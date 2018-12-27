@@ -1,0 +1,7 @@
+{
+    "capabilities" : {
+        "completionProvider" : {
+            "resolveProvider": "true"
+        }
+    }
+}
