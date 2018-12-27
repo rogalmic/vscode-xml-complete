@@ -9,7 +9,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const allowedTagAttributes : Map<string, Array<string>> = new Map<string, Array<string>>();
 	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: 'xml', scheme: 'file' }, new XmlCompletionItemProvider(context, allowedTagAttributes), '<');
 	let linterprovider = new XmlLinterProvider(context, allowedTagAttributes);
-	
+
 	context.subscriptions.push(completionitemprovider, linterprovider);
 }
 

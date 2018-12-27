@@ -6,11 +6,10 @@
 	"author": {
 		"name": "Michal Rogalinski",
 		"email": "rogalinsky@gmail.com"
-	  },
+	},
 	"version": "0.0.1",
 	"preview": true,
 	"license": "MIT",
-
 	"engines": {
 		"vscode": "^1.30.0",
 		"node": "10.12.18"
@@ -23,10 +22,10 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/rogalmic/vscode-xml-complete.git"
-	  },
-	  "bugs": {
+	},
+	"bugs": {
 		"url": "https://github.com/rogalmic/vscode-xml-complete/issues"
-	  },
+	},
 	"keywords": [
 		"xml",
 		"xsd",
@@ -51,7 +50,10 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+		"test": "npm run compile && node ./node_modules/vscode/bin/test",
+		"package": "vsce package",
+		"publish": "vsce publish",
+		"release": "standard-version"
 	},
 	"dependencies": {
 		"get-uri": "2.0.2"
