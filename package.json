@@ -1,71 +1,71 @@
 {
-	"name": "vscode-xml-complete",
-	"displayName": "Xml Complete",
-	"publisher": "rogalmic",
-	"description": "XML editing helper (using XSD schemaLocation)",
-	"author": {
-		"name": "Michal Rogalinski",
-		"email": "rogalinsky@gmail.com"
-	},
-	"version": "0.0.1",
-	"preview": true,
-	"license": "MIT",
-	"engines": {
-		"vscode": "^1.30.0",
-		"node": "10.12.18"
-	},
-	"icon": "images/xml-complete-icon.png",
-	"categories": [
-		"Programming Languages",
-		"Linters"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/rogalmic/vscode-xml-complete.git"
-	},
-	"bugs": {
-		"url": "https://github.com/rogalmic/vscode-xml-complete/issues"
-	},
-	"keywords": [
-		"xml",
-		"xsd",
-		"completion",
-		"linter",
-		"lint"
-	],
-	"activationEvents": [
-		"onLanguage:xml"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"languages": [
-			{
-				"id": "xml",
-				"configuration": "./src/language-configuration.json"
-			}
-		]
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test",
-		"package": "vsce package",
-		"publish": "vsce publish",
-		"release": "standard-version"
-	},
-	"dependencies": {
-		"get-uri": "2.0.2"
-	},
-	"devDependencies": {
-		"typescript": "^3.2.2",
-		"vscode": "^1.1.26",
-		"tslint": "^5.12.0",
-		"@types/node": "10.12.18",
-		"@types/mocha": "^5.2.5",
-		"jsdoctest": "1.7.1",
-		"standard-version": "4.4.0",
-		"vsce": "1.54.0"
-	}
+  "name": "vscode-xml-complete",
+  "displayName": "Xml Complete",
+  "publisher": "rogalmic",
+  "description": "XML editing helper (using XSD schemaLocation)",
+  "author": {
+    "name": "Michal Rogalinski",
+    "email": "rogalinsky@gmail.com"
+  },
+  "version": "0.0.2",
+  "preview": true,
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.30.0",
+    "node": "10.12.18"
+  },
+  "icon": "images/xml-complete-icon.png",
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogalmic/vscode-xml-complete.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogalmic/vscode-xml-complete/issues"
+  },
+  "keywords": [
+    "xml",
+    "xsd",
+    "completion",
+    "linter",
+    "lint"
+  ],
+  "activationEvents": [
+    "onLanguage:xml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "xml",
+        "configuration": "./src/language-configuration.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "package": "vsce package",
+    "publish": "vsce publish",
+    "release": "standard-version"
+  },
+  "dependencies": {
+    "get-uri": "2.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2",
+    "vscode": "^1.1.26",
+    "tslint": "^5.12.0",
+    "@types/node": "10.12.18",
+    "@types/mocha": "^5.2.5",
+    "jsdoctest": "1.7.1",
+    "standard-version": "4.4.0",
+    "vsce": "1.54.0"
+  }
 }
