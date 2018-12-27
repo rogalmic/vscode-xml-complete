@@ -26,7 +26,7 @@ install:
 
 script:
 - vsce package
-- npm test
+#- npm test
 
 deploy:
   - provider: releases

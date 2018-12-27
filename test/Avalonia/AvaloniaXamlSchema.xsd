@@ -1,0 +1,118 @@
+<xs:schema id="AvaloniaXamlSchema"
+    targetNamespace="https://github.com/avaloniaui"
+    elementFormDefault="qualified"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:simpleType name="text">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="coreattrs">
+    <xs:attribute name="Text" type="text"/>
+    <xs:attribute name="Width" type="text"/>
+    <xs:attribute name="Height" type="text"/>
+    <xs:attribute name="Background" type="text"/>
+    <xs:attribute name="Foreground" type="text"/>
+    <xs:attribute name="Title" type="text"/>
+  </xs:attributeGroup>
+
+  <xs:group name="controls">
+    <xs:choice>
+      <xs:element ref="Window"/>
+      <xs:element ref="Button"/>
+      <xs:element ref="TextBlock"/>
+      <xs:element ref="StackPanel"/>
+      <xs:element ref="TextBox"/>
+      <xs:element ref="ScrollViewer"/>
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="Control" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="controls"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:element name="Window">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="MinWidth" type="text"/>
+          <xs:attribute name="MinHeight" type="text"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Button">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="TextBlock">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="TextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="StackPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ScrollViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="DropDown">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="ListBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attributeGroup ref="coreattrs"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

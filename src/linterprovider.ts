@@ -1,29 +1,26 @@
 import * as vscode from 'vscode';
 import { normalize, join } from 'path';
 import { ReadStream } from 'fs';
+import { IXmlSchemaProperties, LanguageId } from './extension';
 
 export default class XmlLinterProvider implements vscode.Disposable {
 
-    private static saxPath = normalize(join(__dirname, '..', 'lib/sax'));
+    private static readonly saxPath = normalize(join(__dirname, '..', 'lib/sax'));
 
     private documentListener: vscode.Disposable;
     private diagnosticCollection: vscode.DiagnosticCollection;
-    private tagAttributes: Map<string, Array<string>>;
+    private schemaPropertiesArray: Array<IXmlSchemaProperties>;
 
-    constructor(private context: vscode.ExtensionContext, allowedTagAttributes: Map<string, Array<string>>) {
-        this.tagAttributes = allowedTagAttributes;
+    constructor(private context: vscode.ExtensionContext, schemaPropertiesArray: Array<IXmlSchemaProperties>) {
+        this.schemaPropertiesArray = schemaPropertiesArray;
         this.diagnosticCollection = vscode.languages.createDiagnosticCollection();
 
-        this.documentListener = vscode.workspace.onDidChangeTextDocument((e) => {
-            this.triggerLint(e.document);
-        }, this, this.context.subscriptions);
+        this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt => this.triggerLint(evnt.document), this, this.context.subscriptions);
 
-        vscode.workspace.onDidOpenTextDocument(this.triggerLint, this, context.subscriptions);
-        vscode.workspace.onDidCloseTextDocument((textDocument) => {
-            this.diagnosticCollection.delete(textDocument.uri);
-        }, null, context.subscriptions);
+        vscode.workspace.onDidOpenTextDocument(doc => this.triggerLint(doc), this, context.subscriptions);
+        vscode.workspace.onDidCloseTextDocument(doc => this.cleanupDocument(doc), null, context.subscriptions);
 
-        vscode.workspace.textDocuments.forEach(this.triggerLint, this);
+        vscode.workspace.textDocuments.forEach(doc => this.triggerLint(doc), this);
     }
 
     public dispose() {
@@ -31,9 +28,13 @@ export default class XmlLinterProvider implements vscode.Disposable {
         this.diagnosticCollection.clear();
     }
 
+    private cleanupDocument(textDocument: vscode.TextDocument): void {
+        this.diagnosticCollection.delete(textDocument.uri);
+    }
+
     private triggerLint(textDocument: vscode.TextDocument): void {
 
-        if (textDocument.languageId != "xml") {
+        if (textDocument.languageId !== LanguageId) {
             return;
         }
 
@@ -41,10 +42,10 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         const diagnostics: vscode.Diagnostic[] = [];
 
-        parser.onerror = (e: any) => {
+        parser.onerror = (_err: any) => {
             let position = new vscode.Position(parser.line, parser.column);
 
-            if (undefined === diagnostics.find(e => e.range.start.line == position.line)) {
+            if (undefined === diagnostics.find(e => e.range.start.line === position.line)) {
                 diagnostics.push(new vscode.Diagnostic(new vscode.Range(position, position), parser.error.message, vscode.DiagnosticSeverity.Error));
             }
             parser.resume();
@@ -52,18 +53,19 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         parser.onopentag = (node: any) => {
 
-            if (this.tagAttributes.size === 0) {
+            let schemaProperties = this.schemaPropertiesArray.find(e => undefined !== e.fileUris.find(n => n.toString() === textDocument.uri.toString()));
+            if (schemaProperties === undefined) {
                 return;
             }
 
             let position = new vscode.Position(parser.line, parser.column);
             let nodeNameSplitted: Array<string> = node.name.split('.');
-            let schemaTag: Array<string> = this.tagAttributes.get(nodeNameSplitted[0]) || [];
+            let schemaTagWithAttributes = schemaProperties.tagCollection.find(e => e.tag === nodeNameSplitted[0]);
 
-            if (schemaTag.length != 0) {
+            if (schemaTagWithAttributes !== undefined) {
                 nodeNameSplitted.shift();
                 Object.keys(node.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-                    if (schemaTag.indexOf(a) < 0 && a.indexOf(":") < 0) {
+                    if (schemaTagWithAttributes !== undefined && schemaTagWithAttributes.attributes.indexOf(a) < 0 && a.indexOf(":") < 0) {
                         diagnostics.push(new vscode.Diagnostic(new vscode.Range(position, position), `Unknown xml attribute '${a}' for tag ${node.name}`, vscode.DiagnosticSeverity.Information));
                     }
                 });
@@ -75,7 +77,8 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         parser.onattribute = (attr: any) => {
             if (attr.name.endsWith(":schemaLocation")) {
-                this.loadSchemaContents(attr.value, () => this.triggerLint(textDocument));
+                let newUri = vscode.Uri.parse(attr.value);
+                this.loadSchemaContents(newUri, textDocument.uri, () => this.triggerLint(textDocument));
             }
         };
 
@@ -86,25 +89,33 @@ export default class XmlLinterProvider implements vscode.Disposable {
         parser.write(textDocument.getText()).close();
     }
 
-    private schemaUri: string = ''; //TODO many files, recurrence
-
-    private loadSchemaContents(uri: string, recheck: () => void): void {
-        if (uri == this.schemaUri) {
+    private loadSchemaContents(schemaUri: vscode.Uri, editorFileUri: vscode.Uri, recheck: () => void): void {
+        let schemaProperties = this.schemaPropertiesArray.find(e => e.namespaceUri.toString() === schemaUri.toString());
+        if (schemaProperties !== undefined) {
+            if (undefined === schemaProperties.fileUris.find(fu => fu.toString() === editorFileUri.toString())) {
+                schemaProperties.fileUris.push(editorFileUri);
+            }
             return;
         }
-        this.schemaUri = uri;
 
-        let tags: string[] = [];
-        let atttributes: string[] = [];
+        schemaProperties = { namespaceUri: schemaUri, fileUris: [editorFileUri], tagCollection: [] } as IXmlSchemaProperties;
+
+        let tagsArray: string[] = [];
+        let atttributesArray: string[] = [];
         let saveTagsAndAttributes = () => {
-            tags.forEach(element => {
-                this.tagAttributes.set(element, atttributes);
+            tagsArray.forEach(element => {
+                if (schemaProperties !== undefined) {
+                    schemaProperties.tagCollection.push({ tag: element, attributes: atttributesArray });
+                }
             });
+            if (schemaProperties !== undefined) {
+                this.schemaPropertiesArray.push(schemaProperties);
+            }
         };
 
         const getUri = require('get-uri');
 
-        getUri(uri, function (err: any, rs: ReadStream) {
+        getUri(schemaUri.toString(true), function (err: any, rs: ReadStream) {
             if (err) {
                 vscode.window.showErrorMessage(`Error getting XSD:\n${err.toString()}`);
                 return;
@@ -121,11 +132,11 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
                 parser.onopentag = (node: any) => {
                     if (node.name.endsWith(":element") && node.attributes["name"] !== undefined) {
-                        tags.push(node.attributes["name"]);
+                        tagsArray.push(node.attributes["name"]);
                     }
 
                     if (node.name.endsWith(":attribute") && node.attributes["name"] !== undefined) {
-                        atttributes.push(node.attributes["name"]);
+                        atttributesArray.push(node.attributes["name"]);
                     }
                 };
 
@@ -139,7 +150,6 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 catch (ex) {
                     vscode.window.showErrorMessage(`Error parsing XSD:\n${ex.message}`);
                 }
-
             });
         });
     }

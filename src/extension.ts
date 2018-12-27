@@ -1,17 +1,22 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import XmlLinterProvider from './linterprovider';
 import XmlCompletionItemProvider from './completionitemprovider';
 
+export interface IXmlSchemaProperties {
+	namespaceUri: vscode.Uri;
+	fileUris: vscode.Uri[];
+	tagCollection: { tag: string, attributes : Array<string>}[];
+}
+
+export const LanguageId : string = 'xml';
+
 export function activate(context: vscode.ExtensionContext) {
 
-	const allowedTagAttributes : Map<string, Array<string>> = new Map<string, Array<string>>();
-	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: 'xml', scheme: 'file' }, new XmlCompletionItemProvider(context, allowedTagAttributes), '<');
-	let linterprovider = new XmlLinterProvider(context, allowedTagAttributes);
+	const schemaPropertiesArray = new Array<IXmlSchemaProperties>();
+	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: LanguageId, scheme: 'file' }, new XmlCompletionItemProvider(context, schemaPropertiesArray), '<');
+	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
 	context.subscriptions.push(completionitemprovider, linterprovider);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}

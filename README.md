@@ -1,4 +1,4 @@
-# vscode-xml-complete README
+# Xml Complete
 
 This extension should help with editing XML files with schema location set:
 ```xml
@@ -9,17 +9,17 @@ xsi:schemaLocation="file:///C:/Users/rogalmic/Documents/src/Avalonia/src/Markup/
 />
 ```
 
-This extension does not require any runtime like `java` or `pythonk`.
+This extension does not require any runtime like `java` or `python`.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Plans:
+- no platform dependencies ever [**done**]
+- no excessive configuration in VSCode [**done**]
+- XSD reading from XML schemaLocation attribute [**ongoing**]
+- basic and realtime linter (XML + optional XSD) [**ongoing**]
+- fast autocomplete based on XSD [**ongoing**]
+- formatting XML [**planned**]
 
 ## Requirements
 
