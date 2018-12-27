@@ -57,7 +57,8 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "get-uri": "2.0.2"
+    "get-uri": "2.0.2",
+    "xml-formatter": "1.0.1"
   },
   "devDependencies": {
     "typescript": "^3.2.2",
