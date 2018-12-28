@@ -1,116 +1,1998 @@
-<xs:schema id="AvaloniaXamlSchema"
-    targetNamespace="https://github.com/avaloniaui"
-    elementFormDefault="qualified"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="text">
-    <xs:restriction base="xs:string"/>
+    <xs:restriction base="xs:string" />
   </xs:simpleType>
-
-  <xs:attributeGroup name="coreattrs">
-    <xs:attribute name="Text" type="text"/>
-    <xs:attribute name="Width" type="text"/>
-    <xs:attribute name="Height" type="text"/>
-    <xs:attribute name="Background" type="text"/>
-    <xs:attribute name="Foreground" type="text"/>
-    <xs:attribute name="Title" type="text"/>
-  </xs:attributeGroup>
-
-  <xs:group name="controls">
-    <xs:choice>
-      <xs:element ref="Window"/>
-      <xs:element ref="Button"/>
-      <xs:element ref="TextBlock"/>
-      <xs:element ref="StackPanel"/>
-      <xs:element ref="TextBox"/>
-      <xs:element ref="ScrollViewer"/>
-    </xs:choice>
-  </xs:group>
-
   <xs:complexType name="Control" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:group ref="controls"/>
+      <xs:group ref="controls" />
+      <xs:any maxOccurs="unbounded" processContents="lax" />
     </xs:choice>
+    <xs:attribute name="FocusAdorner" type="text" />
+    <xs:attribute name="DataTemplates" type="text" />
+    <xs:attribute name="ContextMenu" type="text" />
+    <xs:attribute name="Tag" type="text" />
+    <xs:attribute name="Parent" type="text" />
+    <xs:attribute name="Focusable" type="text" />
+    <xs:attribute name="IsEnabled" type="text" />
+    <xs:attribute name="Cursor" type="text" />
+    <xs:attribute name="IsFocused" type="text" />
+    <xs:attribute name="IsHitTestVisible" type="text" />
+    <xs:attribute name="IsPointerOver" type="text" />
+    <xs:attribute name="KeyBindings" type="text" />
+    <xs:attribute name="Width" type="text" />
+    <xs:attribute name="Height" type="text" />
+    <xs:attribute name="MinWidth" type="text" />
+    <xs:attribute name="MaxWidth" type="text" />
+    <xs:attribute name="MinHeight" type="text" />
+    <xs:attribute name="MaxHeight" type="text" />
+    <xs:attribute name="Margin" type="text" />
+    <xs:attribute name="HorizontalAlignment" type="text" />
+    <xs:attribute name="VerticalAlignment" type="text" />
+    <xs:attribute name="DesiredSize" type="text" />
+    <xs:attribute name="IsMeasureValid" type="text" />
+    <xs:attribute name="IsArrangeValid" type="text" />
+    <xs:attribute name="UseLayoutRounding" type="text" />
+    <xs:attribute name="Bounds" type="text" />
+    <xs:attribute name="TransformedBounds" type="text" />
+    <xs:attribute name="ClipToBounds" type="text" />
+    <xs:attribute name="Clip" type="text" />
+    <xs:attribute name="IsEffectivelyVisible" type="text" />
+    <xs:attribute name="IsVisible" type="text" />
+    <xs:attribute name="Opacity" type="text" />
+    <xs:attribute name="OpacityMask" type="text" />
+    <xs:attribute name="RenderTransform" type="text" />
+    <xs:attribute name="RenderTransformOrigin" type="text" />
+    <xs:attribute name="ZIndex" type="text" />
+    <xs:attribute name="Name" type="text" />
+    <xs:attribute name="Classes" type="text" />
+    <xs:attribute name="DataContext" type="text" />
+    <xs:attribute name="IsInitialized" type="text" />
+    <xs:attribute name="Styles" type="text" />
+    <xs:attribute name="Resources" type="text" />
+    <xs:attribute name="TemplatedParent" type="text" />
+    <xs:attribute name="Clock" type="text" />
+    <xs:attribute name="Transitions" type="text" />
+    <xs:attribute name="Item" type="text" />
   </xs:complexType>
-
-  <xs:element name="Window">
+  <xs:group name="controls">
+    <xs:choice>
+      <xs:element ref="AutoCompleteBox" />
+      <xs:element ref="Border" />
+      <xs:element ref="Button" />
+      <xs:element ref="ButtonSpinner" />
+      <xs:element ref="Calendar" />
+      <xs:element ref="DatePicker" />
+      <xs:element ref="Canvas" />
+      <xs:element ref="Carousel" />
+      <xs:element ref="CheckBox" />
+      <xs:element ref="ContentControl" />
+      <xs:element ref="ContextMenu" />
+      <xs:element ref="DataValidationErrors" />
+      <xs:element ref="Decorator" />
+      <xs:element ref="DockPanel" />
+      <xs:element ref="DrawingPresenter" />
+      <xs:element ref="DropDown" />
+      <xs:element ref="DropDownItem" />
+      <xs:element ref="Expander" />
+      <xs:element ref="Grid" />
+      <xs:element ref="GridSplitter" />
+      <xs:element ref="Image" />
+      <xs:element ref="ItemsControl" />
+      <xs:element ref="LayoutTransformControl" />
+      <xs:element ref="ListBox" />
+      <xs:element ref="ListBoxItem" />
+      <xs:element ref="Menu" />
+      <xs:element ref="MenuItem" />
+      <xs:element ref="NumericUpDown" />
+      <xs:element ref="Panel" />
+      <xs:element ref="ProgressBar" />
+      <xs:element ref="RadioButton" />
+      <xs:element ref="RepeatButton" />
+      <xs:element ref="ScrollViewer" />
+      <xs:element ref="Separator" />
+      <xs:element ref="Slider" />
+      <xs:element ref="StackPanel" />
+      <xs:element ref="TabControl" />
+      <xs:element ref="TabItem" />
+      <xs:element ref="TextBlock" />
+      <xs:element ref="TextBox" />
+      <xs:element ref="ToolTip" />
+      <xs:element ref="TreeView" />
+      <xs:element ref="TreeViewItem" />
+      <xs:element ref="UserControl" />
+      <xs:element ref="VirtualizingStackPanel" />
+      <xs:element ref="Window" />
+      <xs:element ref="WindowBase" />
+      <xs:element ref="WrapPanel" />
+      <xs:element ref="Ellipse" />
+      <xs:element ref="Line" />
+      <xs:element ref="Path" />
+      <xs:element ref="Polygon" />
+      <xs:element ref="Polyline" />
+      <xs:element ref="Rectangle" />
+      <xs:element ref="RemoteWidget" />
+      <xs:element ref="CarouselPresenter" />
+      <xs:element ref="ContentPresenter" />
+      <xs:element ref="ItemsPresenter" />
+      <xs:element ref="ScrollContentPresenter" />
+      <xs:element ref="TextPresenter" />
+      <xs:element ref="EmbeddableControlRoot" />
+      <xs:element ref="CalendarButton" />
+      <xs:element ref="CalendarDayButton" />
+      <xs:element ref="CalendarItem" />
+      <xs:element ref="AccessText" />
+      <xs:element ref="AdornerDecorator" />
+      <xs:element ref="AdornerLayer" />
+      <xs:element ref="HeaderedContentControl" />
+      <xs:element ref="HeaderedItemsControl" />
+      <xs:element ref="HeaderedSelectingItemsControl" />
+      <xs:element ref="Popup" />
+      <xs:element ref="PopupRoot" />
+      <xs:element ref="ScrollBar" />
+      <xs:element ref="SelectingItemsControl" />
+      <xs:element ref="TabStrip" />
+      <xs:element ref="TabStripItem" />
+      <xs:element ref="TemplatedControl" />
+      <xs:element ref="Thumb" />
+      <xs:element ref="ToggleButton" />
+      <xs:element ref="Track" />
+      <xs:element ref="UniformGrid" />
+    </xs:choice>
+  </xs:group>
+  <xs:element name="AutoCompleteBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
-          <xs:attribute name="MinWidth" type="text"/>
-          <xs:attribute name="MinHeight" type="text"/>
+          <xs:attribute name="MinimumPrefixLength" type="text" />
+          <xs:attribute name="IsTextCompletionEnabled" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MinimumPopulateDelay" type="text" />
+          <xs:attribute name="MaxDropDownHeight" type="text" />
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="ValueMemberBinding" type="text" />
+          <xs:attribute name="ValueMemberSelector" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="SearchText" type="text" />
+          <xs:attribute name="FilterMode" type="text" />
+          <xs:attribute name="Watermark" type="text" />
+          <xs:attribute name="ItemFilter" type="text" />
+          <xs:attribute name="TextFilter" type="text" />
+          <xs:attribute name="AsyncPopulator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
+  <xs:element name="Border">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Padding" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Button">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="TextBlock">
+  <xs:element name="ButtonSpinner">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="AllowSpin" type="text" />
+          <xs:attribute name="ShowButtonSpinner" type="text" />
+          <xs:attribute name="ButtonSpinnerLocation" type="text" />
+          <xs:attribute name="ValidSpinDirection" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="TextBox">
+  <xs:element name="Calendar">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="FirstDayOfWeek" type="text" />
+          <xs:attribute name="IsTodayHighlighted" type="text" />
+          <xs:attribute name="HeaderBackground" type="text" />
+          <xs:attribute name="DisplayMode" type="text" />
+          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectedDate" type="text" />
+          <xs:attribute name="SelectedDates" type="text" />
+          <xs:attribute name="DisplayDate" type="text" />
+          <xs:attribute name="DisplayDateStart" type="text" />
+          <xs:attribute name="BlackoutDates" type="text" />
+          <xs:attribute name="DisplayDateEnd" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="StackPanel">
+  <xs:element name="DatePicker">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="BlackoutDates" type="text" />
+          <xs:attribute name="DisplayDate" type="text" />
+          <xs:attribute name="DisplayDateStart" type="text" />
+          <xs:attribute name="DisplayDateEnd" type="text" />
+          <xs:attribute name="FirstDayOfWeek" type="text" />
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="IsTodayHighlighted" type="text" />
+          <xs:attribute name="SelectedDate" type="text" />
+          <xs:attribute name="SelectedDateFormat" type="text" />
+          <xs:attribute name="CustomDateFormatString" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="Watermark" type="text" />
+          <xs:attribute name="UseFloatingWatermark" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
-  <xs:element name="ScrollViewer">
+  <xs:element name="Canvas">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-
+  <xs:element name="Carousel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsVirtualized" type="text" />
+          <xs:attribute name="PageTransition" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContentControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContextMenu">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataValidationErrors">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="ErrorTemplate" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Decorator">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Padding" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DockPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="LastChildFill" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DrawingPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Drawing" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="DropDown">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="MaxDropDownHeight" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
+  <xs:element name="DropDownItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Expander">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ContentTransition" type="text" />
+          <xs:attribute name="ExpandDirection" type="text" />
+          <xs:attribute name="IsExpanded" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Grid">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ColumnDefinitions" type="text" />
+          <xs:attribute name="RowDefinitions" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GridSplitter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Image">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Source" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LayoutTransformControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="LayoutTransform" type="text" />
+          <xs:attribute name="TransformRoot" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ListBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attributeGroup ref="coreattrs"/>
+          <xs:attribute name="Scroll" type="text" />
+          <xs:attribute name="SelectedItems" type="text" />
+          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="VirtualizationMode" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBoxItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Menu">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MenuItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="Icon" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="IsSubMenuOpen" type="text" />
+          <xs:attribute name="HasSubMenu" type="text" />
+          <xs:attribute name="IsTopLevel" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NumericUpDown">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AllowSpin" type="text" />
+          <xs:attribute name="ButtonSpinnerLocation" type="text" />
+          <xs:attribute name="ShowButtonSpinner" type="text" />
+          <xs:attribute name="ClipValueToMinMax" type="text" />
+          <xs:attribute name="CultureInfo" type="text" />
+          <xs:attribute name="FormatString" type="text" />
+          <xs:attribute name="Increment" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="ParsingNumberStyle" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="Watermark" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Panel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProgressBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsIndeterminate" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RadioButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="GroupName" type="text" />
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RepeatButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Interval" type="text" />
+          <xs:attribute name="Delay" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScrollViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Extent" type="text" />
+          <xs:attribute name="Offset" type="text" />
+          <xs:attribute name="Viewport" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Separator">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Slider">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="IsSnapToTickEnabled" type="text" />
+          <xs:attribute name="TickFrequency" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StackPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Spacing" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Pages" type="text" />
+          <xs:attribute name="TabStrip" type="text" />
+          <xs:attribute name="PageTransition" type="text" />
+          <xs:attribute name="TabStripPlacement" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TextBlock">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="FormattedText" type="text" />
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AcceptsReturn" type="text" />
+          <xs:attribute name="AcceptsTab" type="text" />
+          <xs:attribute name="CaretIndex" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="PasswordChar" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="SelectionEnd" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+          <xs:attribute name="Watermark" type="text" />
+          <xs:attribute name="UseFloatingWatermark" type="text" />
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="NewLine" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ToolTip">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeView">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeViewItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsExpanded" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Level" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VirtualizingStackPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Spacing" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Window">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Screens" type="text" />
+          <xs:attribute name="PlatformImpl" type="text" />
+          <xs:attribute name="SizeToContent" type="text" />
+          <xs:attribute name="Title" type="text" />
+          <xs:attribute name="HasSystemDecorations" type="text" />
+          <xs:attribute name="ShowInTaskbar" type="text" />
+          <xs:attribute name="WindowState" type="text" />
+          <xs:attribute name="CanResize" type="text" />
+          <xs:attribute name="Icon" type="text" />
+          <xs:attribute name="WindowStartupLocation" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+          <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="LayoutManager" type="text" />
+          <xs:attribute name="Renderer" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WindowBase">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="PlatformImpl" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+          <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="LayoutManager" type="text" />
+          <xs:attribute name="Renderer" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WrapPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ellipse">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Line">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="StartPoint" type="text" />
+          <xs:attribute name="EndPoint" type="text" />
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Path">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Data" type="text" />
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Polygon">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Points" type="text" />
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Polyline">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Points" type="text" />
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Rectangle">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeDashCap" type="text" />
+          <xs:attribute name="StrokeStartLineCap" type="text" />
+          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoteWidget">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Mode" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CarouselPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsVirtualized" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="PageTransition" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Panel" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContentPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Padding" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ItemsPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="VirtualizationMode" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Panel" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScrollContentPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="CanHorizontallyScroll" type="text" />
+          <xs:attribute name="CanVerticallyScroll" type="text" />
+          <xs:attribute name="Extent" type="text" />
+          <xs:attribute name="Offset" type="text" />
+          <xs:attribute name="Viewport" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Padding" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TextPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="CaretIndex" type="text" />
+          <xs:attribute name="PasswordChar" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="SelectionEnd" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="FormattedText" type="text" />
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmbeddableControlRoot">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="PlatformImpl" type="text" />
+          <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="LayoutManager" type="text" />
+          <xs:attribute name="Renderer" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarDayButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="HeaderBackground" type="text" />
+          <xs:attribute name="DayTitleTemplate" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AccessText">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AccessKey" type="text" />
+          <xs:attribute name="ShowAccessKey" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="FormattedText" type="text" />
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdornerDecorator">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AdornerLayer" type="text" />
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Padding" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdornerLayer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeaderedContentControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeaderedItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeaderedSelectingItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Popup">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="DependencyResolver" type="text" />
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="PlacementMode" type="text" />
+          <xs:attribute name="ObeyScreenEdges" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="PlacementTarget" type="text" />
+          <xs:attribute name="PopupRoot" type="text" />
+          <xs:attribute name="StaysOpen" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PopupRoot">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="PlatformImpl" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+          <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="LayoutManager" type="text" />
+          <xs:attribute name="Renderer" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScrollBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ViewportSize" type="text" />
+          <xs:attribute name="Visibility" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SelectingItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabStrip">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabStripItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TemplatedControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Thumb">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ToggleButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="HotKey" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Track">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="ViewportSize" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Thumb" type="text" />
+          <xs:attribute name="IncreaseButton" type="text" />
+          <xs:attribute name="DecreaseButton" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UniformGrid">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Rows" type="text" />
+          <xs:attribute name="Columns" type="text" />
+          <xs:attribute name="FirstColumn" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>

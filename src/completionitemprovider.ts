@@ -15,6 +15,11 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 			return [];
 		}
 
-		return schemaProperties.tagCollection.map(t => new vscode.CompletionItem(t.tag, vscode.CompletionItemKind.Snippet));
+		// let wordRange = textDocument.getWordRangeAtPosition(position, new RegExp(/^[a-zA-Z0-9]+$/));
+		// let word = textDocument.getText(wordRange);
+
+		return schemaProperties.tagCollection
+			.filter(t => t.tag.indexOf(".") < 0)
+			.map(t => new vscode.CompletionItem(t.tag, vscode.CompletionItemKind.Snippet));
 	}
 }

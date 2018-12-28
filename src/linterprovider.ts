@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { normalize, join } from 'path';
 import { ReadStream } from 'fs';
-import { IXmlSchemaProperties, LanguageId } from './extension';
+import { IXmlSchemaProperties, languageId, globalSettings } from './extension';
 
 export default class XmlLinterProvider implements vscode.Disposable {
 
@@ -34,7 +34,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
     private triggerLint(textDocument: vscode.TextDocument): void {
 
-        if (textDocument.languageId !== LanguageId) {
+        if (textDocument.languageId !== languageId) {
             return;
         }
 
@@ -79,6 +79,12 @@ export default class XmlLinterProvider implements vscode.Disposable {
             if (attr.name.endsWith(":schemaLocation")) {
                 let newUri = vscode.Uri.parse(attr.value);
                 this.loadSchemaContents(newUri, textDocument.uri, () => this.triggerLint(textDocument));
+            } else if (attr.name === "xmlns") {
+                let newUriString = globalSettings.schemaMapping.filter(m => m.xmlns === attr.value).map(m => m.xsdUri).pop();
+                if (newUriString !== undefined) {
+                    let newUri = vscode.Uri.parse(newUriString);
+                    this.loadSchemaContents(newUri, textDocument.uri, () => this.triggerLint(textDocument));
+                }
             }
         };
 
@@ -98,14 +104,16 @@ export default class XmlLinterProvider implements vscode.Disposable {
             return;
         }
 
-        schemaProperties = { namespaceUri: schemaUri, fileUris: [editorFileUri], tagCollection: [] } as IXmlSchemaProperties;
+        schemaProperties = { namespaceUri: schemaUri, xsdContent: ``, fileUris: [editorFileUri], tagCollection: [] } as IXmlSchemaProperties;
 
         let tagsArray: string[] = [];
         let atttributesArray: string[] = [];
+        let content = '';
         let saveTagsAndAttributes = () => {
             tagsArray.forEach(element => {
                 if (schemaProperties !== undefined) {
                     schemaProperties.tagCollection.push({ tag: element, attributes: atttributesArray });
+                    schemaProperties.xsdContent = content;
                 }
             });
             if (schemaProperties !== undefined) {
@@ -120,8 +128,6 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 vscode.window.showErrorMessage(`Error getting XSD:\n${err.toString()}`);
                 return;
             }
-
-            let content = '';
 
             rs.on('data', function (buf: any) {
                 content += buf.toString();
