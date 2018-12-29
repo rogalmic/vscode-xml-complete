@@ -11,11 +11,11 @@ export interface IXmlCompleteSettings {
 export declare let globalSettings: IXmlCompleteSettings;
 
 export interface IXmlSchemaProperties {
-	namespaceUri: vscode.Uri;
+	schemaUri: vscode.Uri;
 	xsdContent: string;
-	fileUris: vscode.Uri[];
 	tagCollection: { tag: string, attributes : Array<string>}[];
 }
+
 
 export const languageId : string = 'xml';
 

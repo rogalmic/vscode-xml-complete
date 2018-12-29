@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
-import { IXmlSchemaProperties } from './extension';
+import { IXmlSchemaProperties, globalSettings } from './extension';
+import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlCompletionItemProvider implements vscode.CompletionItemProvider {
 
@@ -9,17 +10,36 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 		this.schemaPropertiesArray = schemaPropertiesArray;
 	}
 
-	provideCompletionItems(textDocument: vscode.TextDocument, _position: vscode.Position, _token: vscode.CancellationToken, _context: vscode.CompletionContext): vscode.ProviderResult<vscode.CompletionItem[] | vscode.CompletionList> {
-		let schemaProperties = this.schemaPropertiesArray.find(e => undefined !== e.fileUris.find(u => u.toString() === textDocument.uri.toString()));
-		if (schemaProperties === undefined) {
-			return [];
+	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
+		let documentContent = textDocument.getText();
+		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
+
+		let context = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character + 1);
+
+		let resultTexts: string[];
+
+		if (context === "element") {
+			resultTexts = this.schemaPropertiesArray
+				.filter(e => xsdFileUris.find( u => u.toString() === e.schemaUri.toString()) !== undefined)
+				.map(sp => sp.tagCollection.map(e => e.tag))
+				.reduce((prev, next) => prev.concat(next))
+				.sort()
+				.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
+				.filter(t => t.indexOf(".") < 0);
+		} else if (context === "attribute") {
+			resultTexts = this.schemaPropertiesArray
+				.filter(e => xsdFileUris.find( u => u.toString() === e.schemaUri.toString()) !== undefined)
+				.map(sp => sp.tagCollection.map(e => e.attributes).reduce((prev, next) => prev.concat(next)))
+				.reduce((prev, next) => prev.concat(next))
+				.sort()
+				.filter((item, pos, ary) => !pos || item !== ary[pos - 1]);
+		} else {
+			resultTexts = [ "JACKPOT" ];
 		}
 
 		// let wordRange = textDocument.getWordRangeAtPosition(position, new RegExp(/^[a-zA-Z0-9]+$/));
-		// let word = textDocument.getText(wordRange);
-
-		return schemaProperties.tagCollection
-			.filter(t => t.tag.indexOf(".") < 0)
-			.map(t => new vscode.CompletionItem(t.tag, vscode.CompletionItemKind.Snippet));
+		// let word = textDocument.getText(wordRange);		}
+		return resultTexts
+			.map(t => new vscode.CompletionItem(t, vscode.CompletionItemKind.Snippet));
 	}
 }
