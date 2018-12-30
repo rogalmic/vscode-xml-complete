@@ -14,11 +14,12 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 		let documentContent = textDocument.getText();
 		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
 
-		let context = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character);
+		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character);
 
 		let resultTexts: string[];
 
-		if (context === "element") {
+		if (scope.context === "element") {
+			// TODO: if (scope.tagName.contains("."))
 			resultTexts = this.schemaPropertiesArray
 				.filter(e => xsdFileUris.find( u => u.toString() === e.schemaUri.toString()) !== undefined)
 				.map(sp => sp.tagCollection.map(e => e.tag))
@@ -26,10 +27,10 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 				.sort()
 				.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
 				.filter(t => t.indexOf(".") < 0);
-		} else if (context === "attribute") {
+		} else if (scope.context === "attribute") {
 			resultTexts = this.schemaPropertiesArray
 				.filter(e => xsdFileUris.find( u => u.toString() === e.schemaUri.toString()) !== undefined)
-				.map(sp => sp.tagCollection.map(e => e.attributes).reduce((prev, next) => prev.concat(next)))
+				.map(sp => sp.tagCollection.loadAttributes(scope.tagName))
 				.reduce((prev, next) => prev.concat(next))
 				.sort()
 				.filter((item, pos, ary) => !pos || item !== ary[pos - 1]);
@@ -37,8 +38,6 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 			resultTexts = [ "JACKPOT" ];
 		}
 
-		// let wordRange = textDocument.getWordRangeAtPosition(position, new RegExp(/^[a-zA-Z0-9]+$/));
-		// let word = textDocument.getText(wordRange);		}
 		return resultTexts
 			.map(t => new vscode.CompletionItem(t, vscode.CompletionItemKind.Snippet));
 	}

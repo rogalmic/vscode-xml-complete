@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { IXmlSchemaProperties, languageId, globalSettings } from './extension';
+import { IXmlSchemaProperties, languageId, globalSettings, XmlTagCollection } from './extension';
 import XsdParser from './helpers/xsdparser';
 import XsdLoader from './helpers/xsdloader';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
@@ -67,7 +67,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
             for (let xsdUri of xsdFileUris) {
                 let schemaProperties = this.schemaPropertiesArray.find(e => e.schemaUri.toString() === xsdUri.toString());
                 if (schemaProperties === undefined) {
-                    schemaProperties = { schemaUri: xsdUri, xsdContent: ``, tagCollection: [] } as IXmlSchemaProperties;
+                    schemaProperties = { schemaUri: xsdUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as IXmlSchemaProperties;
 
                     try {
                         schemaProperties.xsdContent = await XsdLoader.loadSchemaContentsFromUri(xsdUri.toString(true));
