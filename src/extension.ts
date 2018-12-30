@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
     loadConfiguration();
 
 	const schemaPropertiesArray = new Array<IXmlSchemaProperties>();
-	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: languageId, scheme: 'file' }, new XmlCompletionItemProvider(context, schemaPropertiesArray), '<');
+	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: languageId, scheme: 'file' }, new XmlCompletionItemProvider(context, schemaPropertiesArray));
 	let formatprovider = vscode.languages.registerDocumentFormattingEditProvider({ language: languageId}, new XmlFormatProvider(context, schemaPropertiesArray));
 	let rangeformatprovider = vscode.languages.registerDocumentRangeFormattingEditProvider({ language: languageId}, new XmlRangeFormatProvider(context, schemaPropertiesArray));
 	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);

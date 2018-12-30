@@ -9,17 +9,18 @@ export default class XmlLinterProvider implements vscode.Disposable {
     private documentListener: vscode.Disposable;
     private diagnosticCollection: vscode.DiagnosticCollection;
     private schemaPropertiesArray: Array<IXmlSchemaProperties>;
+    private delayCount: number = 0;
 
     constructor(private context: vscode.ExtensionContext, schemaPropertiesArray: Array<IXmlSchemaProperties>) {
         this.schemaPropertiesArray = schemaPropertiesArray;
         this.diagnosticCollection = vscode.languages.createDiagnosticCollection();
 
-        this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt => this.triggerLint(evnt.document), this, this.context.subscriptions);
+        this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt => this.triggerDelayedLint(evnt.document), this, this.context.subscriptions);
 
-        vscode.workspace.onDidOpenTextDocument(doc => this.triggerLint(doc), this, context.subscriptions);
+        vscode.workspace.onDidOpenTextDocument(doc => this.triggerDelayedLint(doc, 100), this, context.subscriptions);
         vscode.workspace.onDidCloseTextDocument(doc => this.cleanupDocument(doc), null, context.subscriptions);
 
-        vscode.workspace.textDocuments.forEach(doc => this.triggerLint(doc), this);
+        vscode.workspace.textDocuments.forEach(doc => this.triggerDelayedLint(doc, 100), this);
     }
 
     public dispose() {
@@ -31,7 +32,27 @@ export default class XmlLinterProvider implements vscode.Disposable {
         this.diagnosticCollection.delete(textDocument.uri);
     }
 
-    //vscode.CancellationToken
+    private triggerDelayedLint(textDocument: vscode.TextDocument, timeout: number = 1500): void {
+        if (timeout !== 0) {
+            try {
+                if (this.delayCount > 0) {
+                    return;
+                }
+            } finally {
+                this.delayCount = timeout;
+            }
+        }
+        const tick = 100;
+        this.delayCount -= tick;
+        if (this.delayCount <= 0) {
+            this.triggerLint(textDocument);
+        } else {
+            setTimeout(() => {
+                this.triggerDelayedLint(textDocument, 0);
+            }, tick);
+        }
+
+    }
 
     private async triggerLint(textDocument: vscode.TextDocument): Promise<void> {
 

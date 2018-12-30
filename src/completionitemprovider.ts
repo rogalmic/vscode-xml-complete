@@ -14,7 +14,7 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 		let documentContent = textDocument.getText();
 		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
 
-		let context = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character + 1);
+		let context = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character);
 
 		let resultTexts: string[];
 

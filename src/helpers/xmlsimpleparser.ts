@@ -104,6 +104,10 @@ export default class XmlSimpleParser {
 					updatePosition("element");
 				};
 
+				parser.onclosetagstart = () => {
+					updatePosition("element");
+				};
+
 				parser.onclosetag = () => {
 					updatePosition("element");
 				};
