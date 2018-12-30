@@ -26,12 +26,30 @@
   "bugs": {
     "url": "https://github.com/rogalmic/vscode-xml-complete/issues"
   },
+  "badges": [
+    {
+      "url": "https://img.shields.io/github/downloads/rogalmic/vscode-xml-complete/latest/total.svg",
+      "href": "https://github.com/rogalmic/vscode-xml-complete/releases/latest",
+      "description": "Download latest beta release (master branch)"
+    },
+    {
+      "url": "https://img.shields.io/github/stars/rogalmic/vscode-xml-complete.svg?style=social&label=Stars",
+      "href": "https://github.com/rogalmic/vscode-xml-complete/stargazers",
+      "description": "Star the project in github"
+    },
+    {
+      "url": "https://img.shields.io/badge/paypal-donate-blue.svg",
+      "href": "https://paypal.me/rogalmic",
+      "description": "Donate some $ to keep project going"
+    }
+  ],
   "keywords": [
     "xml",
     "xsd",
     "completion",
     "linter",
-    "lint"
+    "lint",
+    "format"
   ],
   "activationEvents": [
     "onLanguage:xml"
@@ -53,8 +71,7 @@
 					"type": "array",
 					"scope": "resource",
 					"default": [
-            { "xmlns": "https://github.com/avaloniaui", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"},
-            { "xmlns": "http://www.w3.org/1999/xhtml", "xsdUri": "https://raw.githubusercontent.com/stefangrunert/XHTML5-XML-Schema/master/xhtml5.xsd"}
+            { "xmlns": "https://github.com/avaloniaui", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"}
           ]
         }
       }

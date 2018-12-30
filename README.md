@@ -1,28 +1,36 @@
 # Xml Complete
 
-This extension helps with editing XML files with schema location set. It does not require any runtime like `java`, `python` or `xmllint`.
+This extension helps with editing XML files by providing hints.
+
+It does not require any runtime like `java`, `python` or `xmllint`, while does partial XSD parsing.
 
 ## Features
 
-Plans:
-- no platform dependencies ever [**done**]
-- no excessive configuration in VSCode [**done**]
-- XSD reading from XML schemaLocation attribute [**ongoing**]
-- basic and realtime linter (XML + optional XSD) [**ongoing**]
-- fast autocomplete based on XSD [**ongoing**]
-- formatting XML [**planned**]
+- Basic linter (XML + partial XSD validation)
 
-## Samples
+[<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-linter.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-linter.png)
 
-### Local schema file
-```xml
-<root
-...
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="file:///C:/Users/rogalmic/Documents/src/Avalonia/src/Markup/Avalonia.xsd"
-/>
+- Fast autocomplete based on XSD
+
+[<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-complete.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-complete.png)
+
+- Formatting XML
+
+[<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-format.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-format.png)
+
+## Configuration
+
+### Extension configuration per XML namespace
+```javascript
+"xmlComplete.schemaMapping":
+[
+ {
+  "xmlns": "https://github.com/avaloniaui",
+  "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+ }
+]
 ```
-### Remote schema file
+### Using `schemaLocation` attribute
 ```xml
 <root
 ...
@@ -42,11 +50,7 @@ xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-comple
 | `https`   | XSD from https server           | `https://www.example.com/path/to/name`
 
 
-## Requirements
-
-*If you have any requirements or dependencies, add a section describing those and how to install and configure them.*
-
 ## Known Issues
 
-*Calling out known issues can help limit users opening duplicate issues against your extension.*
+- This is a preview version, lots of bugs expected...
 
