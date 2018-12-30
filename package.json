@@ -7,7 +7,7 @@
     "name": "Michal Rogalinski",
     "email": "rogalinsky@gmail.com"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "preview": true,
   "license": "MIT",
   "engines": {
@@ -63,15 +63,18 @@
       }
     ],
     "configuration": {
-			"title": "XmlComplete",
-			"type": "object",
-			"properties": {
-				"xmlComplete.schemaMapping": {
-					"description": "Maps xmlns to xsd location Uri.",
-					"type": "array",
-					"scope": "resource",
-					"default": [
-            { "xmlns": "https://github.com/avaloniaui", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"}
+      "title": "XmlComplete",
+      "type": "object",
+      "properties": {
+        "xmlComplete.schemaMapping": {
+          "description": "Maps xmlns to xsd location Uri.",
+          "type": "array",
+          "scope": "resource",
+          "default": [
+            {
+              "xmlns": "https://github.com/avaloniaui",
+              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+            }
           ]
         }
       }
