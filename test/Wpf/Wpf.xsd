@@ -1,0 +1,1804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="WpfXamlSchema" targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="text">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:complexType name="Control" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:group ref="controls" />
+      <xs:any maxOccurs="unbounded" processContents="lax" />
+    </xs:choice>
+    <xs:attribute name="BorderBrush" type="text" />
+    <xs:attribute name="BorderThickness" type="text" />
+    <xs:attribute name="Background" type="text" />
+    <xs:attribute name="Foreground" type="text" />
+    <xs:attribute name="FontFamily" type="text" />
+    <xs:attribute name="FontSize" type="text" />
+    <xs:attribute name="FontStretch" type="text" />
+    <xs:attribute name="FontStyle" type="text" />
+    <xs:attribute name="FontWeight" type="text" />
+    <xs:attribute name="HorizontalContentAlignment" type="text" />
+    <xs:attribute name="VerticalContentAlignment" type="text" />
+    <xs:attribute name="TabIndex" type="text" />
+    <xs:attribute name="IsTabStop" type="text" />
+    <xs:attribute name="Padding" type="text" />
+    <xs:attribute name="Template" type="text" />
+    <xs:attribute name="Style" type="text" />
+    <xs:attribute name="OverridesDefaultStyle" type="text" />
+    <xs:attribute name="UseLayoutRounding" type="text" />
+    <xs:attribute name="Triggers" type="text" />
+    <xs:attribute name="TemplatedParent" type="text" />
+    <xs:attribute name="Resources" type="text" />
+    <xs:attribute name="DataContext" type="text" />
+    <xs:attribute name="BindingGroup" type="text" />
+    <xs:attribute name="Language" type="text" />
+    <xs:attribute name="Name" type="text" />
+    <xs:attribute name="Tag" type="text" />
+    <xs:attribute name="InputScope" type="text" />
+    <xs:attribute name="ActualWidth" type="text" />
+    <xs:attribute name="ActualHeight" type="text" />
+    <xs:attribute name="LayoutTransform" type="text" />
+    <xs:attribute name="Width" type="text" />
+    <xs:attribute name="MinWidth" type="text" />
+    <xs:attribute name="MaxWidth" type="text" />
+    <xs:attribute name="Height" type="text" />
+    <xs:attribute name="MinHeight" type="text" />
+    <xs:attribute name="MaxHeight" type="text" />
+    <xs:attribute name="FlowDirection" type="text" />
+    <xs:attribute name="Margin" type="text" />
+    <xs:attribute name="HorizontalAlignment" type="text" />
+    <xs:attribute name="VerticalAlignment" type="text" />
+    <xs:attribute name="FocusVisualStyle" type="text" />
+    <xs:attribute name="Cursor" type="text" />
+    <xs:attribute name="ForceCursor" type="text" />
+    <xs:attribute name="IsInitialized" type="text" />
+    <xs:attribute name="IsLoaded" type="text" />
+    <xs:attribute name="ToolTip" type="text" />
+    <xs:attribute name="ContextMenu" type="text" />
+    <xs:attribute name="Parent" type="text" />
+    <xs:attribute name="HasAnimatedProperties" type="text" />
+    <xs:attribute name="InputBindings" type="text" />
+    <xs:attribute name="CommandBindings" type="text" />
+    <xs:attribute name="AllowDrop" type="text" />
+    <xs:attribute name="DesiredSize" type="text" />
+    <xs:attribute name="IsMeasureValid" type="text" />
+    <xs:attribute name="IsArrangeValid" type="text" />
+    <xs:attribute name="RenderSize" type="text" />
+    <xs:attribute name="RenderTransform" type="text" />
+    <xs:attribute name="RenderTransformOrigin" type="text" />
+    <xs:attribute name="IsMouseDirectlyOver" type="text" />
+    <xs:attribute name="IsMouseOver" type="text" />
+    <xs:attribute name="IsStylusOver" type="text" />
+    <xs:attribute name="IsKeyboardFocusWithin" type="text" />
+    <xs:attribute name="IsMouseCaptured" type="text" />
+    <xs:attribute name="IsMouseCaptureWithin" type="text" />
+    <xs:attribute name="IsStylusDirectlyOver" type="text" />
+    <xs:attribute name="IsStylusCaptured" type="text" />
+    <xs:attribute name="IsStylusCaptureWithin" type="text" />
+    <xs:attribute name="IsKeyboardFocused" type="text" />
+    <xs:attribute name="IsInputMethodEnabled" type="text" />
+    <xs:attribute name="Opacity" type="text" />
+    <xs:attribute name="OpacityMask" type="text" />
+    <xs:attribute name="BitmapEffect" type="text" />
+    <xs:attribute name="Effect" type="text" />
+    <xs:attribute name="BitmapEffectInput" type="text" />
+    <xs:attribute name="CacheMode" type="text" />
+    <xs:attribute name="Uid" type="text" />
+    <xs:attribute name="Visibility" type="text" />
+    <xs:attribute name="ClipToBounds" type="text" />
+    <xs:attribute name="Clip" type="text" />
+    <xs:attribute name="SnapsToDevicePixels" type="text" />
+    <xs:attribute name="IsFocused" type="text" />
+    <xs:attribute name="IsEnabled" type="text" />
+    <xs:attribute name="IsHitTestVisible" type="text" />
+    <xs:attribute name="IsVisible" type="text" />
+    <xs:attribute name="Focusable" type="text" />
+    <xs:attribute name="PersistId" type="text" />
+    <xs:attribute name="IsManipulationEnabled" type="text" />
+    <xs:attribute name="AreAnyTouchesOver" type="text" />
+    <xs:attribute name="AreAnyTouchesDirectlyOver" type="text" />
+    <xs:attribute name="AreAnyTouchesCapturedWithin" type="text" />
+    <xs:attribute name="AreAnyTouchesCaptured" type="text" />
+    <xs:attribute name="TouchesCaptured" type="text" />
+    <xs:attribute name="TouchesCapturedWithin" type="text" />
+    <xs:attribute name="TouchesOver" type="text" />
+    <xs:attribute name="TouchesDirectlyOver" type="text" />
+    <xs:attribute name="DependencyObjectType" type="text" />
+    <xs:attribute name="IsSealed" type="text" />
+    <xs:attribute name="Dispatcher" type="text" />
+    <xs:anyAttribute namespace="##local http://schemas.microsoft.com/winfx/2006/xaml http://schemas.openxmlformats.org/markup-compatibility/2006" processContents="skip" />
+  </xs:complexType>
+  <xs:group name="controls">
+    <xs:choice>
+      <xs:element ref="Window" />
+      <xs:element ref="NavigationWindow" />
+      <xs:element ref="StickyNoteControl" />
+      <xs:element ref="Button" />
+      <xs:element ref="Calendar" />
+      <xs:element ref="CheckBox" />
+      <xs:element ref="ComboBox" />
+      <xs:element ref="ComboBoxItem" />
+      <xs:element ref="ContentControl" />
+      <xs:element ref="ContextMenu" />
+      <xs:element ref="DataGrid" />
+      <xs:element ref="DataGridCell" />
+      <xs:element ref="DataGridRow" />
+      <xs:element ref="DatePicker" />
+      <xs:element ref="DocumentViewer" />
+      <xs:element ref="Expander" />
+      <xs:element ref="FlowDocumentReader" />
+      <xs:element ref="FlowDocumentScrollViewer" />
+      <xs:element ref="Frame" />
+      <xs:element ref="GridSplitter" />
+      <xs:element ref="GridViewColumnHeader" />
+      <xs:element ref="GroupBox" />
+      <xs:element ref="GroupItem" />
+      <xs:element ref="HeaderedContentControl" />
+      <xs:element ref="HeaderedItemsControl" />
+      <xs:element ref="ItemsControl" />
+      <xs:element ref="Label" />
+      <xs:element ref="ListBox" />
+      <xs:element ref="ListBoxItem" />
+      <xs:element ref="ListView" />
+      <xs:element ref="ListViewItem" />
+      <xs:element ref="Menu" />
+      <xs:element ref="MenuItem" />
+      <xs:element ref="PasswordBox" />
+      <xs:element ref="ProgressBar" />
+      <xs:element ref="RadioButton" />
+      <xs:element ref="RichTextBox" />
+      <xs:element ref="ScrollViewer" />
+      <xs:element ref="Separator" />
+      <xs:element ref="FlowDocumentPageViewer" />
+      <xs:element ref="Slider" />
+      <xs:element ref="TabControl" />
+      <xs:element ref="TabItem" />
+      <xs:element ref="TextBox" />
+      <xs:element ref="ToolBar" />
+      <xs:element ref="ToolTip" />
+      <xs:element ref="TreeView" />
+      <xs:element ref="TreeViewItem" />
+      <xs:element ref="UserControl" />
+      <xs:element ref="CalendarButton" />
+      <xs:element ref="CalendarDayButton" />
+      <xs:element ref="CalendarItem" />
+      <xs:element ref="DataGridCellsPresenter" />
+      <xs:element ref="DataGridColumnHeader" />
+      <xs:element ref="DataGridColumnHeadersPresenter" />
+      <xs:element ref="DataGridRowHeader" />
+      <xs:element ref="DatePickerTextBox" />
+      <xs:element ref="RepeatButton" />
+      <xs:element ref="ResizeGrip" />
+      <xs:element ref="ScrollBar" />
+      <xs:element ref="StatusBar" />
+      <xs:element ref="StatusBarItem" />
+      <xs:element ref="Thumb" />
+      <xs:element ref="ToggleButton" />
+    </xs:choice>
+  </xs:group>
+  <xs:element name="Window">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="TaskbarItemInfo" type="text" />
+          <xs:attribute name="AllowsTransparency" type="text" />
+          <xs:attribute name="Title" type="text" />
+          <xs:attribute name="Icon" type="text" />
+          <xs:attribute name="SizeToContent" type="text" />
+          <xs:attribute name="Top" type="text" />
+          <xs:attribute name="Left" type="text" />
+          <xs:attribute name="RestoreBounds" type="text" />
+          <xs:attribute name="WindowStartupLocation" type="text" />
+          <xs:attribute name="ShowInTaskbar" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="OwnedWindows" type="text" />
+          <xs:attribute name="DialogResult" type="text" />
+          <xs:attribute name="WindowStyle" type="text" />
+          <xs:attribute name="WindowState" type="text" />
+          <xs:attribute name="ResizeMode" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+          <xs:attribute name="ShowActivated" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NavigationWindow">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="SandboxExternalContent" type="text" />
+          <xs:attribute name="NavigationService" type="text" />
+          <xs:attribute name="BackStack" type="text" />
+          <xs:attribute name="ForwardStack" type="text" />
+          <xs:attribute name="ShowsNavigationUI" type="text" />
+          <xs:attribute name="Source" type="text" />
+          <xs:attribute name="CurrentSource" type="text" />
+          <xs:attribute name="CanGoForward" type="text" />
+          <xs:attribute name="CanGoBack" type="text" />
+          <xs:attribute name="TaskbarItemInfo" type="text" />
+          <xs:attribute name="AllowsTransparency" type="text" />
+          <xs:attribute name="Title" type="text" />
+          <xs:attribute name="Icon" type="text" />
+          <xs:attribute name="SizeToContent" type="text" />
+          <xs:attribute name="Top" type="text" />
+          <xs:attribute name="Left" type="text" />
+          <xs:attribute name="RestoreBounds" type="text" />
+          <xs:attribute name="WindowStartupLocation" type="text" />
+          <xs:attribute name="ShowInTaskbar" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Owner" type="text" />
+          <xs:attribute name="OwnedWindows" type="text" />
+          <xs:attribute name="DialogResult" type="text" />
+          <xs:attribute name="WindowStyle" type="text" />
+          <xs:attribute name="WindowState" type="text" />
+          <xs:attribute name="ResizeMode" type="text" />
+          <xs:attribute name="Topmost" type="text" />
+          <xs:attribute name="ShowActivated" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StickyNoteControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Author" type="text" />
+          <xs:attribute name="IsExpanded" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="IsMouseOverAnchor" type="text" />
+          <xs:attribute name="CaptionFontFamily" type="text" />
+          <xs:attribute name="CaptionFontSize" type="text" />
+          <xs:attribute name="CaptionFontStretch" type="text" />
+          <xs:attribute name="CaptionFontStyle" type="text" />
+          <xs:attribute name="CaptionFontWeight" type="text" />
+          <xs:attribute name="PenWidth" type="text" />
+          <xs:attribute name="StickyNoteType" type="text" />
+          <xs:attribute name="AnchorInfo" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Button">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
+          <xs:attribute name="IsDefaulted" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Calendar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="BlackoutDates" type="text" />
+          <xs:attribute name="CalendarButtonStyle" type="text" />
+          <xs:attribute name="CalendarDayButtonStyle" type="text" />
+          <xs:attribute name="CalendarItemStyle" type="text" />
+          <xs:attribute name="DisplayDate" type="text" />
+          <xs:attribute name="DisplayDateEnd" type="text" />
+          <xs:attribute name="DisplayDateStart" type="text" />
+          <xs:attribute name="DisplayMode" type="text" />
+          <xs:attribute name="FirstDayOfWeek" type="text" />
+          <xs:attribute name="IsTodayHighlighted" type="text" />
+          <xs:attribute name="SelectedDate" type="text" />
+          <xs:attribute name="SelectedDates" type="text" />
+          <xs:attribute name="SelectionMode" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComboBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="MaxDropDownHeight" type="text" />
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="ShouldPreserveUserEnteredPrefix" type="text" />
+          <xs:attribute name="IsEditable" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="SelectionBoxItem" type="text" />
+          <xs:attribute name="SelectionBoxItemTemplate" type="text" />
+          <xs:attribute name="SelectionBoxItemStringFormat" type="text" />
+          <xs:attribute name="StaysOpenOnEdit" type="text" />
+          <xs:attribute name="IsSelectionBoxHighlighted" type="text" />
+          <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComboBoxItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsHighlighted" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContentControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ContextMenu">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="PlacementTarget" type="text" />
+          <xs:attribute name="PlacementRectangle" type="text" />
+          <xs:attribute name="Placement" type="text" />
+          <xs:attribute name="HasDropShadow" type="text" />
+          <xs:attribute name="CustomPopupPlacementCallback" type="text" />
+          <xs:attribute name="StaysOpen" type="text" />
+          <xs:attribute name="ItemContainerTemplateSelector" type="text" />
+          <xs:attribute name="UsesItemContainerTemplate" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGrid">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Columns" type="text" />
+          <xs:attribute name="CanUserResizeColumns" type="text" />
+          <xs:attribute name="ColumnWidth" type="text" />
+          <xs:attribute name="MinColumnWidth" type="text" />
+          <xs:attribute name="MaxColumnWidth" type="text" />
+          <xs:attribute name="GridLinesVisibility" type="text" />
+          <xs:attribute name="HorizontalGridLinesBrush" type="text" />
+          <xs:attribute name="VerticalGridLinesBrush" type="text" />
+          <xs:attribute name="RowStyle" type="text" />
+          <xs:attribute name="RowValidationErrorTemplate" type="text" />
+          <xs:attribute name="RowValidationRules" type="text" />
+          <xs:attribute name="RowStyleSelector" type="text" />
+          <xs:attribute name="RowBackground" type="text" />
+          <xs:attribute name="AlternatingRowBackground" type="text" />
+          <xs:attribute name="RowHeight" type="text" />
+          <xs:attribute name="MinRowHeight" type="text" />
+          <xs:attribute name="RowHeaderWidth" type="text" />
+          <xs:attribute name="RowHeaderActualWidth" type="text" />
+          <xs:attribute name="ColumnHeaderHeight" type="text" />
+          <xs:attribute name="HeadersVisibility" type="text" />
+          <xs:attribute name="CellStyle" type="text" />
+          <xs:attribute name="ColumnHeaderStyle" type="text" />
+          <xs:attribute name="RowHeaderStyle" type="text" />
+          <xs:attribute name="RowHeaderTemplate" type="text" />
+          <xs:attribute name="RowHeaderTemplateSelector" type="text" />
+          <xs:attribute name="FocusBorderBrushKey" type="text" />
+          <xs:attribute name="HeadersVisibilityConverter" type="text" />
+          <xs:attribute name="RowDetailsScrollingConverter" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="DeleteCommand" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="CurrentItem" type="text" />
+          <xs:attribute name="CurrentColumn" type="text" />
+          <xs:attribute name="CurrentCell" type="text" />
+          <xs:attribute name="CanUserAddRows" type="text" />
+          <xs:attribute name="CanUserDeleteRows" type="text" />
+          <xs:attribute name="RowDetailsVisibilityMode" type="text" />
+          <xs:attribute name="AreRowDetailsFrozen" type="text" />
+          <xs:attribute name="RowDetailsTemplate" type="text" />
+          <xs:attribute name="RowDetailsTemplateSelector" type="text" />
+          <xs:attribute name="CanUserResizeRows" type="text" />
+          <xs:attribute name="NewItemMargin" type="text" />
+          <xs:attribute name="SelectedCells" type="text" />
+          <xs:attribute name="SelectAllCommand" type="text" />
+          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectionUnit" type="text" />
+          <xs:attribute name="CanUserSortColumns" type="text" />
+          <xs:attribute name="AutoGenerateColumns" type="text" />
+          <xs:attribute name="FrozenColumnCount" type="text" />
+          <xs:attribute name="NonFrozenColumnsViewportHorizontalOffset" type="text" />
+          <xs:attribute name="EnableRowVirtualization" type="text" />
+          <xs:attribute name="EnableColumnVirtualization" type="text" />
+          <xs:attribute name="CanUserReorderColumns" type="text" />
+          <xs:attribute name="DragIndicatorStyle" type="text" />
+          <xs:attribute name="DropLocationIndicatorStyle" type="text" />
+          <xs:attribute name="ClipboardCopyMode" type="text" />
+          <xs:attribute name="CellsPanelHorizontalOffset" type="text" />
+          <xs:attribute name="SelectedItems" type="text" />
+          <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridCell">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Column" type="text" />
+          <xs:attribute name="IsEditing" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridRow">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Item" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderStyle" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="ValidationErrorTemplate" type="text" />
+          <xs:attribute name="DetailsTemplate" type="text" />
+          <xs:attribute name="DetailsTemplateSelector" type="text" />
+          <xs:attribute name="DetailsVisibility" type="text" />
+          <xs:attribute name="AlternationIndex" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="IsEditing" type="text" />
+          <xs:attribute name="IsNewItem" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DatePicker">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="BlackoutDates" type="text" />
+          <xs:attribute name="CalendarStyle" type="text" />
+          <xs:attribute name="DisplayDate" type="text" />
+          <xs:attribute name="DisplayDateEnd" type="text" />
+          <xs:attribute name="DisplayDateStart" type="text" />
+          <xs:attribute name="FirstDayOfWeek" type="text" />
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="IsTodayHighlighted" type="text" />
+          <xs:attribute name="SelectedDate" type="text" />
+          <xs:attribute name="SelectedDateFormat" type="text" />
+          <xs:attribute name="Text" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DocumentViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ViewThumbnailsCommand" type="text" />
+          <xs:attribute name="FitToWidthCommand" type="text" />
+          <xs:attribute name="FitToHeightCommand" type="text" />
+          <xs:attribute name="FitToMaxPagesAcrossCommand" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="ExtentWidth" type="text" />
+          <xs:attribute name="ExtentHeight" type="text" />
+          <xs:attribute name="ViewportWidth" type="text" />
+          <xs:attribute name="ViewportHeight" type="text" />
+          <xs:attribute name="ShowPageBorders" type="text" />
+          <xs:attribute name="Zoom" type="text" />
+          <xs:attribute name="MaxPagesAcross" type="text" />
+          <xs:attribute name="VerticalPageSpacing" type="text" />
+          <xs:attribute name="HorizontalPageSpacing" type="text" />
+          <xs:attribute name="CanMoveUp" type="text" />
+          <xs:attribute name="CanMoveDown" type="text" />
+          <xs:attribute name="CanMoveLeft" type="text" />
+          <xs:attribute name="CanMoveRight" type="text" />
+          <xs:attribute name="CanIncreaseZoom" type="text" />
+          <xs:attribute name="CanDecreaseZoom" type="text" />
+          <xs:attribute name="Document" type="text" />
+          <xs:attribute name="PageCount" type="text" />
+          <xs:attribute name="MasterPageNumber" type="text" />
+          <xs:attribute name="CanGoToPreviousPage" type="text" />
+          <xs:attribute name="CanGoToNextPage" type="text" />
+          <xs:attribute name="PageViews" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Expander">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ExpandDirection" type="text" />
+          <xs:attribute name="IsExpanded" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlowDocumentReader">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ViewingMode" type="text" />
+          <xs:attribute name="Selection" type="text" />
+          <xs:attribute name="IsPageViewEnabled" type="text" />
+          <xs:attribute name="IsTwoPageViewEnabled" type="text" />
+          <xs:attribute name="IsScrollViewEnabled" type="text" />
+          <xs:attribute name="PageCount" type="text" />
+          <xs:attribute name="PageNumber" type="text" />
+          <xs:attribute name="CanGoToPreviousPage" type="text" />
+          <xs:attribute name="CanGoToNextPage" type="text" />
+          <xs:attribute name="IsFindEnabled" type="text" />
+          <xs:attribute name="IsPrintEnabled" type="text" />
+          <xs:attribute name="Document" type="text" />
+          <xs:attribute name="Zoom" type="text" />
+          <xs:attribute name="MaxZoom" type="text" />
+          <xs:attribute name="MinZoom" type="text" />
+          <xs:attribute name="ZoomIncrement" type="text" />
+          <xs:attribute name="CanIncreaseZoom" type="text" />
+          <xs:attribute name="CanDecreaseZoom" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlowDocumentScrollViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Document" type="text" />
+          <xs:attribute name="Selection" type="text" />
+          <xs:attribute name="Zoom" type="text" />
+          <xs:attribute name="MaxZoom" type="text" />
+          <xs:attribute name="MinZoom" type="text" />
+          <xs:attribute name="ZoomIncrement" type="text" />
+          <xs:attribute name="CanIncreaseZoom" type="text" />
+          <xs:attribute name="CanDecreaseZoom" type="text" />
+          <xs:attribute name="IsSelectionEnabled" type="text" />
+          <xs:attribute name="IsToolBarVisible" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Frame">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Source" type="text" />
+          <xs:attribute name="NavigationUIVisibility" type="text" />
+          <xs:attribute name="SandboxExternalContent" type="text" />
+          <xs:attribute name="JournalOwnership" type="text" />
+          <xs:attribute name="NavigationService" type="text" />
+          <xs:attribute name="CanGoForward" type="text" />
+          <xs:attribute name="CanGoBack" type="text" />
+          <xs:attribute name="CurrentSource" type="text" />
+          <xs:attribute name="BackStack" type="text" />
+          <xs:attribute name="ForwardStack" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GridSplitter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ResizeDirection" type="text" />
+          <xs:attribute name="ResizeBehavior" type="text" />
+          <xs:attribute name="ShowsPreview" type="text" />
+          <xs:attribute name="PreviewStyle" type="text" />
+          <xs:attribute name="KeyboardIncrement" type="text" />
+          <xs:attribute name="DragIncrement" type="text" />
+          <xs:attribute name="IsDragging" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GridViewColumnHeader">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Column" type="text" />
+          <xs:attribute name="Role" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GroupBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GroupItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeaderedContentControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HeaderedItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ItemsControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Label">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Target" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectedItems" type="text" />
+          <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListBoxItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListView">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="View" type="text" />
+          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectedItems" type="text" />
+          <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListViewItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Menu">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsMainMenu" type="text" />
+          <xs:attribute name="ItemContainerTemplateSelector" type="text" />
+          <xs:attribute name="UsesItemContainerTemplate" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MenuItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="TopLevelItemTemplateKey" type="text" />
+          <xs:attribute name="TopLevelHeaderTemplateKey" type="text" />
+          <xs:attribute name="SubmenuItemTemplateKey" type="text" />
+          <xs:attribute name="SubmenuHeaderTemplateKey" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="IsSubmenuOpen" type="text" />
+          <xs:attribute name="Role" type="text" />
+          <xs:attribute name="IsCheckable" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="IsHighlighted" type="text" />
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="StaysOpenOnClick" type="text" />
+          <xs:attribute name="InputGestureText" type="text" />
+          <xs:attribute name="Icon" type="text" />
+          <xs:attribute name="IsSuspendingPopupAnimation" type="text" />
+          <xs:attribute name="ItemContainerTemplateSelector" type="text" />
+          <xs:attribute name="UsesItemContainerTemplate" type="text" />
+          <xs:attribute name="SeparatorStyleKey" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PasswordBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Password" type="text" />
+          <xs:attribute name="SecurePassword" type="text" />
+          <xs:attribute name="PasswordChar" type="text" />
+          <xs:attribute name="MaxLength" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionTextBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ProgressBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsIndeterminate" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RadioButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="GroupName" type="text" />
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RichTextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Document" type="text" />
+          <xs:attribute name="IsDocumentEnabled" type="text" />
+          <xs:attribute name="Selection" type="text" />
+          <xs:attribute name="CaretPosition" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="IsReadOnlyCaretVisible" type="text" />
+          <xs:attribute name="AcceptsReturn" type="text" />
+          <xs:attribute name="AcceptsTab" type="text" />
+          <xs:attribute name="SpellCheck" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="ExtentWidth" type="text" />
+          <xs:attribute name="ExtentHeight" type="text" />
+          <xs:attribute name="ViewportWidth" type="text" />
+          <xs:attribute name="ViewportHeight" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="CanUndo" type="text" />
+          <xs:attribute name="CanRedo" type="text" />
+          <xs:attribute name="IsUndoEnabled" type="text" />
+          <xs:attribute name="UndoLimit" type="text" />
+          <xs:attribute name="AutoWordSelection" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionTextBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScrollViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="CanContentScroll" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="ComputedHorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="ComputedVerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="ExtentWidth" type="text" />
+          <xs:attribute name="ExtentHeight" type="text" />
+          <xs:attribute name="ScrollableWidth" type="text" />
+          <xs:attribute name="ScrollableHeight" type="text" />
+          <xs:attribute name="ViewportWidth" type="text" />
+          <xs:attribute name="ViewportHeight" type="text" />
+          <xs:attribute name="ContentVerticalOffset" type="text" />
+          <xs:attribute name="ContentHorizontalOffset" type="text" />
+          <xs:attribute name="IsDeferredScrollingEnabled" type="text" />
+          <xs:attribute name="PanningMode" type="text" />
+          <xs:attribute name="PanningDeceleration" type="text" />
+          <xs:attribute name="PanningRatio" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Separator">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FlowDocumentPageViewer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Selection" type="text" />
+          <xs:attribute name="Zoom" type="text" />
+          <xs:attribute name="MaxZoom" type="text" />
+          <xs:attribute name="MinZoom" type="text" />
+          <xs:attribute name="ZoomIncrement" type="text" />
+          <xs:attribute name="CanIncreaseZoom" type="text" />
+          <xs:attribute name="CanDecreaseZoom" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+          <xs:attribute name="Document" type="text" />
+          <xs:attribute name="PageCount" type="text" />
+          <xs:attribute name="MasterPageNumber" type="text" />
+          <xs:attribute name="CanGoToPreviousPage" type="text" />
+          <xs:attribute name="CanGoToNextPage" type="text" />
+          <xs:attribute name="PageViews" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Slider">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IncreaseLarge" type="text" />
+          <xs:attribute name="DecreaseLarge" type="text" />
+          <xs:attribute name="IncreaseSmall" type="text" />
+          <xs:attribute name="DecreaseSmall" type="text" />
+          <xs:attribute name="MinimizeValue" type="text" />
+          <xs:attribute name="MaximizeValue" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="IsDirectionReversed" type="text" />
+          <xs:attribute name="Delay" type="text" />
+          <xs:attribute name="Interval" type="text" />
+          <xs:attribute name="AutoToolTipPlacement" type="text" />
+          <xs:attribute name="AutoToolTipPrecision" type="text" />
+          <xs:attribute name="IsSnapToTickEnabled" type="text" />
+          <xs:attribute name="TickPlacement" type="text" />
+          <xs:attribute name="TickFrequency" type="text" />
+          <xs:attribute name="Ticks" type="text" />
+          <xs:attribute name="IsSelectionRangeEnabled" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="SelectionEnd" type="text" />
+          <xs:attribute name="IsMoveToPointEnabled" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="TabStripPlacement" type="text" />
+          <xs:attribute name="SelectedContent" type="text" />
+          <xs:attribute name="SelectedContentTemplate" type="text" />
+          <xs:attribute name="SelectedContentTemplateSelector" type="text" />
+          <xs:attribute name="SelectedContentStringFormat" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+          <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TabItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="TabStripPlacement" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="MinLines" type="text" />
+          <xs:attribute name="MaxLines" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="CharacterCasing" type="text" />
+          <xs:attribute name="MaxLength" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+          <xs:attribute name="SelectedText" type="text" />
+          <xs:attribute name="SelectionLength" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="CaretIndex" type="text" />
+          <xs:attribute name="LineCount" type="text" />
+          <xs:attribute name="TextDecorations" type="text" />
+          <xs:attribute name="Typography" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="IsReadOnlyCaretVisible" type="text" />
+          <xs:attribute name="AcceptsReturn" type="text" />
+          <xs:attribute name="AcceptsTab" type="text" />
+          <xs:attribute name="SpellCheck" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="ExtentWidth" type="text" />
+          <xs:attribute name="ExtentHeight" type="text" />
+          <xs:attribute name="ViewportWidth" type="text" />
+          <xs:attribute name="ViewportHeight" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="CanUndo" type="text" />
+          <xs:attribute name="CanRedo" type="text" />
+          <xs:attribute name="IsUndoEnabled" type="text" />
+          <xs:attribute name="UndoLimit" type="text" />
+          <xs:attribute name="AutoWordSelection" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionTextBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ToolBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Band" type="text" />
+          <xs:attribute name="BandIndex" type="text" />
+          <xs:attribute name="IsOverflowOpen" type="text" />
+          <xs:attribute name="HasOverflowItems" type="text" />
+          <xs:attribute name="ButtonStyleKey" type="text" />
+          <xs:attribute name="ToggleButtonStyleKey" type="text" />
+          <xs:attribute name="SeparatorStyleKey" type="text" />
+          <xs:attribute name="CheckBoxStyleKey" type="text" />
+          <xs:attribute name="RadioButtonStyleKey" type="text" />
+          <xs:attribute name="ComboBoxStyleKey" type="text" />
+          <xs:attribute name="TextBoxStyleKey" type="text" />
+          <xs:attribute name="MenuStyleKey" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ToolTip">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="HasDropShadow" type="text" />
+          <xs:attribute name="PlacementTarget" type="text" />
+          <xs:attribute name="PlacementRectangle" type="text" />
+          <xs:attribute name="Placement" type="text" />
+          <xs:attribute name="CustomPopupPlacementCallback" type="text" />
+          <xs:attribute name="StaysOpen" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeView">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="SelectedValue" type="text" />
+          <xs:attribute name="SelectedValuePath" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TreeViewItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsExpanded" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HasHeader" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
+          <xs:attribute name="HeaderTemplateSelector" type="text" />
+          <xs:attribute name="HeaderStringFormat" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserControl">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="HasSelectedDays" type="text" />
+          <xs:attribute name="IsInactive" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
+          <xs:attribute name="IsDefaulted" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarDayButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsToday" type="text" />
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="IsInactive" type="text" />
+          <xs:attribute name="IsBlackedOut" type="text" />
+          <xs:attribute name="IsHighlighted" type="text" />
+          <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
+          <xs:attribute name="IsDefaulted" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CalendarItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="DayTitleTemplateResourceKey" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridCellsPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Item" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridColumnHeader">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Column" type="text" />
+          <xs:attribute name="SeparatorBrush" type="text" />
+          <xs:attribute name="SeparatorVisibility" type="text" />
+          <xs:attribute name="DisplayIndex" type="text" />
+          <xs:attribute name="CanUserSort" type="text" />
+          <xs:attribute name="SortDirection" type="text" />
+          <xs:attribute name="IsFrozen" type="text" />
+          <xs:attribute name="ColumnHeaderDropSeparatorStyleKey" type="text" />
+          <xs:attribute name="ColumnFloatingHeaderStyleKey" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridColumnHeadersPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DataGridRowHeader">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="SeparatorBrush" type="text" />
+          <xs:attribute name="SeparatorVisibility" type="text" />
+          <xs:attribute name="IsRowSelected" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DatePickerTextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="MinLines" type="text" />
+          <xs:attribute name="MaxLines" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="CharacterCasing" type="text" />
+          <xs:attribute name="MaxLength" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+          <xs:attribute name="SelectedText" type="text" />
+          <xs:attribute name="SelectionLength" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="CaretIndex" type="text" />
+          <xs:attribute name="LineCount" type="text" />
+          <xs:attribute name="TextDecorations" type="text" />
+          <xs:attribute name="Typography" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="IsReadOnlyCaretVisible" type="text" />
+          <xs:attribute name="AcceptsReturn" type="text" />
+          <xs:attribute name="AcceptsTab" type="text" />
+          <xs:attribute name="SpellCheck" type="text" />
+          <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
+          <xs:attribute name="VerticalScrollBarVisibility" type="text" />
+          <xs:attribute name="ExtentWidth" type="text" />
+          <xs:attribute name="ExtentHeight" type="text" />
+          <xs:attribute name="ViewportWidth" type="text" />
+          <xs:attribute name="ViewportHeight" type="text" />
+          <xs:attribute name="HorizontalOffset" type="text" />
+          <xs:attribute name="VerticalOffset" type="text" />
+          <xs:attribute name="CanUndo" type="text" />
+          <xs:attribute name="CanRedo" type="text" />
+          <xs:attribute name="IsUndoEnabled" type="text" />
+          <xs:attribute name="UndoLimit" type="text" />
+          <xs:attribute name="AutoWordSelection" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionTextBrush" type="text" />
+          <xs:attribute name="SelectionOpacity" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
+          <xs:attribute name="IsSelectionActive" type="text" />
+          <xs:attribute name="IsInactiveSelectionHighlightEnabled" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RepeatButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Delay" type="text" />
+          <xs:attribute name="Interval" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResizeGrip">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScrollBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="ViewportSize" type="text" />
+          <xs:attribute name="Track" type="text" />
+          <xs:attribute name="Minimum" type="text" />
+          <xs:attribute name="Maximum" type="text" />
+          <xs:attribute name="Value" type="text" />
+          <xs:attribute name="LargeChange" type="text" />
+          <xs:attribute name="SmallChange" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StatusBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ItemContainerTemplateSelector" type="text" />
+          <xs:attribute name="UsesItemContainerTemplate" type="text" />
+          <xs:attribute name="SeparatorStyleKey" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemsSource" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="HasItems" type="text" />
+          <xs:attribute name="DisplayMemberPath" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="ItemTemplateSelector" type="text" />
+          <xs:attribute name="ItemStringFormat" type="text" />
+          <xs:attribute name="ItemBindingGroup" type="text" />
+          <xs:attribute name="ItemContainerStyle" type="text" />
+          <xs:attribute name="ItemContainerStyleSelector" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="IsGrouping" type="text" />
+          <xs:attribute name="GroupStyle" type="text" />
+          <xs:attribute name="GroupStyleSelector" type="text" />
+          <xs:attribute name="AlternationCount" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="IsTextSearchCaseSensitive" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="StatusBarItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Thumb">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsDragging" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ToggleButton">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsChecked" type="text" />
+          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Command" type="text" />
+          <xs:attribute name="CommandParameter" type="text" />
+          <xs:attribute name="CommandTarget" type="text" />
+          <xs:attribute name="ClickMode" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="HasContent" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="ContentTemplateSelector" type="text" />
+          <xs:attribute name="ContentStringFormat" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

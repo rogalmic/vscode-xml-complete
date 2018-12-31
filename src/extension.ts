@@ -57,7 +57,8 @@ function loadConfiguration(): void {
 	globalSettings = <IXmlCompleteSettings>{
 		schemaMapping: section.get('schemaMapping',
 			[
-				{ "xmlns": "https://github.com/avaloniaui", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd" }
+				{ "xmlns": "https://github.com/avaloniaui", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd" },
+				{ "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation", "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd" }
 			])
 	};
 }
