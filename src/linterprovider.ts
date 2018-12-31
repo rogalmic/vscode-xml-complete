@@ -84,7 +84,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
                 let diagnosticResults = result.map(r => {
                     let position = new vscode.Position(r.line, r.column);
-                    let severity = (r.severity === "error") ? vscode.DiagnosticSeverity.Error : (r.severity === "warning") ? vscode.DiagnosticSeverity.Warning : vscode.DiagnosticSeverity.Information;
+                    let severity = (r.severity === "error") ? vscode.DiagnosticSeverity.Error : (r.severity === "warning") ? vscode.DiagnosticSeverity.Warning : vscode.DiagnosticSeverity.Hint;
                     return new vscode.Diagnostic(new vscode.Range(position, position), r.message, severity);
                 });
                 diagnostics.push(...diagnosticResults);
