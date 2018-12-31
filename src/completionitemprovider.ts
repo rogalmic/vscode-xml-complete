@@ -12,9 +12,10 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
 		let documentContent = textDocument.getText();
+		let offset = textDocument.offsetAt(position);
 		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
 
-		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character);
+		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, position.line, position.character, offset);
 
 		let resultTexts: string[];
 

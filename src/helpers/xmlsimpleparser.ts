@@ -73,14 +73,21 @@ export default class XmlSimpleParser {
 			});
 	}
 
-	public static getScopeForPosition(xmlContent: string, line: number, column: number): Promise<{ tagName: string | undefined, context: "element" | "attribute" | undefined }> {
+	public static getScopeForPosition(xmlContent: string, line: number, column: number, offset: number): Promise<{ tagName: string | undefined, context: "element" | "attribute" | undefined }> {
 		const sax = require(XmlSimpleParser.saxPath), strict = true, parser = sax.parser(strict);
 		return new Promise<{ tagName: string | undefined, context: "element" | "attribute" | undefined }>(
 			(resolve) => {
-				let result: { tagName: string | undefined, context: "element" | "attribute" | undefined } = { tagName: undefined, context: undefined };
+				let result: { tagName: string | undefined, context: "element" | "attribute" | undefined } = { tagName: undefined, context: "element" };
 				let done: boolean = false;
 				let updatePosition = (positionContext: "element" | "attribute") => {
 					if (parser.line >= line && parser.column >= column && !done) {
+
+						if (offset >= 1 && xmlContent.charAt(offset - 1) === '<') {
+							positionContext = "element";
+						} else 	if (offset >= 1 && xmlContent.charAt(offset - 1) === ' ') {
+							positionContext = "attribute";
+						}
+
 						result = { tagName: parser.tagName, context: positionContext };
 						done = true;
 					}
@@ -96,10 +103,6 @@ export default class XmlSimpleParser {
 
 				parser.onattribute = () => {
 					updatePosition("attribute");
-				};
-
-				parser.onopentag = () => {
-					updatePosition("element");
 				};
 
 				parser.onclosetagstart = () => {
