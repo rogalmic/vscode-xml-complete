@@ -73,11 +73,13 @@
           "default": [
             {
               "xmlns": "https://github.com/avaloniaui",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd",
+              "strict": false
             },
             {
               "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd"
+              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd",
+              "strict": false
             }
           ]
         }
@@ -97,7 +99,8 @@
   },
   "dependencies": {
     "get-uri": "2.0.2",
-    "xml-formatter": "1.0.1"
+    "xml-formatter": "1.0.1",
+    "sax": "1.2.4"
   },
   "devDependencies": {
     "typescript": "^3.2.2",

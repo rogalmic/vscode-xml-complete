@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
-import { IXmlSchemaProperties } from './extension';
+import { XmlSchemaProperties } from './types';
 
 export default class XmlRangeFormatProvider implements vscode.DocumentRangeFormattingEditProvider {
 
-	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: Array<IXmlSchemaProperties>) {
+	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: Array<XmlSchemaProperties>) {
 	}
 
 	provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {

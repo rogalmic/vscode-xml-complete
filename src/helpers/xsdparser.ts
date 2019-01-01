@@ -1,12 +1,11 @@
-import { normalize, join } from 'path';
-import { XmlTagCollection } from '../extension';
+import { XmlTagCollection } from '../types';
 
 export default class XsdParser {
 
-	private static readonly saxPath = normalize(join(__dirname, '..', '..', 'lib/sax'));
-
 	public static getSchemaTagsAndAttributes(xsdContent: string): Promise<XmlTagCollection> {
-		const sax = require(XsdParser.saxPath), strict = true, parser = sax.parser(strict);
+		const sax = require("sax");
+		const parser = sax.parser(true);
+
 		return new Promise<XmlTagCollection>(
 			(resolve) => {
 				let result: XmlTagCollection = new XmlTagCollection();

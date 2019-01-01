@@ -1,6 +1,6 @@
 # Xml Complete
 
-This extension helps with editing XML files by providing hints.
+This extension helps with editing XML files by providing hints. Sample [schema files](https://github.com/rogalmic/vscode-xml-complete/tree/master/test) provided for XAML file types (WPF, Avalonia).
 
 It does not require any runtime like `java`, `python` or `xmllint`, while does partial XSD parsing.
 
