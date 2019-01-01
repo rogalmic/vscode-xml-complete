@@ -1,12 +1,13 @@
 import * as vscode from 'vscode';
 import { XmlSchemaProperties } from './types';
+import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlRangeFormatProvider implements vscode.DocumentRangeFormattingEditProvider {
 
 	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: Array<XmlSchemaProperties>) {
 	}
 
-	provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): vscode.ProviderResult<vscode.TextEdit[]> {
+	async provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
 		const format = require('xml-formatter');
 		const indentationString = options.insertSpaces ? Array(options.tabSize).fill(' ').join("") : "\t";
 
@@ -19,8 +20,14 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 		const selectionSeparator = "<!--352cf605-57c7-48a8-a5eb-2da215536443-->";
 		let text = [before, selection, after].join(selectionSeparator);
 
-		const emptyLines = /^\s*[\r\n]/gm;
-		let formattedText : string = format(text, {indentation: indentationString}).split(selectionSeparator)[1].replace(emptyLines,"");
+		if (!await XmlSimpleParser.checkXml(text)) {
+			return [];
+		}
+
+		const emptyLines = /^\s*[\r?\n]/gm;
+		let formattedText: string = format(text, { indentation: indentationString })
+			.split(selectionSeparator)[1]
+			.replace(emptyLines, "");
 
 		if (!formattedText) {
 			return [];

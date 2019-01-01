@@ -13,25 +13,42 @@ export default class XsdParser {
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
 
-					xmlDepthPath.push({ tag: tagData.name, resultTagName: tagData.attributes["name"] });
+					xmlDepthPath.push({
+						tag: tagData.name,
+						resultTagName: tagData.attributes["name"]
+					});
 
 					if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
-						result.push({ tag: tagData.attributes["name"], base: tagData.attributes["type"], attributes: [] });
+						result.push({
+							tag: tagData.attributes["name"],
+							base: tagData.attributes["type"],
+							attributes: []
+						});
 					}
 
 					if (tagData.name.endsWith(":complexType") && tagData.attributes["name"] !== undefined) {
-						result.push({ tag: tagData.attributes["name"], base: undefined, attributes: [] });
+						result.push({
+							tag: tagData.attributes["name"],
+							base: undefined,
+							attributes: []
+						});
 					}
 
 					if (tagData.name.endsWith(":attribute") && tagData.attributes["name"] !== undefined) {
-						let currentResultTag = xmlDepthPath.slice().reverse().filter(e => e.resultTagName !== undefined)[1];
+						let currentResultTag = xmlDepthPath
+							.slice()
+							.reverse()
+							.filter(e => e.resultTagName !== undefined)[1];
 						result
 							.filter(e => e.tag === currentResultTag.resultTagName)
 							.forEach(e => e.attributes.push(tagData.attributes["name"]));
 					}
 
 					if (tagData.name.endsWith(":extension") && tagData.attributes["base"] !== undefined) {
-						let currentResultTag = xmlDepthPath.slice().reverse().filter(e => e.resultTagName !== undefined)[0];
+						let currentResultTag = xmlDepthPath
+							.slice()
+							.reverse()
+							.filter(e => e.resultTagName !== undefined)[0];
 
 						result
 							.filter(e => e.tag === currentResultTag.resultTagName)

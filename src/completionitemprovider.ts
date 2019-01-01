@@ -11,16 +11,19 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 		this.schemaPropertiesArray = schemaPropertiesArray;
 	}
 
-	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
+	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
 		let documentContent = textDocument.getText();
 		let offset = textDocument.offsetAt(position);
-		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
+		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping))
+			.map(u => vscode.Uri.parse(u));
 
 		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
 
-		let resultTexts: string[] = [];
+		let resultTexts: string[];
 
-		if (scope.context === "element") {
+		if (token.isCancellationRequested) {
+			resultTexts = [];
+		} else if (scope.context === "element") {
 			// TODO: if (scope.tagName.contains("."))
 			resultTexts = this.schemaPropertiesArray
 				.filter(e => xsdFileUris.find(u => u.toString() === e.schemaUri.toString()) !== undefined)

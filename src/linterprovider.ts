@@ -16,12 +16,17 @@ export default class XmlLinterProvider implements vscode.Disposable {
         this.schemaPropertiesArray = schemaPropertiesArray;
         this.diagnosticCollection = vscode.languages.createDiagnosticCollection();
 
-        this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt => this.triggerDelayedLint(evnt.document), this, this.context.subscriptions);
+        this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt =>
+            this.triggerDelayedLint(evnt.document), this, this.context.subscriptions);
 
-        vscode.workspace.onDidOpenTextDocument(doc => this.triggerDelayedLint(doc, 100), this, context.subscriptions);
-        vscode.workspace.onDidCloseTextDocument(doc => this.cleanupDocument(doc), null, context.subscriptions);
+        vscode.workspace.onDidOpenTextDocument(doc =>
+            this.triggerDelayedLint(doc, 100), this, context.subscriptions);
 
-        vscode.workspace.textDocuments.forEach(doc => this.triggerDelayedLint(doc, 100), this);
+        vscode.workspace.onDidCloseTextDocument(doc =>
+            this.cleanupDocument(doc), null, context.subscriptions);
+
+        vscode.workspace.textDocuments.forEach(doc =>
+            this.triggerDelayedLint(doc, 100), this);
     }
 
     public dispose() {
@@ -33,25 +38,21 @@ export default class XmlLinterProvider implements vscode.Disposable {
         this.diagnosticCollection.delete(textDocument.uri);
     }
 
-    private triggerDelayedLint(textDocument: vscode.TextDocument, timeout: number = 1500): void {
-        if (timeout !== 0) {
-            try {
-                if (this.delayCount > 0) {
-                    return;
-                }
-            } finally {
-                this.delayCount = timeout;
-            }
+    private async triggerDelayedLint(textDocument: vscode.TextDocument, timeout: number = 2000): Promise<void> {
+        if (this.delayCount > 0) {
+            this.delayCount = timeout;
+            return;
         }
+        this.delayCount = timeout;
+
         const tick = 100;
-        this.delayCount -= tick;
-        if (this.delayCount <= 0) {
-            this.triggerLint(textDocument);
-        } else {
-            setTimeout(() => {
-                this.triggerDelayedLint(textDocument, 0);
-            }, tick);
+
+        while (this.delayCount > 0) {
+            await new Promise(resolve => setTimeout(resolve, tick));
+            this.delayCount -= tick;
         }
+
+        this.triggerLint(textDocument);
     }
 
     private async triggerLint(textDocument: vscode.TextDocument): Promise<void> {
@@ -62,7 +63,8 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         const diagnostics: vscode.Diagnostic[] = [];
         try {
-            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(textDocument.getText(), globalSettings.schemaMapping)).map(u => vscode.Uri.parse(u));
+            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(textDocument.getText(), globalSettings.schemaMapping))
+                .map(u => vscode.Uri.parse(u));
 
             for (let xsdUri of xsdFileUris) {
                 let schemaProperties = this.schemaPropertiesArray.find(e => e.schemaUri.toString() === xsdUri.toString());

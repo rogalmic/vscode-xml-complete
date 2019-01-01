@@ -16,7 +16,8 @@ export default class XmlSimpleParser {
 							line: parser.line,
 							column: parser.column,
 							message: parser.error.message,
-							severity: strict ? "error" : "warning" });
+							severity: strict ? "error" : "warning"
+						});
 					}
 					parser.resume();
 				};
@@ -33,7 +34,8 @@ export default class XmlSimpleParser {
 								result.push({
 									line: parser.line,
 									column: parser.column,
-									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: "info" });
+									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: "info"
+								});
 							}
 						});
 					}
@@ -42,7 +44,8 @@ export default class XmlSimpleParser {
 							line: parser.line,
 							column: parser.column,
 							message: `Unknown xml tag '${tagData.name}'`,
-							severity: strict ? "info" : "hint" });
+							severity: strict ? "info" : "hint"
+						});
 					}
 				};
 
@@ -107,7 +110,7 @@ export default class XmlSimpleParser {
 							let lastTagText = content.substring(content.lastIndexOf("<"));
 							if (!/\s/.test(lastTagText)) {
 								result.context = "element";
-							} else if ((lastTagText.split(`"`).length & 1) !== 0 ) {
+							} else if ((lastTagText.split(`"`).length & 1) !== 0) {
 								result.context = "attribute";
 							}
 						}
@@ -140,6 +143,26 @@ export default class XmlSimpleParser {
 					if (result === undefined) {
 						result = { tagName: undefined, context: undefined };
 					}
+					resolve(result);
+				};
+
+				parser.write(xmlContent).close();
+			});
+	}
+
+	public static checkXml(xmlContent: string): Promise<boolean> {
+		const sax = require("sax");
+		const parser = sax.parser(true);
+
+		let result : boolean = true;
+		return new Promise<boolean>(
+			(resolve) => {
+				parser.onerror = () => {
+					result = false;
+					parser.resume();
+				};
+
+				parser.onend = () => {
 					resolve(result);
 				};
 

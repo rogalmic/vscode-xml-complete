@@ -15,16 +15,25 @@ export function activate(context: vscode.ExtensionContext) {
 	loadConfiguration();
 
 	const schemaPropertiesArray = new Array<XmlSchemaProperties>();
-	let completionitemprovider = vscode.languages.registerCompletionItemProvider({ language: languageId, scheme: 'file' }, new XmlCompletionItemProvider(context, schemaPropertiesArray));
-	let formatprovider = vscode.languages.registerDocumentFormattingEditProvider({ language: languageId, scheme: 'file' }, new XmlFormatProvider(context, schemaPropertiesArray));
-	let rangeformatprovider = vscode.languages.registerDocumentRangeFormattingEditProvider({ language: languageId, scheme: 'file' }, new XmlRangeFormatProvider(context, schemaPropertiesArray));
+	let completionitemprovider = vscode.languages.registerCompletionItemProvider(
+		{ language: languageId, scheme: 'file' },
+		new XmlCompletionItemProvider(context, schemaPropertiesArray));
+
+	let formatprovider = vscode.languages.registerDocumentFormattingEditProvider(
+		{ language: languageId, scheme: 'file' },
+		new XmlFormatProvider(context, schemaPropertiesArray));
+
+	let rangeformatprovider = vscode.languages.registerDocumentRangeFormattingEditProvider(
+		{ language: languageId, scheme: 'file' },
+		new XmlRangeFormatProvider(context, schemaPropertiesArray));
+
 	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
 	context.subscriptions.push(completionitemprovider, linterprovider, formatprovider, rangeformatprovider);
 }
 
 function loadConfiguration(): void {
-	const section = vscode.workspace.getConfiguration('xmlComplete');
+	const section = vscode.workspace.getConfiguration('xmlComplete', null);
 	globalSettings = <XmlCompleteSettings>{
 		schemaMapping: section.get('schemaMapping',
 			[
