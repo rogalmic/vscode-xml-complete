@@ -26,7 +26,8 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
 [
  {
   "xmlns": "https://github.com/avaloniaui",
-  "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+  "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd",
+  "strict": true // shows errors instead of tips
  }
 ]
 ```
@@ -52,5 +53,5 @@ xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-comple
 
 ## Known Issues
 
-- This is a preview version, lots of bugs expected...
+- This is a preview version, bugs expected...
 
