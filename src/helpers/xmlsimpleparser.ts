@@ -71,12 +71,14 @@ export default class XmlSimpleParser {
 
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
-						result.push(attr.value);
+						result.push(...attr.value.split(/\s+/));
 					} else if (attr.name === "xmlns") {
-						let newUriString = schemaMapping.filter(m => m.xmlns === attr.value).map(m => m.xsdUri).pop();
-						if (newUriString !== undefined) {
-							result.push(newUriString);
-						}
+						attr.value.split(/\s+/).forEach(ns => {
+							let newUriString = schemaMapping.filter(m => m.xmlns === ns).map(m => m.xsdUri).pop();
+							if (newUriString !== undefined) {
+								result.push(newUriString);
+							}
+						});
 					}
 				};
 
@@ -102,7 +104,6 @@ export default class XmlSimpleParser {
 
 						result = { tagName: parser.tagName, context: undefined };
 						let content = xmlContent.substring(previousStartTagPosition, offset);
-						console.log(`Autocomplete xml triggered for ${content} , current tag is '${parser.tagName}'`);
 
 						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
 							result.context = "text";
@@ -154,7 +155,7 @@ export default class XmlSimpleParser {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
-		let result : boolean = true;
+		let result: boolean = true;
 		return new Promise<boolean>(
 			(resolve) => {
 				parser.onerror = () => {
@@ -166,6 +167,88 @@ export default class XmlSimpleParser {
 					resolve(result);
 				};
 
+				parser.write(xmlContent).close();
+			});
+	}
+
+	public static formatXml(xmlContent: string, indentationString: string): Promise<string> {
+		const sax = require("sax");
+		const parser = sax.parser(true);
+
+		let result: string[] = [];
+		let xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
+
+		let getIndentation = (): string => `\n` + Array(xmlDepthPath.length).fill(indentationString).join("");
+
+		return new Promise<string>(
+			(resolve) => {
+
+				parser.onerror = () => {
+					parser.resume();
+				};
+
+				parser.ontext = (t) => {
+					result.push(/^\s*$/.test(t) ? `` : `${t}`);
+				};
+
+				parser.ondoctype = (t) => {
+					result.push(`\n<!DOCTYPE${t}>`);
+				};
+
+				parser.onprocessinginstruction = (instruction: { name: string, body: string }) => {
+					result.push(`\n<?${instruction.name} ${instruction.body}?>`);
+				};
+
+				parser.onsgmldeclaration = (t) => {
+					result.push(`\n<!${t}>`);
+				};
+
+				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
+					let argString: string[] = [];
+					for (let arg in tagData.attributes) {
+						argString.push(` ${arg}="${tagData.attributes[arg]}"`);
+					}
+
+					if (xmlDepthPath.length > 0) {
+						xmlDepthPath[xmlDepthPath.length - 1].isTextContent = false;
+					}
+
+					result.push(`${getIndentation()}<${tagData.name}${argString.join("")}${tagData.isSelfClosing ? "/>" : ">"}`);
+
+					xmlDepthPath.push({
+						tag: tagData.name,
+						selfClosing: tagData.isSelfClosing,
+						isTextContent: true
+					});
+				};
+
+				parser.onclosetag = (t) => {
+					let tag = xmlDepthPath.pop();
+
+					if (tag && !tag.selfClosing) {
+						result.push(tag.isTextContent ? `</${t}>` : `${getIndentation()}</${t}>`);
+					}
+				};
+
+				parser.oncomment = (t) => {
+					result.push(`<!--${t}-->`);
+				};
+
+				parser.onopencdata = () => {
+					result.push(`\n<![CDATA[`);
+				};
+
+				parser.oncdata = (t) => {
+					result.push(t);
+				};
+
+				parser.onclosecdata = () => {
+					result.push(`]]>`);
+				};
+
+				parser.onend = () => {
+					resolve(result.join(``));
+				};
 				parser.write(xmlContent).close();
 			});
 	}

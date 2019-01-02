@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { languageId, globalSettings } from './extension';
-import { XmlSchemaProperties, XmlTagCollection } from './types';
+import { XmlSchemaProperties, XmlTagCollection, XmlSchemaPropertiesArray } from './types';
 import XsdParser from './helpers/xsdparser';
 import XsdLoader from './helpers/xsdloader';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
@@ -9,10 +9,10 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
     private documentListener: vscode.Disposable;
     private diagnosticCollection: vscode.DiagnosticCollection;
-    private schemaPropertiesArray: Array<XmlSchemaProperties>;
+    private schemaPropertiesArray: XmlSchemaPropertiesArray;
     private delayCount: number = 0;
 
-    constructor(private context: vscode.ExtensionContext, schemaPropertiesArray: Array<XmlSchemaProperties>) {
+    constructor(private context: vscode.ExtensionContext, schemaPropertiesArray: XmlSchemaPropertiesArray) {
         this.schemaPropertiesArray = schemaPropertiesArray;
         this.diagnosticCollection = vscode.languages.createDiagnosticCollection();
 
@@ -61,13 +61,16 @@ export default class XmlLinterProvider implements vscode.Disposable {
             return;
         }
 
-        const diagnostics: vscode.Diagnostic[] = [];
+        let diagnostics: Array<vscode.Diagnostic[]> = new Array<vscode.Diagnostic[]>();
         try {
             let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(textDocument.getText(), globalSettings.schemaMapping))
-                .map(u => vscode.Uri.parse(u));
+                .map(u => vscode.Uri.parse(u))
+                .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString() ) === i);
 
             for (let xsdUri of xsdFileUris) {
-                let schemaProperties = this.schemaPropertiesArray.find(e => e.schemaUri.toString() === xsdUri.toString());
+                let schemaProperties = this.schemaPropertiesArray
+                    .filterUris([xsdUri])[0];
+
                 if (schemaProperties === undefined) {
                     schemaProperties = { schemaUri: xsdUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as XmlSchemaProperties;
 
@@ -82,7 +85,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
                     }
                 }
 
-                const strict = !globalSettings.schemaMapping.find(m => m.xsdUri.toString() === xsdUri.toString() && m.strict === false);
+                const strict = !globalSettings.schemaMapping.find(m => m.xsdUri === xsdUri.toString() && m.strict === false);
                 let result = await XmlSimpleParser.getXmlDiagnosticData(textDocument.getText(), schemaProperties.tagCollection, strict);
 
                 let diagnosticResults = result.map(r => {
@@ -93,10 +96,12 @@ export default class XmlLinterProvider implements vscode.Disposable {
                                 vscode.DiagnosticSeverity.Hint;
                     return new vscode.Diagnostic(new vscode.Range(position, position), r.message, severity);
                 });
-                diagnostics.push(...diagnosticResults);
+
+                diagnostics.push(diagnosticResults);
             }
 
-            this.diagnosticCollection.set(textDocument.uri, diagnostics);
+            this.diagnosticCollection.set(textDocument.uri, diagnostics
+                .reduce((prev, next) => prev.filter(dp => next.find(dn => dn.range.start.compareTo(dp.range.start) === 0))));
         }
         catch (err) {
             vscode.window.showErrorMessage(err);

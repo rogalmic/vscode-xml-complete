@@ -3,7 +3,7 @@ import XmlLinterProvider from './linterprovider';
 import XmlCompletionItemProvider from './completionitemprovider';
 import XmlFormatProvider from './formatprovider';
 import XmlRangeFormatProvider from './rangeformatprovider';
-import { XmlCompleteSettings, XmlSchemaProperties } from './types';
+import { XmlCompleteSettings, XmlSchemaPropertiesArray } from './types';
 
 export declare let globalSettings: XmlCompleteSettings;
 
@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.workspace.onDidChangeConfiguration(loadConfiguration, undefined, context.subscriptions);
 	loadConfiguration();
 
-	const schemaPropertiesArray = new Array<XmlSchemaProperties>();
+	const schemaPropertiesArray = new XmlSchemaPropertiesArray();
 	let completionitemprovider = vscode.languages.registerCompletionItemProvider(
 		{ language: languageId, scheme: 'file' },
 		new XmlCompletionItemProvider(context, schemaPropertiesArray));

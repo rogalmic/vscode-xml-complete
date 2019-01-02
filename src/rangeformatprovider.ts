@@ -1,14 +1,13 @@
 import * as vscode from 'vscode';
-import { XmlSchemaProperties } from './types';
+import { XmlSchemaPropertiesArray } from './types';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlRangeFormatProvider implements vscode.DocumentRangeFormattingEditProvider {
 
-	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: Array<XmlSchemaProperties>) {
+	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
 	async provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
-		const format = require('xml-formatter');
 		const indentationString = options.insertSpaces ? Array(options.tabSize).fill(' ').join("") : "\t";
 
 		let before = textDocument.getText(new vscode.Range(textDocument.positionAt(0), range.start)).trim();
@@ -24,10 +23,9 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 			return [];
 		}
 
-		const emptyLines = /^\s*[\r?\n]/gm;
-		let formattedText: string = format(text, { indentation: indentationString })
+		let formattedText: string = (await XmlSimpleParser.formatXml(text, indentationString))
 			.split(selectionSeparator)[1]
-			.replace(emptyLines, "");
+			.trim();
 
 		if (!formattedText) {
 			return [];

@@ -6,8 +6,9 @@ export class XmlCompleteSettings {
 
 export class XmlTag {
 	tag: string;
-	base: string | undefined;
+	base: string[];
 	attributes: Array<string>;
+	visible: boolean;
 }
 
 export class XmlTagCollection extends Array<XmlTag> {
@@ -17,7 +18,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 			var currentTags = this.filter(e => e.tag === tagName);
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next)));
-				currentTags.forEach(e => result.push(...this.loadAttributes(e.base)));
+				currentTags.forEach(e => e.base.forEach(b => result.push(...this.loadAttributes(b))));
 			}
 		}
 		return result;
@@ -28,6 +29,13 @@ export class XmlSchemaProperties {
 	schemaUri: vscode.Uri;
 	xsdContent: string;
 	tagCollection: XmlTagCollection;
+}
+
+export class XmlSchemaPropertiesArray extends Array<XmlSchemaProperties> {
+	filterUris(uris: vscode.Uri[]) : Array<XmlSchemaProperties> {
+		return this.filter(e => uris
+			.find(u => u.toString() === e.schemaUri.toString()) !== undefined);
+	}
 }
 
 export class XmlDiagnosticData {

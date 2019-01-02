@@ -21,16 +21,27 @@ export default class XsdParser {
 					if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
 						result.push({
 							tag: tagData.attributes["name"],
-							base: tagData.attributes["type"],
-							attributes: []
+							base: [tagData.attributes["type"]],
+							attributes: [],
+							visible: true
 						});
 					}
 
 					if (tagData.name.endsWith(":complexType") && tagData.attributes["name"] !== undefined) {
 						result.push({
 							tag: tagData.attributes["name"],
-							base: undefined,
-							attributes: []
+							base: [],
+							attributes: [],
+							visible: false
+						});
+					}
+
+					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["name"] !== undefined) {
+						result.push({
+							tag: tagData.attributes["name"],
+							base: [],
+							attributes: [],
+							visible: false
 						});
 					}
 
@@ -52,21 +63,38 @@ export default class XsdParser {
 
 						result
 							.filter(e => e.tag === currentResultTag.resultTagName)
-							.forEach(e => e.base = tagData.attributes["base"]);
+							.forEach(e => e.base.push(tagData.attributes["base"]));
+					}
+
+					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["ref"] !== undefined) {
+						let currentResultTag = xmlDepthPath
+							.slice()
+							.reverse()
+							.filter(e => e.resultTagName !== undefined)[0];
+
+						result
+							.filter(e => e.tag === currentResultTag.resultTagName)
+							.forEach(e => e.base.push(tagData.attributes["ref"]));
+					}
+
+					if (tagData.name.endsWith(":import") && tagData.attributes["schemaLocation"] !== undefined) {
+						// TODO: handle this somehow, possibly separate methood to be called:
+						// importFiles.push(tagData.attributes["schemaLocation"]);
 					}
 				};
 
 				parser.onclosetag = (name: string) => {
 					let popped = xmlDepthPath.pop();
 					if (popped !== undefined && popped.tag !== name) {
-						throw new Error("XSD open/close tag consistency error.");
+						console.warn("XSD open/close tag consistency error.");
 					}
 				};
 
 				parser.onend = () => {
 					if (xmlDepthPath.length !== 0) {
-						throw new Error("XSD open/close tag consistency error (end).");
+						console.warn("XSD open/close tag consistency error (end).");
 					}
+
 					resolve(result);
 				};
 

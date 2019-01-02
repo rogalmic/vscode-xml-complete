@@ -1,13 +1,13 @@
 import * as vscode from 'vscode';
-import { XmlSchemaProperties } from './types';
+import { XmlSchemaPropertiesArray } from './types';
 import { globalSettings } from './extension';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlCompletionItemProvider implements vscode.CompletionItemProvider {
 
-	private schemaPropertiesArray: Array<XmlSchemaProperties>;
+	private schemaPropertiesArray: XmlSchemaPropertiesArray;
 
-	constructor(_context: vscode.ExtensionContext, schemaPropertiesArray: Array<XmlSchemaProperties>) {
+	constructor(_context: vscode.ExtensionContext, schemaPropertiesArray: XmlSchemaPropertiesArray) {
 		this.schemaPropertiesArray = schemaPropertiesArray;
 	}
 
@@ -23,34 +23,42 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 		if (token.isCancellationRequested) {
 			resultTexts = [];
-		} else if (scope.context === "element") {
-			// TODO: if (scope.tagName.contains("."))
-			resultTexts = this.schemaPropertiesArray
-				.filter(e => xsdFileUris.find(u => u.toString() === e.schemaUri.toString()) !== undefined)
-				.map(sp => sp.tagCollection.map(e => e.tag))
-				.reduce((prev, next) => prev.concat(next))
-				.sort()
-				.filter((item, pos, ary) => !pos || item !== ary[pos - 1])
-				.filter(t => t.indexOf(".") < 0);
-		} else if (scope.context === "attribute") {
-			resultTexts = this.schemaPropertiesArray
-				.filter(e => xsdFileUris.find(u => u.toString() === e.schemaUri.toString()) !== undefined)
-				.map(sp => sp.tagCollection.loadAttributes(scope.tagName))
-				.reduce((prev, next) => prev.concat(next))
-				.sort()
-				.filter((item, pos, ary) => !pos || item !== ary[pos - 1]);
 		} else if (scope.context === "text") {
 			resultTexts = this.schemaPropertiesArray
-				.filter(e => xsdFileUris.find(u => u.toString() === e.schemaUri.toString()) !== undefined)
-				.map(sp => sp.tagCollection.map(e => `<${e.tag} />`)) //TODO: make proper selection selfclosing
+				.filterUris(xsdFileUris)
+				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => `<${e.tag} />`))
+				.reduce((prev, next) => prev.concat(next));
+			resultTexts.push(...this.schemaPropertiesArray
+				.filterUris(xsdFileUris)
+				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => `<${e.tag}></${e.tag}>`))
+				.reduce((prev, next) => prev.concat(next)));
+			resultTexts.push(...["<!--  -->", "<![CDATA[  ]]>", "<?  ?>", "<%  %>"]);
+			resultTexts = resultTexts
+				.sort()
+				.filter((v, i, a) => a.indexOf(v) === i);
+
+		} else if (scope.tagName === undefined) {
+			resultTexts = [];
+
+		} else if (scope.context === "element" && scope.tagName.indexOf(".") < 0) {
+			resultTexts = this.schemaPropertiesArray
+				.filterUris(xsdFileUris)
+				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => e.tag))
 				.reduce((prev, next) => prev.concat(next))
 				.sort()
-				.filter((item, pos, ary) => !pos || item !== ary[pos - 1]);
+				.filter((v, i, a) => a.indexOf(v) === i);
 
-			resultTexts.push(...["<!--  -->", "<![CDATA[  ]]>", "<?  ?>", "<%  %>"]);
+		} else if (scope.context !== undefined) {
+			resultTexts = this.schemaPropertiesArray
+				.filterUris(xsdFileUris)
+				.map(sp => sp.tagCollection.loadAttributes(scope.tagName ? scope.tagName.replace(".", "") : undefined))
+				.reduce((prev, next) => prev.concat(next))
+				.sort()
+				.filter((v, i, a) => a.indexOf(v) === i);
+
 		} else {
-
 			resultTexts = [];
+
 		}
 
 		return resultTexts
