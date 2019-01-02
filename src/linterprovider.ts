@@ -77,6 +77,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
                     try {
                         schemaProperties.xsdContent = await XsdLoader.loadSchemaContentsFromUri(xsdUri.toString(true));
                         schemaProperties.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperties.xsdContent);
+                        vscode.window.showInformationMessage(`Loaded ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
                     }
                     catch (err) {
                         vscode.window.showErrorMessage(err);
