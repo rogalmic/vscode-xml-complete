@@ -5,10 +5,7 @@ import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlCompletionItemProvider implements vscode.CompletionItemProvider {
 
-	private schemaPropertiesArray: XmlSchemaPropertiesArray;
-
-	constructor(_context: vscode.ExtensionContext, schemaPropertiesArray: XmlSchemaPropertiesArray) {
-		this.schemaPropertiesArray = schemaPropertiesArray;
+	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
 	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {

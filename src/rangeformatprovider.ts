@@ -4,7 +4,7 @@ import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlRangeFormatProvider implements vscode.DocumentRangeFormattingEditProvider {
 
-	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: XmlSchemaPropertiesArray) {
+	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
 	async provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {

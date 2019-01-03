@@ -9,21 +9,20 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
     private documentListener: vscode.Disposable;
     private diagnosticCollection: vscode.DiagnosticCollection;
-    private schemaPropertiesArray: XmlSchemaPropertiesArray;
     private delayCount: number = 0;
 
-    constructor(private context: vscode.ExtensionContext, schemaPropertiesArray: XmlSchemaPropertiesArray) {
+    constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
         this.schemaPropertiesArray = schemaPropertiesArray;
         this.diagnosticCollection = vscode.languages.createDiagnosticCollection();
 
         this.documentListener = vscode.workspace.onDidChangeTextDocument(evnt =>
-            this.triggerDelayedLint(evnt.document), this, this.context.subscriptions);
+            this.triggerDelayedLint(evnt.document), this, this.extensionContext.subscriptions);
 
         vscode.workspace.onDidOpenTextDocument(doc =>
-            this.triggerDelayedLint(doc, 100), this, context.subscriptions);
+            this.triggerDelayedLint(doc, 100), this, extensionContext.subscriptions);
 
         vscode.workspace.onDidCloseTextDocument(doc =>
-            this.cleanupDocument(doc), null, context.subscriptions);
+            this.cleanupDocument(doc), null, extensionContext.subscriptions);
 
         vscode.workspace.textDocuments.forEach(doc =>
             this.triggerDelayedLint(doc, 100), this);

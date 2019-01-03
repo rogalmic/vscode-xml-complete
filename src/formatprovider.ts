@@ -4,7 +4,7 @@ import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlFormatProvider implements vscode.DocumentFormattingEditProvider {
 
-	constructor(_context: vscode.ExtensionContext, _schemaPropertiesArray: XmlSchemaPropertiesArray) {
+	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
 	async provideDocumentFormattingEdits(textDocument: vscode.TextDocument, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
