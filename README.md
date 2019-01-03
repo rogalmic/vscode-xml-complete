@@ -31,7 +31,7 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
  }
 ]
 ```
-### Using `schemaLocation` attribute
+### Using `schemaLocation` attribute directly in edited file
 ```xml
 <root
 ...

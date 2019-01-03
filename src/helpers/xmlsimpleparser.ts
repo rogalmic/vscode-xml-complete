@@ -171,14 +171,14 @@ export default class XmlSimpleParser {
 			});
 	}
 
-	public static formatXml(xmlContent: string, indentationString: string): Promise<string> {
+	public static formatXml(xmlContent: string, indentationString: string, eol : string): Promise<string> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
 		let result: string[] = [];
 		let xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
 
-		let getIndentation = (): string => `\n` + Array(xmlDepthPath.length).fill(indentationString).join("");
+		let getIndentation = (): string => eol + Array(xmlDepthPath.length).fill(indentationString).join("");
 
 		return new Promise<string>(
 			(resolve) => {
@@ -192,15 +192,15 @@ export default class XmlSimpleParser {
 				};
 
 				parser.ondoctype = (t) => {
-					result.push(`\n<!DOCTYPE${t}>`);
+					result.push(`${eol}<!DOCTYPE${t}>`);
 				};
 
 				parser.onprocessinginstruction = (instruction: { name: string, body: string }) => {
-					result.push(`\n<?${instruction.name} ${instruction.body}?>`);
+					result.push(`${eol}<?${instruction.name} ${instruction.body}?>`);
 				};
 
 				parser.onsgmldeclaration = (t) => {
-					result.push(`\n<!${t}>`);
+					result.push(`${eol}<!${t}>`);
 				};
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
@@ -235,7 +235,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onopencdata = () => {
-					result.push(`\n<![CDATA[`);
+					result.push(`${eol}<![CDATA[`);
 				};
 
 				parser.oncdata = (t) => {

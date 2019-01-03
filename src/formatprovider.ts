@@ -10,10 +10,12 @@ export default class XmlFormatProvider implements vscode.DocumentFormattingEditP
 	async provideDocumentFormattingEdits(textDocument: vscode.TextDocument, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
 		const indentationString = options.insertSpaces ? Array(options.tabSize).fill(' ').join("") : "\t";
 
-		let documentRange = new vscode.Range(textDocument.positionAt(0), textDocument.lineAt(textDocument.lineCount - 1).range.end);
+		const documentRange = new vscode.Range(textDocument.positionAt(0), textDocument.lineAt(textDocument.lineCount - 1).range.end);
+		const text = textDocument.getText();
 
-		let formattedText: string = (await XmlSimpleParser.formatXml(textDocument.getText(), indentationString))
-			.trim();
+		let formattedText: string =
+			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? "\r\n" : "\n"))
+				.trim();
 
 		if (!formattedText) {
 			return [];
