@@ -45,6 +45,9 @@
   ],
   "keywords": [
     "xml",
+    "xaml",
+    "avalonia",
+    "wpf",
     "xsd",
     "completion",
     "linter",

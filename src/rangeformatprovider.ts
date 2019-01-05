@@ -23,10 +23,12 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 			return [];
 		}
 
+		const emptyLines = /^\s*[\r?\n]|\s*[\r?\n]$/g;
+
 		let formattedText: string =
 			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`))
 				.split(selectionSeparator)[1]
-				.trim();
+				.replace(emptyLines, "");
 
 		if (!formattedText) {
 			return [];
