@@ -3,7 +3,7 @@
   <xs:simpleType name="text">
     <xs:restriction base="xs:string" />
   </xs:simpleType>
-  <xs:complexType name="Control" mixed="true">
+  <xs:complexType name="FrameworkElement" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:group ref="controls" />
       <xs:any maxOccurs="unbounded" processContents="lax" />
@@ -216,7 +216,7 @@
   <xs:element name="Window">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="TaskbarItemInfo" type="text" />
           <xs:attribute name="AllowsTransparency" type="text" />
           <xs:attribute name="Title" type="text" />
@@ -263,7 +263,7 @@
   <xs:element name="Ellipse">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="RenderedGeometry" type="text" />
           <xs:attribute name="GeometryTransform" type="text" />
           <xs:attribute name="Stretch" type="text" />
@@ -284,7 +284,7 @@
   <xs:element name="Line">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="X1" type="text" />
           <xs:attribute name="Y1" type="text" />
           <xs:attribute name="X2" type="text" />
@@ -309,7 +309,7 @@
   <xs:element name="Path">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Data" type="text" />
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="RenderedGeometry" type="text" />
@@ -331,7 +331,7 @@
   <xs:element name="Polygon">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Points" type="text" />
           <xs:attribute name="FillRule" type="text" />
           <xs:attribute name="Stretch" type="text" />
@@ -354,7 +354,7 @@
   <xs:element name="Polyline">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Points" type="text" />
           <xs:attribute name="FillRule" type="text" />
           <xs:attribute name="Stretch" type="text" />
@@ -377,7 +377,7 @@
   <xs:element name="Rectangle">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="RadiusX" type="text" />
           <xs:attribute name="RadiusY" type="text" />
           <xs:attribute name="RenderedGeometry" type="text" />
@@ -400,7 +400,7 @@
   <xs:element name="ActiveXHost">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Handle" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -409,7 +409,7 @@
   <xs:element name="NavigationWindow">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="SandboxExternalContent" type="text" />
           <xs:attribute name="NavigationService" type="text" />
           <xs:attribute name="BackStack" type="text" />
@@ -465,7 +465,7 @@
   <xs:element name="AdornerDecorator">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="AdornerLayer" type="text" />
           <xs:attribute name="Child" type="text" />
         </xs:extension>
@@ -475,14 +475,14 @@
   <xs:element name="AdornerLayer">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control" />
+        <xs:extension base="FrameworkElement" />
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="DocumentReference">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -491,7 +491,7 @@
   <xs:element name="FixedPage">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="PrintTicket" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -504,7 +504,7 @@
   <xs:element name="Glyphs">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Fill" type="text" />
           <xs:attribute name="Indices" type="text" />
           <xs:attribute name="UnicodeString" type="text" />
@@ -524,7 +524,7 @@
   <xs:element name="PageContent">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
           <xs:attribute name="LinkTargets" type="text" />
           <xs:attribute name="Child" type="text" />
@@ -535,7 +535,7 @@
   <xs:element name="StickyNoteControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Author" type="text" />
           <xs:attribute name="IsExpanded" type="text" />
           <xs:attribute name="IsActive" type="text" />
@@ -570,7 +570,7 @@
   <xs:element name="AccessText">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="AccessKey" type="text" />
           <xs:attribute name="Text" type="text" />
           <xs:attribute name="FontFamily" type="text" />
@@ -595,7 +595,7 @@
   <xs:element name="AdornedElementPlaceholder">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="AdornedElement" type="text" />
           <xs:attribute name="Child" type="text" />
         </xs:extension>
@@ -605,7 +605,7 @@
   <xs:element name="Border">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BorderThickness" type="text" />
           <xs:attribute name="Padding" type="text" />
           <xs:attribute name="CornerRadius" type="text" />
@@ -619,7 +619,7 @@
   <xs:element name="Button">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsDefaulted" type="text" />
@@ -655,7 +655,7 @@
   <xs:element name="Calendar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BlackoutDates" type="text" />
           <xs:attribute name="CalendarButtonStyle" type="text" />
           <xs:attribute name="CalendarDayButtonStyle" type="text" />
@@ -691,7 +691,7 @@
   <xs:element name="Canvas">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="IsItemsHost" type="text" />
@@ -704,7 +704,7 @@
   <xs:element name="CheckBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsChecked" type="text" />
           <xs:attribute name="IsThreeState" type="text" />
           <xs:attribute name="IsPressed" type="text" />
@@ -739,7 +739,7 @@
   <xs:element name="ComboBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="MaxDropDownHeight" type="text" />
           <xs:attribute name="IsDropDownOpen" type="text" />
           <xs:attribute name="ShouldPreserveUserEnteredPrefix" type="text" />
@@ -796,7 +796,7 @@
   <xs:element name="ComboBoxItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsHighlighted" type="text" />
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="Content" type="text" />
@@ -826,7 +826,7 @@
   <xs:element name="ContentControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -854,7 +854,7 @@
   <xs:element name="ContentPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="RecognizesAccessKey" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -868,7 +868,7 @@
   <xs:element name="ContextMenu">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="HorizontalOffset" type="text" />
           <xs:attribute name="VerticalOffset" type="text" />
           <xs:attribute name="IsOpen" type="text" />
@@ -920,7 +920,7 @@
   <xs:element name="Control">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -943,7 +943,7 @@
   <xs:element name="DataGrid">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Columns" type="text" />
           <xs:attribute name="CanUserResizeColumns" type="text" />
           <xs:attribute name="ColumnWidth" type="text" />
@@ -1048,7 +1048,7 @@
   <xs:element name="DataGridCell">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Column" type="text" />
           <xs:attribute name="IsEditing" type="text" />
           <xs:attribute name="IsReadOnly" type="text" />
@@ -1080,7 +1080,7 @@
   <xs:element name="DataGridCellsPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="CanHierarchicallyScrollAndVirtualize" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -1095,7 +1095,7 @@
   <xs:element name="DataGridRow">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Item" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="Header" type="text" />
@@ -1132,7 +1132,7 @@
   <xs:element name="DatePicker">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BlackoutDates" type="text" />
           <xs:attribute name="CalendarStyle" type="text" />
           <xs:attribute name="DisplayDate" type="text" />
@@ -1166,7 +1166,7 @@
   <xs:element name="Decorator">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Child" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -1175,7 +1175,7 @@
   <xs:element name="DockPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="LastChildFill" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Children" type="text" />
@@ -1189,7 +1189,7 @@
   <xs:element name="DocumentViewer">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ViewThumbnailsCommand" type="text" />
           <xs:attribute name="FitToWidthCommand" type="text" />
           <xs:attribute name="FitToHeightCommand" type="text" />
@@ -1239,7 +1239,7 @@
   <xs:element name="Expander">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ExpandDirection" type="text" />
           <xs:attribute name="IsExpanded" type="text" />
           <xs:attribute name="Header" type="text" />
@@ -1274,7 +1274,7 @@
   <xs:element name="FlowDocumentReader">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ViewingMode" type="text" />
           <xs:attribute name="Selection" type="text" />
           <xs:attribute name="IsPageViewEnabled" type="text" />
@@ -1319,7 +1319,7 @@
   <xs:element name="FlowDocumentScrollViewer">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Document" type="text" />
           <xs:attribute name="Selection" type="text" />
           <xs:attribute name="Zoom" type="text" />
@@ -1358,7 +1358,7 @@
   <xs:element name="Frame">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
           <xs:attribute name="NavigationUIVisibility" type="text" />
           <xs:attribute name="SandboxExternalContent" type="text" />
@@ -1396,7 +1396,7 @@
   <xs:element name="Grid">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ShowGridLines" type="text" />
           <xs:attribute name="ColumnDefinitions" type="text" />
           <xs:attribute name="RowDefinitions" type="text" />
@@ -1412,7 +1412,7 @@
   <xs:element name="GridSplitter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ResizeDirection" type="text" />
           <xs:attribute name="ResizeBehavior" type="text" />
           <xs:attribute name="ShowsPreview" type="text" />
@@ -1442,7 +1442,7 @@
   <xs:element name="GridViewColumnHeader">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Column" type="text" />
           <xs:attribute name="Role" type="text" />
           <xs:attribute name="IsPressed" type="text" />
@@ -1477,7 +1477,7 @@
   <xs:element name="GridViewHeaderRowPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ColumnHeaderContainerStyle" type="text" />
           <xs:attribute name="ColumnHeaderTemplate" type="text" />
           <xs:attribute name="ColumnHeaderTemplateSelector" type="text" />
@@ -1493,7 +1493,7 @@
   <xs:element name="GridViewRowPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="Columns" type="text" />
         </xs:extension>
@@ -1503,7 +1503,7 @@
   <xs:element name="GroupBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Header" type="text" />
           <xs:attribute name="HasHeader" type="text" />
           <xs:attribute name="HeaderTemplate" type="text" />
@@ -1536,7 +1536,7 @@
   <xs:element name="GroupItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -1564,7 +1564,7 @@
   <xs:element name="HeaderedContentControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Header" type="text" />
           <xs:attribute name="HasHeader" type="text" />
           <xs:attribute name="HeaderTemplate" type="text" />
@@ -1597,7 +1597,7 @@
   <xs:element name="HeaderedItemsControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Header" type="text" />
           <xs:attribute name="HasHeader" type="text" />
           <xs:attribute name="HeaderTemplate" type="text" />
@@ -1643,7 +1643,7 @@
   <xs:element name="Image">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="StretchDirection" type="text" />
@@ -1654,7 +1654,7 @@
   <xs:element name="InkCanvas">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Strokes" type="text" />
           <xs:attribute name="IsGestureRecognizerAvailable" type="text" />
@@ -1676,7 +1676,7 @@
   <xs:element name="InkPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Strokes" type="text" />
           <xs:attribute name="Child" type="text" />
         </xs:extension>
@@ -1686,7 +1686,7 @@
   <xs:element name="ItemsControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemsSource" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
@@ -1727,14 +1727,14 @@
   <xs:element name="ItemsPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control" />
+        <xs:extension base="FrameworkElement" />
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="Label">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Target" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
@@ -1763,7 +1763,7 @@
   <xs:element name="ListBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="SelectionMode" type="text" />
           <xs:attribute name="SelectedItems" type="text" />
           <xs:attribute name="IsSynchronizedWithCurrentItem" type="text" />
@@ -1811,7 +1811,7 @@
   <xs:element name="ListBoxItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
@@ -1840,7 +1840,7 @@
   <xs:element name="ListView">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="View" type="text" />
           <xs:attribute name="SelectionMode" type="text" />
           <xs:attribute name="SelectedItems" type="text" />
@@ -1889,7 +1889,7 @@
   <xs:element name="ListViewItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
@@ -1918,7 +1918,7 @@
   <xs:element name="MediaElement">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
           <xs:attribute name="Clock" type="text" />
           <xs:attribute name="Stretch" type="text" />
@@ -1947,7 +1947,7 @@
   <xs:element name="Menu">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsMainMenu" type="text" />
           <xs:attribute name="ItemContainerTemplateSelector" type="text" />
           <xs:attribute name="UsesItemContainerTemplate" type="text" />
@@ -1991,7 +1991,7 @@
   <xs:element name="MenuItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="TopLevelItemTemplateKey" type="text" />
           <xs:attribute name="TopLevelHeaderTemplateKey" type="text" />
           <xs:attribute name="SubmenuItemTemplateKey" type="text" />
@@ -2057,7 +2057,7 @@
   <xs:element name="Page">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="WindowTitle" type="text" />
           <xs:attribute name="WindowHeight" type="text" />
@@ -2078,7 +2078,7 @@
   <xs:element name="PasswordBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Password" type="text" />
           <xs:attribute name="SecurePassword" type="text" />
           <xs:attribute name="PasswordChar" type="text" />
@@ -2111,7 +2111,7 @@
   <xs:element name="ScrollContentPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="AdornerLayer" type="text" />
           <xs:attribute name="CanContentScroll" type="text" />
           <xs:attribute name="CanHorizontallyScroll" type="text" />
@@ -2136,7 +2136,7 @@
   <xs:element name="ProgressBar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsIndeterminate" type="text" />
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="Minimum" type="text" />
@@ -2166,7 +2166,7 @@
   <xs:element name="RadioButton">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="GroupName" type="text" />
           <xs:attribute name="IsChecked" type="text" />
           <xs:attribute name="IsThreeState" type="text" />
@@ -2202,7 +2202,7 @@
   <xs:element name="RichTextBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Document" type="text" />
           <xs:attribute name="IsDocumentEnabled" type="text" />
           <xs:attribute name="Selection" type="text" />
@@ -2253,7 +2253,7 @@
   <xs:element name="ScrollViewer">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="CanContentScroll" type="text" />
           <xs:attribute name="HorizontalScrollBarVisibility" type="text" />
           <xs:attribute name="VerticalScrollBarVisibility" type="text" />
@@ -2300,7 +2300,7 @@
   <xs:element name="Separator">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -2323,7 +2323,7 @@
   <xs:element name="FlowDocumentPageViewer">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Selection" type="text" />
           <xs:attribute name="Zoom" type="text" />
           <xs:attribute name="MaxZoom" type="text" />
@@ -2363,7 +2363,7 @@
   <xs:element name="Slider">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IncreaseLarge" type="text" />
           <xs:attribute name="DecreaseLarge" type="text" />
           <xs:attribute name="IncreaseSmall" type="text" />
@@ -2411,7 +2411,7 @@
   <xs:element name="StackPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="CanHorizontallyScroll" type="text" />
           <xs:attribute name="CanVerticallyScroll" type="text" />
@@ -2434,7 +2434,7 @@
   <xs:element name="TabControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="TabStripPlacement" type="text" />
           <xs:attribute name="SelectedContent" type="text" />
           <xs:attribute name="SelectedContentTemplate" type="text" />
@@ -2488,7 +2488,7 @@
   <xs:element name="TabItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="TabStripPlacement" type="text" />
           <xs:attribute name="Header" type="text" />
@@ -2523,7 +2523,7 @@
   <xs:element name="TextBlock">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Inlines" type="text" />
           <xs:attribute name="ContentStart" type="text" />
           <xs:attribute name="ContentEnd" type="text" />
@@ -2555,7 +2555,7 @@
   <xs:element name="TextBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="TextWrapping" type="text" />
           <xs:attribute name="MinLines" type="text" />
           <xs:attribute name="MaxLines" type="text" />
@@ -2616,7 +2616,7 @@
   <xs:element name="ToolBar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="Band" type="text" />
           <xs:attribute name="BandIndex" type="text" />
@@ -2675,7 +2675,7 @@
   <xs:element name="ToolBarTray">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="IsLocked" type="text" />
@@ -2687,7 +2687,7 @@
   <xs:element name="ToolTip">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="HorizontalOffset" type="text" />
           <xs:attribute name="VerticalOffset" type="text" />
           <xs:attribute name="IsOpen" type="text" />
@@ -2724,7 +2724,7 @@
   <xs:element name="TreeView">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="SelectedItem" type="text" />
           <xs:attribute name="SelectedValue" type="text" />
           <xs:attribute name="SelectedValuePath" type="text" />
@@ -2768,7 +2768,7 @@
   <xs:element name="TreeViewItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsExpanded" type="text" />
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="IsSelectionActive" type="text" />
@@ -2817,7 +2817,7 @@
   <xs:element name="UserControl">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -2845,7 +2845,7 @@
   <xs:element name="Viewbox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Child" type="text" />
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="StretchDirection" type="text" />
@@ -2856,7 +2856,7 @@
   <xs:element name="Viewport3D">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Camera" type="text" />
           <xs:attribute name="Children" type="text" />
         </xs:extension>
@@ -2866,7 +2866,7 @@
   <xs:element name="VirtualizingStackPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="CanHorizontallyScroll" type="text" />
           <xs:attribute name="CanVerticallyScroll" type="text" />
@@ -2891,7 +2891,7 @@
   <xs:element name="WebBrowser">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Source" type="text" />
           <xs:attribute name="CanGoBack" type="text" />
           <xs:attribute name="CanGoForward" type="text" />
@@ -2905,7 +2905,7 @@
   <xs:element name="WrapPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ItemWidth" type="text" />
           <xs:attribute name="ItemHeight" type="text" />
           <xs:attribute name="Orientation" type="text" />
@@ -2921,7 +2921,7 @@
   <xs:element name="BulletDecorator">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Bullet" type="text" />
           <xs:attribute name="Child" type="text" />
@@ -2932,7 +2932,7 @@
   <xs:element name="CalendarButton">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="HasSelectedDays" type="text" />
           <xs:attribute name="IsInactive" type="text" />
           <xs:attribute name="IsDefault" type="text" />
@@ -2970,7 +2970,7 @@
   <xs:element name="CalendarDayButton">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsToday" type="text" />
           <xs:attribute name="IsSelected" type="text" />
           <xs:attribute name="IsInactive" type="text" />
@@ -3011,7 +3011,7 @@
   <xs:element name="CalendarItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="DayTitleTemplateResourceKey" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
@@ -3035,7 +3035,7 @@
   <xs:element name="DataGridCellsPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Item" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemsSource" type="text" />
@@ -3077,7 +3077,7 @@
   <xs:element name="DataGridColumnHeader">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Column" type="text" />
           <xs:attribute name="SeparatorBrush" type="text" />
           <xs:attribute name="SeparatorVisibility" type="text" />
@@ -3119,7 +3119,7 @@
   <xs:element name="DataGridColumnHeadersPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemsSource" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
@@ -3160,7 +3160,7 @@
   <xs:element name="DataGridDetailsPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="RecognizesAccessKey" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -3174,7 +3174,7 @@
   <xs:element name="DataGridRowHeader">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="SeparatorBrush" type="text" />
           <xs:attribute name="SeparatorVisibility" type="text" />
           <xs:attribute name="IsRowSelected" type="text" />
@@ -3210,7 +3210,7 @@
   <xs:element name="DataGridRowsPresenter">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="CanHorizontallyScroll" type="text" />
           <xs:attribute name="CanVerticallyScroll" type="text" />
@@ -3235,7 +3235,7 @@
   <xs:element name="DatePickerTextBox">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="TextWrapping" type="text" />
           <xs:attribute name="MinLines" type="text" />
           <xs:attribute name="MaxLines" type="text" />
@@ -3296,7 +3296,7 @@
   <xs:element name="DocumentPageView">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="DocumentPaginator" type="text" />
           <xs:attribute name="DocumentPage" type="text" />
           <xs:attribute name="PageNumber" type="text" />
@@ -3309,7 +3309,7 @@
   <xs:element name="Popup">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Child" type="text" />
           <xs:attribute name="IsOpen" type="text" />
           <xs:attribute name="Placement" type="text" />
@@ -3329,7 +3329,7 @@
   <xs:element name="RepeatButton">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Delay" type="text" />
           <xs:attribute name="Interval" type="text" />
           <xs:attribute name="IsPressed" type="text" />
@@ -3364,7 +3364,7 @@
   <xs:element name="ResizeGrip">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -3387,7 +3387,7 @@
   <xs:element name="ScrollBar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="ViewportSize" type="text" />
           <xs:attribute name="Track" type="text" />
@@ -3418,7 +3418,7 @@
   <xs:element name="SelectiveScrollingGrid">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ShowGridLines" type="text" />
           <xs:attribute name="ColumnDefinitions" type="text" />
           <xs:attribute name="RowDefinitions" type="text" />
@@ -3434,7 +3434,7 @@
   <xs:element name="StatusBar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="ItemContainerTemplateSelector" type="text" />
           <xs:attribute name="UsesItemContainerTemplate" type="text" />
           <xs:attribute name="SeparatorStyleKey" type="text" />
@@ -3478,7 +3478,7 @@
   <xs:element name="StatusBarItem">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="HasContent" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -3506,7 +3506,7 @@
   <xs:element name="TabPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="IsItemsHost" type="text" />
@@ -3519,7 +3519,7 @@
   <xs:element name="Thumb">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsDragging" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
@@ -3543,7 +3543,7 @@
   <xs:element name="TickBar">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Fill" type="text" />
           <xs:attribute name="Minimum" type="text" />
           <xs:attribute name="Maximum" type="text" />
@@ -3562,7 +3562,7 @@
   <xs:element name="ToggleButton">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="IsChecked" type="text" />
           <xs:attribute name="IsThreeState" type="text" />
           <xs:attribute name="IsPressed" type="text" />
@@ -3597,7 +3597,7 @@
   <xs:element name="ToolBarOverflowPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="WrapWidth" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="Children" type="text" />
@@ -3611,7 +3611,7 @@
   <xs:element name="ToolBarPanel">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="CanHorizontallyScroll" type="text" />
           <xs:attribute name="CanVerticallyScroll" type="text" />
@@ -3634,7 +3634,7 @@
   <xs:element name="Track">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="DecreaseRepeatButton" type="text" />
           <xs:attribute name="Thumb" type="text" />
           <xs:attribute name="IncreaseRepeatButton" type="text" />
@@ -3651,7 +3651,7 @@
   <xs:element name="UniformGrid">
     <xs:complexType mixed="true">
       <xs:complexContent>
-        <xs:extension base="Control">
+        <xs:extension base="FrameworkElement">
           <xs:attribute name="FirstColumn" type="text" />
           <xs:attribute name="Columns" type="text" />
           <xs:attribute name="Rows" type="text" />

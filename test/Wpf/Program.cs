@@ -61,7 +61,7 @@ namespace Wpf {
 
         private static XElement GetControlElement(string controlName, IEnumerable<string> controlAttributes, IEnumerable<string> baseAttributeNames)
         {
-            var extension = new XElement(ns + "extension", new XAttribute("base", "Control"));
+            var extension = new XElement(ns + "extension", new XAttribute("base", "FrameworkElement"));
             extension.Add(GetAttributes(controlAttributes));
             var complexContent = new XElement(ns + "complexContent");
             complexContent.Add(extension);
@@ -90,7 +90,7 @@ namespace Wpf {
 
             var choice = new XElement(ns + "choice", new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
             choice.Add(group, any);
-            var complexType = new XElement(ns + "complexType", new XAttribute("name", "Control"), new XAttribute("mixed", "true"));
+            var complexType = new XElement(ns + "complexType", new XAttribute("name", "FrameworkElement"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
             complexType.Add(GetAttributes(controlAttributes));
             complexType.Add(anyAttribute);
