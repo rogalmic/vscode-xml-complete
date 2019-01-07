@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.5...v0.0.6) (2019-01-07)
+
+
+### Bug Fixes
+
+* **parser:** Fix multiple schema locations handling. ([d92380f](https://github.com/rogalmic/vscode-xml-complete/commit/d92380f))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.4...v0.0.5) (2019-01-05)
 

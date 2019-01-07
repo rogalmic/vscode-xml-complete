@@ -7,7 +7,7 @@
     "name": "Michal Rogalinski",
     "email": "rogalinsky@gmail.com"
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "preview": true,
   "license": "MIT",
   "engines": {
@@ -85,9 +85,9 @@
               "strict": false
             },
             {
-                "xmlns": "http://www.w3.org/2000/svg",
-                "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd",
-                "strict": true
+              "xmlns": "http://www.w3.org/2000/svg",
+              "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd",
+              "strict": true
             }
           ]
         }
