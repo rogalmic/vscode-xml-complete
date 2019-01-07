@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "test/Avalonia"
+		},
+		{
+			"path": "test/Wpf"
+		}
+	],
+	"settings": {
+		"javascript.validate.enable": false,
+		"typescript.tsdk": "node_modules/typescript/lib",
+		"typescript.tsc.autoDetect": "off"
+	}
+}

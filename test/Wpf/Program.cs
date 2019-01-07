@@ -17,7 +17,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 
 namespace Wpf {
-    public static class Program 
+    public static class Program
     {
         private static XNamespace ns = "http://www.w3.org/2001/XMLSchema";
 
@@ -29,13 +29,13 @@ namespace Wpf {
         {
             Func<string, bool> isAlphanumeric = str => !alphanumeric.IsMatch(str);
 
-            var assembly = Assembly.GetAssembly(typeof(Control));
+            var assembly = Assembly.GetAssembly(typeof(FrameworkElement));
             var controlsWithAttributes = assembly.GetExportedTypes()
-                .Where(t => !t.IsAbstract && typeof(Control).IsAssignableFrom(t) && isAlphanumeric(t.Name))
+                .Where(t => !t.IsAbstract && typeof(FrameworkElement).IsAssignableFrom(t) && isAlphanumeric(t.Name))
                 .ToDictionary(t => t.Name, t => t.GetProperties().Where(p => isAlphanumeric(p.Name)).Select(p => p.Name).Distinct().ToList());
 
-            var baseControl = controlsWithAttributes.First(c => c.Key == typeof(Control).Name);
-            controlsWithAttributes.Remove(typeof(Control).Name);
+            var baseControl = controlsWithAttributes.First(c => c.Key == typeof(FrameworkElement).Name);
+            controlsWithAttributes.Remove(typeof(FrameworkElement).Name);
 
             foreach (var ca in controlsWithAttributes)
             {

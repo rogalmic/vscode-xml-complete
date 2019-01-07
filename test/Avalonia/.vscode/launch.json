@@ -5,7 +5,7 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Generate Avalonia sample Xsd",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -17,11 +17,6 @@
             "console": "externalTerminal",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
-        }    ]
+        }
+    ]
 }
