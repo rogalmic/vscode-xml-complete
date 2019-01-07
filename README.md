@@ -50,6 +50,7 @@ xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-comple
 | `http`    | XSD from http server            | `http://www.example.com/path/to/name`
 | `https`   | XSD from https server           | `https://www.example.com/path/to/name`
 
+XSD localion URIs can be [whitespace separated](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Svg/Test.svg).
 
 ## Known Issues
 

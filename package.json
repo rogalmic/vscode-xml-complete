@@ -85,9 +85,9 @@
               "strict": false
             },
             {
-              "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd",
-              "strict": false
+                "xmlns": "http://www.w3.org/2000/svg",
+                "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd",
+                "strict": true
             }
           ]
         }

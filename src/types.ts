@@ -15,7 +15,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 	loadAttributes(tagName: string | undefined): string[] {
 		let result: string[] = [];
 		if (tagName !== undefined) {
-			var currentTags = this.filter(e => e.tag === tagName);
+			let currentTags = this.filter(e => e.tag === tagName);
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next)));
 				currentTags.forEach(e => e.base.forEach(b => result.push(...this.loadAttributes(b))));

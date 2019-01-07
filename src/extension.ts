@@ -37,16 +37,6 @@ function loadConfiguration(): void {
 	globalSettings = <XmlCompleteSettings>{
 		schemaMapping: section.get('schemaMapping',
 			[
-				{
-					"xmlns": "https://github.com/avaloniaui",
-					"xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd",
-					"strict": false
-				},
-				{
-					"xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
-					"xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd",
-					"strict": false
-				}
 			])
 	};
 }

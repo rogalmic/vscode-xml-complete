@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { languageId, globalSettings } from './extension';
-import { XmlSchemaProperties, XmlTagCollection, XmlSchemaPropertiesArray } from './types';
+import { XmlSchemaProperties, XmlTagCollection, XmlSchemaPropertiesArray, XmlDiagnosticData } from './types';
 import XsdParser from './helpers/xsdparser';
 import XsdLoader from './helpers/xsdloader';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
@@ -64,7 +64,9 @@ export default class XmlLinterProvider implements vscode.Disposable {
         try {
             let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(textDocument.getText(), globalSettings.schemaMapping))
                 .map(u => vscode.Uri.parse(u))
-                .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString() ) === i);
+                .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString()) === i);
+
+            const text = textDocument.getText();
 
             for (let xsdUri of xsdFileUris) {
                 let schemaProperties = this.schemaPropertiesArray
@@ -86,18 +88,14 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 }
 
                 const strict = !globalSettings.schemaMapping.find(m => m.xsdUri === xsdUri.toString() && m.strict === false);
-                let result = await XmlSimpleParser.getXmlDiagnosticData(textDocument.getText(), schemaProperties.tagCollection, strict);
+                let diagnosticResults = await XmlSimpleParser.getXmlDiagnosticData(text, schemaProperties.tagCollection, strict);
 
-                let diagnosticResults = result.map(r => {
-                    let position = new vscode.Position(r.line, r.column);
-                    let severity = (r.severity === "error") ? vscode.DiagnosticSeverity.Error :
-                        (r.severity === "warning") ? vscode.DiagnosticSeverity.Warning :
-                            (r.severity === "info") ? vscode.DiagnosticSeverity.Information :
-                                vscode.DiagnosticSeverity.Hint;
-                    return new vscode.Diagnostic(new vscode.Range(position, position), r.message, severity);
-                });
+                diagnostics.push(this.getDiagnosticArray(diagnosticResults));
+            }
 
-                diagnostics.push(diagnosticResults);
+            if (xsdFileUris.length === 0) {
+                const planXmlCheckResults = await XmlSimpleParser.getXmlDiagnosticData(text, new XmlTagCollection(), false);
+                diagnostics.push(this.getDiagnosticArray(planXmlCheckResults));
             }
 
             this.diagnosticCollection.set(textDocument.uri, diagnostics
@@ -106,5 +104,16 @@ export default class XmlLinterProvider implements vscode.Disposable {
         catch (err) {
             vscode.window.showErrorMessage(err);
         }
+    }
+
+    private getDiagnosticArray(data: XmlDiagnosticData[]): vscode.Diagnostic[] {
+        return data.map(r => {
+            let position = new vscode.Position(r.line, r.column);
+            let severity = (r.severity === "error") ? vscode.DiagnosticSeverity.Error :
+                (r.severity === "warning") ? vscode.DiagnosticSeverity.Warning :
+                    (r.severity === "info") ? vscode.DiagnosticSeverity.Information :
+                        vscode.DiagnosticSeverity.Hint;
+            return new vscode.Diagnostic(new vscode.Range(position, position), r.message, severity);
+        });
     }
 }

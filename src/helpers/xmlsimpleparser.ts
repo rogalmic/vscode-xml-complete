@@ -73,17 +73,16 @@ export default class XmlSimpleParser {
 					if (attr.name.endsWith(":schemaLocation")) {
 						result.push(...attr.value.split(/\s+/));
 					} else if (attr.name === "xmlns") {
-						attr.value.split(/\s+/).forEach(ns => {
-							let newUriString = schemaMapping.filter(m => m.xmlns === ns).map(m => m.xsdUri).pop();
-							if (newUriString !== undefined) {
-								result.push(newUriString);
-							}
-						});
+						let newUriStrings = schemaMapping
+							.filter(m => m.xmlns === attr.value)
+							.map(m => m.xsdUri.split(/\s+/))
+							.reduce((prev, next) => prev.concat(next));
+						result.push(...newUriStrings);
 					}
 				};
 
 				parser.onend = () => {
-					resolve(result);
+					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
 				};
 
 				parser.write(xmlContent).close();
@@ -171,7 +170,7 @@ export default class XmlSimpleParser {
 			});
 	}
 
-	public static formatXml(xmlContent: string, indentationString: string, eol : string): Promise<string> {
+	public static formatXml(xmlContent: string, indentationString: string, eol: string): Promise<string> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
