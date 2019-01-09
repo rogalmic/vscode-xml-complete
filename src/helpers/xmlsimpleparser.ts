@@ -101,8 +101,9 @@ export default class XmlSimpleParser {
 
 					if ((parser.position >= offset) && !result) {
 
-						result = { tagName: parser.tagName, context: undefined };
 						let content = xmlContent.substring(previousStartTagPosition, offset);
+						content = content.lastIndexOf("<") >= 0 ? content.substring(content.lastIndexOf("<")) : content;
+						result = { tagName: parser.tagName, context: undefined, content: content };
 
 						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
 							result.context = "text";
@@ -141,7 +142,7 @@ export default class XmlSimpleParser {
 
 				parser.onend = () => {
 					if (result === undefined) {
-						result = { tagName: undefined, context: undefined };
+						result = { tagName: undefined, context: undefined, content: "" };
 					}
 					resolve(result);
 				};
