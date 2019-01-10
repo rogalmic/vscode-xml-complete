@@ -44,6 +44,7 @@ namespace AvaloniaXsd
             root.Add(GetBaseControlType(baseControl.Value));
             root.Add(GetControlGroup(controlsWithAttributes.Keys));
             root.Add(controlsWithAttributes.Select(c => GetControlElement(c.Key, c.Value, baseControl.Value)).ToArray());
+            root.Add(GetStyleRelatedTag());
 
             var document = new XDocument();
             document.Add(root);
@@ -92,21 +93,25 @@ namespace AvaloniaXsd
                 .ToArray();
         }
 
-        private static XElement[] GetTagAttributes(string tagName, IEnumerable<string> attributeNames, IEnumerable<string> baseAttributeNames)
+        private static XElement GetStyleRelatedTag()
         {
-            return attributeNames
-                .Concat(baseAttributeNames)
-                .Where(an => an.EndsWith("Styles", false, CultureInfo.InvariantCulture))
-                .Select(an => new XElement(ns + "element", new XAttribute("name", $"{tagName}.{an}"), new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "1")))
-                .Select(xe =>
-                {
-                    xe.Add(new XElement(ns + "complexType",
-                        new XElement(ns + "sequence", new XElement(ns + "any", new XAttribute("maxOccurs", "unbounded"), new XAttribute("processContents", "lax"))),
-                        new XElement(ns + "anyAttribute", new XAttribute("processContents", "lax"))
-                        ));
-                    return xe;
-                })
-                .ToArray();
+            const string SetterComment = "<Setter Property=\"Foreground\" Value=\"Blue\"/>";
+            const string StyleComment = "<Style Selector=\"TextBlock.h1.h2\" />\n<Style Selector=\"Button.red:focus\" />\n<Style Selector=\"StackPanel &gt; Button.foo\" />";
+            var anyElement = new XElement(ns + "any", new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"), new XAttribute("processContents", "lax"));
+
+            var setterElement = new XElement(ns + "element", new XAttribute("name", "Setter"), new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
+            setterElement.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", SetterComment)));
+            setterElement.Add(new XElement(ns + "complexType", new XElement(ns + "sequence", anyElement),
+                GetAttributes(new [] {"Property", "Value"}), new XAttribute("mixed", "true")));
+            var sequence = new XElement(ns + "sequence");
+            sequence.Add(setterElement);
+            var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
+            complexType.Add(sequence);
+            complexType.Add(GetAttributes(new [] {"Selector"}));
+            var element = new XElement(ns + "element", new XAttribute("name", "Style"));            
+            element.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", StyleComment)));
+            element.Add(complexType);
+            return element;
         }
 
         private static XElement[] GetSimpleTypes()

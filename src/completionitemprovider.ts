@@ -66,9 +66,8 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 		return resultTexts
 			.map(t => {
 				let ci = new vscode.CompletionItem(t.name, vscode.CompletionItemKind.Snippet);
-				if (t.comment) {
-					ci.detail = t.comment;
-				}
+				ci.detail = scope.context;
+				ci.documentation = t.comment;
 				return ci;
 			});
 	}
