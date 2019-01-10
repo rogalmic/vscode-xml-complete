@@ -34,7 +34,7 @@ export default class XmlSimpleParser {
 								result.push({
 									line: parser.line,
 									column: parser.column,
-									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: "info"
+									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: strict ? "info" : "hint"
 								});
 							}
 						});
