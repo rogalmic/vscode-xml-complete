@@ -76,7 +76,7 @@ export default class XmlSimpleParser {
 						let newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
 							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next));
+							.reduce((prev, next) => prev.concat(next), []);
 						result.push(...newUriStrings);
 					}
 				};

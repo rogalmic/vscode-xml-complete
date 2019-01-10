@@ -23,7 +23,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 		if (tagName !== undefined) {
 			let currentTags = this.filter(e => e.tag.name === tagName);
 			if (currentTags.length > 0) {
-				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next)));
+				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
 				currentTags.forEach(e => e.base.forEach(b => result.push(...this.loadAttributes(b))));
 			}
 		}
