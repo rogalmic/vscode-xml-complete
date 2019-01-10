@@ -176,6 +176,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Border">
+    <xs:annotation>
+      <xs:documentation>
+        TEST data
+      </xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1995,6 +2000,30 @@
           <xs:attribute name="Background" type="text" />
         </xs:extension>
       </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Style">
+    <xs:annotation>
+      <xs:documentation>&lt;Style Selector="TextBlock.h1.h2" /&gt;
+&lt;Style Selector="Button.red:focus" /&gt;
+&lt;Style Selector="StackPanel &amp;gt; Button.foo" /&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element name="Setter" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>&lt;Setter Property="Foreground" Value="Blue"/&gt;</xs:documentation>
+          </xs:annotation>
+          <xs:complexType mixed="true">
+            <xs:sequence>
+              <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
+            </xs:sequence>
+            <xs:attribute name="Property" type="text" />
+            <xs:attribute name="Value" type="text" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Selector" type="text" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -1,23 +1,33 @@
-<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
-
-
- <xs:element name="addresses">
- <xs:complexType>
- <xs:sequence>
- <xs:element ref="address" minOccurs='1' maxOccurs='unbounded'/>
- </xs:sequence>
- </xs:complexType>
-</xs:element>
-
- <xs:element name="address">
- <xs:complexType>
- <xs:sequence>
- <xs:element ref="name" minOccurs='0' maxOccurs='1'/>
- <xs:element ref="street" minOccurs='0' maxOccurs='1'/>
- </xs:sequence>
- </xs:complexType>
- </xs:element>
-
- <xs:element name="name" type='xs:string'/>
- <xs:element name="street" type='xs:string'/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="addresses">
+		<xs:annotation>
+			<xs:documentation>This is the address collection.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="address" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="address">
+		<xs:annotation>
+			<xs:documentation>This is the single address entry.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="street" minOccurs="0" maxOccurs="1"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="name" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>This is the contact's name.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="street" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>This is the contact's street name. http://www.google.pl/</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 </xs:schema>

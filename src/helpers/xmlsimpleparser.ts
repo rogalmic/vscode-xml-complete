@@ -26,11 +26,11 @@ export default class XmlSimpleParser {
 
 					let nodeNameSplitted: Array<string> = tagData.name.split('.');
 
-					if (xsdTags.find(e => e.tag === nodeNameSplitted[0])) {
+					if (xsdTags.find(e => e.tag.name === nodeNameSplitted[0])) {
 						let schemaTagAttributes = xsdTags.loadAttributes(nodeNameSplitted[0]);
 						nodeNameSplitted.shift();
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-							if (schemaTagAttributes.indexOf(a) < 0 && a.indexOf(":") < 0 && a !== "xmlns") {
+							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":") < 0 && a !== "xmlns") {
 								result.push({
 									line: parser.line,
 									column: parser.column,
