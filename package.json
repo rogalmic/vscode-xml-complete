@@ -88,6 +88,11 @@
               "xmlns": "http://www.w3.org/2000/svg",
               "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd",
               "strict": true
+            },
+            {
+              "xmlns": "http://schemas.microsoft.com/developer/msbuild/2003",
+              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/Microsoft.Build.Core.xsd",
+              "strict": true
             }
           ]
         }
