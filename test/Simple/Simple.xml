@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addresses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Simple/Simple.xsd">
-
+<addresses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Simple/Simple.xsd">
+<!-- notice the autocompletion descriptions from xsd documentation nodes -->
   <address>
     <name>Joe Tester</name>
     <street>Baker street 5</street>
     <wrongExtraField/>
   </address>
-
+  <address>
+    <name>Bill Kill</name>
+    <street>By Drive 5</street>
+  </address>
 </addresses>

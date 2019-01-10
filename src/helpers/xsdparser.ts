@@ -1,4 +1,4 @@
-import { XmlTagCollection } from '../types';
+import { XmlTagCollection, CompletionString } from '../types';
 
 export default class XsdParser {
 
@@ -20,7 +20,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: tagData.attributes["name"],
+							tag: new CompletionString(tagData.attributes["name"]),
 							base: [tagData.attributes["type"]],
 							attributes: [],
 							visible: true
@@ -29,7 +29,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":complexType") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: tagData.attributes["name"],
+							tag: new CompletionString(tagData.attributes["name"]),
 							base: [],
 							attributes: [],
 							visible: false
@@ -38,7 +38,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: tagData.attributes["name"],
+							tag: new CompletionString(tagData.attributes["name"]),
 							base: [],
 							attributes: [],
 							visible: false
@@ -51,8 +51,8 @@ export default class XsdParser {
 							.reverse()
 							.filter(e => e.resultTagName !== undefined)[1];
 						result
-							.filter(e => e.tag === currentResultTag.resultTagName)
-							.forEach(e => e.attributes.push(tagData.attributes["name"]));
+							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.forEach(e => e.attributes.push(new CompletionString(tagData.attributes["name"])));
 					}
 
 					if (tagData.name.endsWith(":extension") && tagData.attributes["base"] !== undefined) {
@@ -62,7 +62,7 @@ export default class XsdParser {
 							.filter(e => e.resultTagName !== undefined)[0];
 
 						result
-							.filter(e => e.tag === currentResultTag.resultTagName)
+							.filter(e => e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.base.push(tagData.attributes["base"]));
 					}
 
@@ -73,7 +73,7 @@ export default class XsdParser {
 							.filter(e => e.resultTagName !== undefined)[0];
 
 						result
-							.filter(e => e.tag === currentResultTag.resultTagName)
+							.filter(e => e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.base.push(tagData.attributes["ref"]));
 					}
 
@@ -87,6 +87,26 @@ export default class XsdParser {
 					let popped = xmlDepthPath.pop();
 					if (popped !== undefined && popped.tag !== name) {
 						console.warn("XSD open/close tag consistency error.");
+					}
+				};
+
+				parser.ontext = (t: string) => {
+					if (/\S/.test(t)) {
+						let stack = xmlDepthPath
+							.slice()
+							.reverse();
+
+						if (!stack.find(e => e.tag.endsWith(":documentation"))) {
+							return;
+						}
+
+						let currentResultTag =
+							stack
+								.filter(e => e.resultTagName !== undefined)[0];
+
+						result
+							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.forEach(e => e.tag.comment = t.trim());
 					}
 				};
 

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { XmlSchemaPropertiesArray } from './types';
+import { XmlSchemaPropertiesArray, CompletionString } from './types';
 import { globalSettings } from './extension';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
@@ -16,20 +16,26 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
 
-		let resultTexts: string[];
+		let resultTexts: CompletionString[];
 
 		if (token.isCancellationRequested) {
 			resultTexts = [];
 		} else if (scope.context === "text") {
 			resultTexts = this.schemaPropertiesArray
 				.filterUris(xsdFileUris)
-				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => `<${e.tag} />`))
+				.map(sp => sp.tagCollection
+					.filter(e => e.visible)
+					.map(e => new CompletionString(`<${e.tag.name} />`, e.tag.comment)))
 				.reduce((prev, next) => prev.concat(next));
 			resultTexts.push(...this.schemaPropertiesArray
 				.filterUris(xsdFileUris)
-				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => `<${e.tag}></${e.tag}>`))
+				.map(sp => sp.tagCollection
+					.filter(e => e.visible)
+					.map(e => new CompletionString(`<${e.tag.name}></${e.tag.name}>`, e.tag.comment)))
 				.reduce((prev, next) => prev.concat(next)));
-			resultTexts.push(...["<!--  -->", "<![CDATA[  ]]>", "<?  ?>", "<%  %>"]);
+			resultTexts.push(...["<!--  -->", "<![CDATA[  ]]>", "<?  ?>", "<%  %>"]
+				.map(e => new CompletionString(e)));
+
 			resultTexts = resultTexts
 				.sort()
 				.filter((v, i, a) => a.indexOf(v) === i);
@@ -55,10 +61,15 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 		} else {
 			resultTexts = [];
-
 		}
 
 		return resultTexts
-			.map(t => new vscode.CompletionItem(t, vscode.CompletionItemKind.Snippet));
+			.map(t => {
+				let ci = new vscode.CompletionItem(t.name, vscode.CompletionItemKind.Snippet);
+				if (t.comment) {
+					ci.detail = t.comment;
+				}
+				return ci;
+			});
 	}
 }

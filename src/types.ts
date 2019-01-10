@@ -4,18 +4,24 @@ export class XmlCompleteSettings {
 	schemaMapping: { xmlns: string, xsdUri: string, strict: boolean }[];
 }
 
+export class CompletionString {
+
+	constructor(public name: string, public comment?: string) {
+	}
+}
+
 export class XmlTag {
-	tag: string;
+	tag: CompletionString;
 	base: string[];
-	attributes: Array<string>;
+	attributes: Array<CompletionString>;
 	visible: boolean;
 }
 
 export class XmlTagCollection extends Array<XmlTag> {
-	loadAttributes(tagName: string | undefined): string[] {
-		let result: string[] = [];
+	loadAttributes(tagName: string | undefined): CompletionString[] {
+		let result: CompletionString[] = [];
 		if (tagName !== undefined) {
-			let currentTags = this.filter(e => e.tag === tagName);
+			let currentTags = this.filter(e => e.tag.name === tagName);
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next)));
 				currentTags.forEach(e => e.base.forEach(b => result.push(...this.loadAttributes(b))));
@@ -32,7 +38,7 @@ export class XmlSchemaProperties {
 }
 
 export class XmlSchemaPropertiesArray extends Array<XmlSchemaProperties> {
-	filterUris(uris: vscode.Uri[]) : Array<XmlSchemaProperties> {
+	filterUris(uris: vscode.Uri[]): Array<XmlSchemaProperties> {
 		return this.filter(e => uris
 			.find(u => u.toString() === e.schemaUri.toString()) !== undefined);
 	}
