@@ -1,9 +1,10 @@
 import * as vscode from 'vscode';
+import { XmlCompleteSettings, XmlSchemaPropertiesArray } from './types';
 import XmlLinterProvider from './linterprovider';
 import XmlCompletionItemProvider from './completionitemprovider';
 import XmlFormatProvider from './formatprovider';
 import XmlRangeFormatProvider from './rangeformatprovider';
-import { XmlCompleteSettings, XmlSchemaPropertiesArray } from './types';
+import AutoCompletionProvider from './autocompletionprovider';
 
 export declare let globalSettings: XmlCompleteSettings;
 
@@ -29,7 +30,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
-	context.subscriptions.push(completionitemprovider, linterprovider, formatprovider, rangeformatprovider);
+	let autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
+
+	context.subscriptions.push(
+		completionitemprovider,
+		formatprovider,
+		rangeformatprovider,
+		linterprovider,
+		autocompletionprovider);
 }
 
 function loadConfiguration(): void {

@@ -81,7 +81,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
                         vscode.window.showInformationMessage(`Loaded ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
                     }
                     catch (err) {
-                        vscode.window.showErrorMessage(err);
+                        vscode.window.showErrorMessage(err.toString());
                     } finally {
                         this.schemaPropertiesArray.push(schemaProperties);
                     }
@@ -102,7 +102,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 .reduce((prev, next) => prev.filter(dp => next.find(dn => dn.range.start.compareTo(dp.range.start) === 0))));
         }
         catch (err) {
-            vscode.window.showErrorMessage(err);
+            vscode.window.showErrorMessage(err.toString());
         }
     }
 

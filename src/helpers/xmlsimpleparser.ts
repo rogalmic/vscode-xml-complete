@@ -34,7 +34,7 @@ export default class XmlSimpleParser {
 								result.push({
 									line: parser.line,
 									column: parser.column,
-									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: "info"
+									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: strict ? "info" : "hint"
 								});
 							}
 						});
@@ -76,7 +76,7 @@ export default class XmlSimpleParser {
 						let newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
 							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next));
+							.reduce((prev, next) => prev.concat(next), []);
 						result.push(...newUriStrings);
 					}
 				};
@@ -101,8 +101,9 @@ export default class XmlSimpleParser {
 
 					if ((parser.position >= offset) && !result) {
 
-						result = { tagName: parser.tagName, context: undefined };
 						let content = xmlContent.substring(previousStartTagPosition, offset);
+						content = content.lastIndexOf("<") >= 0 ? content.substring(content.lastIndexOf("<")) : content;
+						result = { tagName: parser.tagName, context: undefined, content: content };
 
 						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
 							result.context = "text";
@@ -141,7 +142,7 @@ export default class XmlSimpleParser {
 
 				parser.onend = () => {
 					if (result === undefined) {
-						result = { tagName: undefined, context: undefined };
+						result = { tagName: undefined, context: undefined, content: "" };
 					}
 					resolve(result);
 				};
