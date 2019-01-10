@@ -38,7 +38,7 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 			resultTexts = resultTexts
 				.sort()
-				.filter((v, i, a) => a.indexOf(v) === i);
+				.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i);
 
 		} else if (scope.tagName === undefined) {
 			resultTexts = [];
@@ -49,7 +49,7 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => e.tag))
 				.reduce((prev, next) => prev.concat(next))
 				.sort()
-				.filter((v, i, a) => a.indexOf(v) === i);
+				.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i);
 
 		} else if (scope.context !== undefined) {
 			resultTexts = this.schemaPropertiesArray
@@ -57,7 +57,7 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 				.map(sp => sp.tagCollection.loadAttributes(scope.tagName ? scope.tagName.replace(".", "") : undefined))
 				.reduce((prev, next) => prev.concat(next))
 				.sort()
-				.filter((v, i, a) => a.indexOf(v) === i);
+				.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i);
 
 		} else {
 			resultTexts = [];

@@ -3,7 +3,7 @@
         Title="ClootilsNetCoreUI"
         xmlns:vm="clr-namespace:ClootilsNetCoreUI.VS2017"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+        xsi:schemaLocation="file:///C:\Users\rogalmic\Documents\src\vscode-xml-complete\test\Avalonia\AvaloniaXamlSchema.xsd"
         Background="#EEEEEE"
         MinWidth="700"
         MinHeight="500">
@@ -11,8 +11,8 @@
         <StackPanel Margin="30">
             <StackPanel.Styles>
                 <Style Selector="Button.hoverable:pointerover">
-                    <Setter Property="Button.Foreground" Value="Red"/>
-                </Style>
+                    <Setter Property="Button.Foreground" Value="Red"/> 
+                </Style>               
             </StackPanel.Styles>
 
             <TextBlock Text="Select OpenCL device:"/>

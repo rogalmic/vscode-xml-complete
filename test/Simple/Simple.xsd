@@ -27,7 +27,7 @@
 	</xs:element>
 	<xs:element name="street" type="xs:string">
 		<xs:annotation>
-			<xs:documentation>This is the contact's street name.</xs:documentation>
+			<xs:documentation>This is the contact's street name. http://www.google.pl/</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>

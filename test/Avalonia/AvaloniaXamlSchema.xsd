@@ -176,6 +176,11 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Border">
+    <xs:annotation>
+      <xs:documentation>
+        TEST data
+      </xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
