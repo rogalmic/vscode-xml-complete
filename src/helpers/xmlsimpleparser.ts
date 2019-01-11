@@ -178,7 +178,10 @@ export default class XmlSimpleParser {
 		let result: string[] = [];
 		let xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
 
-		let getIndentation = (): string => eol + Array(xmlDepthPath.length).fill(indentationString).join("");
+		let getIndentation = (): string =>
+			(!result[result.length - 1] || result[result.length - 1].indexOf("<") >= 0 || result[result.length - 1].indexOf(">") >= 0)
+				? eol + Array(xmlDepthPath.length).fill(indentationString).join("")
+				: "";
 
 		return new Promise<string>(
 			(resolve) => {
