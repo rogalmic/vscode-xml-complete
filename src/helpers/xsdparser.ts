@@ -102,11 +102,19 @@ export default class XsdParser {
 
 						let currentResultTag =
 							stack
-								.filter(e => e.resultTagName !== undefined)[0];
-
+								.filter(e => e.resultTagName !== undefined && e.tag.endsWith(":element") )[0];
 						result
-							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.tag.comment = t.trim());
+
+						let currentResultAttribute =
+							stack
+								.filter(e => e.resultTagName !== undefined && e.tag.endsWith(":attribute") )[0];
+						result
+							.map(e => e.attributes)
+							.reduce((prev, next) => prev.concat(next), [])
+							.filter(e => currentResultAttribute && e.name === currentResultAttribute.resultTagName)
+							.forEach(e => e.comment = t.trim());
 					}
 				};
 

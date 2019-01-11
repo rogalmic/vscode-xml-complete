@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.IO;
 
 namespace AvaloniaXsd
 {
@@ -15,6 +16,8 @@ namespace AvaloniaXsd
         private static XNamespace ns = "http://www.w3.org/2001/XMLSchema";
 
         private static Regex alphanumeric = new Regex("[^a-zA-Z0-9 -]");
+
+        private static XDocument XmlDocumentation;
 
         public static void Main(string[] args)
         {
@@ -48,7 +51,8 @@ namespace AvaloniaXsd
 
             var document = new XDocument();
             document.Add(root);
-            document.Save("AvaloniaXamlSchema.xsd");
+            document.Save("AvaloniaXamlSchema.Formatted.xsd", SaveOptions.None);
+            document.Save("AvaloniaXamlSchema.xsd", SaveOptions.DisableFormatting);
         }
 
         private static XElement GetControlElement(string controlName, IEnumerable<string> controlAttributes, IEnumerable<string> baseAttributeNames)
@@ -60,6 +64,7 @@ namespace AvaloniaXsd
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
             complexType.Add(complexContent);
             var element = new XElement(ns + "element", new XAttribute("name", controlName));
+            element.Add(GetDocumentationNodeFromName(controlName));
             element.Add(complexType);
             return element;
         }
@@ -89,7 +94,10 @@ namespace AvaloniaXsd
         private static XElement[] GetAttributes(IEnumerable<string> attributeNames)
         {
             return attributeNames
-                .Select(an => new XElement(ns + "attribute", new XAttribute("name", an), new XAttribute("type", "text")))
+                .Select(an => new XElement(ns + "attribute",
+                    GetDocumentationNodeFromName(an),
+                    new XAttribute("name", an),
+                    new XAttribute("type", "text")))
                 .ToArray();
         }
 
@@ -100,16 +108,16 @@ namespace AvaloniaXsd
             var anyElement = new XElement(ns + "any", new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"), new XAttribute("processContents", "lax"));
 
             var setterElement = new XElement(ns + "element", new XAttribute("name", "Setter"), new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
-            setterElement.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", SetterComment)));
+            setterElement.Add(GetDocumentationNodeFromText(SetterComment));
             setterElement.Add(new XElement(ns + "complexType", new XElement(ns + "sequence", anyElement),
-                GetAttributes(new [] {"Property", "Value"}), new XAttribute("mixed", "true")));
+                GetAttributes(new[] { "Property", "Value" }), new XAttribute("mixed", "true")));
             var sequence = new XElement(ns + "sequence");
             sequence.Add(setterElement);
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
             complexType.Add(sequence);
-            complexType.Add(GetAttributes(new [] {"Selector"}));
-            var element = new XElement(ns + "element", new XAttribute("name", "Style"));            
-            element.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", StyleComment)));
+            complexType.Add(GetAttributes(new[] { "Selector" }));
+            var element = new XElement(ns + "element", new XAttribute("name", "Style"));
+            element.Add(GetDocumentationNodeFromText(StyleComment));
             element.Add(complexType);
             return element;
         }
@@ -120,12 +128,46 @@ namespace AvaloniaXsd
             var simpleType = new XElement(ns + "simpleType", new XAttribute("name", "text"));
             simpleType.Add(restriction);
 
-            return new[]{ simpleType };
+            return new[] { simpleType };
         }
 
         private static PropertyInfo[] GetAllControlProperties(this Type controlType)
         {
             return controlType.GetProperties();
+        }
+
+        private static XElement[] GetDocumentationNodeFromName(string entityName)
+        {
+            if (XmlDocumentation == null)
+            {
+                XmlDocumentation = GetDocumentation();
+            }
+
+            entityName = entityName.Split(new[] { "`" }, StringSplitOptions.None).First();
+
+            return XmlDocumentation.Descendants("member")
+                .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{entityName}")))
+                .SelectMany(e => e.Elements("summary"))
+                .Select(e => new XElement(ns + "annotation", new XElement(ns + "documentation", e.Value)))
+                .Take(1)
+                .ToArray();
+        }
+
+        private static XElement[] GetDocumentationNodeFromText(string text)
+        {
+            if (XmlDocumentation == null)
+            {
+                XmlDocumentation = GetDocumentation();
+            }
+
+            return new [] { new XElement(ns + "annotation", new XElement(ns + "documentation", text)) };
+        }
+
+        private static XDocument GetDocumentation()
+        {
+            var resourceAssembly = Assembly.GetExecutingAssembly();
+            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Avalonia.Controls.xml")));
+            return XDocument.Load(resource);
         }
     }
 }
