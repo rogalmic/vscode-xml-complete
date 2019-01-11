@@ -52,7 +52,8 @@
     "completion",
     "linter",
     "lint",
-    "format"
+    "format",
+    "msbuild"
   ],
   "activationEvents": [
     "onLanguage:xml"
