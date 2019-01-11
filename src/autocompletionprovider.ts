@@ -7,14 +7,38 @@ export default class AutoCompletionProvider implements vscode.Disposable {
 
     private documentListener: vscode.Disposable;
     private static maxLineChars = 1024;
+    private delayCount: number = 0;
+    private documentEvent: vscode.TextDocumentChangeEvent;
 
     constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
         this.documentListener = vscode.workspace.onDidChangeTextDocument(async (evnt) =>
-            this.triggerAutoCompletion(evnt), this, this.extensionContext.subscriptions);
+            this.triggerDelayedAutoCompletion(evnt), this, this.extensionContext.subscriptions);
     }
 
     public dispose() {
         this.documentListener.dispose();
+    }
+
+    private async triggerDelayedAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent, timeout: number = 250): Promise<void> {
+
+        console.log("rogalmic event");
+
+        if (this.delayCount > 0) {
+            this.delayCount = timeout;
+            this.documentEvent = documentEvent;
+            return;
+        }
+        this.delayCount = timeout;
+        this.documentEvent = documentEvent;
+
+        const tick = 100;
+
+        while (this.delayCount > 0) {
+            await new Promise(resolve => setTimeout(resolve, tick));
+            this.delayCount -= tick;
+        }
+
+        this.triggerAutoCompletion(this.documentEvent);
     }
 
     private async triggerAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent): Promise<void> {
@@ -24,7 +48,9 @@ export default class AutoCompletionProvider implements vscode.Disposable {
         if (document.languageId !== languageId
             || documentEvent.contentChanges.length !== 1
             || !inputChange.range.isSingleLine
+            || (inputChange.text && inputChange.text.indexOf("\n") >= 0)
             || activeTextEditor === undefined
+            || document.lineCount > 8096
             || activeTextEditor.document.uri.toString() !== document.uri.toString()) {
             return;
         }
@@ -45,7 +71,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
         let scope = await XmlSimpleParser.getScopeForPosition(wholeLineText, linePosition);
 
         if (!(scope.context && scope.context !== "text" && scope.tagName)) {
-            console.log(`Unknown scope for char ${linePosition} in '${wholeLineText}'`);
+            // NOTE: unknown scope
             return;
         }
 
@@ -62,6 +88,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
 
         let resultText: string = "";
 
+        //if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 2) {
         if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 2) {
 
             resultText = wholeLineText.substring(0, linePosition + nextTagStartPostion) + `` + wholeLineText.substring(linePosition + nextTagEndingPostion + 1);
@@ -77,13 +104,14 @@ export default class AutoCompletionProvider implements vscode.Disposable {
             }
         }
 
-        if (!resultText) {
+        if (!resultText || resultText.trim() === wholeLineText.trim()) {
             return;
         }
 
         resultText = resultText.trimRight();
 
-        if (!await XmlSimpleParser.checkXml(`<root>${resultText}</root>`)) {
+        if (!await XmlSimpleParser.checkXml(`${resultText}`)) {
+            // NOTE: Single line must be ok, one element in line
             return;
         }
 
@@ -94,6 +122,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
             .join("\n");
 
         if (!await XmlSimpleParser.checkXml(documentContent)) {
+            // NOTE: Check whole document
             return;
         }
 
