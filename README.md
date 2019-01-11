@@ -10,15 +10,17 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
 
 [<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-linter.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-linter.png)
 
-- Fast autocomplete based on XSD
+- Fast autocomplete based on XSD (utilizes comments from XSD)
 
 [<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-complete.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-complete.png)
 
-- Formatting XML
+- Formatting XML (selected range or full document)
 
 [<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-format.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-format.png)
 
-- Auto-closing and auto-rename for currently edited tag
+- Auto-closing and auto-rename for currently edited tag (works only for single tag in given line)
+
+[<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-auto.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-auto.png)
 
 
 ## Configuration
