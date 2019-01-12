@@ -1,7 +1,10 @@
 .vscode/**
 .vscode-test/**
 src/**
+test/**
 .gitignore
+.travis.yml
+xml-complete.code-workspace
 **/tsconfig.json
 **/tslint.json
 **/*.map
