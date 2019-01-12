@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.3...v0.1.4) (2019-01-12)
+
+
+### Bug Fixes
+
+* Handle text/cdata/doctype scope as text. ([0c64244](https://github.com/rogalmic/vscode-xml-complete/commit/0c64244))
+* **build:** Shrink vsix package by removing unnecessary files. ([94dec10](https://github.com/rogalmic/vscode-xml-complete/commit/94dec10))
+* **completion:** Proper XML scope recognition for last attribute. ([522630d](https://github.com/rogalmic/vscode-xml-complete/commit/522630d))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.2...v0.1.3) (2019-01-12)
 
