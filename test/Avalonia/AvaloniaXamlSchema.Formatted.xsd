@@ -202,68 +202,49 @@
   </xs:group>
   <xs:element name="AutoCompleteBox">
     <xs:annotation>
-      <xs:documentation>Represents a control that provides a text box for user input and a
-            drop-down that contains possible matches based on the input in the text
-            box.</xs:documentation>
+      <xs:documentation>Represents a control that provides a text box for user input and a drop-down that contains possible matches based on the input in the text box.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
           <xs:attribute name="MinimumPrefixLength" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the minimum number of characters required to be entered
-            in the text box before the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; displays
-            possible matches.
-            matches.</xs:documentation>
+              <xs:documentation>Gets or sets the minimum number of characters required to be entered in the text box before the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; displays possible matches. matches.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsTextCompletionEnabled" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the first possible match
-            found during the filtering process will be displayed automatically
-            in the text box.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the first possible match found during the filtering process will be displayed automatically in the text box.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MinimumPopulateDelay" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the minimum delay, after text is typed
-            in the text box before the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control
-            populates the list of possible matches in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the minimum delay, after text is typed in the text box before the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control populates the list of possible matches in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MaxDropDownHeight" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsDropDownOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of
-            the control is open.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of the control is open.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ValueMemberBinding" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the  &lt;see cref="T:Avalonia.Data.Binding" /&gt; that
-            is used to get the values for display in the text portion of
-            the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt;
-            control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.Data.Binding" /&gt; that is used to get the values for display in the text portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ValueMemberSelector" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the MemberSelector that is used to get values for
-            display in the text portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the MemberSelector that is used to get values for display in the text portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedItem" type="text">
@@ -273,23 +254,17 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SearchText" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the text that is used to filter items in the
-            &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt;
-            item collection.</xs:documentation>
+              <xs:documentation>Gets the text that is used to filter items in the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; item collection.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FilterMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets how the text in the text box is used to filter items
-            specified by the
-            &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt;
-            property for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets how the text in the text box is used to filter items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Watermark" type="text">
@@ -299,26 +274,18 @@
           </xs:attribute>
           <xs:attribute name="ItemFilter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the custom method that uses user-entered text to filter
-            the items specified by the
-            &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt;
-            property for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the custom method that uses user-entered text to filter the items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TextFilter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the custom method that uses the user-entered text to
-            filter items specified by the
-            &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt;
-            property in a text-based way for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the custom method that uses the user-entered text to filter items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property in a text-based way for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="AsyncPopulator" type="text" />
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Background" type="text">
@@ -445,8 +412,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -637,8 +603,7 @@
   </xs:element>
   <xs:element name="Calendar">
     <xs:annotation>
-      <xs:documentation>Represents a control that enables a user to select a date by using a
-            visual calendar display.</xs:documentation>
+      <xs:documentation>Represents a control that enables a user to select a date by using a visual calendar display.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -650,21 +615,18 @@
           </xs:attribute>
           <xs:attribute name="IsTodayHighlighted" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the current date is
-            highlighted.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the current date is highlighted.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="HeaderBackground" type="text" />
           <xs:attribute name="DisplayMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the calendar is displayed in
-            months, years, or decades.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the calendar is displayed in months, years, or decades.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectionMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates what kind of selections are
-            allowed.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates what kind of selections are allowed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedDate" type="text">
@@ -782,14 +744,12 @@
           </xs:attribute>
           <xs:attribute name="IsDropDownOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of
-            the control is open.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of the control is open.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsTodayHighlighted" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the current date is
-            highlighted.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the current date is highlighted.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedDate" type="text">
@@ -805,8 +765,7 @@
           <xs:attribute name="CustomDateFormatString" type="text" />
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Watermark" type="text">
@@ -929,9 +888,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -946,8 +903,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -1045,8 +1001,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -1249,9 +1204,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -1266,8 +1219,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -1336,8 +1288,7 @@
   </xs:element>
   <xs:element name="DataValidationErrors">
     <xs:annotation>
-      <xs:documentation>A control which displays an error notifier when there is a DataValidationError. 
-            Provides attached properties to track errors on a control</xs:documentation>
+      <xs:documentation>A control which displays an error notifier when there is a DataValidationError. Provides attached properties to track errors on a control</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1457,8 +1408,7 @@
         <xs:extension base="Control">
           <xs:attribute name="LastChildFill" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value which indicates whether the last child of the 
-            &lt;see cref="T:Avalonia.Controls.DockPanel" /&gt; fills the remaining space in the panel.</xs:documentation>
+              <xs:documentation>Gets or sets a value which indicates whether the last child of the &lt;see cref="T:Avalonia.Controls.DockPanel" /&gt; fills the remaining space in the panel.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Children" type="text">
@@ -1498,14 +1448,12 @@
         <xs:extension base="Control">
           <xs:attribute name="IsDropDownOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of
-            the control is open.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the drop-down portion of the control is open.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MaxDropDownHeight" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="AutoScrollToSelectedItem" type="text">
@@ -1530,9 +1478,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -1547,8 +1493,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -1928,9 +1873,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -1945,8 +1888,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -2124,8 +2066,7 @@
           </xs:attribute>
           <xs:attribute name="SelectionMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates what kind of selections are
-            allowed.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates what kind of selections are allowed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="VirtualizationMode" type="text">
@@ -2155,9 +2096,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -2172,8 +2111,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -2365,9 +2303,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -2382,8 +2318,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -2484,8 +2419,7 @@
           </xs:attribute>
           <xs:attribute name="IsSubMenuOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates whether the submenu of the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; is
-            open.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates whether the submenu of the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; is open.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="HasSubMenu" type="text">
@@ -2530,9 +2464,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -2547,8 +2479,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -2679,8 +2610,7 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Value" type="text">
@@ -2881,8 +2811,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -3001,8 +2930,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -3422,9 +3350,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -3439,8 +3365,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -3509,7 +3434,7 @@
   </xs:element>
   <xs:element name="TabItem">
     <xs:annotation>
-      <xs:documentation>An item in  a &lt;see cref="T:Avalonia.Controls.Primitives.TabStrip" /&gt; or &lt;see cref="T:Avalonia.Controls.TabControl" /&gt;.</xs:documentation>
+      <xs:documentation>An item in a &lt;see cref="T:Avalonia.Controls.Primitives.TabStrip" /&gt; or &lt;see cref="T:Avalonia.Controls.TabControl" /&gt;.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -3617,8 +3542,7 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FontFamily" type="text">
@@ -3685,8 +3609,7 @@
           <xs:attribute name="SelectionEnd" type="text" />
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TextAlignment" type="text">
@@ -3874,9 +3797,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -3891,8 +3812,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -3998,9 +3918,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -4015,8 +3933,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -4237,9 +4154,7 @@
           </xs:attribute>
           <xs:attribute name="CanResize" type="text">
             <xs:annotation>
-              <xs:documentation>Enables or disables resizing of the window.
-            Note that if &lt;see cref="P:Avalonia.Controls.Window.HasSystemDecorations" /&gt; is set to False then this property
-            has no effect and should be treated as a recommendation for the user setting HasSystemDecorations.</xs:documentation>
+              <xs:documentation>Enables or disables resizing of the window. Note that if &lt;see cref="P:Avalonia.Controls.Window.HasSystemDecorations" /&gt; is set to False then this property has no effect and should be treated as a recommendation for the user setting HasSystemDecorations.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Icon" type="text">
@@ -4486,10 +4401,7 @@
   </xs:element>
   <xs:element name="WrapPanel">
     <xs:annotation>
-      <xs:documentation>Positions child elements in sequential position from left to right, 
-            breaking content to the next line at the edge of the containing box. 
-            Subsequent ordering happens sequentially from top to bottom or from right to left, 
-            depending on the value of the Orientation property.</xs:documentation>
+      <xs:documentation>Positions child elements in sequential position from left to right, breaking content to the next line at the edge of the containing box. Subsequent ordering happens sequentially from top to bottom or from right to left, depending on the value of the Orientation property.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -4567,9 +4479,7 @@
         <xs:extension base="Control">
           <xs:attribute name="Data" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the list of possible matches added to the drop-down portion of
-            the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt;
-            control.</xs:documentation>
+              <xs:documentation>Gets the list of possible matches added to the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="DefiningGeometry" type="text" />
@@ -4695,9 +4605,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemContainerGenerator" type="text">
@@ -4712,8 +4620,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -4805,9 +4712,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemContainerGenerator" type="text">
@@ -4822,8 +4727,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -4941,8 +4845,7 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FontFamily" type="text">
@@ -5090,8 +4993,7 @@
   </xs:element>
   <xs:element name="CalendarButton">
     <xs:annotation>
-      <xs:documentation>Represents a button on a
-            &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
+      <xs:documentation>Represents a button on a &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -5118,8 +5020,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -5228,8 +5129,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
@@ -5314,8 +5214,7 @@
   </xs:element>
   <xs:element name="CalendarItem">
     <xs:annotation>
-      <xs:documentation>Represents the currently displayed month or year on a
-            &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
+      <xs:documentation>Represents the currently displayed month or year on a &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -5400,8 +5299,7 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FontFamily" type="text">
@@ -5600,9 +5498,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -5617,8 +5513,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -5724,9 +5619,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -5741,8 +5634,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -5838,8 +5730,7 @@
           </xs:attribute>
           <xs:attribute name="ObeyScreenEdges" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the popup positions itself within the nearest screen boundary
-            when its opened at a position where it would otherwise overlap the screen edge.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the popup positions itself within the nearest screen boundary when its opened at a position where it would otherwise overlap the screen edge.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="HorizontalOffset" type="text">
@@ -5864,8 +5755,7 @@
           </xs:attribute>
           <xs:attribute name="StaysOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the popup should stay open when the popup is
-            pressed or loses focus.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the popup should stay open when the popup is pressed or loses focus.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Topmost" type="text">
@@ -6013,8 +5903,7 @@
           </xs:attribute>
           <xs:attribute name="Visibility" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates whether the scrollbar should hide itself when it
-            is not needed.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates whether the scrollbar should hide itself when it is not needed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Orientation" type="text">
@@ -6122,9 +6011,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -6139,8 +6026,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -6233,9 +6119,7 @@
           </xs:attribute>
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the
-            drop-down portion of the
-            &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ItemCount" type="text">
@@ -6250,8 +6134,7 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used
-            to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
@@ -6556,8 +6439,7 @@
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the
-            window.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
