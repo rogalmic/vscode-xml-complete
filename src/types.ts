@@ -54,5 +54,4 @@ export class XmlDiagnosticData {
 export class XmlScope {
 	tagName: string | undefined;
 	context: "element" | "attribute" | "text" | undefined;
-	content: string;
 }

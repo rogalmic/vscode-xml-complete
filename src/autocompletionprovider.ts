@@ -7,6 +7,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
 
     private documentListener: vscode.Disposable;
     private static maxLineChars = 1024;
+    private static maxLines = 8096;
     private delayCount: number = 0;
     private documentEvent: vscode.TextDocumentChangeEvent;
 
@@ -48,25 +49,30 @@ export default class AutoCompletionProvider implements vscode.Disposable {
             || !inputChange.range.isSingleLine
             || (inputChange.text && inputChange.text.indexOf("\n") >= 0)
             || activeTextEditor === undefined
-            || document.lineCount > 8096
+            || document.lineCount > AutoCompletionProvider.maxLines
             || activeTextEditor.document.uri.toString() !== document.uri.toString()) {
             return;
         }
 
-
-        const linePosition = inputChange.range.end.character - 1;
         const changeLine = inputChange.range.end.line;
         const wholeLineRange = document.lineAt(changeLine).range;
         const wholeLineText = document.getText(document.lineAt(inputChange.range.end.line).range);
+
+        let linePosition = inputChange.range.start.character + inputChange.text.length;
 
         if (wholeLineText.length >= AutoCompletionProvider.maxLineChars) {
             return;
         }
 
+        const scope = await XmlSimpleParser.getScopeForPosition(`${wholeLineText}\n`, linePosition);
+
+        if (--linePosition < 0) {
+            // NOTE: automatic acions require info about previous char
+            return;
+        }
+
         const before = wholeLineText.substring(0, linePosition);
         const after = wholeLineText.substring(linePosition);
-
-        let scope = await XmlSimpleParser.getScopeForPosition(wholeLineText, linePosition);
 
         if (!(scope.context && scope.context !== "text" && scope.tagName)) {
             // NOTE: unknown scope
@@ -86,8 +92,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
 
         let resultText: string = "";
 
-        //if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 2) {
-        if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 2) {
+        if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 1) {
 
             resultText = wholeLineText.substring(0, linePosition + nextTagStartPostion) + `` + wholeLineText.substring(linePosition + nextTagEndingPostion + 1);
 
