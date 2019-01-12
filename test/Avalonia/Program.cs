@@ -148,7 +148,9 @@ namespace AvaloniaXsd
             return XmlDocumentation.Descendants("member")
                 .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{entityName}")))
                 .SelectMany(e => e.Elements("summary"))
-                .Select(e => new XElement(ns + "annotation", new XElement(ns + "documentation", e.Value)))
+                .Select(e => new XElement(ns + "annotation", 
+                    new XElement(ns + "documentation", 
+                        e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim())))                
                 .Take(1)
                 .ToArray();
         }

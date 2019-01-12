@@ -21,8 +21,6 @@ export default class AutoCompletionProvider implements vscode.Disposable {
 
     private async triggerDelayedAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent, timeout: number = 250): Promise<void> {
 
-        console.log("rogalmic event");
-
         if (this.delayCount > 0) {
             this.delayCount = timeout;
             this.documentEvent = documentEvent;

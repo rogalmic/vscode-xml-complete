@@ -100,21 +100,26 @@ export default class XsdParser {
 							return;
 						}
 
-						let currentResultTag =
+						let currentCommentTarget =
 							stack
-								.filter(e => e.resultTagName !== undefined && e.tag.endsWith(":element") )[0];
-						result
-							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
-							.forEach(e => e.tag.comment = t.trim());
+								.filter(e => e.resultTagName !== undefined)[0];
 
-						let currentResultAttribute =
-							stack
-								.filter(e => e.resultTagName !== undefined && e.tag.endsWith(":attribute") )[0];
-						result
-							.map(e => e.attributes)
-							.reduce((prev, next) => prev.concat(next), [])
-							.filter(e => currentResultAttribute && e.name === currentResultAttribute.resultTagName)
-							.forEach(e => e.comment = t.trim());
+						if (!currentCommentTarget) {
+							return;
+						}
+
+						if (currentCommentTarget.tag.endsWith(":element")) {
+							result
+								.filter(e => currentCommentTarget && e.tag.name === currentCommentTarget.resultTagName)
+								.forEach(e => e.tag.comment = t.trim());
+						}
+						else if (currentCommentTarget.tag.endsWith(":attribute")) {
+							result
+								.map(e => e.attributes)
+								.reduce((prev, next) => prev.concat(next), [])
+								.filter(e => currentCommentTarget && e.name === currentCommentTarget.resultTagName)
+								.forEach(e => e.comment = t.trim());
+						}
 					}
 				};
 
