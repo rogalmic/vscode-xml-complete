@@ -58,7 +58,7 @@ namespace AvaloniaXsd
         private static XElement GetControlElement(string controlName, IEnumerable<string> controlAttributes, IEnumerable<string> baseAttributeNames)
         {
             var extension = new XElement(ns + "extension", new XAttribute("base", "Control"));
-            extension.Add(GetAttributes(controlAttributes));
+            extension.Add(GetAttributes(controlAttributes, controlName));
             var complexContent = new XElement(ns + "complexContent");
             complexContent.Add(extension);
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
@@ -88,14 +88,14 @@ namespace AvaloniaXsd
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "Control"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
-            complexType.Add(GetAttributes(controlAttributes));
+            complexType.Add(GetAttributes(controlAttributes, ""));
             return complexType;
         }
-        private static XElement[] GetAttributes(IEnumerable<string> attributeNames)
+        private static XElement[] GetAttributes(IEnumerable<string> attributeNames, string tagName)
         {
             return attributeNames
                 .Select(an => new XElement(ns + "attribute",
-                    GetDocumentationNodeFromName(an),
+                    GetDocumentationNodeFromName(tagName, an),
                     new XAttribute("name", an),
                     new XAttribute("type", "text")))
                 .ToArray();
@@ -110,12 +110,12 @@ namespace AvaloniaXsd
             var setterElement = new XElement(ns + "element", new XAttribute("name", "Setter"), new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
             setterElement.Add(GetDocumentationNodeFromText(SetterComment));
             setterElement.Add(new XElement(ns + "complexType", new XElement(ns + "sequence", anyElement),
-                GetAttributes(new[] { "Property", "Value" }), new XAttribute("mixed", "true")));
+                GetAttributes(new[] { "Property", "Value" }, "Setter"), new XAttribute("mixed", "true")));
             var sequence = new XElement(ns + "sequence");
             sequence.Add(setterElement);
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
             complexType.Add(sequence);
-            complexType.Add(GetAttributes(new[] { "Selector" }));
+            complexType.Add(GetAttributes(new[] { "Selector" }, "Style"));
             var element = new XElement(ns + "element", new XAttribute("name", "Style"));
             element.Add(GetDocumentationNodeFromText(StyleComment));
             element.Add(complexType);
@@ -136,17 +136,20 @@ namespace AvaloniaXsd
             return controlType.GetProperties();
         }
 
-        private static XElement[] GetDocumentationNodeFromName(string entityName)
+        private static XElement[] GetDocumentationNodeFromName(params string[] entityNames)
         {
             if (XmlDocumentation == null)
             {
                 XmlDocumentation = GetDocumentation();
             }
 
-            entityName = entityName.Split(new[] { "`" }, StringSplitOptions.None).First();
+            entityNames = entityNames
+                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Select(n => n.Split(new[] { "`" }, StringSplitOptions.None).First())
+                .ToArray();
 
             return XmlDocumentation.Descendants("member")
-                .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{entityName}")))
+                .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{string.Join(".", entityNames)}")))
                 .SelectMany(e => e.Elements("summary"))
                 .Select(e => new XElement(ns + "annotation", 
                     new XElement(ns + "documentation", 
