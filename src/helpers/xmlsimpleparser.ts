@@ -175,12 +175,15 @@ export default class XmlSimpleParser {
 			});
 	}
 
-	public static formatXml(xmlContent: string, indentationString: string, eol: string): Promise<string> {
+	public static formatXml(xmlContent: string, indentationString: string, eol: string, formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized"): Promise<string> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
 		let result: string[] = [];
 		let xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
+
+		let multiLineAttributes = formattingStyle === "multiLineAttributes";
+		indentationString = (formattingStyle === "fileSizeOptimized") ? "" : indentationString;
 
 		let getIndentation = (): string =>
 			(!result[result.length - 1] || result[result.length - 1].indexOf("<") >= 0 || result[result.length - 1].indexOf(">") >= 0)
@@ -211,7 +214,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
-					let argString: string[] = [];
+					let argString: string[] = [""];
 					for (let arg in tagData.attributes) {
 						argString.push(` ${arg}="${tagData.attributes[arg]}"`);
 					}
@@ -220,7 +223,8 @@ export default class XmlSimpleParser {
 						xmlDepthPath[xmlDepthPath.length - 1].isTextContent = false;
 					}
 
-					result.push(`${getIndentation()}<${tagData.name}${argString.join("")}${tagData.isSelfClosing ? "/>" : ">"}`);
+					let attributesStr = argString.join(multiLineAttributes ? `${getIndentation()}${indentationString}` : ``);
+					result.push(`${getIndentation()}<${tagData.name}${attributesStr}${tagData.isSelfClosing ? "/>" : ">"}`);
 
 					xmlDepthPath.push({
 						tag: tagData.name,

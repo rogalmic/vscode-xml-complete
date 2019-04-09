@@ -70,6 +70,17 @@
       "title": "XmlComplete",
       "type": "object",
       "properties": {
+        "xmlComplete.formattingStyle": {
+          "description": "Defines if attributes should be single line or not.",
+          "type": "string",
+          "enum": [
+            "singleLineAttributes",
+            "multiLineAttributes",
+            "fileSizeOptimized"
+          ],
+          "scope": "resource",
+          "default": []
+        },
         "xmlComplete.schemaMapping": {
           "description": "Maps xmlns to xsd location Uri.",
           "type": "array",
@@ -116,13 +127,13 @@
     "sax": "1.2.4"
   },
   "devDependencies": {
-    "typescript": "^3.3.3333",
-    "vscode": "^1.1.30",
-    "tslint": "^5.13.0",
+    "typescript": "^3.4.2",
+    "vscode": "^1.1.33",
+    "tslint": "^5.15.0",
     "@types/node": "10.12.27",
     "@types/mocha": "5.2.6",
     "jsdoctest": "1.7.1",
-    "standard-version": "5.0.0",
-    "vsce": "1.57.1"
+    "standard-version": "5.0.2",
+    "vsce": "1.59.0"
   }
 }

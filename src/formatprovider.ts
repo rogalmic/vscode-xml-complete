@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { XmlSchemaPropertiesArray } from './types';
+import { globalSettings } from './extension';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlFormatProvider implements vscode.DocumentFormattingEditProvider {
@@ -14,7 +15,7 @@ export default class XmlFormatProvider implements vscode.DocumentFormattingEditP
 		const text = textDocument.getText();
 
 		let formattedText: string =
-			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? "\r\n" : "\n"))
+			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`, globalSettings.formattingStyle))
 				.trim();
 
 		if (!formattedText) {

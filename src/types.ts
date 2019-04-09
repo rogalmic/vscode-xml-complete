@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 export class XmlCompleteSettings {
 	schemaMapping: { xmlns: string, xsdUri: string, strict: boolean }[];
+	formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized";
 }
 
 export class CompletionString {

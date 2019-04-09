@@ -42,11 +42,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 function loadConfiguration(): void {
 	const section = vscode.workspace.getConfiguration('xmlComplete', null);
-	globalSettings = <XmlCompleteSettings>{
-		schemaMapping: section.get('schemaMapping',
-			[
-			])
-	};
+	globalSettings = new XmlCompleteSettings();
+	globalSettings.schemaMapping = section.get('schemaMapping', []);
+	globalSettings.formattingStyle = section.get('formattingStyle', "singleLineAttributes");
 }
 
 export function deactivate() { }

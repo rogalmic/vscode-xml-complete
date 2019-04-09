@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { XmlSchemaPropertiesArray } from './types';
+import { globalSettings } from './extension';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlRangeFormatProvider implements vscode.DocumentRangeFormattingEditProvider {
@@ -26,7 +27,7 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 		const emptyLines = /^\s*[\r?\n]|\s*[\r?\n]$/g;
 
 		let formattedText: string =
-			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`))
+			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`, globalSettings.formattingStyle))
 				.split(selectionSeparator)[1]
 				.replace(emptyLines, "");
 
