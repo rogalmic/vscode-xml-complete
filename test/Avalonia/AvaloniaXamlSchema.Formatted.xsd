@@ -126,6 +126,8 @@
       <xs:element ref="Canvas" />
       <xs:element ref="Carousel" />
       <xs:element ref="CheckBox" />
+      <xs:element ref="ComboBox" />
+      <xs:element ref="ComboBoxItem" />
       <xs:element ref="ContentControl" />
       <xs:element ref="ContextMenu" />
       <xs:element ref="DataValidationErrors" />
@@ -161,6 +163,7 @@
       <xs:element ref="TreeView" />
       <xs:element ref="TreeViewItem" />
       <xs:element ref="UserControl" />
+      <xs:element ref="Viewbox" />
       <xs:element ref="VirtualizingStackPanel" />
       <xs:element ref="Window" />
       <xs:element ref="WindowBase" />
@@ -656,6 +659,61 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ComboBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="MaxDropDownHeight" type="text" />
+          <xs:attribute name="VirtualizationMode" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="MemberSelector" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ComboBoxItem">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsSelected" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ContentControl">
     <xs:annotation>
       <xs:documentation>Displays &lt;see cref="P:Avalonia.Controls.ContentControl.Content" /&gt; according to a &lt;see cref="T:Avalonia.Controls.Templates.FuncDataTemplate" /&gt;.</xs:documentation>
@@ -832,6 +890,11 @@
               <xs:documentation>Gets or sets the maximum height for the dropdown list.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="VirtualizationMode" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the virtualization mode for the items.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
@@ -891,6 +954,8 @@
           <xs:attribute name="ExpandDirection" type="text" />
           <xs:attribute name="IsExpanded" type="text" />
           <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -1040,21 +1105,8 @@
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TransformRoot" type="text" />
-          <xs:attribute name="Content" type="text" />
-          <xs:attribute name="ContentTemplate" type="text" />
-          <xs:attribute name="Presenter" type="text" />
-          <xs:attribute name="HorizontalContentAlignment" type="text" />
-          <xs:attribute name="VerticalContentAlignment" type="text" />
-          <xs:attribute name="Background" type="text" />
-          <xs:attribute name="BorderBrush" type="text" />
-          <xs:attribute name="BorderThickness" type="text" />
-          <xs:attribute name="FontFamily" type="text" />
-          <xs:attribute name="FontSize" type="text" />
-          <xs:attribute name="FontStyle" type="text" />
-          <xs:attribute name="FontWeight" type="text" />
-          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Child" type="text" />
           <xs:attribute name="Padding" type="text" />
-          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -1596,12 +1648,34 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="Pages" type="text" />
-          <xs:attribute name="TabStrip" type="text" />
-          <xs:attribute name="PageTransition" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the horizontal alignment of the content within the control.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="VerticalContentAlignment" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the vertical alignment of the content within the control.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="TabStripPlacement" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the tabstrip placement of the TabControl.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ContentTemplate" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the default data template used to display the content of the selected tab.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="SelectedContent" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the content of the selected tab.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="SelectedContentTemplate" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the content template for the selected tab.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
@@ -1635,12 +1709,19 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
+          <xs:attribute name="TabStripPlacement" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the tab strip placement.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="IsSelected" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the selection state of the item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Header" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -1802,11 +1883,13 @@
               <xs:documentation>Gets or sets a value indicating whether to automatically scroll to newly selected items.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="SelectionMode" type="text" />
           <xs:attribute name="SelectedItem" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the selected item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="SelectedItems" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
@@ -1898,6 +1981,24 @@
           <xs:attribute name="Foreground" type="text" />
           <xs:attribute name="Padding" type="text" />
           <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Viewbox">
+    <xs:annotation>
+      <xs:documentation>Viewbox is used to scale single child.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Stretch" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the stretch mode, which determines how child fits into the available space.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Padding" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -2071,6 +2172,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2092,6 +2194,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2112,6 +2215,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2132,6 +2236,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2152,6 +2257,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2171,6 +2277,7 @@
           <xs:attribute name="Stretch" type="text" />
           <xs:attribute name="Stroke" type="text" />
           <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
           <xs:attribute name="StrokeDashCap" type="text" />
           <xs:attribute name="StrokeStartLineCap" type="text" />
@@ -2545,6 +2652,12 @@
           <xs:attribute name="Header" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the header content.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="HeaderTemplate" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the data template used to display the header content of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Content" type="text" />
