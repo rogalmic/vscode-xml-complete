@@ -124,7 +124,6 @@
   },
   "dependencies": {
     "get-uri": "2.0.3",
-    "npm": "^6.9.0",
     "sax": "1.2.4"
   },
   "devDependencies": {
