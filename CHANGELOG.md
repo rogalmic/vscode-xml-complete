@@ -1,6 +1,15 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.7](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.6...v0.1.7) (2019-05-21)
+
+
+### Features
+
+* Update dependencies. ([171e1ef](https://github.com/rogalmic/vscode-xml-complete/commit/171e1ef))
+
+
 
 ## [0.1.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.5...v0.1.6) (2019-04-09)
 
