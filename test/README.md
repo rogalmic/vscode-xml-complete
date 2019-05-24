@@ -35,3 +35,7 @@ In essence: different ways of referencing XSD file, to achieve parsing and tag/a
    - `Wpf.xsd` generated from binaries, via .NET reflection.
    - using default configuration for namespace `http://schemas.microsoft.com/winfx/2006/xaml/presentation`
    - schema referenced in `MainWindow.xaml` : `xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"`
+
+1. EmbeddedXsd
+
+   - schema embedded in `EmbeddedXsd.xml` : `xsi:schemaLocation="data:text/plain;base64,PHhzOnN.......aGVtYT4="`
