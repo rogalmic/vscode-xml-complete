@@ -1,3 +1,17 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.7...v0.1.8) (2019-08-04)
+
+
+### Bug Fixes
+
+* Fixes for reported issues ([#6](https://github.com/rogalmic/vscode-xml-complete/issues/6),[#7](https://github.com/rogalmic/vscode-xml-complete/issues/7),[#8](https://github.com/rogalmic/vscode-xml-complete/issues/8)). ([3655826](https://github.com/rogalmic/vscode-xml-complete/commit/3655826))
+
+
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
