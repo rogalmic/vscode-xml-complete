@@ -19,16 +19,74 @@ export class XmlTag {
 }
 
 export class XmlTagCollection extends Array<XmlTag> {
+	private nsMap: Map<string, string> = new Map<string, string>();
+
+	setNsMap(xsdNsTag:string, xsdNsStr:string) {
+		this.nsMap.set(xsdNsTag, xsdNsStr);
+	}
+
+	loadAttributesEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString[] {
+		let result: CompletionString[] = [];
+		if (tagName !== undefined) {
+			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
+			fixedNames.forEach(fixn => {
+				result.push(...this.loadAttributes(fixn));
+			});
+		}
+
+		return result;
+	}
+
+	loadTagEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString | undefined {
+		let result = undefined;
+		if (tagName !== undefined) {
+			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
+			let element =this.find(e => fixedNames.includes(e.tag.name))
+			if (element !== undefined) {
+				return element.tag;
+			}
+		}
+
+		return result;
+	}
+
 	loadAttributes(tagName: string | undefined): CompletionString[] {
 		let result: CompletionString[] = [];
 		if (tagName !== undefined) {
-			let currentTags = this.filter(e => e.tag.name === tagName);
+			let currentTags = this.filter(e => e.tag.name === tagName || e.tag.name.endsWith(tagName.substring(tagName.indexOf(":")+1)));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
-				currentTags.forEach(e => e.base.forEach(b => result.push(...this.loadAttributes(b))));
+				currentTags.forEach(e => e.base.filter(b => b != tagName).forEach(b => result.push(...this.loadAttributes(b))));
 			}
 		}
 		return result;
+	}
+
+	fixNs(xsdString: CompletionString, localXmlMapping: Map<string, string>): CompletionString {
+		let arr = xsdString.name.split(":");
+		if (arr.length === 2 && this.nsMap.has(arr[0]) && localXmlMapping.has(this.nsMap[arr[0]]))
+		{
+			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment);
+		}
+		return xsdString;
+	}
+
+	fixNsReverse(xmlString: string, localXmlMapping: Map<string, string>): Array<string> {
+		let arr = xmlString.split(":");
+		let xmlStrings = new Array<string>();
+
+		localXmlMapping.forEach((v, k) => {
+			if (v === arr[0]) {
+				this.nsMap.forEach((v2, k2) => {
+					if (v2 == k) {
+						xmlStrings.push(k2 + ":" + arr[1]);
+					}
+				});
+			}
+		});
+		xmlStrings.push(arr[arr.length-1]);
+
+		return xmlStrings;
 	}
 }
 

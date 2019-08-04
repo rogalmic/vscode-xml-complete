@@ -2,7 +2,7 @@ import { XmlTagCollection, XmlDiagnosticData, XmlScope } from '../types';
 
 export default class XmlSimpleParser {
 
-	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, strict: boolean = true): Promise<XmlDiagnosticData[]> {
+	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict: boolean = true): Promise<XmlDiagnosticData[]> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -26,11 +26,11 @@ export default class XmlSimpleParser {
 
 					let nodeNameSplitted: Array<string> = tagData.name.split('.');
 
-					if (xsdTags.find(e => e.tag.name === nodeNameSplitted[0])) {
-						let schemaTagAttributes = xsdTags.loadAttributes(nodeNameSplitted[0]);
+					if (xsdTags.loadTagEx(nodeNameSplitted[0], nsMap) !== undefined) {
+						let schemaTagAttributes = xsdTags.loadAttributesEx(nodeNameSplitted[0], nsMap);
 						nodeNameSplitted.shift();
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":") < 0 && a !== "xmlns") {
+							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0 && a !== "xmlns") {
 								result.push({
 									line: parser.line,
 									column: parser.column,
@@ -39,7 +39,7 @@ export default class XmlSimpleParser {
 							}
 						});
 					}
-					else if (tagData.name.indexOf(":") < 0) {
+					else if (tagData.name.indexOf(":!") < 0) {
 						result.push({
 							line: parser.line,
 							column: parser.column,
@@ -78,11 +78,43 @@ export default class XmlSimpleParser {
 							.map(m => m.xsdUri.split(/\s+/))
 							.reduce((prev, next) => prev.concat(next), []);
 						result.push(...newUriStrings);
+					} else if (attr.name.startsWith("xmlns:")) {
+						let newUriStrings = schemaMapping
+							.filter(m => m.xmlns === attr.value)
+							.map(m => m.xsdUri.split(/\s+/))
+							.reduce((prev, next) => prev.concat(next), []);
+						result.push(...newUriStrings);
 					}
 				};
 
 				parser.onend = () => {
 					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
+				};
+
+				parser.write(xmlContent).close();
+			});
+	}
+
+	public static getNamespaceMapping(xmlContent: string): Promise<Map<string, string>> {
+		const sax = require("sax");
+		const parser = sax.parser(true);
+
+		return new Promise<Map<string, string>>(
+			(resolve) => {
+				let result: Map<string, string> = new Map<string, string>();
+
+				parser.onerror = () => {
+					parser.resume();
+				};
+
+				parser.onattribute = (attr: any) => {
+					if (attr.name.startsWith("xmlns:")) {
+						result.set(attr.value, attr.name.substring("xmlns:".length));
+					}
+				};
+
+				parser.onend = () => {
+					resolve(result);
 				};
 
 				parser.write(xmlContent).close();

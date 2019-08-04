@@ -65,9 +65,13 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         let diagnostics: Array<vscode.Diagnostic[]> = new Array<vscode.Diagnostic[]>();
         try {
-            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(textDocument.getText(), globalSettings.schemaMapping))
+            let documentContent = textDocument.getText();
+
+            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping))
                 .map(u => vscode.Uri.parse(u))
                 .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString()) === i);
+
+            let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
 
             const text = textDocument.getText();
 
@@ -91,13 +95,13 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 }
 
                 const strict = !globalSettings.schemaMapping.find(m => m.xsdUri === xsdUri.toString() && m.strict === false);
-                let diagnosticResults = await XmlSimpleParser.getXmlDiagnosticData(text, schemaProperties.tagCollection, strict);
+                let diagnosticResults = await XmlSimpleParser.getXmlDiagnosticData(text, schemaProperties.tagCollection, nsMap, strict);
 
                 diagnostics.push(this.getDiagnosticArray(diagnosticResults));
             }
 
             if (xsdFileUris.length === 0) {
-                const planXmlCheckResults = await XmlSimpleParser.getXmlDiagnosticData(text, new XmlTagCollection(), false);
+                const planXmlCheckResults = await XmlSimpleParser.getXmlDiagnosticData(text, new XmlTagCollection(), nsMap, false);
                 diagnostics.push(this.getDiagnosticArray(planXmlCheckResults));
             }
 

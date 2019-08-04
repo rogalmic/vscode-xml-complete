@@ -17,6 +17,8 @@
 				"${workspaceFolder}/test/BigFile/BigFile.xml",
 				"${workspaceFolder}/test/Wpf/MainWindow.xaml",
 				"${workspaceFolder}/test/Svg/Test.svg",
+				"${workspaceFolder}/test/Custom1/App.view.xml",
+				"${workspaceFolder}/test/Custom2/StackOverflowTest.xml",
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"

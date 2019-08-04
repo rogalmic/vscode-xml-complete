@@ -1,0 +1,2548 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="sap.ui.core" xmlns:n0="sap.ui.core">
+  <xsd:element name="ComponentContainer" type="n0:_ComponentContainerType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Container that embeds a UIComponent in a control tree.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Control" type="n0:_ControlType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Base Class for Controls.
+
+Controls provide the following features:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;Rendering&lt;/b&gt;: the &lt;code&gt;RenderManager&lt;/code&gt; only expects instances of class &lt;code&gt;Control&lt;/code&gt;
+    in its {@link sap.ui.core.RenderManager#renderControl renderControl} method.
+    By convention, each control class has an associated static class that takes care of rendering
+    the control (its 'Renderer').&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;show / hide&lt;/b&gt;: a control can be hidden, although it is still part of the control tree,
+    see property {@link #getVisible visible}&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;local busy indicator&lt;/b&gt;: marks a control visually as 'busy', see properties {@link #getBusy busy}
+    and {@link #getBusyIndicatorDelay busyIndicatorDelay}&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;field groups&lt;/b&gt;: by assigning the same group ID to a set of editable controls, they form a
+    group which can be validated together. See property {@link #getFieldGroupIds fieldGroupIds}
+    and event {@link #event:validateFieldGroup validateFieldGroup}.
+    The term &lt;i&gt;field&lt;/i&gt; was chosen as most often this feature will be used to group editable
+    fields in a form.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;custom style classes&lt;/b&gt;: all controls allow to add custom CSS classes to their rendered DOM
+    without modifying their renderer code. See methods {@link #addStyleClass addStyleClass},
+    {@link #removeStyleClass removeStyleClass}, {@link #toggleStyleClass toggleStyleClass}
+    and {@link #hasStyleClass hasStyleClass}.&lt;/br&gt;
+    The necessary implementation is encapsulated in {@link sap.ui.core.CustomStyleClassSupport
+    CustomStyleClassSupport} and can be applied to selected element classes as well.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;browser events&lt;/b&gt;: by calling the methods {@link #attachBrowserEvent attachBrowserEvent} and
+    {@link #detachBrowserEvent detachBrowserEvent}, consumers can let the control class take care of
+    registering / de-registering a given set of event listeners to the control's root DOM node.
+    The framework will adapt the registration whenever the DOM node changes (e.g. before or after
+    rendering or when the control is destroyed).&lt;/li&gt;
+&lt;/ul&gt;
+
+See section "{@link topic:91f1703b6f4d1014b6dd926db0e91070 Developing OpenUI5/SAPUI5 Controls}"
+in the documentation for an introduction to control development.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="CustomData" type="n0:_CustomDataType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Contains a single key/value pair of custom data attached to an Element. See method data().</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Element" type="n0:_ElementType">
+    <xsd:annotation>
+      <xsd:documentation>Base Class for Elements.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="HTML" type="n0:_HTMLType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Embeds standard HTML in an SAPUI5 control tree.
+
+Security Hint: By default, the HTML content (property 'content') is not sanitized and therefore
+open to XSS attacks. Applications that want to show user defined input in an HTML control, should
+either sanitize the content on their own or activate automatic sanitizing through the
+{@link #setSanitizeContent sanitizeContent} property.
+
+Although this control inherits the &lt;code&gt;tooltip&lt;/code&gt; aggregation/property and the
+&lt;code&gt;hasStyleClass&lt;/code&gt;, &lt;code&gt;addStyleClass&lt;/code&gt;, &lt;code&gt;removeStyleClass&lt;/code&gt; and
+&lt;code&gt;toggleStyleClass&lt;/code&gt; methods from its base class, it doesn't support them.
+Instead, the defined HTML content can contain a tooltip (title attribute) or custom CSS classes.
+
+For further hints about usage restrictions for this control, see also the documentation of the
+&lt;code&gt;content&lt;/code&gt; property.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Icon" type="n0:_IconType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Icon uses embedded font instead of pixel image. Comparing to image, Icon is easily scalable, color can be altered live and various effects can be added using css.
+
+A set of built in Icons is available and they can be fetched by calling sap.ui.core.IconPool.getIconURI and set this value to the src property on the Icon.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="InvisibleText" type="n0:_InvisibleTextType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>An InvisibleText is used to bring hidden texts to the UI for screen reader support. The hidden text can e.g. be referenced
+in the ariaLabelledBy or ariaDescribedBy associations of other controls.
+
+The inherited properties busy, busyIndicatorDelay and visible and the aggregation tooltip is not supported by this control.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Item" type="n0:_ItemType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>A control base type.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="LayoutData" type="n0:_LayoutDataType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>A layout data base type.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ListItem" type="n0:_ListItemType" substitutionGroup="n0:Item">
+    <xsd:annotation>
+      <xsd:documentation>An item that is used in lists or list-similar controls such as DropdownBox, for example.
+The element foresees the usage of additional texts displayed in a second column.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="LocalBusyIndicator" type="n0:_LocalBusyIndicatorType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>The LocalBusyIndicator is a special version of the
+BusyIndicator. This one doesn't block the whole screen - it just
+blocks the corresponding control and puts a local animation over the
+control. To use the functionality of this control the corresponding
+control needs to be enabled via the 'LocalBusyIndicatorSupport'
+accordingly to the ListBox control (see the init-function of the
+ListBox).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Message" type="n0:_MessageType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>This element used to provide messages. Rendering must be done within the control that uses this kind of element.
+
+Its default level is none.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="ScrollBar" type="n0:_ScrollBarType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>The ScrollBar control can be used for virtual scrolling of a certain area.
+This means: to simulate a very large scrollable area when technically the area is small and the control takes care of displaying the respective part only. E.g. a Table control can take care of only rendering the currently visible rows and use this ScrollBar control to make the user think he actually scrolls through a long list.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SeparatorItem" type="n0:_SeparatorItemType" substitutionGroup="n0:Item">
+    <xsd:annotation>
+      <xsd:documentation>An item that provides a visual separation. It borrows all its methods from the classes sap.ui.core.Item, sap.ui.core.Element,
+sap.ui.base.EventProvider, and sap.ui.base.Object.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Title" type="n0:_TitleType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Represents a title element that can be used for aggregation with other controls</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TooltipBase" type="n0:_TooltipBaseType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Abstract class that can be extended in order to implement any extended tooltip. For example, RichTooltip Control is based on it. It provides the opening/closing behavior and the main "text" property.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="UIComponent" type="n0:_UIComponentType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Base Class for UIComponent.
+
+If you are extending a UIComponent make sure you read the {@link #.extend} documentation since the metadata is special.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="VariantLayoutData" type="n0:_VariantLayoutDataType" substitutionGroup="n0:LayoutData">
+    <xsd:annotation>
+      <xsd:documentation>Allows to add multiple LayoutData to one control in case that an easy switch of layouts (e.g. in a Form) is needed.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DragDropBase" type="n0:_DragDropBaseType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Provides the base class for all drag-and-drop configurations.
+This feature enables a native HTML5 drag-and-drop API for the controls, therefore it is limited to browser support.
+&lt;h3&gt;Limitations&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;There is no mobile device that supports drag and drop.&lt;/li&gt;
+  &lt;li&gt;There is no accessible alternative for drag and drop. Applications which use the drag-and-drop functionality must provide an
+  accessible alternative UI (for example, action buttons or menus) to perform the same operations.&lt;/li&gt;
+  &lt;li&gt;A custom dragging ghost element is not possible in Internet Explorer.&lt;/li&gt;
+  &lt;li&gt;Transparency of the drag ghost element and the cursor during drag-and-drop operations depends on the browser implementation.&lt;/li&gt;
+  &lt;li&gt;Internet Explorer does only support plain text MIME type for the DataTransfer Object.&lt;/li&gt;
+  &lt;li&gt;Constraining a drag position is not possible, therefore there is no snap-to-grid or snap-to-element feature possible.&lt;/li&gt;
+  &lt;li&gt;Texts in draggable controls cannot be selected.&lt;/li&gt;
+  &lt;li&gt;The text of input fields in draggable controls can be selected, but not dragged.&lt;/li&gt;
+&lt;/ul&gt;</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DragDropInfo" type="n0:_DragDropInfoType" substitutionGroup="n0:DropInfo">
+    <xsd:annotation>
+      <xsd:documentation>Provides the configuration for drag-and-drop operations.
+&lt;b&gt;Note:&lt;/b&gt; This configuration might be ignored due to control {@link sap.ui.core.Element.extend metadata} restrictions.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DragInfo" type="n0:_DragInfoType" substitutionGroup="n0:DragDropBase">
+    <xsd:annotation>
+      <xsd:documentation>Provides the configuration for drag operations.
+&lt;b&gt;Note:&lt;/b&gt; This configuration might be ignored due to control {@link sap.ui.core.Element.extend metadata} restrictions.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DropInfo" type="n0:_DropInfoType" substitutionGroup="n0:DragDropBase">
+    <xsd:annotation>
+      <xsd:documentation>Provides the configuration for drop operations.
+&lt;b&gt;Note:&lt;/b&gt; This configuration might be ignored due to control {@link sap.ui.core.Element.extend metadata} restrictions.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Hyphenation" type="n0:_HyphenationType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>This class provides methods for evaluating the possibility of using browser-native hyphenation or initializing and using a third-party hyphenation module.
+
+&lt;h3&gt;Overview&lt;/h3&gt;
+By using this API, a developer can check if browser-native hyphenation is supported for a particular language.
+
+When browser-native hyphenation is not supported or if otherwise required, the API can be used to hyphenate texts. A third-party library "Hyphenopoly" is used in that case.
+
+It is used internally by controls that support the &lt;code&gt;wrappingType:{@link sap.m.WrappingType WrappingType.Hyphenated}&lt;/code&gt; property.
+
+As the class is singleton, an instance should be acquired from {@link sap.ui.core.hyphenation.Hyphenation.getInstance Hyphenation.getInstance}.
+
+&lt;h3&gt;Usage&lt;/h3&gt;
+&lt;h4&gt;When to use:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;To check if browser-native hyphenation is available for particular language.&lt;/li&gt;
+&lt;li&gt;To hyphenate texts if browser-native hyphenation is not available.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;When not to use:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+If the use case is covered by controls that support the property &lt;code&gt;wrappingType:{@link sap.m.WrappingType WrappingType.Hyphenated}&lt;/code&gt;.
+This functionality is supported by {@link sap.m.Title sap.m.Title}, {@link sap.m.Label sap.m.Label} and {@link sap.m.Text sap.m.Text}.
+&lt;/li&gt;
+&lt;li&gt;If browser-native hyphenation is available&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Example&lt;/h3&gt;
+&lt;pre&gt;
+if (!Hyphenation.getInstance().canUseNativeHyphenation("en")) {
+	Hyphenation.getInstance().initialize("en").then(function() {
+		console.log(Hyphenation.getInstance().hyphenate("An example text to hyphenate.", "en"));
+	});
+}
+&lt;/pre&gt;
+
+For more information, see {@link topic:6322164936f047de941ec522b95d7b70 Hyphenation for Text Controls}.
+
+&lt;code&gt;Caution:&lt;/code&gt; Note that as the hyphenation feature uses third-party
+and browser-native tools, we are not responsible for any grammatical incorrectness
+or inconsistencies of the hyphenation. Also, the variety of supported languages is
+outside the scope of our control and may be subject to future changes.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="HTMLView" type="n0:_HTMLViewType" substitutionGroup="n0:View">
+    <xsd:annotation>
+      <xsd:documentation>A view defined/constructed by declarative HTML.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="JSONView" type="n0:_JSONViewType" substitutionGroup="n0:View">
+    <xsd:annotation>
+      <xsd:documentation>A View defined using JSON.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="JSView" type="n0:_JSViewType" substitutionGroup="n0:View">
+    <xsd:annotation>
+      <xsd:documentation>A View defined/constructed by JavaScript code.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TemplateView" type="n0:_TemplateViewType" substitutionGroup="n0:View">
+    <xsd:annotation>
+      <xsd:documentation>A view defined in a template.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="View" type="n0:_ViewType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>A base class for Views.
+
+Introduces the relationship to a Controller, some basic visual appearance settings like width and height,
+and provides lifecycle events.
+
+Views form an ID scope for the elements and controls in their content. They can prefix the IDs of
+elements either automatically (e.g. XMLView) or programmatically (using {@link #createId}).
+With method {@link #byId}, elements or controls can be found with their view-local ID.
+Also see {@link topic:91f28be26f4d1014b6dd926db0e91070 "Support for Unique IDs"} in the documentation.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="XMLView" type="n0:_XMLViewType" substitutionGroup="n0:View">
+    <xsd:annotation>
+      <xsd:documentation>A View defined using (P)XML and HTML markup.
+
+&lt;strong&gt;Note:&lt;/strong&gt;&lt;br&gt;
+Be aware that modifications of the content aggregation of this control are not supported due to technical reasons.
+This includes calls to all content modifying methods like &lt;code&gt;addContent&gt;&lt;/code&gt; etc., but also the implicit
+removal of controls contained by the content aggregation. For example the destruction of a Control via the &lt;code&gt;
+destroy&lt;/code&gt; method. All functions can be called but may not work properly or lead to unexpected side effects.
+
+&lt;strong&gt;Note:&lt;/strong&gt;&lt;br&gt;
+On root level, you can only define content for the default aggregation, e.g. without adding the &lt;code&gt;&amp;lt;content&amp;gt;&lt;/code&gt; tag. If
+you want to specify content for another aggregation of a view like &lt;code&gt;dependents&lt;/code&gt;, place it in a child
+control's dependents aggregation or add it by using {@link sap.ui.core.mvc.XMLView#addDependent}.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="OpenSearchProvider" type="n0:_OpenSearchProviderType" substitutionGroup="n0:SearchProvider">
+    <xsd:annotation>
+      <xsd:documentation>A SearchProvider which uses the OpenSearch protocol (either JSON or XML).</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="SearchProvider" type="n0:_SearchProviderType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Abstract base class for all SearchProviders which can be e.g. attached to a SearchField.
+
+Do not create instances of this class, but use a concrete subclass instead.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DOMAttribute" type="n0:_DOMAttributeType" substitutionGroup="n0:Element">
+    <xsd:annotation>
+      <xsd:documentation>Represents a DOM attribute of a DOM element.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="DOMElement" type="n0:_DOMElementType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Represents a DOM element. It allows to use databinding for the properties and nested DOM attributes.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Template" type="n0:_TemplateType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>Base Class for Template.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="TemplateControl" type="n0:_TemplateControlType" substitutionGroup="n0:Control">
+    <xsd:annotation>
+      <xsd:documentation>This is the base class for all template controls. Template controls are declared based on templates.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="Fragment">
+    <xsd:complexType>
+      <xsd:simpleContent>
+        <xsd:restriction base="n0:_FragmentType0">
+          <xsd:enumeration value=""/>
+          <xsd:whiteSpace value="collapse"/>
+        </xsd:restriction>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="FragmentDefinition">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="n0:Control"/>
+        <xsd:element ref="n0:Fragment"/>
+        <xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="_ComponentContainerType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="name" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Component name, the package where the component is contained. This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="url" type="n0:_URIType">
+          <xsd:annotation>
+            <xsd:documentation>The URL of the component. This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="async" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Flag whether the component should be created sync (default) or async. The default
+will be async when initially the property &lt;code&gt;manifest&lt;/code&gt; is set to a truthy
+value and for the property &lt;code&gt;async&lt;/code&gt; no value has been specified.
+This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="handleValidation" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Enable/disable validation handling by MessageManager for this component.
+The resulting Messages will be propagated to the controls.
+This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="settings" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The settings object passed to the component when created. This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="propagateModel" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Defines whether binding information is propagated to the component.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="width" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>Container width in CSS size</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>Container height in CSS size</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="lifecycle" type="n0:_ComponentLifecycleType">
+          <xsd:annotation>
+            <xsd:documentation>Lifecycle behavior for the Component associated by the &lt;code&gt;ComponentContainer&lt;/code&gt;.
+The default behavior is &lt;code&gt;Legacy&lt;/code&gt;. This  means that the &lt;code&gt;ComponentContainer&lt;/code&gt;
+takes care that the Component is destroyed when the &lt;code&gt;ComponentContainer&lt;/code&gt; is destroyed,
+but it is &lt;b&gt;not&lt;/b&gt; destroyed when a new Component is associated.
+If you use the &lt;code&gt;usage&lt;/code&gt; property to create the Component,
+the default behavior is &lt;code&gt;Container&lt;/code&gt;. This means that
+the Component is destroyed when the &lt;code&gt;ComponentContainer&lt;/code&gt; is destroyed or a new
+Component is associated.
+This property must only be applied before a component instance is created.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="autoPrefixId" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Flag, whether to auto-prefix the ID of the nested Component or not. If
+this property is set to true the ID of the Component will be prefixed
+with the ID of the ComponentContainer followed by a single dash.
+This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="usage" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The component usage. If the ComponentContainer is used inside a
+Component, this Component can define a usage which will be used for creating
+the Component.
+This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="manifest" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Controls when and from where to load the manifest for the Component.
+When set to any truthy value, the manifest will be loaded asynchronously by default
+and evaluated before the Component controller, if it is set to a falsy value
+other than &lt;code&gt;undefined&lt;/code&gt;, the manifest will be loaded after the controller.
+A non-empty string value will be interpreted as the URL location from where to load the manifest.
+A non-null object value will be interpreted as manifest content.
+This property can only be applied initially.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="component" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The component displayed in this ComponentContainer.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="componentCreated" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the component instance has been created by the
+ComponentContainer.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="componentFailed" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the creation of the component instance has failed.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ControlType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="blocked" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether the control is currently in blocked state.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="busy" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether the control is currently in busy state.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="busyIndicatorDelay" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>The delay in milliseconds, after which the busy indicator will show up for this control.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="busyIndicatorSize" type="n0:_BusyIndicatorSizeType">
+          <xsd:annotation>
+            <xsd:documentation>The size of the BusyIndicator. For controls with a width smaller 3rem a
+&lt;code&gt;sap.ui.core.BusyIndicatorSize.Small&lt;/code&gt; should be used.
+If the size could vary in width and the width could get smaller than 3rem, the
+&lt;code&gt;sap.ui.core.BusyIndicatorSize.Auto&lt;/code&gt; option could be used.
+The default is set to &lt;code&gt;sap.ui.core.BusyIndicatorSize.Medium&lt;/code&gt;
+For a full screen BusyIndicator use &lt;code&gt;sap.ui.core.BusyIndicatorSize.Large&lt;/code&gt;.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="visible" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether the control should be visible on the screen.
+
+If set to false, a placeholder will be rendered to mark the location of the invisible
+control in the DOM of the current page. The placeholder will be hidden and have
+zero dimensions (&lt;code&gt;display: none&lt;/code&gt;).
+
+See {@link sap.ui.core.RenderManager#writeInvisiblePlaceholderData RenderManager#writeInvisiblePlaceholderData} for details.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="fieldGroupIds" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The IDs of a logical field group that this control belongs to.
+
+All fields in a logical field group should share the same &lt;code&gt;fieldGroupId&lt;/code&gt;.
+Once a logical field group is left, the &lt;code&gt;validateFieldGroup&lt;/code&gt; event is raised.
+
+For backward compatibility with older releases, field group IDs are syntactically not
+limited, but it is suggested to use only valid {@link sap.ui.core.ID}s.
+
+See {@link #attachValidateFieldGroup}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="validateFieldGroup" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Event is fired if a logical field group defined by &lt;code&gt;fieldGroupIds&lt;/code&gt; of a control was left
+or the user explicitly pressed a key combination that triggers validation.
+
+Listen to this event to validate data of the controls belonging to a field group.
+See {@link #setFieldGroupIds}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="class" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>A string that will be added to the "class" attribute of this control's root HTML element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="binding" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Bind the object to the referenced entity in the model, which is used as the binding context to resolve bound properties or aggregations of the object itself and all of its children relatively to the given path.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_CustomDataType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="key" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The key of the data in this CustomData object.
+When the data is just stored, it can be any string, but when it is to be written to HTML (writeToDom == true) then it must also be a valid HTML attribute name (it must conform to the sap.ui.core.ID type and may contain no colon) to avoid collisions, it also may not start with "sap-ui". When written to HTML, the key is prefixed with "data-".
+If any restriction is violated, a warning will be logged and nothing will be written to the DOM.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="value" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The data stored in this CustomData object.
+When the data is just stored, it can be any JS type, but when it is to be written to HTML (writeToDom == true) then it must be a string.
+If this restriction is violated, a warning will be logged and nothing will be written to the DOM.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="writeToDom" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>If set to "true" and the value is of type "string" and the key conforms to the documented restrictions, this custom data is written to the HTML root element of the control as a "data-*" attribute.
+If the key is "abc" and the value is "cde", the HTML will look as follows:
+&amp;lt;SomeTag ... data-abc="cde" ... &amp;gt;
+Thus the application can provide stable attributes by data binding which can be used for styling or identification purposes.
+ATTENTION: use carefully to not create huge attributes or a large number of them.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ElementType">
+    <xsd:sequence>
+      <xsd:element name="tooltip" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>The tooltip that should be shown for this Element.
+
+Can either be an instance of a TooltipBase subclass or a simple string.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0">
+              <xsd:element ref="n0:TooltipBase"/>
+              <xsd:element ref="n0:Fragment"/>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="customData" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Custom Data, a data structure like a map containing arbitrary key value pairs.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+              <xsd:element ref="n0:CustomData"/>
+              <xsd:element ref="n0:Fragment"/>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="layoutData" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Defines the layout constraints for this control when it is used inside a Layout.
+LayoutData classes are typed classes and must match the embedding Layout.
+See VariantLayoutData for aggregating multiple alternative LayoutData instances to a single Element.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0">
+              <xsd:element ref="n0:LayoutData"/>
+              <xsd:element ref="n0:Fragment"/>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="dependents" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Dependents are not rendered, but their databinding context and lifecycle are bound to the aggregating Element.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+              <xsd:element ref="n0:Element"/>
+              <xsd:element ref="n0:Fragment"/>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="dragDropConfig" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Defines the drag-and-drop configuration.
+&lt;b&gt;Note:&lt;/b&gt; This configuration might be ignored due to control {@link sap.ui.core.Element.extend metadata} restrictions.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+              <xsd:element ref="n0:DragDropBase"/>
+              <xsd:element ref="n0:Fragment"/>
+            </xsd:choice>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="n0:_IDType">
+      <xsd:annotation>
+        <xsd:documentation>The unique identifier within a page, either configured or automatically generated.</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+  <xsd:complexType name="_HTMLType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="content" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>HTML content to be displayed, defined as a string.
+
+The content is converted to DOM nodes with a call to &lt;code&gt;new jQuery(content)&lt;/code&gt;, so any
+restrictions for the jQuery constructor apply to the content of the HTML control as well.
+
+Some of these restrictions (there might be others!) are:
+&lt;ul&gt;
+&lt;li&gt;the content must be enclosed in tags, pure text is not supported. &lt;/li&gt;
+&lt;li&gt;if the content contains script tags, they will be executed but they will not appear in the
+    resulting DOM tree. When the contained code tries to find the corresponding script tag,
+    it will fail.&lt;/li&gt;
+&lt;/ul&gt;
+
+Please consider to consult the jQuery documentation as well.
+
+The HTML control currently doesn't prevent the usage of multiple root nodes in its DOM content
+(e.g. &lt;code&gt;setContent("&amp;lt;div/&gt;&amp;lt;div/&gt;")&lt;/code&gt;), but this is not a guaranteed feature.
+The accepted content might be restricted to single root nodes in future versions.
+To notify applications about this fact, a warning is written in the log when multiple root nodes are used.
+
+When changing the content dynamically, ensure that the ID of the root node remains the same as the HTML
+control's ID. Otherwise it cannot be guaranteed that certain lifecycle events take place.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="preferDOM" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether existing DOM content is preferred over the given content string.
+
+There are two scenarios where this flag is relevant (when set to true):
+&lt;ul&gt;
+&lt;li&gt;for the initial rendering: when an HTML control is added to a UIArea for the first time
+    and if the root node of that UIArea contained DOM content with the same id as the HTML
+    control, then that content will be used for rendering instead of any specified string
+    content&lt;/li&gt;
+&lt;li&gt;any follow-up rendering: when an HTML control is rendered for the second or any later
+    time and the preferDOM flag is set, then the DOM from the first rendering is preserved
+    and not replaced by the string content&lt;/li&gt;
+&lt;/ul&gt;
+
+As preserving the existing DOM is the most common use case of the HTML control, the default value is true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="sanitizeContent" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether to run the HTML sanitizer once the content (HTML markup) is applied or not.
+
+To configure the set of allowed URLs, you can use the {@link jQuery.sap.addUrlWhitelist whitelist API}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="afterRendering" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired after the HTML control has been rendered. Allows to manipulate the resulting DOM.
+
+When the control doesn't have string content and no preserved DOM existed for this control,
+then this event will fire, but there won't be a DOM node for this control.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_IconType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:sequence/>
+        <xsd:attribute name="src" type="n0:_URIType">
+          <xsd:annotation>
+            <xsd:documentation>This property should be set by the return value of calling sap.ui.core.IconPool.getIconURI with an Icon name parameter and an optional collection parameter which is required when using application extended Icons. A list of standard FontIcon is available here.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="size" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>Since Icon uses font, this property will be applied to the css font-size property on the rendered DOM element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="color" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The color of the Icon. If color is not defined here, the Icon inherits the color from its DOM parent.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="hoverColor" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This color is shown when icon is hovered. This property has no visual effect when run on mobile device.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="activeColor" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This color is shown when icon is pressed/activated by the user.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="width" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>This is the width of the DOM element which contains the Icon. Setting this property doesn't affect the size of the font. If you want to make the font bigger, increase the size property.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>This is the height of the DOM element which contains the Icon. Setting this property doesn't affect the size of the font. If you want to make the font bigger, increase the size property.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="backgroundColor" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Background color of the Icon in normal state.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="hoverBackgroundColor" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Background color for Icon in hover state. This property has no visual effect when run on mobile device.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="activeBackgroundColor" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Background color for Icon in active state.
+
+The property can be set with {@link sap.ui.core.CSSColor CSS Color} or {@link sap.ui.core.IconColor Semantic Icon Color}.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="decorative" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>A decorative icon is included for design reasons. Accessibility tools will ignore decorative icons. Tab stop isn't affected by this property anymore and it's now controlled by the existence of press event handler and the noTabStop property.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="useIconTooltip" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Decides whether a default Icon tooltip should be used if no tooltip is set.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="alt" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This defines the alternative text which is used for outputting the aria-label attribute on the DOM.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="noTabStop" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Defines whether the tab stop of icon is controlled by the existence of press event handler. When it's set to false, Icon control has tab stop when press event handler is attached.
+If it's set to true, Icon control never has tab stop no matter whether press event handler exists or not.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="ariaLabelledBy" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Association to controls / ids which label this control (see WAI-ARIA attribute aria-labelledby).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="press" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when icon is pressed/activated by the user. When a handler is attached to this event, the Icon gets tab stop. If you want to disable this behavior, set the noTabStop property to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_InvisibleTextType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The text of the InvisibleText.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ItemType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The text to be displayed for the item.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="enabled" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Enabled items can be selected.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="textDirection" type="n0:_TextDirectionType">
+          <xsd:annotation>
+            <xsd:documentation>Options are RTL and LTR. Alternatively, an item can inherit its text direction from its parent control.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="key" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Can be used as input for subsequent actions.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_LayoutDataType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ListItemType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ItemType">
+        <xsd:attribute name="icon" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The icon belonging to this list item instance.
+This can be a URI to an image or an icon font URI.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="additionalText" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Some additional text of type string, optionally to be displayed along with this item.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_LocalBusyIndicatorType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="width" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>This property is the width of the control that has to
+be covered. With this width the position of the animation can be
+properly set.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>This property is the height of the control that has to
+be covered. With this height the position of the animation can be
+properly set.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_MessageType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Message text</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="timestamp" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Message's timestamp. It is just a simple String that will be used without any transformation. So the application that uses messages needs to format the timestamp to its own needs.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="icon" type="n0:_URIType">
+          <xsd:annotation>
+            <xsd:documentation>A possible icon URI of the message</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="level" type="n0:_MessageTypeType">
+          <xsd:annotation>
+            <xsd:documentation>Setting the message's level.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="readOnly" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Determines whether the message should be read only. This helps the application to handle a message a different way if the application differentiates between read-only and common messages.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ScrollBarType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="vertical" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Orientation. Defines if the Scrollbar is vertical or horizontal.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="scrollPosition" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Scroll position in steps or pixels.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="size" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>Size of the Scrollbar (in pixels).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="contentSize" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>Size of the scrollable content (in pixels).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="steps" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Number of steps to scroll. Used if the size of the content is not known as the data is loaded dynamically.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="scroll" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Scroll event.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_SeparatorItemType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ItemType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_TitleType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Defines the title text</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="icon" type="n0:_URIType">
+          <xsd:annotation>
+            <xsd:documentation>Defines the URL for icon display</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="level" type="n0:_TitleLevelType">
+          <xsd:annotation>
+            <xsd:documentation>Defines the level of the title. If set to auto the level of the title is chosen by the control rendering the title.
+
+Currently not all controls using the Title.control supporting this property.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="emphasized" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>If set the title is displayed emphasized.
+This feature is nor supported by all controls using the Title.control.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_TooltipBaseType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The text that is shown in the tooltip that extends the TooltipBase class, for example in RichTooltip.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="openDuration" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Optional. Open Duration in milliseconds.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="closeDuration" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Optional. Close Duration in milliseconds.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="myPosition" type="n0:_DockType">
+          <xsd:annotation>
+            <xsd:documentation>Optional. My position defines which position on the extended tooltip being positioned to align with the target control.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="atPosition" type="n0:_DockType">
+          <xsd:annotation>
+            <xsd:documentation>Optional. At position defines which position on the target control to align the positioned tooltip.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="offset" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Optional. Offset adds these left-top values to the calculated position.
+Example: "10 3".</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="collision" type="n0:_CollisionType">
+          <xsd:annotation>
+            <xsd:documentation>Optional. Collision - when the positioned element overflows the window in some direction, move it to an alternative position.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="openDelay" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Opening delay of the tooltip in milliseconds</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="closeDelay" type="xsd:int">
+          <xsd:annotation>
+            <xsd:documentation>Closing delay of the tooltip in milliseconds</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="closed" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when the Tooltip has been closed</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_UIComponentType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_VariantLayoutDataType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_LayoutDataType">
+        <xsd:sequence>
+          <xsd:element name="multipleLayoutData" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Allows multiple LayoutData.</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                  <xsd:element ref="n0:LayoutData"/>
+                  <xsd:element ref="n0:Fragment"/>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DragDropBaseType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="groupName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Defines the name of the group to which this object belongs. If &lt;code&gt;groupName&lt;/code&gt; is specified, then this object will only interacts with other drag-and-drop objects within the same group.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="enabled" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Indicates whether this configuration is active or not.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DragDropInfoType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_DropInfoType">
+        <xsd:attribute name="sourceAggregation" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The name of the aggregation from which all children can be dragged. If undefined, the control itself can be dragged.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="targetElement" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The target element for this drag and drop action. If undefined, the control with this drag and drop configuration itself is the target.
+Leaving this empty, but defining source and target aggregation, allows you to reorder the children within a control, for example.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragStart" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when the user starts dragging an element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragEnd" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when a drag operation is being ended.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DragInfoType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_DragDropBaseType">
+        <xsd:attribute name="sourceAggregation" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The name of the aggregation from which all children can be dragged. If undefined, the control itself can be dragged.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragStart" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when the user starts dragging an element.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragEnd" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when a drag operation is being ended.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DropInfoType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_DragDropBaseType">
+        <xsd:attribute name="targetAggregation" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The aggregation name in the drop target control which is the target of this drag-and-drop action. If undefined, the entire
+control is the target. This can be handy if the target control does not have any aggregations or if the drop position within the target does not matter.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropEffect" type="n0:_DropEffectType">
+          <xsd:annotation>
+            <xsd:documentation>Defines the visual drop effect.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropPosition" type="n0:_DropPositionType">
+          <xsd:annotation>
+            <xsd:documentation>Defines the position for the drop action, visualized by a rectangle.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dropLayout" type="n0:_DropLayoutType">
+          <xsd:annotation>
+            <xsd:documentation>Defines the layout of the droppable controls if &lt;code&gt;dropPosition&lt;/code&gt; is set to &lt;code&gt;Between&lt;/code&gt; or &lt;code&gt;OnOrBetween&lt;/code&gt;.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragEnter" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when a dragged element enters a drop target.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="dragOver" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when an element is being dragged over a valid drop target.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="drop" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>This event is fired when an element is dropped on a valid drop target, as specified by the drag-and-drop info.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_HyphenationType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="error" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired if an error with initialization or hyphenation occurs.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_HTMLViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ViewType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_JSONViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ViewType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_JSViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ViewType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_TemplateViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ViewType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_ViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:sequence>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="n0:Control"/>
+            <xsd:element ref="n0:Fragment"/>
+            <xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+          </xsd:choice>
+          <xsd:element name="content" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Child Controls of the view</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                  <xsd:element ref="n0:Control"/>
+                  <xsd:element ref="n0:Fragment"/>
+                  <xsd:any processContents="lax" namespace="http://www.w3.org/1999/xhtml"/>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="width" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>The width</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="height" type="n0:_CSSSizeType">
+          <xsd:annotation>
+            <xsd:documentation>The height</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="viewName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of the View</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="displayBlock" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation>Whether the CSS display should be set to "block".
+Set this to "true" if the default display "inline-block" causes a vertical scrollbar with Views that are set to 100% height.
+Do not set this to "true" if you want to display other content in the same HTML parent on either side of the View (setting to "true" may push that other content to the next/previous line).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="afterInit" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the View has parsed the UI description and instantiated the contained controls (/control tree).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="beforeExit" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the view has received the request to destroy itself, but before it has destroyed anything.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="afterRendering" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the View has been (re-)rendered and its HTML is present in the DOM.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="beforeRendering" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired before this View is re-rendered. Use to unbind event handlers from HTML elements etc.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="controllerName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of the controller class to use for this view.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of a resource bundle that should be loaded for this view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleAlias" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Model name under which the resource bundle should be stored.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleLocale" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Locale that should be used to load a resourcebundle for this view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="type" type="n0:_ViewTypeType">
+          <xsd:annotation>
+            <xsd:documentation>Type of the view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="controllerName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of the controller class to use for this view.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleName" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>(module) Name of a resource bundle that should be loaded for this view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleUrl" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>URL of a resource bundle that should be loaded for this view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleLocale" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Locale that should be used to load a resource bundle for this view</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="resourceBundleAlias" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Model name under which the resource bundle should be stored.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_XMLViewType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ViewType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_OpenSearchProviderType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_SearchProviderType">
+        <xsd:attribute name="suggestUrl" type="n0:_URIType">
+          <xsd:annotation>
+            <xsd:documentation>The URL for suggestions of the search provider. As placeholder for the concrete search queries '{searchTerms}' must be used. For cross domain requests maybe a proxy must be used.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="suggestType" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The type of data which is provided by the given suggestUrl: either 'json' or 'xml'.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_SearchProviderType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="icon" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Icon of the Search Provider</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DOMAttributeType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ElementType">
+        <xsd:attribute name="name" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Name of the DOM attribute</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="value" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Value of the DOM attribute</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_DOMElementType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:sequence>
+          <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element ref="n0:DOMAttribute"/>
+            <xsd:element ref="n0:Fragment"/>
+          </xsd:choice>
+          <xsd:element name="attributes" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>DOM attributes which are rendered as part of the DOM element and bindable</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                  <xsd:element ref="n0:DOMAttribute"/>
+                  <xsd:element ref="n0:Fragment"/>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="elements" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation>Nested DOM elements to support nested bindable structures</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                  <xsd:element ref="n0:DOMElement"/>
+                  <xsd:element ref="n0:Fragment"/>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="text" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The text content of the DOM element</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="tag" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The HTML-tag of the DOM element which contains the text</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_TemplateType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:attribute name="content" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The Template definition as a String.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_TemplateControlType">
+    <xsd:complexContent>
+      <xsd:extension base="n0:_ControlType">
+        <xsd:sequence/>
+        <xsd:attribute name="context" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The context is a data object. It can be used for default template expressions. A change of the context object leads to a re-rendering whereas a change of a nested property of the context object doesn't. By default the context is an empty object.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="template" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>The template on which the template control is based on.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="afterRendering" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired when the Template Control has been (re-)rendered and its HTML is present in the DOM.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <xsd:attribute name="beforeRendering" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Fired before this Template Control is re-rendered. Use to unbind event handlers from HTML elements etc.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="_FragmentType0">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="id" type="n0:_IDType"/>
+        <xsd:attribute name="fragmentName" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:simpleType name="_AbsoluteCSSSizeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[-+]?(0*|([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]))|calc\(\s*(\(\s*)*[-+]?(([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC])?)(\s*(\)\s*)*(\s[-+]\s|[*/])\s*(\(\s*)*([-+]?(([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC])?)))*\s*(\)\s*)*\)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_AccessibleLandmarkRoleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>No explicit role is applicable.
+
+The interpretation of this value depends on the control / element which defines a property with this type.
+Normally this value means that no accessible landmark should be written.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Banner">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;banner&lt;/code&gt;.
+
+A banner usually appears at the top of the page and typically spans the full width.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Main">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;main&lt;/code&gt;.
+
+The main content of a page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Region">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;region&lt;/code&gt;.
+
+A section of a page, that is important enough to be included in a page summary or table of contents.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Navigation">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;navigation&lt;/code&gt;.
+
+A region that contains a collection of items and objects that, as a whole, combine to create a navigation facility.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Search">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;search&lt;/code&gt;.
+
+A region that contains a collection of items and objects that, as a whole, combine to create a search facility.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Complementary">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;complementary&lt;/code&gt;.
+
+A section of the page, designed to be complementary to the main content at a similar level in the DOM hierarchy.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Form">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;form&lt;/code&gt;.
+
+A region that contains a collection of items and objects that, as a whole, combine to create a form.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ContentInfo">
+        <xsd:annotation>
+          <xsd:documentation>Represents the ARIA role &lt;code&gt;contentinfo&lt;/code&gt;.
+
+A region that contains information about the content on the page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_AccessibleRoleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Alert">
+        <xsd:annotation>
+          <xsd:documentation>A message with an alert or error information.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="AlertDialog">
+        <xsd:annotation>
+          <xsd:documentation>A separate window with an alert or error information.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Application">
+        <xsd:annotation>
+          <xsd:documentation>A software unit executing a set of tasks for the user.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Banner">
+        <xsd:annotation>
+          <xsd:documentation>Usually defined as the advertisement at the top of a web page.
+The banner content typically contains the site or company logo, or other key advertisements.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Button">
+        <xsd:annotation>
+          <xsd:documentation>Allows user-triggered actions.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Checkbox">
+        <xsd:annotation>
+          <xsd:documentation>A control that has three possible values: true, false, mixed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ColumnHeader">
+        <xsd:annotation>
+          <xsd:documentation>A table cell containing header information for a column.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Combobox">
+        <xsd:annotation>
+          <xsd:documentation>Allows selecting an item from a list, or to enter data directly in the input field.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ContentInfo">
+        <xsd:annotation>
+          <xsd:documentation>Information about the content on the page. Examples are footnotes, copyrights, or links to privacy statements.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Definition">
+        <xsd:annotation>
+          <xsd:documentation>The content of the associated element represents a definition.
+If there is a definition element within the content, this one represents the term being defined.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Description">
+        <xsd:annotation>
+          <xsd:documentation>Descriptive content for a page element.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Dialog">
+        <xsd:annotation>
+          <xsd:documentation>A small window that is designed to interrupt the current application processing
+in order to inform the user and to get some response.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Directory">
+        <xsd:annotation>
+          <xsd:documentation>A list of references to members of a single group.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Document">
+        <xsd:annotation>
+          <xsd:documentation>Content that contains related information, such as a book.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Grid">
+        <xsd:annotation>
+          <xsd:documentation>Contains cells of tabular data arranged in rows and columns, for example in a table.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="GridCell">
+        <xsd:annotation>
+          <xsd:documentation>A table cell in a grid where the cells can be active, editable, and selectable.
+Cells may have functional relationships to controls, for example.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Group">
+        <xsd:annotation>
+          <xsd:documentation>A section of user interface objects.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Heading">
+        <xsd:annotation>
+          <xsd:documentation>A heading for a section of the page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Img">
+        <xsd:annotation>
+          <xsd:documentation>A container for a collection of elements that form an image.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Link">
+        <xsd:annotation>
+          <xsd:documentation>An interactive reference to a resource.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="List">
+        <xsd:annotation>
+          <xsd:documentation>A container for non-interactive list items which are the children of the list.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Listbox">
+        <xsd:annotation>
+          <xsd:documentation>A widget that allows the user to select one or more items from a list.
+The items within the list are static and can contain images.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ListItem">
+        <xsd:annotation>
+          <xsd:documentation>A single item in a list.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Log">
+        <xsd:annotation>
+          <xsd:documentation>An area where new information is added, or old information disappears.
+Information types are chat logs, messaging, or error logs, for example.
+The log contains a sequence: New information is always added to the end of the log.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Main">
+        <xsd:annotation>
+          <xsd:documentation>Defines the main content of a document.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Marquee">
+        <xsd:annotation>
+          <xsd:documentation>Is used to scroll text across the page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Menu">
+        <xsd:annotation>
+          <xsd:documentation>Offers a list of choices to the user.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Menubar">
+        <xsd:annotation>
+          <xsd:documentation>A container for menu items where each item may activate a submenu.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MenuItem">
+        <xsd:annotation>
+          <xsd:documentation>A child in a menu.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MenuItemCheckbox">
+        <xsd:annotation>
+          <xsd:documentation>A checkable menu item (tri-state).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MenuItemRadio">
+        <xsd:annotation>
+          <xsd:documentation>A menu item which is part of a group of menuitemradio roles.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Navigation">
+        <xsd:annotation>
+          <xsd:documentation>A collection of links suitable for use when navigating the document or related documents.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Note">
+        <xsd:annotation>
+          <xsd:documentation>The content is parenthetic or ancillary to the main content of the resource.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Option">
+        <xsd:annotation>
+          <xsd:documentation>A selectable item in a list represented by a select.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Presentation">
+        <xsd:annotation>
+          <xsd:documentation>An element whose role is presentational does not need to be mapped to the accessibility API.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="ProgressBar">
+        <xsd:annotation>
+          <xsd:documentation>Shows the execution progress in applications providing functions that take a long time.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Radio">
+        <xsd:annotation>
+          <xsd:documentation>An option in single-select list. Only one radio control in a radiogroup can be selected at the same time.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RadioGroup">
+        <xsd:annotation>
+          <xsd:documentation>A group of radio controls.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Region">
+        <xsd:annotation>
+          <xsd:documentation>A large section on the web page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Row">
+        <xsd:annotation>
+          <xsd:documentation>A row of table cells.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RowHeader">
+        <xsd:annotation>
+          <xsd:documentation>A table cell containing header information for a row.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Search">
+        <xsd:annotation>
+          <xsd:documentation>A search section of a web document. In many cases, this is a form used to submit search requests about the site,
+or a more general Internet wide search service.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Secondary">
+        <xsd:annotation>
+          <xsd:documentation>A unique section of the document. In the case of a portal, this may include time display, weather forecast,
+or stock price.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SeeAlso">
+        <xsd:annotation>
+          <xsd:documentation>Indicates that the element contains content that is related to the main content of the page.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Separator">
+        <xsd:annotation>
+          <xsd:documentation>A line or bar that separates sections of content.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Slider">
+        <xsd:annotation>
+          <xsd:documentation>A user input where the user selects an input in a given range. This form of range expects an analogous keyboard
+interface.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="SpinButton">
+        <xsd:annotation>
+          <xsd:documentation>Allows users to select a value from a list of given entries where exactly one value is displayed at runtime, and
+the other ones can be displayed by scrolling using the arrow up and arrow down key.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Status">
+        <xsd:annotation>
+          <xsd:documentation>A container for processing advisory information.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Tab">
+        <xsd:annotation>
+          <xsd:documentation>A header for a tab panel.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Tablist">
+        <xsd:annotation>
+          <xsd:documentation>A list of tabs which are references to tab panels.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Tabpanel">
+        <xsd:annotation>
+          <xsd:documentation>A container for the resources associated with a tab.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Textbox">
+        <xsd:annotation>
+          <xsd:documentation>Inputs that allow free-form text as their value.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Timer">
+        <xsd:annotation>
+          <xsd:documentation>A numerical counter which indicates an amount of elapsed time from a start point,
+or of the time remaining until a certain end point.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Toolbar">
+        <xsd:annotation>
+          <xsd:documentation>A collection of commonly used functions represented in compact visual form.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Tooltip">
+        <xsd:annotation>
+          <xsd:documentation>A popup that displays a description for an element when the user passes over or rests on that element.
+Supplement to the normal tooltip processing of the user agent.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Tree">
+        <xsd:annotation>
+          <xsd:documentation>A form of a list (tree) having groups (subtrees) inside groups (subtrees), where the sub trees can be collapsed and expanded.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TreeGrid">
+        <xsd:annotation>
+          <xsd:documentation>A grid whose rows are expandable and collapsable in the same manner as the ones of trees.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="TreeItem">
+        <xsd:annotation>
+          <xsd:documentation>A tree node</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_BarColorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NEUTRAL">
+        <xsd:annotation>
+          <xsd:documentation>Color: blue (#b8d0e8)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="POSITIVE">
+        <xsd:annotation>
+          <xsd:documentation>Color: green (#b5e7a8)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CRITICAL">
+        <xsd:annotation>
+          <xsd:documentation>Color: yellow (#faf2b0)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NEGATIVE">
+        <xsd:annotation>
+          <xsd:documentation>Color: red (#ff9a90)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_BusyIndicatorSizeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Auto">
+        <xsd:annotation>
+          <xsd:documentation>Type: automatic size detection</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Small">
+        <xsd:annotation>
+          <xsd:documentation>Type: small size</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Medium">
+        <xsd:annotation>
+          <xsd:documentation>Type: Medium size</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Large">
+        <xsd:annotation>
+          <xsd:documentation>Type: Large size</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_CSSColorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|rgb\(\s*((1?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))|([0-9]?[0-9](\.[0-9]+)?|100(\.0+)?)%)\s*(,\s*((1?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))|([0-9]?[0-9](\.[0-9]+)?|100(\.0+)?)%)\s*){2}\)|rgba\((\s*((1?[0-9]?[0-9]|2([0-4][0-9]|5[0-5]))|([0-9]?[0-9](\.[0-9]+)?|100(\.0+)?)%)\s*,){3}\s*(0(\.[0-9]+)?|1(\.0+)?)\s*\)|hsl\(\s*([0-2]?[0-9]?[0-9]|3([0-5][0-9]|60))\s*(,\s*(([0-9]?[0-9](\.[0-9]+)?|100(\.0+)?)%)\s*){2}\)|hsla\(\s*([0-2]?[0-9]?[0-9]|3([0-5][0-9]|60))\s*,(\s*(([0-9]?[0-9](\.[0-9]+)?|100(\.0+)?)%)\s*,){2}\s*(0(\.[0-9]+)?|1(\.0+)?)\s*\)|aliceblue|antiquewhite|aqua|aquamarine|azure|beige|bisque|black|blanchedalmond|blue|blueviolet|brown|burlywood|cadetblue|chartreuse|chocolate|coral|cornflowerblue|cornsilk|crimson|cyan|darkblue|darkcyan|darkgoldenrod|darkgray|darkgrey|darkgreen|darkkhaki|darkmagenta|darkolivegreen|darkorange|darkorchid|darkred|darksalmon|darkseagreen|darkslateblue|darkslategray|darkslategrey|darkturquoise|darkviolet|deeppink|deepskyblue|dimgray|dimgrey|dodgerblue|firebrick|floralwhite|forestgreen|fuchsia|gainsboro|ghostwhite|gold|goldenrod|gray|grey|green|greenyellow|honeydew|hotpink|indianred|indigo|ivory|khaki|lavender|lavenderblush|lawngreen|lemonchiffon|lightblue|lightcoral|lightcyan|lightgoldenrodyellow|lightgray|lightgrey|lightgreen|lightpink|lightsalmon|lightseagreen|lightskyblue|lightslategray|lightslategrey|lightsteelblue|lightyellow|lime|limegreen|linen|magenta|maroon|mediumaquamarine|mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturquoise|mediumvioletred|midnightblue|mintcream|mistyrose|moccasin|navajowhite|navy|oldlace|olive|olivedrab|orange|orangered|orchid|palegoldenrod|palegreen|paleturquoise|palevioletred|papayawhip|peachpuff|peru|pink|plum|powderblue|purple|red|rosybrown|royalblue|saddlebrown|salmon|sandybrown|seagreen|seashell|sienna|silverskyblue|slateblue|slategray|slategrey|snow|springgreen|steelblue|tan|teal|thistle|tomato|turquoise|violet|wheat|white|whitesmoke|yellow|yellowgreen|transparent|inherit|"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_CSSSizeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="auto|inherit|[-+]?(0*|([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]|[vV][wW]|[vV][hH]|[vV][mM][iI][nN]|[vV][mM][aA][xX]|%))|calc\(\s*(\(\s*)*[-+]?(([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]|[vV][wW]|[vV][hH]|[vV][mM][iI][nN]|[vV][mM][aA][xX]|%)?)(\s*(\)\s*)*(\s[-+]\s|[*/])\s*(\(\s*)*([-+]?(([0-9]+|[0-9]*\.[0-9]+)([rR][eE][mM]|[eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]|[vV][wW]|[vV][hH]|[vV][mM][iI][nN]|[vV][mM][aA][xX]|%)?)))*\s*(\)\s*)*\)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_CSSSizeShortHandType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="inherit|(auto|[-+]?(0*|(\d+|\d*\.\d+)([eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]|%))){1}(\s(auto|[-+]?(0*|(\d+|\d*\.\d+)([eE][mM]|[eE][xX]|[pP][xX]|[cC][mM]|[mM][mM]|[iI][nN]|[pP][tT]|[pP][cC]|%)))){0,3}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_CalendarTypeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Gregorian">
+        <xsd:annotation>
+          <xsd:documentation>The Gregorian calendar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Islamic">
+        <xsd:annotation>
+          <xsd:documentation>The Islamic calendar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Japanese">
+        <xsd:annotation>
+          <xsd:documentation>The Japanese emperor calendar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Persian">
+        <xsd:annotation>
+          <xsd:documentation>The Persian Jalali calendar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Buddhist">
+        <xsd:annotation>
+          <xsd:documentation>The Thai buddhist calendar</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_CollisionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(flip|fit|none)( (flip|fit|none))?"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ComponentLifecycleType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Legacy">
+        <xsd:annotation>
+          <xsd:documentation>Legacy lifecycle means that the ComponentContainer takes care
+to destroy the Component which is associated with the
+ComponentContainer once the ComponentContainer is destroyed but
+not when a new Component is associated.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Application">
+        <xsd:annotation>
+          <xsd:documentation>Application managed lifecycle means that the Application takes care
+to destroy the Components associated with the ComponentContainer.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Container">
+        <xsd:annotation>
+          <xsd:documentation>Container managed lifecycle means that the ComponentContainer takes
+care to destroy the Components associated with the ComponentContainer
+once the ComponentContainer is destroyed or a new Component is associated.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_DesignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Standard">
+        <xsd:annotation>
+          <xsd:documentation>Standard font</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Monospace">
+        <xsd:annotation>
+          <xsd:documentation>Mono space font</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_DockType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(begin|left|center|right|end) (top|center|bottom)"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_HorizontalAlignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Begin">
+        <xsd:annotation>
+          <xsd:documentation>Locale-specific positioning at the beginning of the line</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="End">
+        <xsd:annotation>
+          <xsd:documentation>Locale-specific positioning at the end of the line</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Left">
+        <xsd:annotation>
+          <xsd:documentation>Hard option for left alignment</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Right">
+        <xsd:annotation>
+          <xsd:documentation>Hard option for right alignment</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Center">
+        <xsd:annotation>
+          <xsd:documentation>Centered alignment of text</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_IDType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[A-Za-z_][-A-Za-z0-9_.:]*"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_IconColorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Default">
+        <xsd:annotation>
+          <xsd:documentation>Default color (brand color)</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Positive">
+        <xsd:annotation>
+          <xsd:documentation>Positive color</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Negative">
+        <xsd:annotation>
+          <xsd:documentation>Negative color</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Critical">
+        <xsd:annotation>
+          <xsd:documentation>Critical color</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Neutral">
+        <xsd:annotation>
+          <xsd:documentation>Neutral color.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Contrast">
+        <xsd:annotation>
+          <xsd:documentation>Contrast color.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ImeModeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Auto">
+        <xsd:annotation>
+          <xsd:documentation>The value is automatically computed by the user agent.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Active">
+        <xsd:annotation>
+          <xsd:documentation>IME is used for entering characters.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Inactive">
+        <xsd:annotation>
+          <xsd:documentation>IME is not used for entering characters.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Disabled">
+        <xsd:annotation>
+          <xsd:documentation>IME is disabled.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_IndicationColorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Indication01">
+        <xsd:annotation>
+          <xsd:documentation>Indication Color 1</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Indication02">
+        <xsd:annotation>
+          <xsd:documentation>Indication Color 2</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Indication03">
+        <xsd:annotation>
+          <xsd:documentation>Indication Color 3</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Indication04">
+        <xsd:annotation>
+          <xsd:documentation>Indication Color 4</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Indication05">
+        <xsd:annotation>
+          <xsd:documentation>Indication Color 5</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_MessageTypeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Information">
+        <xsd:annotation>
+          <xsd:documentation>Message should be just an information</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Warning">
+        <xsd:annotation>
+          <xsd:documentation>Message is a warning</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Error">
+        <xsd:annotation>
+          <xsd:documentation>Message is an error</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>Message has no specific level</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Success">
+        <xsd:annotation>
+          <xsd:documentation>Message is a success message</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_OpenStateType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="OPEN">
+        <xsd:annotation>
+          <xsd:documentation>Open and currently not changing states.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CLOSED">
+        <xsd:annotation>
+          <xsd:documentation>Closed and currently not changing states.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="OPENING">
+        <xsd:annotation>
+          <xsd:documentation>Already left the CLOSED state, is not OPEN yet, but in the process of getting OPEN.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="CLOSING">
+        <xsd:annotation>
+          <xsd:documentation>Still open, but in the process of going to the CLOSED state.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_OrientationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Horizontal">
+        <xsd:annotation>
+          <xsd:documentation>Arrange Horizontally</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Vertical">
+        <xsd:annotation>
+          <xsd:documentation>Arrange Vertically</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_PercentageType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9][0-9]*(\.[0-9]+)?%"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_PriorityType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>Default, none priority</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Low">
+        <xsd:annotation>
+          <xsd:documentation>Low priority</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Medium">
+        <xsd:annotation>
+          <xsd:documentation>Medium priority</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="High">
+        <xsd:annotation>
+          <xsd:documentation>High priority</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ScrollBarActionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Step">
+        <xsd:annotation>
+          <xsd:documentation>Single step scrolling caused by clicking an arrow button or arrow key.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Page">
+        <xsd:annotation>
+          <xsd:documentation>Range scrolling caused by clicking track area or using page up or page down key.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="MouseWheel">
+        <xsd:annotation>
+          <xsd:documentation>Scrolling done by mouse wheel</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Drag">
+        <xsd:annotation>
+          <xsd:documentation>Scrolling done by dragging the scroll bar's paint thumb</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ScrollingType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>No scroll bar provided even if the content is larger than the available space.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Auto">
+        <xsd:annotation>
+          <xsd:documentation>A scroll bar is shown if the content requires more space than the given space (rectangle) provides.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Scroll">
+        <xsd:annotation>
+          <xsd:documentation>A scroll bar is always shown even if the space is large enough for the current content.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Hidden">
+        <xsd:annotation>
+          <xsd:documentation>No scroll bar is shown, and the content stays in the given rectangle.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_SortOrderType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>Sorting is not applied.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Ascending">
+        <xsd:annotation>
+          <xsd:documentation>Sorting is done in ascending order.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Descending">
+        <xsd:annotation>
+          <xsd:documentation>Sorting is done in descending order.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_TextAlignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Begin">
+        <xsd:annotation>
+          <xsd:documentation>Locale-specific positioning at the beginning of the line.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="End">
+        <xsd:annotation>
+          <xsd:documentation>Locale-specific positioning at the end of the line.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Left">
+        <xsd:annotation>
+          <xsd:documentation>Hard option for left alignment.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Right">
+        <xsd:annotation>
+          <xsd:documentation>Hard option for right alignment.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Center">
+        <xsd:annotation>
+          <xsd:documentation>Centered text alignment.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Initial">
+        <xsd:annotation>
+          <xsd:documentation>Sets no text align, so the browser default is used.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_TextDirectionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="LTR">
+        <xsd:annotation>
+          <xsd:documentation>Specifies left-to-right text direction.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="RTL">
+        <xsd:annotation>
+          <xsd:documentation>Specifies right-to-left text direction.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Inherit">
+        <xsd:annotation>
+          <xsd:documentation>Inherits the direction from its parent control/container.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_TitleLevelType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Auto">
+        <xsd:annotation>
+          <xsd:documentation>The level of the title is choosen by the control rendering the title.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H1">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 1.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H2">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 2</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H3">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 3</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H4">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 4</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H5">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 5</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="H6">
+        <xsd:annotation>
+          <xsd:documentation>The Title is of level 6</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_URIType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ValueStateType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Error">
+        <xsd:annotation>
+          <xsd:documentation>State is not valid.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Warning">
+        <xsd:annotation>
+          <xsd:documentation>State is valid but with a warning.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Success">
+        <xsd:annotation>
+          <xsd:documentation>State is valid.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Information">
+        <xsd:annotation>
+          <xsd:documentation>State is informative.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>State is not specified.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_VerticalAlignType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bottom">
+        <xsd:annotation>
+          <xsd:documentation>Content is aligned at the bottom.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Middle">
+        <xsd:annotation>
+          <xsd:documentation>Content is centered vertically .</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Top">
+        <xsd:annotation>
+          <xsd:documentation>Content is aligned at the top.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Inherit">
+        <xsd:annotation>
+          <xsd:documentation>Content respect the parent's vertical alignment.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_WrappingType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>The standard browser behavior is considered for wrapping.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Soft">
+        <xsd:annotation>
+          <xsd:documentation>The text is actually on the same line but displayed within several lines.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Hard">
+        <xsd:annotation>
+          <xsd:documentation>Inserts actual line breaks in the text at the wrap point.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Off">
+        <xsd:annotation>
+          <xsd:documentation>Wrapping shall not be allowed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_DropEffectType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Copy">
+        <xsd:annotation>
+          <xsd:documentation>A copy of the source item is made at the new location.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Move">
+        <xsd:annotation>
+          <xsd:documentation>An item is moved to a new location.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Link">
+        <xsd:annotation>
+          <xsd:documentation>A link is established to the source at the new location.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="None">
+        <xsd:annotation>
+          <xsd:documentation>The item cannot be dropped.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_DropLayoutType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Default">
+        <xsd:annotation>
+          <xsd:documentation>Default {@link sap.ui.core.Element.extend layout} definition of the aggregations.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Vertical">
+        <xsd:annotation>
+          <xsd:documentation>Droppable controls are arranged vertically.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Horizontal">
+        <xsd:annotation>
+          <xsd:documentation>Droppable controls are arranged horizontally.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_DropPositionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="On">
+        <xsd:annotation>
+          <xsd:documentation>Drop on the control.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Between">
+        <xsd:annotation>
+          <xsd:documentation>Drop between the controls.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="OnOrBetween">
+        <xsd:annotation>
+          <xsd:documentation>Drop on the control or between the controls.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_ViewTypeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="JSON">
+        <xsd:annotation>
+          <xsd:documentation>JSON View</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="XML">
+        <xsd:annotation>
+          <xsd:documentation>XML view</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="HTML">
+        <xsd:annotation>
+          <xsd:documentation>HTML view</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="JS">
+        <xsd:annotation>
+          <xsd:documentation>JS View</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Template">
+        <xsd:annotation>
+          <xsd:documentation>Template View</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="_HistoryDirectionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Forwards">
+        <xsd:annotation>
+          <xsd:documentation>The page has already been navigated to and it was the successor of the previous page</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Backwards">
+        <xsd:annotation>
+          <xsd:documentation>The page has already been navigated to and it was the precessor of the previous page</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="NewEntry">
+        <xsd:annotation>
+          <xsd:documentation>A new Entry is added to the history</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+      <xsd:enumeration value="Unknown">
+        <xsd:annotation>
+          <xsd:documentation>A Navigation took place, but it could be any of the other three states</xsd:documentation>
+        </xsd:annotation>
+      </xsd:enumeration>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

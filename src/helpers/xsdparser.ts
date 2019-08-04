@@ -18,6 +18,16 @@ export default class XsdParser {
 						resultTagName: tagData.attributes["name"]
 					});
 
+					if (tagData.name.endsWith(":schema")) {
+						Object.keys(tagData.attributes).forEach((k) =>
+						{
+							if (k.startsWith("xmlns:"))
+							{
+								result.setNsMap(k.substring("xmlns:".length), tagData.attributes[k]);
+							}
+						});
+					}
+
 					if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
 						result.push({
 							tag: new CompletionString(tagData.attributes["name"]),
