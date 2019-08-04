@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.IO;
 
 namespace Wpf {
     public static class Program
@@ -22,6 +23,8 @@ namespace Wpf {
         private static XNamespace ns = "http://www.w3.org/2001/XMLSchema";
 
         private static Regex alphanumeric = new Regex("[^a-zA-Z0-9 -]");
+
+        private static XDocument XmlDocumentation;
 
         [STAThreadAttribute]
         [DebuggerNonUserCodeAttribute]
@@ -70,6 +73,7 @@ namespace Wpf {
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
             complexType.Add(complexContent);
             var element = new XElement(ns + "element", new XAttribute("name", controlName));
+            element.Add(GetDocumentationNodeFromName(controlName));
             element.Add(complexType);
             return element;
         }
@@ -138,6 +142,37 @@ namespace Wpf {
         private static PropertyInfo[] GetAllControlProperties(this Type controlType)
         {
             return controlType.GetProperties();
+        }
+
+        private static XElement[] GetDocumentationNodeFromName(params string[] entityNames)
+        {
+            if (XmlDocumentation == null)
+            {
+                XmlDocumentation = GetDocumentation();
+            }
+
+            entityNames = entityNames
+                .Where(n => !string.IsNullOrWhiteSpace(n))
+                .Select(n => n.Split(new[] { "`" }, StringSplitOptions.None).First())
+                .ToArray();
+
+            return XmlDocumentation.Descendants("member")
+                .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{string.Join(".", entityNames)}")))
+                .SelectMany(e => e.Elements("summary"))
+                .Select(e => new XElement(ns + "annotation", 
+                    new XElement(ns + "documentation", 
+                        Regex.Replace(e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim()
+                            , @"\s+", " "))))                
+                .Take(1)
+                .ToArray();
+        }
+
+        private static XDocument GetDocumentation()
+        {
+            var resourceAssembly = Assembly.GetExecutingAssembly();
+            var aaa = resourceAssembly.GetManifestResourceNames();
+            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Wpf.Controls.xml")));
+            return XDocument.Load(resource);
         }
     }
 }

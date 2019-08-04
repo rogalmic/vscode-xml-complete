@@ -5,4 +5,7 @@
     <UseWPF>true</UseWPF>
     <StartupObject>Wpf.Program</StartupObject>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Wpf.Controls.xml"/>
+  </ItemGroup>
 </Project>

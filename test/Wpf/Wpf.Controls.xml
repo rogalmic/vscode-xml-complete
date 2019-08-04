@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PresentationFramework</name>
+    </assembly>
+    <members>
+        <!-- TODO: add more -->
+        <member name="T:System.Windows.Controls.TextBlock">
+            <summary>
+            A control that displays a block of text.
+            </summary>
+        </member>
+    </members>
+</doc>

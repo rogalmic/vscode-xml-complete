@@ -2521,6 +2521,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TextBlock">
+    <xs:annotation>
+      <xs:documentation>A control that displays a block of text.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
