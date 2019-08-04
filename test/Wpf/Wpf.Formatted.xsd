@@ -214,6 +214,9 @@
     </xs:choice>
   </xs:group>
   <xs:element name="Window">
+    <xs:annotation>
+      <xs:documentation>Provides the ability to create, configure, show, and manage the lifetime of windows and dialog boxes.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -261,6 +264,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Ellipse">
+    <xs:annotation>
+      <xs:documentation>Draws an ellipse.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -282,6 +288,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Line">
+    <xs:annotation>
+      <xs:documentation>Draws a straight line between two points.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -307,6 +316,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Path">
+    <xs:annotation>
+      <xs:documentation>Gets the file path for the custom place.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -329,6 +341,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Polygon">
+    <xs:annotation>
+      <xs:documentation>Draws a polygon, which is a connected series of lines that form a closed shape.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -352,6 +367,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Polyline">
+    <xs:annotation>
+      <xs:documentation>Draws a series of connected straight lines.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -375,6 +393,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Rectangle">
+    <xs:annotation>
+      <xs:documentation>Draws a rectangle.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -398,6 +419,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ActiveXHost">
+    <xs:annotation>
+      <xs:documentation>Hosts an ActiveX control as an element within Windows Presentation Foundation (WPF) content.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -407,6 +431,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NavigationWindow">
+    <xs:annotation>
+      <xs:documentation>Represents a window that supports content navigation.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -463,6 +490,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AdornerDecorator">
+    <xs:annotation>
+      <xs:documentation>Provides an &lt;see cref="T:System.Windows.Documents.AdornerLayer" /&gt; for the child elements in the visual tree.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -473,6 +503,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AdornerLayer">
+    <xs:annotation>
+      <xs:documentation>Gets the &lt;see cref="T:System.Windows.Documents.AdornerLayer" /&gt; on which adorners are rendered.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement" />
@@ -480,6 +513,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DocumentReference">
+    <xs:annotation>
+      <xs:documentation>Provides access to reference a &lt;see cref="T:System.Windows.Documents.FixedDocument" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -489,6 +525,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="FixedPage">
+    <xs:annotation>
+      <xs:documentation>Provides the content for a high fidelity, fixed-format page.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -502,6 +541,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Glyphs">
+    <xs:annotation>
+      <xs:documentation>Represents the set of glyphs that are used for rendering fixed text.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -522,6 +564,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="PageContent">
+    <xs:annotation>
+      <xs:documentation>Provides information about the &lt;see cref="T:System.Windows.Documents.FixedPage" /&gt; elements within a &lt;see cref="T:System.Windows.Documents.FixedDocument" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -533,6 +578,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="StickyNoteControl">
+    <xs:annotation>
+      <xs:documentation>Represents a control that lets users attach typed text or handwritten annotations to documents.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -568,6 +616,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AccessText">
+    <xs:annotation>
+      <xs:documentation>Specifies with an underscore the character that is used as the access key.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -593,6 +644,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AdornedElementPlaceholder">
+    <xs:annotation>
+      <xs:documentation>Represents the element used in a &lt;see cref="T:System.Windows.Controls.ControlTemplate" /&gt; to specify where a decorated control is placed relative to other elements in the &lt;see cref="T:System.Windows.Controls.ControlTemplate" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -603,6 +657,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Border">
+    <xs:annotation>
+      <xs:documentation>Draws a border, background, or both around another element.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -617,6 +674,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Button">
+    <xs:annotation>
+      <xs:documentation>Represents a Windows button control, which reacts to the &lt;see cref="E:System.Windows.Controls.Primitives.ButtonBase.Click" /&gt; event.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -653,6 +713,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Calendar">
+    <xs:annotation>
+      <xs:documentation>Represents a control that enables a user to select a date by using a visual calendar display.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -689,6 +752,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Canvas">
+    <xs:annotation>
+      <xs:documentation>Defines an area within which you can explicitly position child elements by using coordinates that are relative to the &lt;see cref="T:System.Windows.Controls.Canvas" /&gt; area.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -702,6 +768,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="CheckBox">
+    <xs:annotation>
+      <xs:documentation>Represents a control that a user can select and clear.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -737,6 +806,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ComboBox">
+    <xs:annotation>
+      <xs:documentation>Represents a selection control with a drop-down list that can be shown or hidden by clicking the arrow on the control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -794,6 +866,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ComboBoxItem">
+    <xs:annotation>
+      <xs:documentation>Implements a selectable item inside a &lt;see cref="T:System.Windows.Controls.ComboBox" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -824,6 +899,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ContentControl">
+    <xs:annotation>
+      <xs:documentation>Represents a control with a single piece of content of any type.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -852,6 +930,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ContentPresenter">
+    <xs:annotation>
+      <xs:documentation>Displays the content of a &lt;see cref="T:System.Windows.Controls.ContentControl" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -866,6 +947,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ContextMenu">
+    <xs:annotation>
+      <xs:documentation>Represents a pop-up menu that enables a control to expose functionality that is specific to the context of the control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -918,6 +1002,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Control">
+    <xs:annotation>
+      <xs:documentation>Represents the base class for user interface (UI) elements that use a &lt;see cref="T:System.Windows.Controls.ControlTemplate" /&gt; to define their appearance.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -941,6 +1028,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGrid">
+    <xs:annotation>
+      <xs:documentation>Represents a control that displays data in a customizable grid.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1046,6 +1136,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridCell">
+    <xs:annotation>
+      <xs:documentation>Represents a cell of a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1078,6 +1171,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridCellsPanel">
+    <xs:annotation>
+      <xs:documentation>Represents a panel that lays out cells and column headers in a data grid.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1093,6 +1189,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridRow">
+    <xs:annotation>
+      <xs:documentation>Represents a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; row.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1130,6 +1229,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DatePicker">
+    <xs:annotation>
+      <xs:documentation>Represents a control that allows the user to select a date.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1164,6 +1266,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Decorator">
+    <xs:annotation>
+      <xs:documentation>Provides a base class for elements that apply effects onto or around a single child element, such as &lt;see cref="T:System.Windows.Controls.Border" /&gt; or &lt;see cref="T:System.Windows.Controls.Viewbox" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1173,6 +1278,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DockPanel">
+    <xs:annotation>
+      <xs:documentation>Defines an area where you can arrange child elements either horizontally or vertically, relative to each other.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1187,6 +1295,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DocumentViewer">
+    <xs:annotation>
+      <xs:documentation>Represents a document viewing control that can host paginated &lt;see cref="T:System.Windows.Documents.FixedDocument" /&gt; content such as an &lt;see cref="T:System.Windows.Xps.Packaging.XpsDocument" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1237,6 +1348,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Expander">
+    <xs:annotation>
+      <xs:documentation>Represents the control that displays a header that has a collapsible window that displays content.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1272,6 +1386,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="FlowDocumentReader">
+    <xs:annotation>
+      <xs:documentation>Provides a control for viewing flow content, with built-in support for multiple viewing modes.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1317,6 +1434,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="FlowDocumentScrollViewer">
+    <xs:annotation>
+      <xs:documentation>Provides a control for viewing flow content in a continuous scrolling mode.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1356,6 +1476,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Frame">
+    <xs:annotation>
+      <xs:documentation>Frame is a content control that supports navigation.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1394,6 +1517,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Grid">
+    <xs:annotation>
+      <xs:documentation>Defines a flexible grid area that consists of columns and rows.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1410,6 +1536,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GridSplitter">
+    <xs:annotation>
+      <xs:documentation>Represents the control that redistributes space between columns or rows of a &lt;see cref="T:System.Windows.Controls.Grid" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1440,6 +1569,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GridViewColumnHeader">
+    <xs:annotation>
+      <xs:documentation>Represents a column header for a &lt;see cref="T:System.Windows.Controls.GridViewColumn" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1475,6 +1607,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GridViewHeaderRowPresenter">
+    <xs:annotation>
+      <xs:documentation>Represents an object that is used to define the layout of a row of column headers.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1491,6 +1626,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GridViewRowPresenter">
+    <xs:annotation>
+      <xs:documentation>Represents an object that specifies the layout of a row of data.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1501,6 +1639,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GroupBox">
+    <xs:annotation>
+      <xs:documentation>Represents a control that creates a container that has a border and a header for user interface (UI) content.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1534,6 +1675,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="GroupItem">
+    <xs:annotation>
+      <xs:documentation>Appears as the root of the visual subtree generated for a group.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1562,6 +1706,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="HeaderedContentControl">
+    <xs:annotation>
+      <xs:documentation>Provides the base implementation for all controls that contain single content and have a header.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1595,6 +1742,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="HeaderedItemsControl">
+    <xs:annotation>
+      <xs:documentation>Represents a control that contains multiple items and has a header.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1641,6 +1791,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Image">
+    <xs:annotation>
+      <xs:documentation>Represents a control that displays an image.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1652,6 +1805,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="InkCanvas">
+    <xs:annotation>
+      <xs:documentation>Defines an area that receives and displays ink strokes.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1674,6 +1830,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="InkPresenter">
+    <xs:annotation>
+      <xs:documentation>Gets the ink presenter that displays ink on the &lt;see cref="T:System.Windows.Controls.InkCanvas" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1684,6 +1843,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ItemsControl">
+    <xs:annotation>
+      <xs:documentation>Represents a control that can be used to present a collection of items.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1725,6 +1887,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ItemsPresenter">
+    <xs:annotation>
+      <xs:documentation>Used within the template of an item control to specify the place in the control's visual tree where the &lt;see cref="P:System.Windows.Controls.ItemsControl.ItemsPanel" /&gt; defined by the &lt;see cref="T:System.Windows.Controls.ItemsControl" /&gt; is to be added.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement" />
@@ -1732,6 +1897,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Label">
+    <xs:annotation>
+      <xs:documentation>Represents the text label for a control and provides support for access keys.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1761,6 +1929,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ListBox">
+    <xs:annotation>
+      <xs:documentation>Contains a list of selectable items.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1809,6 +1980,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ListBoxItem">
+    <xs:annotation>
+      <xs:documentation>Represents a selectable item in a &lt;see cref="T:System.Windows.Controls.ListBox" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1838,6 +2012,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ListView">
+    <xs:annotation>
+      <xs:documentation>Represents a control that displays a list of data items.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1887,6 +2064,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ListViewItem">
+    <xs:annotation>
+      <xs:documentation>Represents an item in a &lt;see cref="T:System.Windows.Controls.ListView" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1916,6 +2096,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="MediaElement">
+    <xs:annotation>
+      <xs:documentation>Represents a control that contains audio and/or video.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1945,6 +2128,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Menu">
+    <xs:annotation>
+      <xs:documentation>Represents a Windows menu control that enables you to hierarchically organize elements associated with commands and event handlers.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -1989,6 +2175,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="MenuItem">
+    <xs:annotation>
+      <xs:documentation>Represents a selectable item inside a &lt;see cref="T:System.Windows.Controls.Menu" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2055,6 +2244,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Page">
+    <xs:annotation>
+      <xs:documentation>Indicates that the &lt;see cref="T:System.Windows.Controls.FlowDocumentReader" /&gt; should show content one page at a time.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2076,6 +2268,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="PasswordBox">
+    <xs:annotation>
+      <xs:documentation>Represents a control designed for entering and handling passwords.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2109,6 +2304,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ScrollContentPresenter">
+    <xs:annotation>
+      <xs:documentation>Displays the content of a &lt;see cref="T:System.Windows.Controls.ScrollViewer" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2134,6 +2332,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ProgressBar">
+    <xs:annotation>
+      <xs:documentation>Indicates the progress of an operation.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2164,6 +2365,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RadioButton">
+    <xs:annotation>
+      <xs:documentation>Represents a button that can be selected, but not cleared, by a user. The &lt;see cref="P:System.Windows.Controls.Primitives.ToggleButton.IsChecked" /&gt; property of a &lt;see cref="T:System.Windows.Controls.RadioButton" /&gt; can be set by clicking it, but it can only be cleared programmatically.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2200,6 +2404,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RichTextBox">
+    <xs:annotation>
+      <xs:documentation>Represents a rich editing control which operates on &lt;see cref="T:System.Windows.Documents.FlowDocument" /&gt; objects.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2251,6 +2458,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ScrollViewer">
+    <xs:annotation>
+      <xs:documentation>Represents a scrollable area that can contain other visible elements.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2298,6 +2508,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Separator">
+    <xs:annotation>
+      <xs:documentation>Control that is used to separate items in items controls.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2321,6 +2534,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="FlowDocumentPageViewer">
+    <xs:annotation>
+      <xs:documentation>Represents a control for viewing flow content in a fixed viewing mode that shows content one page at a time.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2361,6 +2577,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Slider">
+    <xs:annotation>
+      <xs:documentation>Represents a control that lets the user select from a range of values by moving a &lt;see cref="P:System.Windows.Controls.Primitives.Track.Thumb" /&gt; control along a &lt;see cref="T:System.Windows.Controls.Primitives.Track" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2409,6 +2628,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="StackPanel">
+    <xs:annotation>
+      <xs:documentation>Arranges child elements into a single line that can be oriented horizontally or vertically.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2432,6 +2654,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TabControl">
+    <xs:annotation>
+      <xs:documentation>Represents a control that contains multiple items that share the same space on the screen.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2486,6 +2711,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TabItem">
+    <xs:annotation>
+      <xs:documentation>Represents a selectable item inside a &lt;see cref="T:System.Windows.Controls.TabControl" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2522,7 +2750,7 @@
   </xs:element>
   <xs:element name="TextBlock">
     <xs:annotation>
-      <xs:documentation>A control that displays a block of text.</xs:documentation>
+      <xs:documentation>Provides a lightweight control for displaying small amounts of flow content.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2556,6 +2784,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TextBox">
+    <xs:annotation>
+      <xs:documentation>Represents a control that can be used to display or edit unformatted text.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2617,6 +2848,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToolBar">
+    <xs:annotation>
+      <xs:documentation>Provides a container for a group of commands or controls.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2676,6 +2910,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToolBarTray">
+    <xs:annotation>
+      <xs:documentation>Represents the container that handles the layout of a &lt;see cref="T:System.Windows.Controls.ToolBar" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2688,6 +2925,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToolTip">
+    <xs:annotation>
+      <xs:documentation>Represents a control that creates a pop-up window that displays information for an element in the interface.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2725,6 +2965,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TreeView">
+    <xs:annotation>
+      <xs:documentation>Represents a control that displays hierarchical data in a tree structure that has items that can expand and collapse.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2769,6 +3012,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TreeViewItem">
+    <xs:annotation>
+      <xs:documentation>Implements a selectable item in a &lt;see cref="T:System.Windows.Controls.TreeView" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2818,6 +3064,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UserControl">
+    <xs:annotation>
+      <xs:documentation>Provides a simple way to create a control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2846,6 +3095,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Viewbox">
+    <xs:annotation>
+      <xs:documentation>Defines a content decorator that can stretch and scale a single child to fill the available space.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2857,6 +3109,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Viewport3D">
+    <xs:annotation>
+      <xs:documentation>Renders the contained 3-D content within the 2-D layout bounds of the &lt;see cref="T:System.Windows.Controls.Viewport3D" /&gt; element.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2867,6 +3122,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="VirtualizingStackPanel">
+    <xs:annotation>
+      <xs:documentation>Arranges and virtualizes content on a single line that is oriented either horizontally or vertically.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2892,6 +3150,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="WebBrowser">
+    <xs:annotation>
+      <xs:documentation>Hosts and navigates between HTML documents. Enables interoperability between WPF managed code and HTML script.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2906,6 +3167,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="WrapPanel">
+    <xs:annotation>
+      <xs:documentation>Positions child elements in sequential position from left to right, breaking content to the next line at the edge of the containing box. Subsequent ordering happens sequentially from top to bottom or from right to left, depending on the value of the &lt;see cref="P:System.Windows.Controls.WrapPanel.Orientation" /&gt; property.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2922,6 +3186,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="BulletDecorator">
+    <xs:annotation>
+      <xs:documentation>Represents a layout control that aligns a bullet and another visual object.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2933,6 +3200,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="CalendarButton">
+    <xs:annotation>
+      <xs:documentation>Represents a month or year on a &lt;see cref="T:System.Windows.Controls.Calendar" /&gt; object.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -2971,6 +3241,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="CalendarDayButton">
+    <xs:annotation>
+      <xs:documentation>Represents a day on a &lt;see cref="T:System.Windows.Controls.Calendar" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3012,6 +3285,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="CalendarItem">
+    <xs:annotation>
+      <xs:documentation>Represents the currently displayed month or year on a &lt;see cref="T:System.Windows.Controls.Calendar" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3036,6 +3312,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridCellsPresenter">
+    <xs:annotation>
+      <xs:documentation>Used within the template of a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; to specify the location in the control's visual tree where the cells are to be added.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3078,6 +3357,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridColumnHeader">
+    <xs:annotation>
+      <xs:documentation>Represents an individual &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; column header.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3120,6 +3402,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridColumnHeadersPresenter">
+    <xs:annotation>
+      <xs:documentation>Used within the template of a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; to specify the location in the control's visual tree where the column headers are to be added.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3161,6 +3446,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridDetailsPresenter">
+    <xs:annotation>
+      <xs:documentation>Used within the template of a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; to specify the location in the control's visual tree where the row details are to be added.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3175,6 +3463,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridRowHeader">
+    <xs:annotation>
+      <xs:documentation>Represents an individual &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; row header.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3211,6 +3502,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DataGridRowsPresenter">
+    <xs:annotation>
+      <xs:documentation>Used within the template of a &lt;see cref="T:System.Windows.Controls.DataGrid" /&gt; to specify the location in the control's visual tree where the rows are to be added.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3236,6 +3530,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DatePickerTextBox">
+    <xs:annotation>
+      <xs:documentation>Represents the text input of a &lt;see cref="T:System.Windows.Controls.DatePicker" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3297,6 +3594,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DocumentPageView">
+    <xs:annotation>
+      <xs:documentation>Represents a viewport for a paginated &lt;see cref="T:System.Windows.Documents.DocumentPage" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3310,6 +3610,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Popup">
+    <xs:annotation>
+      <xs:documentation>Represents a pop-up window that has content.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3330,6 +3633,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RepeatButton">
+    <xs:annotation>
+      <xs:documentation>Represents a control that raises its &lt;see cref="E:System.Windows.Controls.Primitives.ButtonBase.Click" /&gt; event repeatedly from the time it is pressed until it is released.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3365,6 +3671,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ResizeGrip">
+    <xs:annotation>
+      <xs:documentation>Represents an implementation of a &lt;see cref="T:System.Windows.Controls.Primitives.Thumb" /&gt; control that enables a &lt;see cref="T:System.Windows.Window" /&gt; to change its size.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3388,6 +3697,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ScrollBar">
+    <xs:annotation>
+      <xs:documentation>Represents a control that provides a scroll bar that has a sliding &lt;see cref="T:System.Windows.Controls.Primitives.Thumb" /&gt; whose position corresponds to a value.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3419,6 +3731,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="SelectiveScrollingGrid">
+    <xs:annotation>
+      <xs:documentation>A panel that can hold specified cells in place when the view is scrolled.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3435,6 +3750,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="StatusBar">
+    <xs:annotation>
+      <xs:documentation>Represents a control that displays items and information in a horizontal bar in an application window.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3479,6 +3797,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="StatusBarItem">
+    <xs:annotation>
+      <xs:documentation>Represents an item of a &lt;see cref="T:System.Windows.Controls.Primitives.StatusBar" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3507,6 +3828,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TabPanel">
+    <xs:annotation>
+      <xs:documentation>Handles the layout of the &lt;see cref="T:System.Windows.Controls.TabItem" /&gt; objects on a &lt;see cref="T:System.Windows.Controls.TabControl" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3520,6 +3844,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Thumb">
+    <xs:annotation>
+      <xs:documentation>Represents a control that can be dragged by the user.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3544,6 +3871,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="TickBar">
+    <xs:annotation>
+      <xs:documentation>Represents a control that draws a set of tick marks for a &lt;see cref="T:System.Windows.Controls.Slider" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3563,6 +3893,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToggleButton">
+    <xs:annotation>
+      <xs:documentation>Base class for controls that can switch states, such as &lt;see cref="T:System.Windows.Controls.CheckBox" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3598,6 +3931,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToolBarOverflowPanel">
+    <xs:annotation>
+      <xs:documentation>Used to arrange overflow &lt;see cref="T:System.Windows.Controls.ToolBar" /&gt; items.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3612,6 +3948,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToolBarPanel">
+    <xs:annotation>
+      <xs:documentation>Arranges &lt;see cref="T:System.Windows.Controls.ToolBar" /&gt; items inside a &lt;see cref="T:System.Windows.Controls.ToolBar" /&gt;.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3635,6 +3974,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Track">
+    <xs:annotation>
+      <xs:documentation>Gets the &lt;see cref="T:System.Windows.Controls.Primitives.Track" /&gt; for a &lt;see cref="T:System.Windows.Controls.Primitives.ScrollBar" /&gt; control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
@@ -3652,6 +3994,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UniformGrid">
+    <xs:annotation>
+      <xs:documentation>Provides a way to arrange content in a grid where all the cells in the grid have the same size.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="FrameworkElement">
