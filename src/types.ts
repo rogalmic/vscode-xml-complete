@@ -53,10 +53,12 @@ export class XmlTagCollection extends Array<XmlTag> {
 	loadAttributes(tagName: string | undefined): CompletionString[] {
 		let result: CompletionString[] = [];
 		if (tagName !== undefined) {
-			let currentTags = this.filter(e => e.tag.name === tagName || e.tag.name.endsWith(tagName.substring(tagName.indexOf(":")+1)));
+			let currentTags = this.filter(e => e.tag.name === tagName || e.tag.name === tagName.substring(tagName.indexOf(":")+1));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
-				currentTags.forEach(e => e.base.filter(b => b != tagName).forEach(b => result.push(...this.loadAttributes(b))));
+				currentTags.forEach(e =>
+					e.base.filter(b => !currentTags.map(t=>t.tag.name).includes(b))
+						.forEach(b => result.push(...this.loadAttributes(b))));
 			}
 		}
 		return result;
