@@ -67,7 +67,7 @@ namespace Wpf {
         private static XElement GetControlElement(string controlName, IEnumerable<string> controlAttributes, IEnumerable<string> baseAttributeNames)
         {
             var extension = new XElement(ns + "extension", new XAttribute("base", "FrameworkElement"));
-            extension.Add(GetAttributes(controlAttributes));
+            extension.Add(GetAttributes(controlAttributes, controlName));
             var complexContent = new XElement(ns + "complexContent");
             complexContent.Add(extension);
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
@@ -98,14 +98,17 @@ namespace Wpf {
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "FrameworkElement"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
-            complexType.Add(GetAttributes(controlAttributes));
+            complexType.Add(GetAttributes(controlAttributes, ""));
             complexType.Add(anyAttribute);
             return complexType;
         }
-        private static XElement[] GetAttributes(IEnumerable<string> attributeNames)
+        private static XElement[] GetAttributes(IEnumerable<string> attributeNames, string tagName)
         {
             return attributeNames
-                .Select(an => new XElement(ns + "attribute", new XAttribute("name", an), new XAttribute("type", "text")))
+                .Select(an => new XElement(ns + "attribute",
+                    GetDocumentationNodeFromName(tagName, an),
+                    new XAttribute("name", an),
+                    new XAttribute("type", "text")))
                 .ToArray();
         }
 
@@ -118,12 +121,12 @@ namespace Wpf {
             var setterElement = new XElement(ns + "element", new XAttribute("name", "Setter"), new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
             setterElement.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", SetterComment)));
             setterElement.Add(new XElement(ns + "complexType", new XElement(ns + "sequence", anyElement),
-                GetAttributes(new [] {"Property", "Value"}), new XAttribute("mixed", "true")));
+                GetAttributes(new [] {"Property", "Value"}, "Setter"), new XAttribute("mixed", "true")));
             var sequence = new XElement(ns + "sequence");
             sequence.Add(setterElement);
             var complexType = new XElement(ns + "complexType", new XAttribute("mixed", "true"));
             complexType.Add(sequence);
-            complexType.Add(GetAttributes(new [] {"TargetType", "BasedOn"}));
+            complexType.Add(GetAttributes(new [] {"TargetType", "BasedOn"}, "Style"));
             var element = new XElement(ns + "element", new XAttribute("name", "Style"));            
             element.Add(new XElement(ns + "annotation", new XElement(ns + "documentation", StyleComment)));
             element.Add(complexType);

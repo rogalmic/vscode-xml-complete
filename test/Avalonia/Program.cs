@@ -83,12 +83,14 @@ namespace AvaloniaXsd
         {
             var group = new XElement(ns + "group", new XAttribute("ref", "controls"));
             var any = new XElement(ns + "any", new XAttribute("maxOccurs", "unbounded"), new XAttribute("processContents", "lax"));
+            var anyAttribute = new XElement(ns + "anyAttribute", new XAttribute("namespace", "##local"), new XAttribute("processContents", "skip"));
 
             var choice = new XElement(ns + "choice", new XAttribute("minOccurs", "0"), new XAttribute("maxOccurs", "unbounded"));
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "Control"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
             complexType.Add(GetAttributes(controlAttributes, ""));
+            complexType.Add(anyAttribute);
             return complexType;
         }
         private static XElement[] GetAttributes(IEnumerable<string> attributeNames, string tagName)
