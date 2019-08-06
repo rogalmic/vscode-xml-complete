@@ -4,20 +4,12 @@ using System.Xml.Linq;
 using System.Reflection;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Globalization;
 using System.IO;
 
-namespace Wpf {
+namespace Wpf
+{
     public static class Program
     {
         private static XNamespace ns = "http://www.w3.org/2001/XMLSchema";
@@ -98,7 +90,8 @@ namespace Wpf {
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "FrameworkElement"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
-            complexType.Add(GetAttributes(controlAttributes, ""));
+            complexType.Add(GetAttributes(controlAttributes, "FrameworkElement"));
+            complexType.Add(GetAttributes(controlAttributes, "UIElement"));
             complexType.Add(anyAttribute);
             return complexType;
         }

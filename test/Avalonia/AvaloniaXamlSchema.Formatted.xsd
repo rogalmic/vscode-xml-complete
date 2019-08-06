@@ -28,11 +28,7 @@
         <xs:documentation>Gets or sets a user-defined object attached to the control.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute name="Parent" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the parent "T:Avalonia.Controls.IMenuElement" .</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Parent" type="text" />
     <xs:attribute name="Focusable" type="text" />
     <xs:attribute name="IsEnabled" type="text" />
     <xs:attribute name="Cursor" type="text" />
@@ -40,36 +36,12 @@
     <xs:attribute name="IsHitTestVisible" type="text" />
     <xs:attribute name="IsPointerOver" type="text" />
     <xs:attribute name="KeyBindings" type="text" />
-    <xs:attribute name="Width" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the width of the column.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="Height" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the height of the row.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="MinWidth" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the minimum width of the column in DIPs.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="MaxWidth" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the maximum width of the column in DIPs.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="MinHeight" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the minimum height of the row in DIPs.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="MaxHeight" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the maximum height of the row in DIPs.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Width" type="text" />
+    <xs:attribute name="Height" type="text" />
+    <xs:attribute name="MinWidth" type="text" />
+    <xs:attribute name="MaxWidth" type="text" />
+    <xs:attribute name="MinHeight" type="text" />
+    <xs:attribute name="MaxHeight" type="text" />
     <xs:attribute name="Margin" type="text" />
     <xs:attribute name="HorizontalAlignment" type="text" />
     <xs:attribute name="VerticalAlignment" type="text" />
@@ -88,32 +60,16 @@
     <xs:attribute name="RenderTransform" type="text" />
     <xs:attribute name="RenderTransformOrigin" type="text" />
     <xs:attribute name="ZIndex" type="text" />
-    <xs:attribute name="Name" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the name of the SharedSizeGroup.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Name" type="text" />
     <xs:attribute name="Classes" type="text" />
     <xs:attribute name="DataContext" type="text" />
     <xs:attribute name="IsInitialized" type="text" />
-    <xs:attribute name="Styles" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the application's global styles.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="Resources" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the application's global resource dictionary.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Styles" type="text" />
+    <xs:attribute name="Resources" type="text" />
     <xs:attribute name="TemplatedParent" type="text" />
     <xs:attribute name="Clock" type="text" />
     <xs:attribute name="Transitions" type="text" />
-    <xs:attribute name="Item" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the item that the container represents.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Item" type="text" />
     <xs:anyAttribute namespace="##local" processContents="skip" />
   </xs:complexType>
   <xs:group name="controls">
@@ -661,12 +617,27 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ComboBox">
+    <xs:annotation>
+      <xs:documentation>A drop-down list control.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsDropDownOpen" type="text" />
-          <xs:attribute name="MaxDropDownHeight" type="text" />
-          <xs:attribute name="VirtualizationMode" type="text" />
+          <xs:attribute name="IsDropDownOpen" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating whether the dropdown is currently open.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MaxDropDownHeight" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the maximum height for the dropdown list.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="VirtualizationMode" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the virtualization mode for the items.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
@@ -692,6 +663,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ComboBoxItem">
+    <xs:annotation>
+      <xs:documentation>A selectable item in a "T:Avalonia.Controls.ComboBox" .</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -763,16 +737,12 @@
   </xs:element>
   <xs:element name="ContextMenu">
     <xs:annotation>
-      <xs:documentation>Gets or sets a context menu to the control.</xs:documentation>
+      <xs:documentation>A control context menu.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsOpen" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets a value indicating whether the popup is open</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
+          <xs:attribute name="IsOpen" type="text" />
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
@@ -875,27 +845,12 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DropDown">
-    <xs:annotation>
-      <xs:documentation>A drop-down list control.</xs:documentation>
-    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsDropDownOpen" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the dropdown is currently open.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="MaxDropDownHeight" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets the maximum height for the dropdown list.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="VirtualizationMode" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets the virtualization mode for the items.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
+          <xs:attribute name="IsDropDownOpen" type="text" />
+          <xs:attribute name="MaxDropDownHeight" type="text" />
+          <xs:attribute name="VirtualizationMode" type="text" />
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
@@ -921,9 +876,6 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="DropDownItem">
-    <xs:annotation>
-      <xs:documentation>A selectable item in a "T:Avalonia.Controls.DropDown" .</xs:documentation>
-    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1193,11 +1145,7 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsOpen" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets a value indicating whether the menu is open.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
+          <xs:attribute name="IsOpen" type="text" />
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
@@ -1884,13 +1832,21 @@
               <xs:documentation>Gets or sets a value indicating whether to automatically scroll to newly selected items.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectionMode" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the selection mode.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="SelectedItem" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the selected item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="SelectedItems" type="text" />
+          <xs:attribute name="SelectedItems" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the selected items.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
@@ -2655,7 +2611,11 @@
               <xs:documentation>Gets or sets the header content.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="HeaderPresenter" type="text" />
+          <xs:attribute name="HeaderPresenter" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the header presenter from the control's template.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="HeaderTemplate" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the data template used to display the header content of the control.</xs:documentation>

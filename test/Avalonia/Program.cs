@@ -2,11 +2,9 @@
 using System.Linq;
 using System.Xml.Linq;
 using System.Reflection;
-using Avalonia;
 using Avalonia.Controls;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Globalization;
 using System.IO;
 
 namespace AvaloniaXsd
@@ -89,7 +87,7 @@ namespace AvaloniaXsd
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "Control"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
-            complexType.Add(GetAttributes(controlAttributes, ""));
+            complexType.Add(GetAttributes(controlAttributes, "Control"));
             complexType.Add(anyAttribute);
             return complexType;
         }

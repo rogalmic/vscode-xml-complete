@@ -10,12 +10,12 @@
     </xs:choice>
     <xs:attribute name="Style" type="text">
       <xs:annotation>
-        <xs:documentation>Source is from a style setter of a non-theme style.</xs:documentation>
+        <xs:documentation>Gets or sets the style used by this element when it is rendered.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="OverridesDefaultStyle" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value indicating whether this element incorporates style properties from theme styles.</xs:documentation>
+        <xs:documentation>Gets or sets a value that indicates whether this element incorporates style properties from theme styles.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="UseLayoutRounding" type="text">
@@ -25,17 +25,17 @@
     </xs:attribute>
     <xs:attribute name="Triggers" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a collection of "T:System.Windows.TriggerBase" objects that apply property changes or perform actions based on specified conditions.</xs:documentation>
+        <xs:documentation>Gets the collection of triggers established directly on this element, or in child elements.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="TemplatedParent" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a static value that is used to return a "T:System.Windows.Data.RelativeSource" constructed for the "F:System.Windows.Data.RelativeSourceMode.TemplatedParent" mode.</xs:documentation>
+        <xs:documentation>Gets a reference to the template parent of this element. This property is not relevant if the element was not created through a template.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Resources" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a collection of application-scope resources, such as styles and brushes.</xs:documentation>
+        <xs:documentation>Gets or sets the locally-defined resource dictionary.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="DataContext" type="text">
@@ -45,37 +45,37 @@
     </xs:attribute>
     <xs:attribute name="BindingGroup" type="text">
       <xs:annotation>
-        <xs:documentation>Gets the "T:System.Windows.Data.BindingGroup" that this binding expression belongs to.</xs:documentation>
+        <xs:documentation>Gets or sets the "T:System.Windows.Data.BindingGroup" that is used for the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Language" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets localization/globalization language information that applies to an individual element.</xs:documentation>
+        <xs:documentation>Gets or sets localization/globalization language information that applies to an element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Name" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a name for this "T:System.Windows.Annotations.AnnotationResource" .</xs:documentation>
+        <xs:documentation>Gets or sets the identifying name of the element. The name provides a reference so that code-behind, such as event handler code, can refer to a markup element after it is constructed during processing by a XAML processor.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Tag" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets an object associated with the dialog. This provides the ability to attach an arbitrary object to the dialog.</xs:documentation>
+        <xs:documentation>Gets or sets an arbitrary object value that can be used to store custom information about this element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="InputScope" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets the context for input used by this "T:System.Windows.FrameworkContentElement" .</xs:documentation>
+        <xs:documentation>Gets or sets the context for input used by this "T:System.Windows.FrameworkElement" .</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="ActualWidth" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a value that represents the actual calculated width of a "T:System.Windows.Controls.ColumnDefinition" .</xs:documentation>
+        <xs:documentation>Gets the rendered width of this element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="ActualHeight" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a value that represents the calculated height of the "T:System.Windows.Controls.RowDefinition" .</xs:documentation>
+        <xs:documentation>Gets the rendered height of this element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="LayoutTransform" type="text">
@@ -85,47 +85,47 @@
     </xs:attribute>
     <xs:attribute name="Width" type="text">
       <xs:annotation>
-        <xs:documentation>Gets the calculated width of a "T:System.Windows.Controls.ColumnDefinition" element, or sets the "T:System.Windows.GridLength" value of a column that is defined by the "T:System.Windows.Controls.ColumnDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the width of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="MinWidth" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value that represents the minimum width of a "T:System.Windows.Controls.ColumnDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the minimum width constraint of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="MaxWidth" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value that represents the maximum width of a "T:System.Windows.Controls.ColumnDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the maximum width constraint of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Height" type="text">
       <xs:annotation>
-        <xs:documentation>Gets the calculated height of a "T:System.Windows.Controls.RowDefinition" element, or sets the "T:System.Windows.GridLength" value of a row that is defined by the "T:System.Windows.Controls.RowDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the suggested height of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="MinHeight" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value that represents the minimum allowable height of a "T:System.Windows.Controls.RowDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the minimum height constraint of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="MaxHeight" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value that represents the maximum height of a "T:System.Windows.Controls.RowDefinition" .</xs:documentation>
+        <xs:documentation>Gets or sets the maximum height constraint of the element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="FlowDirection" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets the relative direction for flow of content within a "T:System.Windows.Documents.Block" element.</xs:documentation>
+        <xs:documentation>Gets or sets the direction that text and other user interface (UI) elements flow within any parent element that controls their layout.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Margin" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets the margin thickness for the element.</xs:documentation>
+        <xs:documentation>Gets or sets the outer margin of an element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="HorizontalAlignment" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value that indicates the horizontal alignment for a "T:System.Windows.Documents.Floater" object.</xs:documentation>
+        <xs:documentation>Gets or sets the horizontal alignment characteristics applied to this element when it is composed within a parent element, such as a panel or items control.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="VerticalAlignment" type="text">
@@ -135,7 +135,7 @@
     </xs:attribute>
     <xs:attribute name="FocusVisualStyle" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets an object that enables customization of appearance, effects, or other style characteristics that will apply to this element when it captures keyboard focus.</xs:documentation>
+        <xs:documentation>Gets or sets a property that enables customization of appearance, effects, or other style characteristics that will apply to this element when it captures keyboard focus.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Cursor" type="text">
@@ -145,32 +145,32 @@
     </xs:attribute>
     <xs:attribute name="ForceCursor" type="text">
       <xs:annotation>
-        <xs:documentation>Gets or sets a value indicating whether this "T:System.Windows.FrameworkContentElement" should force the user interface (UI) to render the cursor as declared by this instance's "P:System.Windows.FrameworkContentElement.Cursor" property.</xs:documentation>
+        <xs:documentation>Gets or sets a value that indicates whether this "T:System.Windows.FrameworkElement" should force the user interface (UI) to render the cursor as declared by the "P:System.Windows.FrameworkElement.Cursor" property.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="IsInitialized" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a value indicating whether this element has been initialized, either by being loaded as Extensible Application Markup Language (XAML), or by explicitly having its "M:System.Windows.FrameworkContentElement.EndInit" method called.</xs:documentation>
+        <xs:documentation>Gets a value that indicates whether this element has been initialized, either during processing by a XAML processor, or by explicitly having its "M:System.Windows.FrameworkElement.EndInit" method called.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="IsLoaded" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a value indicating whether this element has been loaded for presentation.</xs:documentation>
+        <xs:documentation>Gets a value that indicates whether this element has been loaded for presentation.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="ToolTip" type="text">
       <xs:annotation>
-        <xs:documentation>Represents a control that creates a pop-up window that displays information for an element in the interface.</xs:documentation>
+        <xs:documentation>Gets or sets the tool-tip object that is displayed for this element in the user interface (UI).</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="ContextMenu" type="text">
       <xs:annotation>
-        <xs:documentation>Represents a pop-up menu that enables a control to expose functionality that is specific to the context of the control.</xs:documentation>
+        <xs:documentation>Gets or sets the context menu element that should appear whenever the context menu is requested through user interface (UI) from within this element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Parent" type="text">
       <xs:annotation>
-        <xs:documentation>Gets the parent of the collection to register.</xs:documentation>
+        <xs:documentation>Gets the logical parent element of this element.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="HasAnimatedProperties" type="text" />
@@ -200,25 +200,13 @@
     <xs:attribute name="Effect" type="text" />
     <xs:attribute name="BitmapEffectInput" type="text" />
     <xs:attribute name="CacheMode" type="text" />
-    <xs:attribute name="Uid" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets the Uid component of this "T:System.Windows.Markup.Localizer.BamlLocalizableResourceKey" .</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-    <xs:attribute name="Visibility" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets or sets the visibility of the column.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="Uid" type="text" />
+    <xs:attribute name="Visibility" type="text" />
     <xs:attribute name="ClipToBounds" type="text" />
     <xs:attribute name="Clip" type="text" />
     <xs:attribute name="SnapsToDevicePixels" type="text" />
     <xs:attribute name="IsFocused" type="text" />
-    <xs:attribute name="IsEnabled" type="text">
-      <xs:annotation>
-        <xs:documentation>Gets a value that indicates whether the "T:System.Windows.Annotations.AnnotationService" is enabled.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
+    <xs:attribute name="IsEnabled" type="text" />
     <xs:attribute name="IsHitTestVisible" type="text" />
     <xs:attribute name="IsVisible" type="text" />
     <xs:attribute name="Focusable" type="text" />
@@ -233,11 +221,278 @@
     <xs:attribute name="TouchesOver" type="text" />
     <xs:attribute name="TouchesDirectlyOver" type="text" />
     <xs:attribute name="DependencyObjectType" type="text" />
-    <xs:attribute name="IsSealed" type="text">
+    <xs:attribute name="IsSealed" type="text" />
+    <xs:attribute name="Dispatcher" type="text" />
+    <xs:attribute name="Style" type="text" />
+    <xs:attribute name="OverridesDefaultStyle" type="text" />
+    <xs:attribute name="UseLayoutRounding" type="text" />
+    <xs:attribute name="Triggers" type="text" />
+    <xs:attribute name="TemplatedParent" type="text" />
+    <xs:attribute name="Resources" type="text" />
+    <xs:attribute name="DataContext" type="text" />
+    <xs:attribute name="BindingGroup" type="text" />
+    <xs:attribute name="Language" type="text" />
+    <xs:attribute name="Name" type="text" />
+    <xs:attribute name="Tag" type="text" />
+    <xs:attribute name="InputScope" type="text" />
+    <xs:attribute name="ActualWidth" type="text" />
+    <xs:attribute name="ActualHeight" type="text" />
+    <xs:attribute name="LayoutTransform" type="text" />
+    <xs:attribute name="Width" type="text" />
+    <xs:attribute name="MinWidth" type="text" />
+    <xs:attribute name="MaxWidth" type="text" />
+    <xs:attribute name="Height" type="text" />
+    <xs:attribute name="MinHeight" type="text" />
+    <xs:attribute name="MaxHeight" type="text" />
+    <xs:attribute name="FlowDirection" type="text" />
+    <xs:attribute name="Margin" type="text" />
+    <xs:attribute name="HorizontalAlignment" type="text" />
+    <xs:attribute name="VerticalAlignment" type="text" />
+    <xs:attribute name="FocusVisualStyle" type="text" />
+    <xs:attribute name="Cursor" type="text" />
+    <xs:attribute name="ForceCursor" type="text" />
+    <xs:attribute name="IsInitialized" type="text" />
+    <xs:attribute name="IsLoaded" type="text" />
+    <xs:attribute name="ToolTip" type="text" />
+    <xs:attribute name="ContextMenu" type="text" />
+    <xs:attribute name="Parent" type="text" />
+    <xs:attribute name="HasAnimatedProperties" type="text">
       <xs:annotation>
-        <xs:documentation>Gets a value that indicates whether this trigger is read-only and cannot be changed .</xs:documentation>
+        <xs:documentation>Gets a value indicating whether this element has any animated properties.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="InputBindings" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets the collection of input bindings associated with this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CommandBindings" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a collection of "T:System.Windows.Input.CommandBinding" objects associated with this element. A "T:System.Windows.Input.CommandBinding" enables command handling for this element, and declares the linkage between a command, its events, and the handlers attached by this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AllowDrop" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value indicating whether this element can be used as the target of a drag-and-drop operation. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DesiredSize" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets the size that this element computed during the measure pass of the layout process.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMeasureValid" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the current size returned by layout measure is valid.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsArrangeValid" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RenderSize" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets (or sets) the final render size of this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RenderTransform" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets transform information that affects the rendering position of this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="RenderTransformOrigin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the center point of any possible render transform declared by "P:System.Windows.UIElement.RenderTransform" , relative to the bounds of the element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMouseDirectlyOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether the position of the mouse pointer corresponds to hit test results, which take element compositing into account. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMouseOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the mouse pointer is located over this element (including child elements in the visual tree). This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsStylusOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the stylus cursor is located over this element (including visual child elements). This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsKeyboardFocusWithin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether keyboard focus is anywhere within the element or its visual tree child elements. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMouseCaptured" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the mouse is captured to this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsMouseCaptureWithin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that determines whether mouse capture is held by this element or by child elements in its visual tree. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsStylusDirectlyOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether the stylus position corresponds to hit test results, which take element compositing into account. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsStylusCaptured" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether the stylus is captured by this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsStylusCaptureWithin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that determines whether stylus capture is held by this element, or an element within the element bounds and its visual tree. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsKeyboardFocused" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether this element has keyboard focus. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsInputMethodEnabled" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether an input method system, such as an Input Method Editor (IME), is enabled for processing the input to this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Opacity" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the opacity factor applied to the entire "T:System.Windows.UIElement" when it is rendered in the user interface (UI). This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="OpacityMask" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets an opacity mask, as a "T:System.Windows.Media.Brush" implementation that is applied to any alpha-channel masking for the rendered content of this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="BitmapEffect" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a bitmap effect that applies directly to the rendered content for this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Effect" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the bitmap effect to apply to the "T:System.Windows.UIElement" . This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="BitmapEffectInput" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets an input source for the bitmap effect that applies directly to the rendered content for this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="CacheMode" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a cached representation of the "T:System.Windows.UIElement" .</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Uid" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the unique identifier (for localization) for this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Visibility" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the user interface (UI) visibility of this element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="ClipToBounds" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value indicating whether to clip the content of this element (or content coming from the child elements of this element) to fit into the size of the containing element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Clip" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets the geometry used to define the outline of the contents of an element. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SnapsToDevicePixels" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value that determines whether rendering for this element should use device-specific pixel settings during rendering. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsFocused" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that determines whether this element has logical focus. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsEnabled" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value indicating whether this element is enabled in the user interface (UI). This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsHitTestVisible" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value that declares whether this element can possibly be returned as a hit test result from some portion of its rendered content. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsVisible" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value indicating whether this element is visible in the user interface (UI). This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="Focusable" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value that indicates whether the element can receive focus. This is a dependency property.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="PersistId" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that uniquely identifies this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="IsManipulationEnabled" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a value that indicates whether manipulation events are enabled on this "T:System.Windows.UIElement" .</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AreAnyTouchesOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether at least one touch is pressed over this element or any child elements in its visual tree.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AreAnyTouchesDirectlyOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether at least one touch is pressed over this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AreAnyTouchesCapturedWithin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether at least one touch is captured to this element or to any child elements in its visual tree.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="AreAnyTouchesCaptured" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets a value that indicates whether at least one touch is captured to this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TouchesCaptured" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets all touch devices that are captured to this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TouchesCapturedWithin" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets all touch devices that are captured to this element or any child elements in its visual tree.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TouchesOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets all touch devices that are over this element or any child elements in its visual tree.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="TouchesDirectlyOver" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets all touch devices that are over this element.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="DependencyObjectType" type="text" />
+    <xs:attribute name="IsSealed" type="text" />
     <xs:attribute name="Dispatcher" type="text" />
     <xs:anyAttribute namespace="##local http://schemas.microsoft.com/winfx/2006/xaml http://schemas.openxmlformats.org/markup-compatibility/2006" processContents="skip" />
   </xs:complexType>
