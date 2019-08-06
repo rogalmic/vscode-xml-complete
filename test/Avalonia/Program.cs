@@ -155,7 +155,7 @@ namespace AvaloniaXsd
                 .SelectMany(e => e.Elements("summary"))
                 .Select(e => new XElement(ns + "annotation", 
                     new XElement(ns + "documentation", 
-                        Regex.Replace(e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim()
+                        Regex.Replace(e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim().Replace("<see cref=","").Replace("/>","")
                             , @"\s+", " "))))                
                 .Take(1)
                 .ToArray();

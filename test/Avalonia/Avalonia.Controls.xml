@@ -133,6 +133,16 @@
             <param name="exitMode">The shutdown mode.</param>
             <returns></returns>
         </member>
+        <member name="M:Avalonia.Controls.AppBuilderBase`1.With``1(``0)">
+            <summary>
+            Configures platform-specific options
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.AppBuilderBase`1.With``1(System.Func{``0})">
+            <summary>
+            Configures platform-specific options
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.AppBuilderBase`1.Setup">
             <summary>
             Sets up the platform-speciic services for the <see cref="T:Avalonia.Application"/>.
@@ -169,7 +179,6 @@
             <see cref="E:Avalonia.Controls.AutoCompleteBox.Populating" />
             event.
             </summary>
-            <QualityBand>Stable</QualityBand>
         </member>
         <member name="P:Avalonia.Controls.PopulatingEventArgs.Parameter">
             <summary>
@@ -204,7 +213,6 @@
             <typeparam name="T">The type used for filtering the
             <see cref="T:Avalonia.Controls.AutoCompleteBox" />. This type can
             be either a string or an object.</typeparam>
-            <QualityBand>Stable</QualityBand>
         </member>
         <member name="T:Avalonia.Controls.AutoCompleteFilterMode">
             <summary>
@@ -214,7 +222,6 @@
             <see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" />
             property for display in the drop-down.
             </summary>
-            <QualityBand>Stable</QualityBand>
         </member>
         <member name="F:Avalonia.Controls.AutoCompleteFilterMode.None">
             <summary>
@@ -1595,13 +1602,13 @@
         <member name="M:Avalonia.Controls.Button.OnAttachedToVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Avalonia.Controls.Button.OnDetachedFromVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
+            <inheritdoc/>
+        </member>
         <member name="M:Avalonia.Controls.Button.OnKeyDown(Avalonia.Input.KeyEventArgs)">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.Button.OnKeyUp(Avalonia.Input.KeyEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.Button.OnDetachedFromVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.Button.OnClick">
@@ -1837,7 +1844,6 @@
             <see cref="E:Avalonia.Controls.Calendar.DisplayModeChanged" />
             event.
             </summary>
-            <QualityBand>Mature</QualityBand>
         </member>
         <member name="P:Avalonia.Controls.CalendarModeChangedEventArgs.OldMode">
             <summary>
@@ -2825,15 +2831,28 @@
             Defines the <see cref="P:Avalonia.Controls.Primitives.HeaderedContentControl.HeaderTemplate"/> property.
             </summary>
         </member>
+        <member name="M:Avalonia.Controls.Primitives.HeaderedContentControl.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Avalonia.Controls.ContentControl"/> class.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Primitives.HeaderedContentControl.Header">
             <summary>
             Gets or sets the header content.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.HeaderedContentControl.HeaderPresenter">
+            <summary>
+            Gets the header presenter from the control's template.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Primitives.HeaderedContentControl.HeaderTemplate">
             <summary>
             Gets or sets the data template used to display the header content of the control.
             </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.HeaderedContentControl.RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
+            <inheritdoc/>
         </member>
         <member name="T:Avalonia.Controls.Primitives.HeaderedItemsControl">
             <summary>
@@ -2860,8 +2879,14 @@
             Gets the header presenter from the control's template.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.Primitives.HeaderedItemsControl.OnTemplateApplied(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
+        <member name="M:Avalonia.Controls.Primitives.HeaderedItemsControl.Avalonia#Controls#Presenters#IContentPresenterHost#RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
             <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.HeaderedItemsControl.RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
+            <summary>
+            Called when an <see cref="T:Avalonia.Controls.Presenters.IContentPresenter"/> is registered with the control.
+            </summary>
+            <param name="presenter">The presenter.</param>
         </member>
         <member name="T:Avalonia.Controls.Primitives.HeaderedSelectingItemsControl">
             <summary>
@@ -2888,8 +2913,14 @@
             Gets the header presenter from the control's template.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.Primitives.HeaderedSelectingItemsControl.OnTemplateApplied(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
+        <member name="M:Avalonia.Controls.Primitives.HeaderedSelectingItemsControl.Avalonia#Controls#Presenters#IContentPresenterHost#RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
             <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.HeaderedSelectingItemsControl.RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
+            <summary>
+            Called when an <see cref="T:Avalonia.Controls.Presenters.IContentPresenter"/> is registered with the control.
+            </summary>
+            <param name="presenter">The presenter.</param>
         </member>
         <member name="T:Avalonia.Controls.Primitives.ILogicalScrollable">
             <summary>
@@ -3562,6 +3593,13 @@
             false.
             </returns>
         </member>
+        <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.SynchronizeItems(System.Collections.IList,System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Makes a list of objects equal another.
+            </summary>
+            <param name="items">The items collection.</param>
+            <param name="desired">The desired items.</param>
+        </member>
         <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.GetRange(System.Collections.IEnumerable,System.Int32,System.Int32)">
             <summary>
             Gets a range of items from an IEnumerable.
@@ -3570,13 +3608,6 @@
             <param name="first">The index of the first item.</param>
             <param name="last">The index of the last item.</param>
             <returns>The items.</returns>
-        </member>
-        <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.SynchronizeItems(System.Collections.IList,System.Collections.Generic.IEnumerable{System.Object})">
-            <summary>
-            Makes a list of objects equal another.
-            </summary>
-            <param name="items">The items collection.</param>
-            <param name="desired">The desired items.</param>
         </member>
         <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.ContainerSelectionChanged(Avalonia.Interactivity.RoutedEventArgs)">
             <summary>
@@ -4423,6 +4454,84 @@
             <param name="s">The column definitions string.</param>
             <returns>The <see cref="T:Avalonia.Controls.ColumnDefinitions"/>.</returns>
         </member>
+        <member name="T:Avalonia.Controls.ComboBox">
+            <summary>
+            A drop-down list control.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ComboBox.DefaultPanel">
+            <summary>
+            The default value for the <see cref="P:Avalonia.Controls.ItemsControl.ItemsPanel"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ComboBox.IsDropDownOpenProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.ComboBox.IsDropDownOpen"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ComboBox.MaxDropDownHeightProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.ComboBox.MaxDropDownHeight"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ComboBox.SelectionBoxItemProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.ComboBox.SelectionBoxItem"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ComboBox.VirtualizationModeProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.ComboBox.VirtualizationMode"/> property.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Avalonia.Controls.ComboBox"/> class.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.ComboBox.IsDropDownOpen">
+            <summary>
+            Gets or sets a value indicating whether the dropdown is currently open.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.ComboBox.MaxDropDownHeight">
+            <summary>
+            Gets or sets the maximum height for the dropdown list.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.ComboBox.SelectionBoxItem">
+            <summary>
+            Gets or sets the item to display as the control's content.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.ComboBox.VirtualizationMode">
+            <summary>
+            Gets or sets the virtualization mode for the items.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.CreateItemContainerGenerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.OnAttachedToLogicalTree(Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.OnKeyDown(Avalonia.Input.KeyEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.OnPointerWheelChanged(Avalonia.Input.PointerWheelEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.OnPointerPressed(Avalonia.Input.PointerPressedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.ComboBox.OnTemplateApplied(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Avalonia.Controls.ComboBoxItem">
+            <summary>
+            A selectable item in a <see cref="T:Avalonia.Controls.ComboBox"/>.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.ContentControl">
             <summary>
             Displays <see cref="P:Avalonia.Controls.ContentControl.Content"/> according to a <see cref="T:Avalonia.Controls.Templates.FuncDataTemplate"/>.
@@ -4481,9 +4590,15 @@
         <member name="M:Avalonia.Controls.ContentControl.Avalonia#Controls#Presenters#IContentPresenterHost#RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
             <inheritdoc/>
         </member>
-        <member name="F:Avalonia.Controls.ContextMenu.IsOpenProperty">
+        <member name="M:Avalonia.Controls.ContentControl.RegisterContentPresenter(Avalonia.Controls.Presenters.IContentPresenter)">
             <summary>
-            Defines the <see cref="P:Avalonia.Controls.ContextMenu.IsOpen"/> property.
+            Called when an <see cref="T:Avalonia.Controls.Presenters.IContentPresenter"/> is registered with the control.
+            </summary>
+            <param name="presenter">The presenter.</param>
+        </member>
+        <member name="T:Avalonia.Controls.ContextMenu">
+            <summary>
+            A control context menu.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.ContextMenu.#ctor">
@@ -4501,20 +4616,6 @@
             <summary>
             Initializes static members of the <see cref="T:Avalonia.Controls.ContextMenu"/> class.
             </summary>
-        </member>
-        <member name="P:Avalonia.Controls.ContextMenu.IsOpen">
-            <summary>
-            Gets a value indicating whether the popup is open
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.ContextMenu.Avalonia#Controls#IMenu#InteractionHandler">
-            <inheritdoc/>
-        </member>
-        <member name="P:Avalonia.Controls.ContextMenu.Avalonia#Controls#IMenuElement#SelectedItem">
-            <inheritdoc/>
-        </member>
-        <member name="P:Avalonia.Controls.ContextMenu.Avalonia#Controls#IMenuElement#SubItems">
-            <inheritdoc/>
         </member>
         <member name="E:Avalonia.Controls.ContextMenu.ContextMenuOpening">
             <summary>
@@ -4637,13 +4738,13 @@
         </member>
         <member name="M:Avalonia.Controls.ControlExtensions.BringIntoView(Avalonia.Controls.IControl)">
             <summary>
-            Tries to being the control into view.
+            Tries to bring the control into view.
             </summary>
             <param name="control">The control.</param>
         </member>
         <member name="M:Avalonia.Controls.ControlExtensions.BringIntoView(Avalonia.Controls.IControl,Avalonia.Rect)">
             <summary>
-            Tries to being the control into view.
+            Tries to bring the control into view.
             </summary>
             <param name="control">The control.</param>
             <param name="rect">The area of the control to being into view.</param>
@@ -4821,81 +4922,6 @@
         </member>
         <member name="M:Avalonia.Controls.DockPanel.ArrangeOverride(Avalonia.Size)">
             <inheritdoc/>
-        </member>
-        <member name="T:Avalonia.Controls.DropDown">
-            <summary>
-            A drop-down list control.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.DropDown.DefaultPanel">
-            <summary>
-            The default value for the <see cref="P:Avalonia.Controls.ItemsControl.ItemsPanel"/> property.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.DropDown.IsDropDownOpenProperty">
-            <summary>
-            Defines the <see cref="P:Avalonia.Controls.DropDown.IsDropDownOpen"/> property.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.DropDown.MaxDropDownHeightProperty">
-            <summary>
-            Defines the <see cref="P:Avalonia.Controls.DropDown.MaxDropDownHeight"/> property.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.DropDown.SelectionBoxItemProperty">
-            <summary>
-            Defines the <see cref="P:Avalonia.Controls.DropDown.SelectionBoxItem"/> property.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.DropDown.VirtualizationModeProperty">
-            <summary>
-            Defines the <see cref="P:Avalonia.Controls.DropDown.VirtualizationMode"/> property.
-            </summary>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.#cctor">
-            <summary>
-            Initializes static members of the <see cref="T:Avalonia.Controls.DropDown"/> class.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.DropDown.IsDropDownOpen">
-            <summary>
-            Gets or sets a value indicating whether the dropdown is currently open.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.DropDown.MaxDropDownHeight">
-            <summary>
-            Gets or sets the maximum height for the dropdown list.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.DropDown.SelectionBoxItem">
-            <summary>
-            Gets or sets the item to display as the control's content.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.DropDown.VirtualizationMode">
-            <summary>
-            Gets or sets the virtualization mode for the items.
-            </summary>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.CreateItemContainerGenerator">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.OnAttachedToLogicalTree(Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.OnKeyDown(Avalonia.Input.KeyEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.OnPointerPressed(Avalonia.Input.PointerPressedEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.DropDown.OnTemplateApplied(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Avalonia.Controls.DropDownItem">
-            <summary>
-            A selectable item in a <see cref="T:Avalonia.Controls.DropDown"/>.
-            </summary>
         </member>
         <member name="T:Avalonia.Controls.Generators.IItemContainerGenerator">
             <summary>
@@ -5221,9 +5247,14 @@
             Event raised whenever containers are dematerialized.
             </summary>
         </member>
-        <member name="P:Avalonia.Controls.Generators.TreeContainerIndex.Items">
+        <member name="P:Avalonia.Controls.Generators.TreeContainerIndex.Containers">
             <summary>
             Gets the currently materialized containers.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Generators.TreeContainerIndex.Items">
+            <summary>
+            Gets the items of currently materialized containers.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.Generators.TreeContainerIndex.Add(System.Object,Avalonia.Controls.IControl)">
@@ -5712,6 +5743,9 @@
             </summary>
             <param name="availableSize">The available size.</param>
             <returns>The desired size of the control.</returns>
+        </member>
+        <member name="M:Avalonia.Controls.Image.ArrangeOverride(Avalonia.Size)">
+            <inheritdoc/>
         </member>
         <member name="T:Avalonia.Controls.IMenu">
             <summary>
@@ -6268,21 +6302,6 @@
             A top-level menu control.
             </summary>
         </member>
-        <member name="F:Avalonia.Controls.Menu.IsOpenProperty">
-            <summary>
-            Defines the <see cref="P:Avalonia.Controls.Menu.IsOpen"/> property.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.Menu.MenuOpenedEvent">
-            <summary>
-            Defines the <see cref="E:Avalonia.Controls.Menu.MenuOpened"/> event.
-            </summary>
-        </member>
-        <member name="F:Avalonia.Controls.Menu.MenuClosedEvent">
-            <summary>
-            Defines the <see cref="E:Avalonia.Controls.Menu.MenuClosed"/> event.
-            </summary>
-        </member>
         <member name="M:Avalonia.Controls.Menu.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Avalonia.Controls.Menu"/> class.
@@ -6294,61 +6313,106 @@
             </summary>
             <param name="interactionHandler">The menu interaction handler.</param>
         </member>
-        <member name="M:Avalonia.Controls.Menu.#cctor">
-            <summary>
-            Initializes static members of the <see cref="T:Avalonia.Controls.Menu"/> class.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Menu.IsOpen">
-            <summary>
-            Gets a value indicating whether the menu is open.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Menu.Avalonia#Controls#IMenu#InteractionHandler">
-            <inheritdoc/>
-        </member>
-        <member name="P:Avalonia.Controls.Menu.Avalonia#Controls#IMenuElement#SelectedItem">
-            <inheritdoc/>
-        </member>
-        <member name="P:Avalonia.Controls.Menu.Avalonia#Controls#IMenuElement#SubItems">
-            <inheritdoc/>
-        </member>
-        <member name="E:Avalonia.Controls.Menu.MenuOpened">
-            <summary>
-            Occurs when a <see cref="T:Avalonia.Controls.Menu"/> is opened.
-            </summary>
-        </member>
-        <member name="E:Avalonia.Controls.Menu.MenuClosed">
-            <summary>
-            Occurs when a <see cref="T:Avalonia.Controls.Menu"/> is closed.
-            </summary>
-        </member>
         <member name="M:Avalonia.Controls.Menu.Close">
-            <summary>
-            Closes the menu.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.Menu.Open">
-            <summary>
-            Opens the menu in response to the Alt/F10 key.
-            </summary>
-        </member>
-        <member name="M:Avalonia.Controls.Menu.Avalonia#Controls#IMenuElement#MoveSelection(Avalonia.Input.NavigationDirection,System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Avalonia.Controls.Menu.CreateItemContainerGenerator">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.Menu.OnAttachedToVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Avalonia.Controls.Menu.OnDetachedFromVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
+        <member name="T:Avalonia.Controls.MenuBase">
+            <summary>
+            Base class for menu controls.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.MenuBase.IsOpenProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.MenuBase.IsOpen"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.MenuBase.MenuOpenedEvent">
+            <summary>
+            Defines the <see cref="E:Avalonia.Controls.MenuBase.MenuOpened"/> event.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.MenuBase.MenuClosedEvent">
+            <summary>
+            Defines the <see cref="E:Avalonia.Controls.MenuBase.MenuClosed"/> event.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Avalonia.Controls.MenuBase"/> class.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.#ctor(Avalonia.Controls.Platform.IMenuInteractionHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Avalonia.Controls.MenuBase"/> class.
+            </summary>
+            <param name="interactionHandler">The menu interaction handler.</param>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Avalonia.Controls.MenuBase"/> class.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MenuBase.IsOpen">
+            <summary>
+            Gets a value indicating whether the menu is open.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MenuBase.Avalonia#Controls#IMenu#InteractionHandler">
             <inheritdoc/>
         </member>
-        <member name="M:Avalonia.Controls.Menu.OnKeyDown(Avalonia.Input.KeyEventArgs)">
+        <member name="P:Avalonia.Controls.MenuBase.Avalonia#Controls#IMenuElement#SelectedItem">
             <inheritdoc/>
         </member>
-        <member name="M:Avalonia.Controls.Menu.OnSubmenuOpened(Avalonia.Interactivity.RoutedEventArgs)">
+        <member name="P:Avalonia.Controls.MenuBase.Avalonia#Controls#IMenuElement#SubItems">
+            <inheritdoc/>
+        </member>
+        <member name="P:Avalonia.Controls.MenuBase.InteractionHandler">
+            <summary>
+            Gets the interaction handler for the menu.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.MenuBase.MenuOpened">
+            <summary>
+            Occurs when a <see cref="T:Avalonia.Controls.Menu"/> is opened.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.MenuBase.MenuClosed">
+            <summary>
+            Occurs when a <see cref="T:Avalonia.Controls.Menu"/> is closed.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.Close">
+            <summary>
+            Closes the menu.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.Open">
+            <summary>
+            Opens the menu.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.Avalonia#Controls#IMenuElement#MoveSelection(Avalonia.Input.NavigationDirection,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.CreateItemContainerGenerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.OnKeyDown(Avalonia.Input.KeyEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.OnAttachedToVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.OnDetachedFromVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.MenuBase.OnSubmenuOpened(Avalonia.Interactivity.RoutedEventArgs)">
             <summary>
             Called when a submenu opens somewhere in the menu.
             </summary>
@@ -6576,7 +6640,7 @@
         </member>
         <member name="M:Avalonia.Controls.MenuItem.HeaderChanged(Avalonia.AvaloniaPropertyChangedEventArgs)">
             <summary>
-            Called when the <see cref="!:Header"/> property changes.
+            Called when the <see cref="P:Avalonia.Controls.Primitives.HeaderedSelectingItemsControl.Header"/> property changes.
             </summary>
             <param name="e">The property change event.</param>
         </member>
@@ -6688,8 +6752,8 @@
             <para>
             The <see cref="T:Avalonia.Controls.Mixins.ContentControlMixin"/> adds behavior to a control which acts as a content
             control such as <see cref="T:Avalonia.Controls.ContentControl"/> and <see cref="T:Avalonia.Controls.Primitives.HeaderedItemsControl"/>. It
-            updates keeps the control's logical children in sync with the content being displayed by
-            the control.
+            keeps the control's logical children in sync with the content being displayed by the
+            control.
             </para>
         </member>
         <member name="M:Avalonia.Controls.Mixins.ContentControlMixin.Attach``1(Avalonia.AvaloniaProperty,System.Func{``0,Avalonia.Collections.IAvaloniaList{Avalonia.LogicalTree.ILogical}},System.String)">
@@ -6904,6 +6968,9 @@
             <summary>
             Initializes static members of the <see cref="T:Avalonia.Controls.NumericUpDown"/> class.
             </summary>
+        </member>
+        <member name="M:Avalonia.Controls.NumericUpDown.OnLostFocus(Avalonia.Interactivity.RoutedEventArgs)">
+            <inheritdoc />
         </member>
         <member name="M:Avalonia.Controls.NumericUpDown.OnTemplateApplied(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
             <inheritdoc />
@@ -7184,6 +7251,22 @@
             <param name="sender">The event sender.</param>
             <param name="e">The event args.</param>
         </member>
+        <member name="T:Avalonia.Controls.PixelPointEventArgs">
+            <summary>
+            Provides <see cref="T:Avalonia.PixelPoint"/> data for events.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.PixelPointEventArgs.#ctor(Avalonia.PixelPoint)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Avalonia.Controls.PixelPointEventArgs"/> class.
+            </summary>
+            <param name="point">The <see cref="T:Avalonia.PixelPoint"/> data.</param>
+        </member>
+        <member name="P:Avalonia.Controls.PixelPointEventArgs.Point">
+            <summary>
+            Gets the <see cref="T:Avalonia.PixelPoint"/> data.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.PlacementMode">
             <summary>
             Defines the placement for a <see cref="T:Avalonia.Controls.Primitives.Popup"/> control.
@@ -7245,22 +7328,6 @@
             <remarks>
             Contents should be drawn on actual window after disposing
             </remarks>
-        </member>
-        <member name="T:Avalonia.Controls.PointEventArgs">
-            <summary>
-            Provides <see cref="P:Avalonia.Controls.PointEventArgs.Point"/> data for events.
-            </summary>
-        </member>
-        <member name="M:Avalonia.Controls.PointEventArgs.#ctor(Avalonia.Point)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Avalonia.Controls.PointEventArgs"/> class.
-            </summary>
-            <param name="point">The <see cref="P:Avalonia.Controls.PointEventArgs.Point"/> data.</param>
-        </member>
-        <member name="P:Avalonia.Controls.PointEventArgs.Point">
-            <summary>
-            Gets the <see cref="P:Avalonia.Controls.PointEventArgs.Point"/> data.
-            </summary>
         </member>
         <member name="T:Avalonia.Controls.Presenters.CarouselPresenter">
             <summary>
@@ -7435,6 +7502,9 @@
             Gets or sets the space between the border and the <see cref="P:Avalonia.Controls.Presenters.ContentPresenter.Child"/> control.
             </summary>
         </member>
+        <member name="E:Avalonia.Controls.Presenters.ContentPresenter.Avalonia#Controls#Presenters#IContentPresenter#ChildChanging">
+            <inheritdoc/>
+        </member>
         <member name="M:Avalonia.Controls.Presenters.ContentPresenter.ApplyTemplate">
             <inheritdoc/>
         </member>
@@ -7490,6 +7560,17 @@
             <summary>
             Gets or sets the content to be displayed by the presenter.
             </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Presenters.IContentPresenter.ChildChanging">
+            <summary>
+            Raised when <see cref="P:Avalonia.Controls.Presenters.IContentPresenter.Child"/> property is about to change.
+            </summary>
+            <remarks>
+            This event should be raised after the child has been removed from the visual tree,
+            but before the <see cref="P:Avalonia.Controls.Presenters.IContentPresenter.Child"/> property has changed. It is intended for consumption
+            by <see cref="T:Avalonia.Controls.Mixins.ContentControlMixin"/> in order to update the host control's logical
+            children.
+            </remarks>
         </member>
         <member name="T:Avalonia.Controls.Presenters.IContentPresenterHost">
             <summary>
@@ -9647,6 +9728,11 @@
             The dependency resolver to use. If null the default dependency resolver will be used.
             </param>
         </member>
+        <member name="E:Avalonia.Controls.TopLevel.Opened">
+            <summary>
+            Fired when the window is opened.
+            </summary>
+        </member>
         <member name="E:Avalonia.Controls.TopLevel.Closed">
             <summary>
             Fired when the window is closed.
@@ -9705,7 +9791,7 @@
         <member name="M:Avalonia.Controls.TopLevel.Avalonia#Rendering#IRenderRoot#Invalidate(Avalonia.Rect)">
             <inheritdoc/>
         </member>
-        <member name="M:Avalonia.Controls.TopLevel.Avalonia#Rendering#IRenderRoot#PointToClient(Avalonia.Point)">
+        <member name="M:Avalonia.Controls.TopLevel.Avalonia#Rendering#IRenderRoot#PointToClient(Avalonia.PixelPoint)">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.TopLevel.Avalonia#Rendering#IRenderRoot#PointToScreen(Avalonia.Point)">
@@ -9743,6 +9829,12 @@
         <member name="M:Avalonia.Controls.TopLevel.OnAttachedToVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Avalonia.Controls.TopLevel.OnOpened(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Avalonia.Controls.TopLevel.Opened"/> event.
+            </summary>
+            <param name="e">The event args.</param>
+        </member>
         <member name="M:Avalonia.Controls.TopLevel.TryGetService``1(Avalonia.IAvaloniaDependencyResolver)">
             <summary>
             Tries to get a service from an <see cref="T:Avalonia.IAvaloniaDependencyResolver"/>, logging a
@@ -9778,9 +9870,14 @@
             Defines the <see cref="P:Avalonia.Controls.TreeView.SelectedItem"/> property.
             </summary>
         </member>
-        <member name="F:Avalonia.Controls.TreeView.SelectedItemChangedEvent">
+        <member name="F:Avalonia.Controls.TreeView.SelectedItemsProperty">
             <summary>
-            Defines the <see cref="E:Avalonia.Controls.TreeView.SelectedItemChanged"/> event.
+            Defines the <see cref="P:Avalonia.Controls.TreeView.SelectedItems"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TreeView.SelectionModeProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TreeView.SelectionMode"/> property.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.TreeView.#cctor">
@@ -9788,7 +9885,7 @@
             Initializes static members of the <see cref="T:Avalonia.Controls.TreeView"/> class.
             </summary>
         </member>
-        <member name="E:Avalonia.Controls.TreeView.SelectedItemChanged">
+        <member name="E:Avalonia.Controls.TreeView.SelectionChanged">
             <summary>
             Occurs when the control's selection changes.
             </summary>
@@ -9803,9 +9900,36 @@
             Gets or sets a value indicating whether to automatically scroll to newly selected items.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.TreeView.SelectionMode">
+            <summary>
+            Gets or sets the selection mode.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.TreeView.SelectedItem">
             <summary>
             Gets or sets the selected item.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TreeView.SelectedItems">
+            <summary>
+            Gets the selected items.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.TreeView.SubscribeToSelectedItems">
+            <summary>
+            Subscribes to the <see cref="P:Avalonia.Controls.TreeView.SelectedItems"/> CollectionChanged event, if any.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.TreeView.SelectedItemsCollectionChanged(System.Object,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Called when the <see cref="P:Avalonia.Controls.TreeView.SelectedItems"/> CollectionChanged event is raised.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:Avalonia.Controls.TreeView.UnsubscribeFromSelectedItems">
+            <summary>
+            Unsubscribes from the <see cref="P:Avalonia.Controls.TreeView.SelectedItems"/> CollectionChanged event, if any.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.TreeView.CreateItemContainerGenerator">
@@ -9825,6 +9949,23 @@
             <param name="select">Whether the item should be selected or unselected.</param>
             <param name="rangeModifier">Whether the range modifier is enabled (i.e. shift key).</param>
             <param name="toggleModifier">Whether the toggle modifier is enabled (i.e. ctrl key).</param>
+        </member>
+        <member name="M:Avalonia.Controls.TreeView.FindFirstNode(Avalonia.Controls.TreeView,Avalonia.Controls.TreeViewItem,Avalonia.Controls.TreeViewItem)">
+            <summary>
+            Find which node is first in hierarchy.
+            </summary>
+            <param name="treeView">Search root.</param>
+            <param name="nodeA">Nodes to find.</param>
+            <param name="nodeB">Node to find.</param>
+            <returns>Found first node.</returns>
+        </member>
+        <member name="M:Avalonia.Controls.TreeView.GetItemsInRange(Avalonia.Controls.TreeViewItem,Avalonia.Controls.TreeViewItem)">
+            <summary>
+            Returns all items that belong to containers between <paramref name="from"/> and <paramref name="to"/>.
+            The range is inclusive.
+            </summary>
+            <param name="from">From container.</param>
+            <param name="to">To container.</param>
         </member>
         <member name="M:Avalonia.Controls.TreeView.UpdateSelectionFromEventSource(Avalonia.Interactivity.IInteractive,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
@@ -9924,9 +10065,6 @@
             <inheritdoc/>
         </member>
         <member name="E:Avalonia.Controls.UserControl.Avalonia#Controls#INameScope#Unregistered">
-            <inheritdoc/>
-        </member>
-        <member name="P:Avalonia.Controls.UserControl.Avalonia#Styling#IStyleable#StyleKey">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.UserControl.Avalonia#Controls#INameScope#Register(System.String,System.Object)">
@@ -10865,6 +11003,7 @@
             <summary>
             Shows the window as a dialog.
             </summary>
+            <param name="owner">The dialog's owner window.</param>
             <returns>
             A task that can be used to track the lifetime of the dialog.
             </returns>
@@ -10876,6 +11015,7 @@
             <typeparam name="TResult">
             The type of the result produced by the dialog.
             </typeparam>
+            <param name="owner">The dialog's owner window.</param>
             <returns>.
             A task that can be used to retrieve the result of the dialog when it closes.
             </returns>
@@ -10887,6 +11027,7 @@
             <typeparam name="TResult">
             The type of the result produced by the dialog.
             </typeparam>
+            <param name="owner">The dialog's owner window.</param>
             <returns>.
             A task that can be used to retrieve the result of the dialog when it closes.
             </returns>
@@ -10978,7 +11119,7 @@
         </member>
         <member name="M:Avalonia.Controls.WindowBase.Show">
             <summary>
-            Shows the popup.
+            Shows the window.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.WindowBase.BeginAutoSizing">
@@ -11010,7 +11151,7 @@
             </summary>
             <param name="clientSize">The new client size.</param>
         </member>
-        <member name="M:Avalonia.Controls.WindowBase.HandlePositionChanged(Avalonia.Point)">
+        <member name="M:Avalonia.Controls.WindowBase.HandlePositionChanged(Avalonia.PixelPoint)">
             <summary>
             Handles a window position change notification from 
             <see cref="P:Avalonia.Platform.IWindowBaseImpl.PositionChanged"/>.
@@ -11446,7 +11587,7 @@
             Sets the <see cref="T:Avalonia.Input.IInputRoot"/> for the toplevel.
             </summary>
         </member>
-        <member name="M:Avalonia.Platform.ITopLevelImpl.PointToClient(Avalonia.Point)">
+        <member name="M:Avalonia.Platform.ITopLevelImpl.PointToClient(Avalonia.PixelPoint)">
             <summary>
             Converts a point from screen to client coordinates.
             </summary>
@@ -11499,7 +11640,7 @@
         </member>
         <member name="P:Avalonia.Platform.IWindowBaseImpl.Position">
             <summary>
-            Gets position of the window relatively to the screen
+            Gets the position of the window in device pixels.
             </summary>
         </member>
         <member name="P:Avalonia.Platform.IWindowBaseImpl.PositionChanged">

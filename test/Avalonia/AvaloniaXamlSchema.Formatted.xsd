@@ -30,7 +30,7 @@
     </xs:attribute>
     <xs:attribute name="Parent" type="text">
       <xs:annotation>
-        <xs:documentation>Gets the parent &lt;see cref="T:Avalonia.Controls.IMenuElement" /&gt;.</xs:documentation>
+        <xs:documentation>Gets the parent "T:Avalonia.Controls.IMenuElement" .</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="Focusable" type="text" />
@@ -213,7 +213,7 @@
         <xs:extension base="Control">
           <xs:attribute name="MinimumPrefixLength" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the minimum number of characters required to be entered in the text box before the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; displays possible matches. matches.</xs:documentation>
+              <xs:documentation>Gets or sets the minimum number of characters required to be entered in the text box before the "T:Avalonia.Controls.AutoCompleteBox" displays possible matches. matches.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsTextCompletionEnabled" type="text">
@@ -223,17 +223,17 @@
           </xs:attribute>
           <xs:attribute name="ItemTemplate" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.DataTemplate" /&gt; used to display each item in the drop-down portion of the control.</xs:documentation>
+              <xs:documentation>Gets or sets the "T:Avalonia.DataTemplate" used to display each item in the drop-down portion of the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MinimumPopulateDelay" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the minimum delay, after text is typed in the text box before the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control populates the list of possible matches in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the minimum delay, after text is typed in the text box before the "T:Avalonia.Controls.AutoCompleteBox" control populates the list of possible matches in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="MaxDropDownHeight" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the maximum height of the drop-down portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsDropDownOpen" type="text">
@@ -243,12 +243,12 @@
           </xs:attribute>
           <xs:attribute name="ValueMemberBinding" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the &lt;see cref="T:Avalonia.Data.Binding" /&gt; that is used to get the values for display in the text portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the "T:Avalonia.Data.Binding" that is used to get the values for display in the text portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ValueMemberSelector" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the MemberSelector that is used to get values for display in the text portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the MemberSelector that is used to get values for display in the text portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedItem" type="text">
@@ -258,34 +258,34 @@
           </xs:attribute>
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text in the text box portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the text in the text box portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SearchText" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the text that is used to filter items in the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; item collection.</xs:documentation>
+              <xs:documentation>Gets the text that is used to filter items in the "P:Avalonia.Controls.AutoCompleteBox.ItemsSource" item collection.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FilterMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets how the text in the text box is used to filter items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets how the text in the text box is used to filter items specified by the "P:Avalonia.Controls.AutoCompleteBox.ItemsSource" property for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Watermark" type="text" />
           <xs:attribute name="ItemFilter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the custom method that uses user-entered text to filter the items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the custom method that uses user-entered text to filter the items specified by the "P:Avalonia.Controls.AutoCompleteBox.ItemsSource" property for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TextFilter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the custom method that uses the user-entered text to filter items specified by the &lt;see cref="P:Avalonia.Controls.AutoCompleteBox.ItemsSource" /&gt; property in a text-based way for display in the drop-down.</xs:documentation>
+              <xs:documentation>Gets or sets the custom method that uses the user-entered text to filter items specified by the "P:Avalonia.Controls.AutoCompleteBox.ItemsSource" property in a text-based way for display in the drop-down.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="AsyncPopulator" type="text" />
           <xs:attribute name="Items" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the &lt;see cref="T:Avalonia.Controls.AutoCompleteBox" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets a collection that is used to generate the items for the drop-down portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Background" type="text" />
@@ -344,22 +344,22 @@
         <xs:extension base="Control">
           <xs:attribute name="ClickMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating how the &lt;see cref="T:Avalonia.Controls.Button" /&gt; should react to clicks.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating how the "T:Avalonia.Controls.Button" should react to clicks.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Command" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets an &lt;see cref="T:System.Windows.Input.ICommand" /&gt; to be invoked when the button is clicked.</xs:documentation>
+              <xs:documentation>Gets or sets an "T:System.Windows.Input.ICommand" to be invoked when the button is clicked.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="HotKey" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets an &lt;see cref="T:Avalonia.Input.KeyGesture" /&gt; associated with this control</xs:documentation>
+              <xs:documentation>Gets or sets an "T:Avalonia.Input.KeyGesture" associated with this control</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="CommandParameter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a parameter to be passed to the &lt;see cref="P:Avalonia.Controls.Button.Command" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets a parameter to be passed to the "P:Avalonia.Controls.Button.Command" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsDefault" type="text">
@@ -396,7 +396,7 @@
         <xs:extension base="Control">
           <xs:attribute name="AllowSpin" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the &lt;see cref="T:Avalonia.Controls.ButtonSpinner" /&gt; should allow to spin.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the "T:Avalonia.Controls.ButtonSpinner" should allow to spin.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ShowButtonSpinner" type="text">
@@ -406,7 +406,7 @@
           </xs:attribute>
           <xs:attribute name="ButtonSpinnerLocation" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets current location of the &lt;see cref="T:Avalonia.Controls.ButtonSpinner" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets current location of the "T:Avalonia.Controls.ButtonSpinner" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ValidSpinDirection" type="text" />
@@ -532,7 +532,7 @@
           </xs:attribute>
           <xs:attribute name="IsDropDownOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the drop-down &lt;see cref="T:Avalonia.Controls.Calendar" /&gt; is open or closed.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the drop-down "T:Avalonia.Controls.Calendar" is open or closed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsTodayHighlighted" type="text">
@@ -553,7 +553,7 @@
           <xs:attribute name="CustomDateFormatString" type="text" />
           <xs:attribute name="Text" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the text that is displayed by the &lt;see cref="T:Avalonia.Controls.DatePicker" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the text that is displayed by the "T:Avalonia.Controls.DatePicker" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Watermark" type="text" />
@@ -717,7 +717,7 @@
   </xs:element>
   <xs:element name="ContentControl">
     <xs:annotation>
-      <xs:documentation>Displays &lt;see cref="P:Avalonia.Controls.ContentControl.Content" /&gt; according to a &lt;see cref="T:Avalonia.Controls.Templates.FuncDataTemplate" /&gt;.</xs:documentation>
+      <xs:documentation>Displays "P:Avalonia.Controls.ContentControl.Content" according to a "T:Avalonia.Controls.Templates.FuncDataTemplate" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -839,7 +839,7 @@
           </xs:attribute>
           <xs:attribute name="Padding" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the padding to place around the &lt;see cref="P:Avalonia.Controls.Decorator.Child" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the padding to place around the "P:Avalonia.Controls.Decorator.Child" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -855,7 +855,7 @@
         <xs:extension base="Control">
           <xs:attribute name="LastChildFill" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value which indicates whether the last child of the &lt;see cref="T:Avalonia.Controls.DockPanel" /&gt; fills the remaining space in the panel.</xs:documentation>
+              <xs:documentation>Gets or sets a value which indicates whether the last child of the "T:Avalonia.Controls.DockPanel" fills the remaining space in the panel.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Children" type="text" />
@@ -922,7 +922,7 @@
   </xs:element>
   <xs:element name="DropDownItem">
     <xs:annotation>
-      <xs:documentation>A selectable item in a &lt;see cref="T:Avalonia.Controls.DropDown" /&gt;.</xs:documentation>
+      <xs:documentation>A selectable item in a "T:Avalonia.Controls.DropDown" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1022,7 +1022,7 @@
   </xs:element>
   <xs:element name="Image">
     <xs:annotation>
-      <xs:documentation>Displays a &lt;see cref="T:Avalonia.Media.Imaging.Bitmap" /&gt; image.</xs:documentation>
+      <xs:documentation>Displays a "T:Avalonia.Media.Imaging.Bitmap" image.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1050,7 +1050,7 @@
         <xs:extension base="Control">
           <xs:attribute name="ItemContainerGenerator" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the &lt;see cref="T:Avalonia.Controls.Generators.IItemContainerGenerator" /&gt; for the control.</xs:documentation>
+              <xs:documentation>Gets the "T:Avalonia.Controls.Generators.IItemContainerGenerator" for the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Items" type="text">
@@ -1071,7 +1071,7 @@
           </xs:attribute>
           <xs:attribute name="MemberSelector" type="text">
             <xs:annotation>
-              <xs:documentation>Selects a member from &lt;see cref="P:Avalonia.Controls.ItemsControl.Items" /&gt; to use as the list item.</xs:documentation>
+              <xs:documentation>Selects a member from "P:Avalonia.Controls.ItemsControl.Items" to use as the list item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Presenter" type="text">
@@ -1114,14 +1114,14 @@
   </xs:element>
   <xs:element name="ListBox">
     <xs:annotation>
-      <xs:documentation>An &lt;see cref="T:Avalonia.Controls.ItemsControl" /&gt; in which individual items can be selected.</xs:documentation>
+      <xs:documentation>An "T:Avalonia.Controls.ItemsControl" in which individual items can be selected.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
           <xs:attribute name="Scroll" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the scroll information for the &lt;see cref="T:Avalonia.Controls.ListBox" /&gt;.</xs:documentation>
+              <xs:documentation>Gets the scroll information for the "T:Avalonia.Controls.ListBox" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedItems" type="text" />
@@ -1157,7 +1157,7 @@
   </xs:element>
   <xs:element name="ListBoxItem">
     <xs:annotation>
-      <xs:documentation>A selectable item in a &lt;see cref="T:Avalonia.Controls.ListBox" /&gt;.</xs:documentation>
+      <xs:documentation>A selectable item in a "T:Avalonia.Controls.ListBox" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1236,37 +1236,37 @@
           </xs:attribute>
           <xs:attribute name="HotKey" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets an &lt;see cref="T:Avalonia.Input.KeyGesture" /&gt; associated with this control</xs:documentation>
+              <xs:documentation>Gets or sets an "T:Avalonia.Input.KeyGesture" associated with this control</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="CommandParameter" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the parameter to pass to the &lt;see cref="P:Avalonia.Controls.MenuItem.Command" /&gt; property of a &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the parameter to pass to the "P:Avalonia.Controls.MenuItem.Command" property of a "T:Avalonia.Controls.MenuItem" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Icon" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the icon that appears in a &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the icon that appears in a "T:Avalonia.Controls.MenuItem" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsSelected" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; is currently selected.</xs:documentation>
+              <xs:documentation>Gets or sets a value indicating whether the "T:Avalonia.Controls.MenuItem" is currently selected.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsSubMenuOpen" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates whether the submenu of the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; is open.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates whether the submenu of the "T:Avalonia.Controls.MenuItem" is open.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="HasSubMenu" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates whether the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; has a submenu.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates whether the "T:Avalonia.Controls.MenuItem" has a submenu.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsTopLevel" type="text">
             <xs:annotation>
-              <xs:documentation>Gets a value that indicates whether the &lt;see cref="T:Avalonia.Controls.MenuItem" /&gt; is a top-level main menu item.</xs:documentation>
+              <xs:documentation>Gets a value that indicates whether the "T:Avalonia.Controls.MenuItem" is a top-level main menu item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Header" type="text" />
@@ -1309,7 +1309,7 @@
           </xs:attribute>
           <xs:attribute name="ButtonSpinnerLocation" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets current location of the &lt;see cref="T:Avalonia.Controls.ButtonSpinner" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets current location of the "T:Avalonia.Controls.ButtonSpinner" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ShowButtonSpinner" type="text">
@@ -1329,12 +1329,12 @@
           </xs:attribute>
           <xs:attribute name="FormatString" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the display format of the &lt;see cref="P:Avalonia.Controls.NumericUpDown.Value" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the display format of the "P:Avalonia.Controls.NumericUpDown.Value" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Increment" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the amount in which to increment the &lt;see cref="P:Avalonia.Controls.NumericUpDown.Value" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the amount in which to increment the "P:Avalonia.Controls.NumericUpDown.Value" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsReadOnly" type="text">
@@ -1369,7 +1369,7 @@
           </xs:attribute>
           <xs:attribute name="Watermark" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the object to use as a watermark if the &lt;see cref="P:Avalonia.Controls.NumericUpDown.Value" /&gt; is null.</xs:documentation>
+              <xs:documentation>Gets or sets the object to use as a watermark if the "P:Avalonia.Controls.NumericUpDown.Value" is null.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Background" type="text" />
@@ -1395,7 +1395,7 @@
         <xs:extension base="Control">
           <xs:attribute name="Children" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the children of the &lt;see cref="T:Avalonia.Controls.Panel" /&gt;.</xs:documentation>
+              <xs:documentation>Gets the children of the "T:Avalonia.Controls.Panel" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Background" type="text">
@@ -1587,12 +1587,12 @@
         <xs:extension base="Control">
           <xs:attribute name="Orientation" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the orientation of a &lt;see cref="T:Avalonia.Controls.Slider" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the orientation of a "T:Avalonia.Controls.Slider" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsSnapToTickEnabled" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a value that indicates whether the &lt;see cref="T:Avalonia.Controls.Slider" /&gt; automatically moves the &lt;see cref="T:Avalonia.Controls.Primitives.Thumb" /&gt; to the closest tick mark.</xs:documentation>
+              <xs:documentation>Gets or sets a value that indicates whether the "T:Avalonia.Controls.Slider" automatically moves the "T:Avalonia.Controls.Primitives.Thumb" to the closest tick mark.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TickFrequency" type="text">
@@ -1705,7 +1705,7 @@
   </xs:element>
   <xs:element name="TabItem">
     <xs:annotation>
-      <xs:documentation>An item in a &lt;see cref="T:Avalonia.Controls.Primitives.TabStrip" /&gt; or &lt;see cref="T:Avalonia.Controls.TabControl" /&gt;.</xs:documentation>
+      <xs:documentation>An item in a "T:Avalonia.Controls.Primitives.TabStrip" or "T:Avalonia.Controls.TabControl" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1786,7 +1786,7 @@
           </xs:attribute>
           <xs:attribute name="FormattedText" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the &lt;see cref="P:Avalonia.Controls.TextBlock.FormattedText" /&gt; used to render the text.</xs:documentation>
+              <xs:documentation>Gets the "P:Avalonia.Controls.TextBlock.FormattedText" used to render the text.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="TextWrapping" type="text">
@@ -1824,7 +1824,7 @@
           <xs:attribute name="TextWrapping" type="text" />
           <xs:attribute name="NewLine" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets which characters are inserted when Enter is pressed. Default: &lt;see cref="P:System.Environment.NewLine" /&gt;</xs:documentation>
+              <xs:documentation>Gets or sets which characters are inserted when Enter is pressed. Default: "P:System.Environment.NewLine" </xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Background" type="text" />
@@ -1876,7 +1876,7 @@
         <xs:extension base="Control">
           <xs:attribute name="ItemContainerGenerator" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the &lt;see cref="T:Avalonia.Controls.Generators.ITreeItemContainerGenerator" /&gt; for the tree view.</xs:documentation>
+              <xs:documentation>Gets the "T:Avalonia.Controls.Generators.ITreeItemContainerGenerator" for the tree view.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="AutoScrollToSelectedItem" type="text">
@@ -1913,7 +1913,7 @@
   </xs:element>
   <xs:element name="TreeViewItem">
     <xs:annotation>
-      <xs:documentation>An item in a &lt;see cref="T:Avalonia.Controls.TreeView" /&gt;.</xs:documentation>
+      <xs:documentation>An item in a "T:Avalonia.Controls.TreeView" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1935,7 +1935,7 @@
           </xs:attribute>
           <xs:attribute name="ItemContainerGenerator" type="text">
             <xs:annotation>
-              <xs:documentation>Gets the &lt;see cref="T:Avalonia.Controls.Generators.ITreeItemContainerGenerator" /&gt; for the tree view.</xs:documentation>
+              <xs:documentation>Gets the "T:Avalonia.Controls.Generators.ITreeItemContainerGenerator" for the tree view.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Header" type="text" />
@@ -2056,7 +2056,7 @@
           </xs:attribute>
           <xs:attribute name="CanResize" type="text">
             <xs:annotation>
-              <xs:documentation>Enables or disables resizing of the window. Note that if &lt;see cref="P:Avalonia.Controls.Window.HasSystemDecorations" /&gt; is set to False then this property has no effect and should be treated as a recommendation for the user setting HasSystemDecorations.</xs:documentation>
+              <xs:documentation>Enables or disables resizing of the window. Note that if "P:Avalonia.Controls.Window.HasSystemDecorations" is set to False then this property has no effect and should be treated as a recommendation for the user setting HasSystemDecorations.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Icon" type="text">
@@ -2299,7 +2299,7 @@
   </xs:element>
   <xs:element name="CarouselPresenter">
     <xs:annotation>
-      <xs:documentation>Displays pages inside an &lt;see cref="T:Avalonia.Controls.ItemsControl" /&gt;.</xs:documentation>
+      <xs:documentation>Displays pages inside an "T:Avalonia.Controls.ItemsControl" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2331,7 +2331,7 @@
   </xs:element>
   <xs:element name="ContentPresenter">
     <xs:annotation>
-      <xs:documentation>Presents a single item of data inside a &lt;see cref="T:Avalonia.Controls.Primitives.TemplatedControl" /&gt; template.</xs:documentation>
+      <xs:documentation>Presents a single item of data inside a "T:Avalonia.Controls.Primitives.TemplatedControl" template.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2383,7 +2383,7 @@
           </xs:attribute>
           <xs:attribute name="Padding" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the space between the border and the &lt;see cref="P:Avalonia.Controls.Presenters.ContentPresenter.Child" /&gt; control.</xs:documentation>
+              <xs:documentation>Gets or sets the space between the border and the "P:Avalonia.Controls.Presenters.ContentPresenter.Child" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -2392,7 +2392,7 @@
   </xs:element>
   <xs:element name="ItemsPresenter">
     <xs:annotation>
-      <xs:documentation>Displays items inside an &lt;see cref="T:Avalonia.Controls.ItemsControl" /&gt;.</xs:documentation>
+      <xs:documentation>Displays items inside an "T:Avalonia.Controls.ItemsControl" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2414,7 +2414,7 @@
   </xs:element>
   <xs:element name="ScrollContentPresenter">
     <xs:annotation>
-      <xs:documentation>Presents a scrolling view of content inside a &lt;see cref="T:Avalonia.Controls.ScrollViewer" /&gt;.</xs:documentation>
+      <xs:documentation>Presents a scrolling view of content inside a "T:Avalonia.Controls.ScrollViewer" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2509,7 +2509,7 @@
   </xs:element>
   <xs:element name="CalendarButton">
     <xs:annotation>
-      <xs:documentation>Represents a button on a &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
+      <xs:documentation>Represents a button on a "T:Avalonia.Controls.Calendar" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2570,7 +2570,7 @@
   </xs:element>
   <xs:element name="CalendarItem">
     <xs:annotation>
-      <xs:documentation>Represents the currently displayed month or year on a &lt;see cref="T:Avalonia.Controls.Calendar" /&gt;.</xs:documentation>
+      <xs:documentation>Represents the currently displayed month or year on a "T:Avalonia.Controls.Calendar" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2645,7 +2645,7 @@
   </xs:element>
   <xs:element name="HeaderedContentControl">
     <xs:annotation>
-      <xs:documentation>A &lt;see cref="T:Avalonia.Controls.ContentControl" /&gt; with a header.</xs:documentation>
+      <xs:documentation>A "T:Avalonia.Controls.ContentControl" with a header.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2682,7 +2682,7 @@
   </xs:element>
   <xs:element name="HeaderedItemsControl">
     <xs:annotation>
-      <xs:documentation>Represents an &lt;see cref="T:Avalonia.Controls.ItemsControl" /&gt; with a related header.</xs:documentation>
+      <xs:documentation>Represents an "T:Avalonia.Controls.ItemsControl" with a related header.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2720,7 +2720,7 @@
   </xs:element>
   <xs:element name="HeaderedSelectingItemsControl">
     <xs:annotation>
-      <xs:documentation>Represents a &lt;see cref="T:Avalonia.Controls.Primitives.SelectingItemsControl" /&gt; with a related header.</xs:documentation>
+      <xs:documentation>Represents a "T:Avalonia.Controls.Primitives.SelectingItemsControl" with a related header.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2773,7 +2773,7 @@
           </xs:attribute>
           <xs:attribute name="DependencyResolver" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a dependency resolver for the &lt;see cref="P:Avalonia.Controls.Primitives.Popup.PopupRoot" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets a dependency resolver for the "P:Avalonia.Controls.Primitives.Popup.PopupRoot" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsOpen" type="text">
@@ -2783,7 +2783,7 @@
           </xs:attribute>
           <xs:attribute name="PlacementMode" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the placement mode of the popup in relation to the &lt;see cref="P:Avalonia.Controls.Primitives.Popup.PlacementTarget" /&gt;.</xs:documentation>
+              <xs:documentation>Gets or sets the placement mode of the popup in relation to the "P:Avalonia.Controls.Primitives.Popup.PlacementTarget" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ObeyScreenEdges" type="text">
@@ -2793,12 +2793,12 @@
           </xs:attribute>
           <xs:attribute name="HorizontalOffset" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the Horizontal offset of the popup in relation to the &lt;see cref="P:Avalonia.Controls.Primitives.Popup.PlacementTarget" /&gt;</xs:documentation>
+              <xs:documentation>Gets or sets the Horizontal offset of the popup in relation to the "P:Avalonia.Controls.Primitives.Popup.PlacementTarget" </xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="VerticalOffset" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the Vertical offset of the popup in relation to the &lt;see cref="P:Avalonia.Controls.Primitives.Popup.PlacementTarget" /&gt;</xs:documentation>
+              <xs:documentation>Gets or sets the Vertical offset of the popup in relation to the "P:Avalonia.Controls.Primitives.Popup.PlacementTarget" </xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="PlacementTarget" type="text">
@@ -2906,7 +2906,7 @@
   </xs:element>
   <xs:element name="SelectingItemsControl">
     <xs:annotation>
-      <xs:documentation>An &lt;see cref="T:Avalonia.Controls.ItemsControl" /&gt; that maintains a selection.</xs:documentation>
+      <xs:documentation>An "T:Avalonia.Controls.ItemsControl" that maintains a selection.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2977,7 +2977,7 @@
   </xs:element>
   <xs:element name="TabStripItem">
     <xs:annotation>
-      <xs:documentation>Represents a tab in a &lt;see cref="T:Avalonia.Controls.Primitives.TabStrip" /&gt;.</xs:documentation>
+      <xs:documentation>Represents a tab in a "T:Avalonia.Controls.Primitives.TabStrip" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -3004,7 +3004,7 @@
   </xs:element>
   <xs:element name="TemplatedControl">
     <xs:annotation>
-      <xs:documentation>A lookless control whose visual appearance is defined by its &lt;see cref="P:Avalonia.Controls.Primitives.TemplatedControl.Template" /&gt;.</xs:documentation>
+      <xs:documentation>A lookless control whose visual appearance is defined by its "P:Avalonia.Controls.Primitives.TemplatedControl.Template" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -3130,7 +3130,7 @@
   </xs:element>
   <xs:element name="UniformGrid">
     <xs:annotation>
-      <xs:documentation>A &lt;see cref="T:Avalonia.Controls.Panel" /&gt; with uniform column and row sizes.</xs:documentation>
+      <xs:documentation>A "T:Avalonia.Controls.Panel" with uniform column and row sizes.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
