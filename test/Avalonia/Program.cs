@@ -87,10 +87,43 @@ namespace AvaloniaXsd
             choice.Add(group, any);
             var complexType = new XElement(ns + "complexType", new XAttribute("name", "Control"), new XAttribute("mixed", "true"));
             complexType.Add(choice);
-            complexType.Add(GetAttributes(controlAttributes, "Control"));
+            AppendAttributes(complexType, GetAttributes(controlAttributes, "Control"));
             complexType.Add(anyAttribute);
             return complexType;
         }
+
+        private static void AppendAttributes(XElement controlType, IEnumerable<XElement> elementsToAdd)
+        {
+            var controlTypeElements =  controlType.Elements(ns + "attribute").ToArray();
+
+            foreach (var e in elementsToAdd)
+            {
+                var existingElements =  controlTypeElements.Where(a => 
+                    a.Attribute("name").Value == e.Attribute("name").Value).ToList();
+
+                if (existingElements.Any())
+                {
+                    var docs = existingElements.Descendants(ns + "documentation").ToList();
+                    if (docs.Any())
+                    {
+                        docs.ForEach(d => 
+                        {
+                            d.Value += string.Join(Environment.NewLine, e.Descendants(ns + "documentation").Select(d2 => d2.Value));
+                        });
+                    }
+                    else
+                    {
+                        existingElements.ForEach(ee => ee.Remove());
+                        controlType.Add(e);
+                    }
+                }
+                else
+                {
+                    controlType.Add(e);
+                }
+            }
+        }
+
         private static XElement[] GetAttributes(IEnumerable<string> attributeNames, string tagName)
         {
             return attributeNames
