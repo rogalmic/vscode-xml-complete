@@ -13,6 +13,6 @@
     <EmbeddedResource Include="Avalonia.Controls.xml"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" Version="0.8.1"/>
+    <PackageReference Include="Avalonia.Desktop" Version="0.8.2"/>
   </ItemGroup>
 </Project>
