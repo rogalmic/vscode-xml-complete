@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [0.1.9](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.8...v0.1.9) (2019-08-04)
+### [0.1.9](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.8...v0.1.9) (2019-08-04)
 
 
 ### Bug Fixes
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.8](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.7...v0.1.8) (2019-08-04)
+### [0.1.8](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.7...v0.1.8) (2019-08-04)
 
 
 ### Bug Fixes
@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.7](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.6...v0.1.7) (2019-05-21)
+### [0.1.7](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.6...v0.1.7) (2019-05-21)
 
 
 ### Features
@@ -34,7 +34,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.5...v0.1.6) (2019-04-09)
+### [0.1.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.5...v0.1.6) (2019-04-09)
 
 
 ### Features
@@ -43,7 +43,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.4...v0.1.5) (2019-02-27)
+### [0.1.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.4...v0.1.5) (2019-02-27)
 
 
 ### Features
@@ -52,7 +52,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.3...v0.1.4) (2019-01-12)
+### [0.1.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.3...v0.1.4) (2019-01-12)
 
 
 ### Bug Fixes
@@ -63,7 +63,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.2...v0.1.3) (2019-01-12)
+### [0.1.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.2...v0.1.3) (2019-01-12)
 
 
 ### Bug Fixes
@@ -72,7 +72,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.2](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.1...v0.1.2) (2019-01-11)
+### [0.1.2](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.1...v0.1.2) (2019-01-11)
 
 
 ### Bug Fixes
@@ -81,7 +81,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.1.1](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.0...v0.1.1) (2019-01-11)
+### [0.1.1](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.0...v0.1.1) (2019-01-11)
 
 
 ### Bug Fixes
@@ -90,7 +90,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-# [0.1.0](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.6...v0.1.0) (2019-01-10)
+## [0.1.0](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.6...v0.1.0) (2019-01-10)
 
 
 ### Features
@@ -99,7 +99,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.0.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.5...v0.0.6) (2019-01-07)
+### [0.0.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.5...v0.0.6) (2019-01-07)
 
 
 ### Bug Fixes
@@ -108,7 +108,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.0.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.4...v0.0.5) (2019-01-05)
+### [0.0.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.4...v0.0.5) (2019-01-05)
 
 
 ### Bug Fixes
@@ -122,7 +122,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.0.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.3...v0.0.4) (2019-01-02)
+### [0.0.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.3...v0.0.4) (2019-01-02)
 
 
 ### Features
@@ -133,7 +133,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.0.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.2...v0.0.3) (2018-12-30)
+### [0.0.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.0.2...v0.0.3) (2018-12-30)
 
 
 ### Features
@@ -143,6 +143,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 
 
-## [0.0.2](https://github.com/rogalmic/vscode-xml-complete) (2018-12-27)
+### [0.0.2](https://github.com/rogalmic/vscode-xml-complete) (2018-12-27)
 
 ### Initial release

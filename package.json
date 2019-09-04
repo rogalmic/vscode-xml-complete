@@ -11,8 +11,8 @@
   "preview": true,
   "license": "MIT",
   "engines": {
-    "vscode": "^1.31.0",
-    "node": "^10.2.0"
+    "vscode": "^1.37.0",
+    "node": "^10.11.0"
   },
   "icon": "images/xml-complete-icon.png",
   "categories": [
@@ -127,13 +127,13 @@
     "sax": "1.2.4"
   },
   "devDependencies": {
-    "typescript": "^3.4.5",
-    "vscode": "^1.1.34",
-    "tslint": "^5.16.0",
+    "typescript": "^3.6.2",
+    "vscode": "^1.1.36",
+    "tslint": "^5.19.0",
     "@types/node": "10.12.27",
-    "@types/mocha": "5.2.6",
+    "@types/mocha": "5.2.7",
     "jsdoctest": "1.7.1",
-    "standard-version": "6.0.1",
-    "vsce": "1.61.0"
+    "standard-version": "7.0.0",
+    "vsce": "1.66.0"
   }
 }
