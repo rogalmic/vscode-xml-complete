@@ -139,7 +139,7 @@ export default class XmlSimpleParser {
 						let normalizedContent = content.concat(" ").replace("/", "").replace("\t", " ").replace("\n", " ").replace("\r", " ");
 						let tagName = content.substring(1, normalizedContent.indexOf(" "));
 
-						result = { tagName: /^[a-z0-9\.-_]*$/.test(tagName) ? tagName : undefined, context: undefined };
+						result = { tagName: /^[a-zA-Z0-9_:\.\-]+$/.test(tagName) ? tagName : undefined, context: undefined };
 
 						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
 							result.context = "text";
