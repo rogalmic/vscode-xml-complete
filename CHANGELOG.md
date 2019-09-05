@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.1.10](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.9...v0.1.10) (2019-09-05)
+
+
+### Bug Fixes
+
+* Fix tag name regex match to allow hyphen. ([d290e49](https://github.com/rogalmic/vscode-xml-complete/commit/d290e49))
 
 ### [0.1.9](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.8...v0.1.9) (2019-08-04)
 
