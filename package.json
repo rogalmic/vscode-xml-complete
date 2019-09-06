@@ -130,7 +130,7 @@
     "typescript": "^3.6.2",
     "vscode": "^1.1.36",
     "tslint": "^5.19.0",
-    "@types/node": "10.12.27",
+    "@types/node": "10.14.17",
     "@types/mocha": "5.2.7",
     "jsdoctest": "1.7.1",
     "standard-version": "7.0.0",
