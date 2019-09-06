@@ -5,6 +5,7 @@ import XmlCompletionItemProvider from './completionitemprovider';
 import XmlFormatProvider from './formatprovider';
 import XmlRangeFormatProvider from './rangeformatprovider';
 import AutoCompletionProvider from './autocompletionprovider';
+import XmlHoverProvider from './hoverprovider';
 
 export declare let globalSettings: XmlCompleteSettings;
 
@@ -28,6 +29,10 @@ export function activate(context: vscode.ExtensionContext) {
 		{ language: languageId, scheme: 'file' },
 		new XmlRangeFormatProvider(context, schemaPropertiesArray));
 
+	let hoverprovider = vscode.languages.registerHoverProvider(
+		{ language: languageId, scheme: 'file' },
+		new XmlHoverProvider(context, schemaPropertiesArray));
+
 	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
 	let autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
@@ -36,6 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
 		completionitemprovider,
 		formatprovider,
 		rangeformatprovider,
+		hoverprovider,
 		linterprovider,
 		autocompletionprovider);
 }

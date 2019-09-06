@@ -22,6 +22,8 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
 
 [<img src="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-auto.png" width="400" style="filter: blur(1px); " title="Click to show in browser"/>](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/gif/images/vscode-xml-complete-auto.png)
 
+- Mouse hover documentation for xml nodes/attributes (utilizes comments from XSD)
+
 
 ## Configuration
 
