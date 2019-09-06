@@ -24,6 +24,8 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
 
 - Mouse hover documentation for xml nodes/attributes (utilizes comments from XSD)
 
+- Go to definition support (using XSD as target)
+
 
 ## Configuration
 

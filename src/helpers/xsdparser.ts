@@ -2,9 +2,11 @@ import { XmlTagCollection, CompletionString } from '../types';
 
 export default class XsdParser {
 
-	public static getSchemaTagsAndAttributes(xsdContent: string): Promise<XmlTagCollection> {
+	public static getSchemaTagsAndAttributes(xsdContent: string, xsdUri: string): Promise<XmlTagCollection> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
+
+		let getCompletionString = (name: string, comment?: string) => new CompletionString(name, comment, xsdUri, parser.line, parser.column);
 
 		return new Promise<XmlTagCollection>(
 			(resolve) => {
@@ -30,7 +32,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: new CompletionString(tagData.attributes["name"]),
+							tag: getCompletionString(tagData.attributes["name"]),
 							base: [tagData.attributes["type"]],
 							attributes: [],
 							visible: true
@@ -39,7 +41,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":complexType") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: new CompletionString(tagData.attributes["name"]),
+							tag: getCompletionString(tagData.attributes["name"]),
 							base: [],
 							attributes: [],
 							visible: false
@@ -48,7 +50,7 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["name"] !== undefined) {
 						result.push({
-							tag: new CompletionString(tagData.attributes["name"]),
+							tag: getCompletionString(tagData.attributes["name"]),
 							base: [],
 							attributes: [],
 							visible: false
@@ -62,7 +64,7 @@ export default class XsdParser {
 							.filter(e => e.resultTagName !== undefined)[1];
 						result
 							.filter(e => e.tag.name === currentResultTag.resultTagName)
-							.forEach(e => e.attributes.push(new CompletionString(tagData.attributes["name"])));
+							.forEach(e => e.attributes.push(getCompletionString(tagData.attributes["name"])));
 					}
 
 					if (tagData.name.endsWith(":extension") && tagData.attributes["base"] !== undefined) {
