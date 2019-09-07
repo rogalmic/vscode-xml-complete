@@ -7,7 +7,7 @@ export class XmlCompleteSettings {
 
 export class CompletionString {
 
-	constructor(public name: string, public comment?: string) {
+	constructor(public name: string, public comment?: string, public definitionUri?:string, public definitionLine?:number, public definitionColumn?:number) {
 	}
 }
 
@@ -68,7 +68,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 		let arr = xsdString.name.split(":");
 		if (arr.length === 2 && this.nsMap.has(arr[0]) && localXmlMapping.has(this.nsMap[arr[0]]))
 		{
-			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment);
+			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment, xsdString.definitionUri, xsdString.definitionLine, xsdString.definitionColumn);
 		}
 		return xsdString;
 	}

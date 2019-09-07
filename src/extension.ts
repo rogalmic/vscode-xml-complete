@@ -6,6 +6,8 @@ import XmlFormatProvider from './formatprovider';
 import XmlRangeFormatProvider from './rangeformatprovider';
 import AutoCompletionProvider from './autocompletionprovider';
 import XmlHoverProvider from './hoverprovider';
+import XmlDefinitionProvider from './definitionprovider';
+import XmlDefinitionContentProvider from './definitioncontentprovider';
 
 export declare let globalSettings: XmlCompleteSettings;
 
@@ -33,17 +35,25 @@ export function activate(context: vscode.ExtensionContext) {
 		{ language: languageId, scheme: 'file' },
 		new XmlHoverProvider(context, schemaPropertiesArray));
 
+	let definitionprovider = vscode.languages.registerDefinitionProvider(
+			{ language: languageId, scheme: 'file' },
+			new XmlDefinitionProvider(context, schemaPropertiesArray));
+
 	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
 	let autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
+
+	let definitioncontentprovider = vscode.workspace.registerTextDocumentContentProvider('xml2xsd-definition-provider', new XmlDefinitionContentProvider(context, schemaPropertiesArray));
 
 	context.subscriptions.push(
 		completionitemprovider,
 		formatprovider,
 		rangeformatprovider,
 		hoverprovider,
+		definitionprovider,
 		linterprovider,
-		autocompletionprovider);
+		autocompletionprovider,
+		definitioncontentprovider);
 }
 
 function loadConfiguration(): void {
