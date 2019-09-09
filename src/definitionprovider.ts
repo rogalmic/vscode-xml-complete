@@ -14,13 +14,15 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 		let wordRange = textDocument.getWordRangeAtPosition(position);
 		let word = textDocument.getText(wordRange);
 
+		let noDefinitionUri = (e) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;
+
 		switch (scope.context) {
 			case "element":
 				let tags = this.schemaPropertiesArray
 					.map(p => p.tagCollection.filter(t => t.tag.name === word))
 					.reduce((prev, next) => prev.concat(next), []);
 				if (tags.length > 0) {
-					let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${encodeURIComponent(tags[0].tag.definitionUri || '')}`);
+					let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${Buffer.from(tags[0].tag.definitionUri || noDefinitionUri(word)).toString('hex')}`);
 					let position = new vscode.Position(tags[0].tag.definitionLine || 1, tags[0].tag.definitionColumn || 1);
 					return {
 						uri: uri,
@@ -36,7 +38,7 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 							.reduce((prev, next) => prev.concat(next), []))
 						.reduce((prev, next) => prev.concat(next), []);
 					if (atts.length > 0) {
-						let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${encodeURIComponent(atts[0].definitionUri || '')}`);
+						let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${Buffer.from(atts[0].definitionUri || noDefinitionUri(word)).toString('hex')}`);
 						let position = new vscode.Position(atts[0].definitionLine || 1, atts[0].definitionColumn || 1);
 						return {
 							uri: uri,
@@ -46,6 +48,6 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 				break;
 		}
 
-		throw "Unable to get definition.";
+		throw `Unable to get definition for phrase '${word}'.`;
 	}
 }
