@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.10...v0.2.0) (2019-09-09)
+
+
+### Bug Fixes
+
+* Fix for Windows Uri path normalization. ([675840a](https://github.com/rogalmic/vscode-xml-complete/commit/675840a))
+
+
+### Features
+
+* Definition provider for xml ([#11](https://github.com/rogalmic/vscode-xml-complete/issues/11)). ([10486aa](https://github.com/rogalmic/vscode-xml-complete/commit/10486aa))
+* Hover provider for xml ([#11](https://github.com/rogalmic/vscode-xml-complete/issues/11)). ([0e962cb](https://github.com/rogalmic/vscode-xml-complete/commit/0e962cb))
+
 ### [0.1.10](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.9...v0.1.10) (2019-09-05)
 
 
