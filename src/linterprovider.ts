@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { languageId, globalSettings } from './extension';
 import { XmlSchemaProperties, XmlTagCollection, XmlSchemaPropertiesArray, XmlDiagnosticData } from './types';
 import XsdParser from './helpers/xsdparser';
-import XsdLoader from './helpers/xsdloader';
+import XsdCachedLoader from './helpers/xsdcachedloader';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
 export default class XmlLinterProvider implements vscode.Disposable {
@@ -24,9 +24,6 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         vscode.workspace.onDidCloseTextDocument(doc =>
             this.cleanupDocument(doc), null, extensionContext.subscriptions);
-
-        vscode.workspace.textDocuments.forEach(doc =>
-            this.triggerDelayedLint(doc, 100), this);
     }
 
     public dispose() {
@@ -84,7 +81,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
                     try {
                         let xsdUriString = xsdUri.toString(true);
-                        schemaProperties.xsdContent = await XsdLoader.loadSchemaContentsFromUri(xsdUriString);
+                        schemaProperties.xsdContent = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString);
                         schemaProperties.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperties.xsdContent, xsdUriString);
                         vscode.window.showInformationMessage(`Loaded ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
                     }

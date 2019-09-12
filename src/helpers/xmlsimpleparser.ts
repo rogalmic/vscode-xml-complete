@@ -222,6 +222,13 @@ export default class XmlSimpleParser {
 				? eol + Array(xmlDepthPath.length).fill(indentationString).join("")
 				: "";
 
+		let getEncodedText = (t: string) : string =>
+			t.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&apos;');
+
 		return new Promise<string>(
 			(resolve) => {
 
@@ -230,7 +237,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.ontext = (t) => {
-					result.push(/^\s*$/.test(t) ? `` : `${t}`);
+					result.push(/^\s*$/.test(t) ? `` : getEncodedText(`${t}`));
 				};
 
 				parser.ondoctype = (t) => {

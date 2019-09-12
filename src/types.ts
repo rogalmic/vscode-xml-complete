@@ -50,15 +50,20 @@ export class XmlTagCollection extends Array<XmlTag> {
 		return result;
 	}
 
-	loadAttributes(tagName: string | undefined): CompletionString[] {
+	loadAttributes(tagName: string | undefined, handledNames: string[] = []): CompletionString[] {
+
+		let tagNameCompare = (a: string, b: string) => a === b || a === b.substring(b.indexOf(":")+1);
+
 		let result: CompletionString[] = [];
 		if (tagName !== undefined) {
-			let currentTags = this.filter(e => e.tag.name === tagName || e.tag.name === tagName.substring(tagName.indexOf(":")+1));
+			handledNames.push(tagName);
+			let currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
-				currentTags.forEach(e =>
-					e.base.filter(b => !currentTags.map(t=>t.tag.name).includes(b))
-						.forEach(b => result.push(...this.loadAttributes(b))));
+				currentTags.forEach(e => {
+					e.base.filter(b => !handledNames.includes(b))
+						.forEach(b => result.push(...this.loadAttributes(b)))
+				});
 			}
 		}
 		return result;
