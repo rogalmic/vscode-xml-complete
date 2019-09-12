@@ -1,194 +1,257 @@
-import { XmlTagCollection, XmlDiagnosticData, XmlScope } from '../types';
+import { XmlDiagnosticData, XmlScope, XmlSchemaProperties, XmlTag } from '../types';
+import XsdSettings from './settings';
+import { IAttributes } from './xsdparser';
+
+export interface INsMap {
+	uriToNs: Map<string, string>,
+	nsToUri: Map<string, string>
+}
 
 export default class XmlSimpleParser {
 
-	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict: boolean = true): Promise<XmlDiagnosticData[]> {
-		const sax = require("sax");
+	public static getXmlDiagnosticData(xmlContent: string, schemaProperties: XmlSchemaProperties[], nsMap: INsMap): XmlDiagnosticData[] {
+		const sax = /*require("sax");*/ (window as any).sax;
 		const parser = sax.parser(true);
 
-		return new Promise<XmlDiagnosticData[]>(
-			(resolve) => {
-				let result: XmlDiagnosticData[] = [];
+		let result: XmlDiagnosticData[] = [];
+		const tagStack: string[] = [];
+		let stackIndex = -1, startLine = 0, startColumn = 0;
+		const attribsRange: Map<string, monaco.IRange> = new Map<string, monaco.IRange>();
 
-				parser.onerror = () => {
-					if (undefined === result.find(e => e.line === parser.line)) {
-						result.push({
-							line: parser.line,
-							column: parser.column,
-							message: parser.error.message,
-							severity: strict ? "error" : "warning"
-						});
-					}
-					parser.resume();
-				};
+		parser.onerror = () => {
+			if (!result.find(e => e.range.startLineNumber === parser.line)) {
+				result.push(<XmlDiagnosticData>{
+					range: new monaco.Range(parser.line, parser.column, parser.line, parser.column),
+					message: parser.error.message,
+					severity: "error"
+				} as XmlDiagnosticData);
+			}
+			parser.resume();
+		};
 
-				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
-
-					let nodeNameSplitted: Array<string> = tagData.name.split('.');
-
-					if (xsdTags.loadTagEx(nodeNameSplitted[0], nsMap) !== undefined) {
-						let schemaTagAttributes = xsdTags.loadAttributesEx(nodeNameSplitted[0], nsMap);
-						nodeNameSplitted.shift();
-						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0 && a !== "xmlns") {
-								result.push({
-									line: parser.line,
-									column: parser.column,
-									message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`, severity: strict ? "info" : "hint"
-								});
-							}
-						});
-					}
-					else if (tagData.name.indexOf(":!") < 0) {
-						result.push({
-							line: parser.line,
-							column: parser.column,
-							message: `Unknown xml tag '${tagData.name}'`,
-							severity: strict ? "info" : "hint"
-						});
-					}
-				};
-
-				parser.onend = () => {
-					resolve(result);
-				};
-
-				parser.write(xmlContent).close();
+		parser.onattribute = (tag: { name: string, value: string }) => {
+			attribsRange.set(tag.name, {
+				startLineNumber: parser.line,
+				startColumn: parser.column - tag.name.length - tag.value.length - 2,
+				endLineNumber: parser.line,
+				endColumn: parser.column + 1
 			});
-	}
+		};
 
-	public static getSchemaXsdUris(xmlContent: string, schemaMapping: { xmlns: string, xsdUri: string }[]): Promise<string[]> {
-		const sax = require("sax");
-		const parser = sax.parser(true);
+		parser.onopentagstart = (tag: { name: string }) => {
+			tagStack[++stackIndex] = tag.name;
+			attribsRange.clear();
+			startLine = parser.line;
+			startColumn = parser.column;
+		};
 
-		return new Promise<string[]>(
-			(resolve) => {
-				let result: string[] = [];
+		parser.onclosetag = () => {
+			stackIndex--;
+		};
 
-				parser.onerror = () => {
-					parser.resume();
-				};
+		if (schemaProperties) {
+			parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: IAttributes }) => {
+				let parentTagName = stackIndex == 0 ? null : tagStack[stackIndex - 1];
+				parentTagName = parentTagName ? parentTagName.substring(parentTagName.indexOf(":") + 1) : null;
 
-				parser.onattribute = (attr: any) => {
-					if (attr.name.endsWith(":schemaLocation")) {
-						result.push(...attr.value.split(/\s+/));
-					} else if (attr.name === "xmlns") {
-						let newUriStrings = schemaMapping
-							.filter(m => m.xmlns === attr.value)
-							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next), []);
-						result.push(...newUriStrings);
-					} else if (attr.name.startsWith("xmlns:")) {
-						let newUriStrings = schemaMapping
-							.filter(m => m.xmlns === attr.value)
-							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next), []);
-						result.push(...newUriStrings);
-					}
-				};
+				const parentTag = schemaProperties
+					.map(sp => ({
+						tag: sp.tagCollection.filter(e => e.visible && e.tag.name === parentTagName)[0],
+						foundInSp: sp
+					}))
+					.filter(t => t.tag)
+					.reduce((prev, next) => prev.concat(next), [])[0];
 
-				parser.onend = () => {
-					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
-				};
+				const strict = parentTag && XsdSettings.schemaMapping.find(m => m.xsdUri === parentTag.foundInSp.schemaUri.toString() && m.strict === true) ? true : false;
 
-				parser.write(xmlContent).close();
-			});
-	}
+				const allowedTags = schemaProperties
+					.map(sp => sp.tagCollection.loadTagEx(parentTag ? parentTag.tag.name : null, nsMap)
+						.map(tag => sp.tagCollection.fixNs(tag, nsMap, sp)))
+					.reduce((prev, next) => prev.concat(next), [])
+					.filter(t => t.name == tagData.name);
 
-	public static getNamespaceMapping(xmlContent: string): Promise<Map<string, string>> {
-		const sax = require("sax");
-		const parser = sax.parser(true);
+				if (allowedTags.length) {
+					const findTagName = tagData.name.substring(tagData.name.indexOf(":") + 1);
 
-		return new Promise<Map<string, string>>(
-			(resolve) => {
-				let result: Map<string, string> = new Map<string, string>();
-
-				parser.onerror = () => {
-					parser.resume();
-				};
-
-				parser.onattribute = (attr: any) => {
-					if (attr.name.startsWith("xmlns:")) {
-						result.set(attr.value, attr.name.substring("xmlns:".length));
-					}
-				};
-
-				parser.onend = () => {
-					resolve(result);
-				};
-
-				parser.write(xmlContent).close();
-			});
-	}
-
-	public static getScopeForPosition(xmlContent: string, offset: number): Promise<XmlScope> {
-		const sax = require("sax");
-		const parser = sax.parser(true);
-
-		return new Promise<XmlScope>(
-			(resolve) => {
-				let result: XmlScope;
-				let previousStartTagPosition = 0;
-				let updatePosition = () => {
-
-					if ((parser.position >= offset) && !result) {
-
-						let content = xmlContent.substring(previousStartTagPosition, offset);
-						content = content.lastIndexOf("<") >= 0 ? content.substring(content.lastIndexOf("<")) : content;
-
-						let normalizedContent = content.concat(" ").replace("/", "").replace("\t", " ").replace("\n", " ").replace("\r", " ");
-						let tagName = content.substring(1, normalizedContent.indexOf(" "));
-
-						result = { tagName: /^[a-zA-Z0-9_:\.\-]*$/.test(tagName) ? tagName : undefined, context: undefined };
-
-						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
-							result.context = "text";
-						} else {
-							let lastTagText = content.substring(content.lastIndexOf("<"));
-							if (!/\s/.test(lastTagText)) {
-								result.context = "element";
-							} else if ((lastTagText.split(`"`).length % 2) !== 0) {
-								result.context = "attribute";
-							}
+					let ft: XmlTag, foundInSp: XmlSchemaProperties;
+					const xsdTags = schemaProperties.filter(sp => {
+						let _ft = sp.tagCollection.filter(t => t.tag.name === findTagName)[0]
+						if (_ft) {
+							ft = _ft;
+							foundInSp = sp;
+							return true;
 						}
+						return false;
+					});
+
+					let schemaTagAttributes = xsdTags[0].tagCollection.loadAttributesEx(ft.tag.name, nsMap, null);
+
+					Object.keys(tagData.attributes).forEach((a: string) => {
+						const attrib = schemaTagAttributes.find(sta => sta.name === a);
+						if (!attrib && a.indexOf(":!") < 0
+							&& !a.startsWith("xmlns") && !a.startsWith("data-")) {
+							const pos = attribsRange.get(a);
+							result.push(<XmlDiagnosticData>{
+								range: pos,
+								message: `Unknown xml attribute '${a}' for tag '${tagData.name}'`,
+								severity: strict ? "info" : "hint"
+							});
+						}
+						else if (attrib && attrib.values && attrib.values.findIndex(a => a.name === tagData.attributes[attrib.name]) < 0) {
+							const pos = attribsRange.get(a);
+							result.push(<XmlDiagnosticData>{
+								range: new monaco.Range(pos.startLineNumber, pos.startColumn + a.length + 1, pos.endLineNumber, pos.endColumn),
+								message: `Unknown xml attribute value '${a}' for attribute '${attrib.name}' in tag '${tagData.name}'`,
+								severity: strict ? "info" : "hint"
+							});
+						}
+					});
+				}
+				else if (tagData.name.indexOf(":!") < 0) {
+					result.push(<XmlDiagnosticData>{
+						range: new monaco.Range(startLine, startColumn - tagData.name.length - 1, parser.line, parser.column + 1),
+						message: `Unknown xml tag '${tagData.name}'`,
+						severity: strict ? "info" : "hint"
+					});
+				}
+			};
+		}
+
+		parser.write(xmlContent).close();
+		return result;
+	}
+
+	public static getSchemaXsdUris(xmlContent: string, schemaMapping: { xmlns: string, xsdUri: string }[]): string[] {
+		const sax = /*require("sax");*/ (window as any).sax;
+		const parser = sax.parser(true);
+
+		const result: string[] = [];
+
+		parser.onerror = () => {
+			parser.resume();
+		};
+
+		parser.onattribute = (attr: any) => {
+			if (attr.name.endsWith(":schemaLocation")) {
+				result.push(...attr.value.split(/\s+/));
+			} else if (attr.name === "xmlns") {
+				let newUriStrings = schemaMapping
+					.filter(m => m.xmlns === attr.value)
+					.map(m => m.xsdUri.split(/\s+/))
+					.reduce((prev, next) => prev.concat(next), []);
+				result.push(...newUriStrings);
+			} else if (attr.name.startsWith("xmlns:")) {
+				let newUriStrings = schemaMapping
+					.filter(m => m.xmlns === attr.value)
+					.map(m => m.xsdUri.split(/\s+/))
+					.reduce((prev, next) => prev.concat(next), []);
+				result.push(...newUriStrings);
+			}
+		};
+
+		parser.write(xmlContent).close();
+
+		return result.filter((v, i, a) => a.indexOf(v) === i);
+	}
+
+	public static getNamespaceMapping(xmlContent: string): INsMap {
+		const sax = /*require("sax");*/ (window as any).sax;
+		const parser = sax.parser(true);
+
+		const uriToNs = new Map<string, string>();
+		const nsToUri = new Map<string, string>();
+
+		parser.onerror = () => {
+			parser.resume();
+		};
+
+		parser.onattribute = (attr: any) => {
+			if (attr.name === "xmlns") {
+				uriToNs.set(attr.value, "");
+				nsToUri.set("", attr.value);
+			}
+			else if (attr.name.startsWith("xmlns:")) {
+				const ns = attr.name.substring("xmlns:".length);
+				uriToNs.set(attr.value, ns);
+				nsToUri.set(ns, attr.value);
+			}
+		};
+
+		parser.write(xmlContent).close();
+		return { uriToNs: uriToNs, nsToUri: nsToUri };
+	}
+
+	public static getScopeForPosition(xmlContent: string, offset: number): XmlScope {
+		const sax = /*require("sax");*/ (window as any).sax;
+		const parser = sax.parser(true);
+
+		const tagStack: string[] = [];
+		let stackIndex = -1;
+
+		let result: XmlScope;
+		let previousStartTagPosition = 0;
+		let updatePosition = () => {
+			if ((parser.position >= offset) && !result) {
+				let content = xmlContent.substring(previousStartTagPosition, offset);
+				content = content.lastIndexOf("<") >= 0 ? content.substring(content.lastIndexOf("<")) : content;
+
+				let normalizedContent = content.concat(" ").replace("/", "").replace("\t", " ").replace("\n", " ").replace("\r", " ");
+				let tagName = content.substring(1, normalizedContent.indexOf(" "));
+
+				result = {
+					tagName: /^[\<a-zA-Z0-9_:\.\-]*$/.test(tagName) ? tagName : undefined,
+					parentTagName: tagStack[stackIndex]
+				};
+
+				if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
+					result.context = "text";
+				} else {
+					let lastTagText = content.substring(content.lastIndexOf("<"));
+					if (!/\s/.test(lastTagText)) {
+						result.context = "element";
+					} else if ((lastTagText.split(`"`).length % 2) !== 0) {
+						result.context = "attribute";
 					}
+				}
+			}
+			previousStartTagPosition = parser.startTagPosition - 1;
+		};
 
-					previousStartTagPosition = parser.startTagPosition - 1;
-				};
+		parser.onerror = () => {
+			parser.resume();
+		};
 
-				parser.onerror = () => {
-					parser.resume();
-				};
+		parser.ontext = () => {
+			updatePosition();
+		};
 
-				parser.ontext = (_t: any) => {
-					updatePosition();
-				};
+		parser.onopentagstart = (tag: { name: string }) => {
+			tagStack[++stackIndex] = tag.name;
+			updatePosition();
+		};
 
-				parser.onopentagstart = () => {
-					updatePosition();
-				};
+		parser.onattribute = () => {
+			updatePosition();
+		};
 
-				parser.onattribute = () => {
-					updatePosition();
-				};
+		parser.onclosetag = () => {
+			stackIndex--;
+			updatePosition();
+		};
 
-				parser.onclosetag = () => {
-					updatePosition();
-				};
+		parser.onend = () => {
+			if (result === undefined) {
+				result = { tagName: undefined, parentTagName: undefined, context: undefined };
+			}
 
-				parser.onend = () => {
-					if (result === undefined) {
-						result = { tagName: undefined, context: undefined };
-					}
-					resolve(result);
-				};
+		};
 
-				parser.write(xmlContent).close();
-			});
+		parser.write(xmlContent).close();
+		return result;
 	}
 
 	public static checkXml(xmlContent: string): Promise<boolean> {
-		const sax = require("sax");
+		const sax = /*require("sax");*/ (window as any).sax;
 		const parser = sax.parser(true);
 
 		let result: boolean = true;
@@ -208,7 +271,7 @@ export default class XmlSimpleParser {
 	}
 
 	public static formatXml(xmlContent: string, indentationString: string, eol: string, formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized"): Promise<string> {
-		const sax = require("sax");
+		const sax = /*require("sax");*/ (window as any).sax;
 		const parser = sax.parser(true);
 
 		let result: string[] = [];
@@ -222,13 +285,6 @@ export default class XmlSimpleParser {
 				? eol + Array(xmlDepthPath.length).fill(indentationString).join("")
 				: "";
 
-		let getEncodedText = (t: string) : string =>
-			t.replace(/&/g, '&amp;')
-			.replace(/</g, '&lt;')
-			.replace(/>/g, '&gt;')
-			.replace(/"/g, '&quot;')
-			.replace(/'/g, '&apos;');
-
 		return new Promise<string>(
 			(resolve) => {
 
@@ -236,11 +292,11 @@ export default class XmlSimpleParser {
 					parser.resume();
 				};
 
-				parser.ontext = (t) => {
-					result.push(/^\s*$/.test(t) ? `` : getEncodedText(`${t}`));
+				parser.ontext = (t: string) => {
+					result.push(/^\s*$/.test(t) ? `` : `${t}`);
 				};
 
-				parser.ondoctype = (t) => {
+				parser.ondoctype = (t: string) => {
 					result.push(`${eol}<!DOCTYPE${t}>`);
 				};
 
@@ -248,11 +304,11 @@ export default class XmlSimpleParser {
 					result.push(`${eol}<?${instruction.name} ${instruction.body}?>`);
 				};
 
-				parser.onsgmldeclaration = (t) => {
+				parser.onsgmldeclaration = (t: string) => {
 					result.push(`${eol}<!${t}>`);
 				};
 
-				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
+				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: IAttributes }) => {
 					let argString: string[] = [""];
 					for (let arg in tagData.attributes) {
 						argString.push(` ${arg}="${tagData.attributes[arg]}"`);
@@ -272,7 +328,7 @@ export default class XmlSimpleParser {
 					});
 				};
 
-				parser.onclosetag = (t) => {
+				parser.onclosetag = (t: string) => {
 					let tag = xmlDepthPath.pop();
 
 					if (tag && !tag.selfClosing) {
@@ -280,7 +336,7 @@ export default class XmlSimpleParser {
 					}
 				};
 
-				parser.oncomment = (t) => {
+				parser.oncomment = (t: string) => {
 					result.push(`<!--${t}-->`);
 				};
 
@@ -288,7 +344,7 @@ export default class XmlSimpleParser {
 					result.push(`${eol}<![CDATA[`);
 				};
 
-				parser.oncdata = (t) => {
+				parser.oncdata = (t: string) => {
 					result.push(t);
 				};
 
