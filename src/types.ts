@@ -1,123 +1,207 @@
-import * as vscode from 'vscode';
+import { INsMap } from "./helpers/xmlsimpleparser";
 
-export class XmlCompleteSettings {
-	schemaMapping: { xmlns: string, xsdUri: string, strict: boolean }[];
-	formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized";
+//export class XmlCompleteSettings {
+//	schemaMapping: { xmlns: string, xsdUri: string, strict: boolean }[];
+//	formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized";
+//}
+
+
+export const enum CsType {
+	Element = 1,
+	Attribute = 2,
+	AttributeValue = 3,
 }
 
 export class CompletionString {
+	public documentation?: monaco.IMarkdownString;
 
-	constructor(public name: string, public comment?: string, public definitionUri?:string, public definitionLine?:number, public definitionColumn?:number) {
+	constructor(public name: string, public type: CsType, public comment?: string, public values?: CompletionString[]) {
 	}
+
+	public newWithName?(name: string): CompletionString {
+		const clone = <CompletionString>Object.create(this);
+		clone.name = name;
+		return clone;
+	}
+}
+
+export const enum XsdType {
+	Unknown = 0,
+	Element = 1,
+	ElementRef = 2,
+	AttributeGroup = 3,
 }
 
 export class XmlTag {
+
+	private constructor(tag: string) {
+		this.tag = new CompletionString(tag, CsType.Element);
+	}
+
+	static createElement(tag: string, baseElements: string[]): XmlTag {
+		const x = new XmlTag(tag);
+		x.baseElements = baseElements;
+		x.visible = true;
+		x.xsdType = XsdType.Element;
+		return x;
+	}
+
+	static createElementRef(tag: string): XmlTag {
+		const x = new XmlTag(tag);
+		x.xsdType = XsdType.ElementRef;
+		return x;
+	}
+
+	static createAttributeGroup(tag: string): XmlTag {
+		const x = new XmlTag(tag);
+		x.xsdType = XsdType.AttributeGroup;
+		return x;
+	}
+
 	tag: CompletionString;
-	base: string[];
-	attributes: Array<CompletionString>;
-	visible: boolean;
+	baseAttributes?: string[] = [];
+	attributes?: CompletionString[] = [];
+	visible?: boolean = false;
+
+	formQualified?: boolean;
+	xsdType?: XsdType;
+	baseElements?: string[] = [];
+	childElements?: XmlTag[] = [];
 }
 
 export class XmlTagCollection extends Array<XmlTag> {
-	private nsMap: Map<string, string> = new Map<string, string>();
+	private nsMap: Map<string, string>;
+	prefixMap: Map<string, string>;
 
-	setNsMap(xsdNsTag:string, xsdNsStr:string) {
+	constructor() {
+		super();
+		this.nsMap = new Map<string, string>();
+		this.prefixMap = new Map<string, string>();
+	}
+
+	setNsMap(xsdNsTag: string, xsdNsStr: string) {
 		this.nsMap.set(xsdNsTag, xsdNsStr);
+		this.prefixMap.set(xsdNsStr, xsdNsTag);
 	}
 
-	loadAttributesEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString[] {
+	loadAttributesEx(tagName: string, localNsMap: INsMap, namespace: string): CompletionString[] {
 		let result: CompletionString[] = [];
-		if (tagName !== undefined) {
-			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			fixedNames.forEach(fixn => {
-				result.push(...this.loadAttributes(fixn));
-			});
-		}
-
-		return result;
-	}
-
-	loadTagEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString | undefined {
-		let result = undefined;
-		if (tagName !== undefined) {
-			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			let element =this.find(e => fixedNames.includes(e.tag.name))
-			if (element !== undefined) {
-				return element.tag;
+		if (tagName) {
+			let arr = tagName.split(":");
+			if (arr.length === 2) {
+				if (localNsMap.uriToNs.get(namespace) !== arr[0]) {
+					return result;
+				}
+				this.loadAttributes(arr[1], result);
+			}
+			else {
+				this.loadAttributes(tagName, result);
 			}
 		}
-
 		return result;
 	}
 
-	loadAttributes(tagName: string | undefined, handledNames: string[] = []): CompletionString[] {
+	loadAttributes(tagName: string, result: CompletionString[], recursiveCheck: string[] = [], recursiveCall: number = 0) {
+		//console.log("--".repeat(recursiveCall) + " a: " + tagName);
+		const currentTags = this.filter(e => e.tag.name === tagName);
+		if (!currentTags.length)
+			return;
 
-		let tagNameCompare = (a: string, b: string) => a === b || a === b.substring(b.indexOf(":")+1);
+		result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
 
+		currentTags.forEach(e =>
+			e.baseAttributes.filter(b => !currentTags.map(t => t.tag.name).includes(b) && !recursiveCheck.includes(b))
+				.forEach(b => {
+					recursiveCheck.push(b);
+					this.loadAttributes(b, result, recursiveCheck, recursiveCall + 1);
+				}));
+
+		currentTags.filter(t => t.xsdType === XsdType.AttributeGroup || (recursiveCall === 0 && t.xsdType === XsdType.Element))
+			.forEach(e =>
+				e.baseElements.filter(b => !currentTags.map(t => t.tag.name).includes(b) && !recursiveCheck.includes(b))
+					.forEach(b => {
+						recursiveCheck.push(b);
+						this.loadAttributes(b, result, recursiveCheck, recursiveCall + 1);
+					}));
+	}
+
+
+	loadTagEx(tagName: string | undefined, localNsMap: INsMap): CompletionString[] {
 		let result: CompletionString[] = [];
-		if (tagName !== undefined) {
-			handledNames.push(tagName);
-			let currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
-			if (currentTags.length > 0) {
-				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
-				currentTags.forEach(e => {
-					e.base.filter(b => !handledNames.includes(b))
-						.forEach(b => result.push(...this.loadAttributes(b)))
-				});
-			}
+		if (tagName) {
+			this.loadTags(tagName, result);
+		}
+		else {
+			return this.filter(e => e.visible).map(e => e.tag);
 		}
 		return result;
 	}
 
-	fixNs(xsdString: CompletionString, localXmlMapping: Map<string, string>): CompletionString {
-		let arr = xsdString.name.split(":");
-		if (arr.length === 2 && this.nsMap.has(arr[0]) && localXmlMapping.has(this.nsMap[arr[0]]))
-		{
-			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment, xsdString.definitionUri, xsdString.definitionLine, xsdString.definitionColumn);
-		}
-		return xsdString;
+	loadTags(tagName: string, result: CompletionString[], recursiveCheck: string[] = [], recursiveCall: number = 0) {
+		// NOTE: Does not support restriction/difference between same element name under different parents!! need complete'ish tree for that
+		//console.log("--".repeat(recursiveCall) + " e: " + tagName);
+		const currentTags = this.filter(e => e.tag.name === tagName);
+		if (!currentTags.length)
+			return;
+
+		if (recursiveCall > 0)
+			currentTags.filter(t => t.visible).forEach(t => result.push(t.tag));
+
+		result.push(...currentTags.map(e => e.childElements.map(t => t.tag)).reduce((prev, next) => prev.concat(next), []));
+
+		currentTags.filter(t => t.xsdType === XsdType.ElementRef || (recursiveCall === 0 && t.xsdType === XsdType.Element))
+			.forEach(e =>
+				e.baseElements.filter(b => b && !currentTags.map(t => t.tag.name).includes(b) && !recursiveCheck.includes(b))
+					.forEach(b => {
+						recursiveCheck.push(b);
+						this.loadTags(b, result, recursiveCheck, recursiveCall + 1);
+					}));
 	}
 
-	fixNsReverse(xmlString: string, localXmlMapping: Map<string, string>): Array<string> {
-		let arr = xmlString.split(":");
-		let xmlStrings = new Array<string>();
-
-		localXmlMapping.forEach((v, k) => {
-			if (v === arr[0]) {
-				this.nsMap.forEach((v2, k2) => {
-					if (v2 == k) {
-						xmlStrings.push(k2 + ":" + arr[1]);
-					}
-				});
+	completeNsTagName(tagName: string, localNsMap: INsMap, nsUri: string, parentTagNs: string): string {
+		let arr = tagName.split(":");
+		if (arr.length === 2) {
+			if (this.nsMap.has(arr[0]) && localNsMap.uriToNs.has(this.nsMap.get(arr[0]))) {
+				const ns = localNsMap.uriToNs.get(this.nsMap.get(arr[0]));
+				return ns === "" || parentTagNs === ns ? arr[1] : ns + ":" + arr[1];
 			}
-		});
-		xmlStrings.push(arr[arr.length-1]);
-
-		return xmlStrings;
+		}
+		else if (arr.length === 1 && nsUri && localNsMap.uriToNs.has(nsUri)) {
+			const ns = localNsMap.uriToNs.get(nsUri);
+			return ns === "" || ns === parentTagNs ? tagName : ns + ":" + tagName;
+		}
+		return tagName;
 	}
+
+	fixNs(xsdString: CompletionString, localNsMap: INsMap, sp: XmlSchemaProperties, parentTagNs: string = null): CompletionString {
+		const newName = this.completeNsTagName(xsdString.name, localNsMap, sp ? sp.namespace : null, parentTagNs);
+		return xsdString.name === newName ? xsdString : xsdString.newWithName(newName);
+	}
+
 }
 
 export class XmlSchemaProperties {
-	schemaUri: vscode.Uri;
+	schemaUri: monaco.Uri;
 	xsdContent: string;
 	tagCollection: XmlTagCollection;
+	namespace: string;
 }
 
 export class XmlSchemaPropertiesArray extends Array<XmlSchemaProperties> {
-	filterUris(uris: vscode.Uri[]): Array<XmlSchemaProperties> {
+	filterUris(uris: monaco.Uri[]): Array<XmlSchemaProperties> {
 		return this.filter(e => uris
 			.find(u => u.toString() === e.schemaUri.toString()) !== undefined);
 	}
 }
 
 export class XmlDiagnosticData {
-	line: number;
-	column: number;
+	range: monaco.Range;
 	message: string;
 	severity: "error" | "warning" | "info" | "hint";
 }
 
 export class XmlScope {
 	tagName: string | undefined;
-	context: "element" | "attribute" | "text" | undefined;
+	parentTagName: string;
+	context?: "element" | "attribute" | "text" | undefined;
 }

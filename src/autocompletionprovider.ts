@@ -1,140 +1,123 @@
-import * as vscode from 'vscode';
-import { languageId } from './extension';
-import { XmlSchemaPropertiesArray } from './types';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
+import { Updater } from '../util/Updater';
 
-export default class AutoCompletionProvider implements vscode.Disposable {
+export default class AutoCompletionProvider extends Updater implements monaco.IDisposable {
 
-    private documentListener: vscode.Disposable;
-    private static maxLineChars = 1024;
-    private static maxLines = 8096;
-    private delayCount: number = 0;
-    private documentEvent: vscode.TextDocumentChangeEvent;
+	constructor(languageId: string) {
+		super(languageId, 0);
+	}
 
-    constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
-        this.documentListener = vscode.workspace.onDidChangeTextDocument(async (evnt) =>
-            this.triggerDelayedAutoCompletion(evnt), this, this.extensionContext.subscriptions);
-    }
+	private static maxLineChars = 1024;
+	private static maxLines = 8096;
 
-    public dispose() {
-        this.documentListener.dispose();
-    }
+	async doUpdate(resource: monaco.Uri, languageId: string, documentEvent: monaco.editor.IModelContentChangedEvent): Promise<void> {
+		if (!documentEvent)
+			return null;
+		const document = monaco.editor.getModel(resource) as IMdlnModel;
+		if (!document || !document.editor)
+			return null;
 
-    private async triggerDelayedAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent, timeout: number = 250): Promise<void> {
+		const inputChange = documentEvent.changes[0];
 
-        if (this.delayCount > 0) {
-            this.delayCount = timeout;
-            this.documentEvent = documentEvent;
-            return;
-        }
-        this.delayCount = timeout;
-        this.documentEvent = documentEvent;
+		if (document.getModeId() !== languageId
+			|| documentEvent.changes.length !== 1
+			|| inputChange.range.startLineNumber - inputChange.range.endLineNumber !== 0
+			|| (inputChange.text && inputChange.text.indexOf("\n") >= 0)
+			|| document.getLineCount() > AutoCompletionProvider.maxLines) {
+			return null;
+		}
 
-        const tick = 100;
+		const changeLine = inputChange.range.endLineNumber;
+		const wholeLineRange = new monaco.Range(changeLine, 1, changeLine, document.getLineLength(changeLine) + 1);
+		const wholeLineText = document.getLineContent(inputChange.range.startLineNumber);
 
-        while (this.delayCount > 0) {
-            await new Promise(resolve => setTimeout(resolve, tick));
-            this.delayCount -= tick;
-        }
+		let linePosition = (inputChange.range.startColumn - 1) + (inputChange.text.length - 1);
 
-        this.triggerAutoCompletion(this.documentEvent);
-    }
+		if (wholeLineText.length >= AutoCompletionProvider.maxLineChars) {
+			return null;
+		}
 
-    private async triggerAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent): Promise<void> {
-        const activeTextEditor = vscode.window.activeTextEditor;
-        const document = documentEvent.document;
-        const inputChange = documentEvent.contentChanges[0];
-        if (document.languageId !== languageId
-            || documentEvent.contentChanges.length !== 1
-            || !inputChange.range.isSingleLine
-            || (inputChange.text && inputChange.text.indexOf("\n") >= 0)
-            || activeTextEditor === undefined
-            || document.lineCount > AutoCompletionProvider.maxLines
-            || activeTextEditor.document.uri.toString() !== document.uri.toString()) {
-            return;
-        }
+		const scope = await XmlSimpleParser.getScopeForPosition(`${wholeLineText}\n`, linePosition);
 
-        const changeLine = inputChange.range.end.line;
-        const wholeLineRange = document.lineAt(changeLine).range;
-        const wholeLineText = document.getText(document.lineAt(inputChange.range.end.line).range);
+		if (--linePosition < 0) {
+			// NOTE: automatic acions require info about previous char
+			return null;
+		}
 
-        let linePosition = inputChange.range.start.character + inputChange.text.length;
+		const before = wholeLineText.substring(0, linePosition);
+		const after = wholeLineText.substring(linePosition);
 
-        if (wholeLineText.length >= AutoCompletionProvider.maxLineChars) {
-            return;
-        }
+		if (!(scope.context && scope.context !== "text" && scope.tagName)) {
+			// NOTE: unknown scope
+			return null;
+		}
 
-        const scope = await XmlSimpleParser.getScopeForPosition(`${wholeLineText}\n`, linePosition);
+		if (before.substr(before.lastIndexOf("<"), 2) === "</") {
+			// NOTE: current position in closing tag
+			return null;
+		}
+		if (after.indexOf(">") <= 0) {
+			return null;
+		}
 
-        if (--linePosition < 0) {
-            // NOTE: automatic acions require info about previous char
-            return;
-        }
+		// NOTE: auto-change is available only for single tag enclosed in one line
+		const closeCurrentTagIndex = after.indexOf(">");
+		const nextTagStartPosition = after.indexOf("<");
+		const nextTagEndingPosition = nextTagStartPosition >= 0 ? after.indexOf(">", nextTagStartPosition) : -1;
+		const invalidTagStartPosition = nextTagEndingPosition >= 0 ? after.indexOf("<", nextTagEndingPosition) : -1;
 
-        const before = wholeLineText.substring(0, linePosition);
-        const after = wholeLineText.substring(linePosition);
+		let resultText: string = "";
 
-        if (!(scope.context && scope.context !== "text" && scope.tagName)) {
-            // NOTE: unknown scope
-            return;
-        }
+		if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 1) {
 
-        if (before.substr(before.lastIndexOf("<"), 2) === "</") {
-            // NOTE: current position in closing tag
-            return;
-        }
+			resultText = wholeLineText.substring(0, linePosition + nextTagStartPosition) + `` + wholeLineText.substring(linePosition + nextTagEndingPosition + 1);
 
-        // NOTE: auto-change is available only for single tag enclosed in one line
-        const closeCurrentTagIndex = after.indexOf(">");
-        const nextTagStartPostion = after.indexOf("<");
-        const nextTagEndingPostion = nextTagStartPostion >= 0 ? after.indexOf(">", nextTagStartPostion) : -1;
-        const invalidTagStartPostion = nextTagEndingPostion >= 0 ? after.indexOf("<", nextTagEndingPostion) : -1;
+		} else if (after.substr(closeCurrentTagIndex - 1, 2) !== "/>" && invalidTagStartPosition < 0) {
 
-        let resultText: string = "";
+			if (nextTagStartPosition >= 0 && after[nextTagStartPosition + 1] === "/") {
 
-        if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 1) {
+				resultText = wholeLineText.substring(0, linePosition + nextTagStartPosition) + `</${scope.tagName}>` + wholeLineText.substring(linePosition + nextTagEndingPosition + 1);
+			}
+			else if (nextTagStartPosition < 0) {
+				resultText = wholeLineText.substring(0, linePosition + closeCurrentTagIndex + 1) + `</${scope.tagName}>` + wholeLineText.substring(linePosition + closeCurrentTagIndex + 1);
+			}
+		}
 
-            resultText = wholeLineText.substring(0, linePosition + nextTagStartPostion) + `` + wholeLineText.substring(linePosition + nextTagEndingPostion + 1);
+		if (!resultText || resultText.trim() === wholeLineText.trim()) {
+			return null;
+		}
 
-        } else if (after.substr(closeCurrentTagIndex - 1, 2) !== "/>" && invalidTagStartPostion < 0) {
+		resultText = resultText.trimEnd();
 
-            if (nextTagStartPostion >= 0 && after[nextTagStartPostion + 1] === "/") {
+		if (!await XmlSimpleParser.checkXml(`${resultText}`)) {
+			// NOTE: Single line must be ok, one element in line
+			//console.log("bad xml 1: " + resultText);
+			return null;
+		}
 
-                resultText = wholeLineText.substring(0, linePosition + nextTagStartPostion) + `</${scope.tagName}>` + wholeLineText.substring(linePosition + nextTagEndingPostion + 1);
-            }
-            else if (nextTagStartPostion < 0) {
-                resultText = wholeLineText.substring(0, linePosition + closeCurrentTagIndex + 1) + `</${scope.tagName}>` + wholeLineText.substring(linePosition + closeCurrentTagIndex + 1);
-            }
-        }
+		let documentContent = document.getValue();
 
-        if (!resultText || resultText.trim() === wholeLineText.trim()) {
-            return;
-        }
+		documentContent = documentContent.split("\n")
+			.map((l, i) => (i === changeLine - 1) ? resultText : l)
+			.join("\n");
 
-        resultText = resultText.trimRight();
+		if (!await XmlSimpleParser.checkXml(documentContent)) {
+			// NOTE: Check whole document
+			//console.log("bad xml 2");
+			return null;
+		}
 
-        if (!await XmlSimpleParser.checkXml(`${resultText}`)) {
-            // NOTE: Single line must be ok, one element in line
-            return;
-        }
+		document.pushEditOperations([], [{
+			forceMoveMarkers: false,
+			range: wholeLineRange,
+			text: resultText
+		} as monaco.editor.IIdentifiedSingleEditOperation], null);
 
-        let documentContent = document.getText();
-
-        documentContent = documentContent.split("\n")
-            .map((l, i) => (i === changeLine) ? resultText : l)
-            .join("\n");
-
-        if (!await XmlSimpleParser.checkXml(documentContent)) {
-            // NOTE: Check whole document
-            return;
-        }
-
-        await activeTextEditor.edit((builder) => {
-            builder.replace(
-                new vscode.Range(
-                    wholeLineRange.start,
-                    wholeLineRange.end),
-                resultText);
-        }, { undoStopAfter: false, undoStopBefore: false });
-    }
+		if (document.editor) {
+			document.editor.setPosition({
+				lineNumber: inputChange.range.startLineNumber,
+				column: inputChange.range.startColumn + 1
+			});
+		}
+	}
 }

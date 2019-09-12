@@ -3,7 +3,7 @@
 		"module": "commonjs",
 		"target": "es2018",
 
-		"noImplicitAny": false,
+		"noImplicitAny": true,
 		"removeComments": true,
 		"noUnusedLocals": true,
 		"noImplicitThis": true,
