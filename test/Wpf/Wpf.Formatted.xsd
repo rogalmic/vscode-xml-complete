@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="WpfXamlSchema" targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema id="WpfXamlSchema" targetNamespace="http://schemas.microsoft.com/winfx/2006/xaml/presentation" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schemaLocation="https://www.w3.org/2001/XMLSchema.xsd">
   <xs:simpleType name="text">
     <xs:restriction base="xs:string" />
   </xs:simpleType>

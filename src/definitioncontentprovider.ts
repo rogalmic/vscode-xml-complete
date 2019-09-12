@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { XmlSchemaPropertiesArray } from './types';
-import XsdLoader from './helpers/xsdloader';
+import XsdCachedLoader from './helpers/xsdcachedloader';
+import { schemaId } from './extension';
 
 export default class XmlDefinitionContentProvider implements vscode.TextDocumentContentProvider {
 
@@ -9,7 +10,7 @@ export default class XmlDefinitionContentProvider implements vscode.TextDocument
 
 	async provideTextDocumentContent (uri : vscode.Uri) : Promise<string> {
 		// NOTE: Uri@Windows is normalizing to lower-case (https://vshaxe.github.io/vscode-extern/vscode/Uri.html), using hex
-		let trueUri = Buffer.from(uri.toString(true).replace('xml2xsd-definition-provider://', ''), 'hex').toString();
-        return await XsdLoader.loadSchemaContentsFromUri(trueUri);
+		let trueUri = Buffer.from(uri.toString(true).replace(`${schemaId}://`, ''), 'hex').toString();
+        return await XsdCachedLoader.loadSchemaContentsFromUri(trueUri);
     }
 }

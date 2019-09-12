@@ -11,6 +11,8 @@
 			"runtimeExecutable": "${execPath}",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}",
+				"${workspaceFolder}/test/Avalonia/AvaloniaXamlSchema.Formatted.xsd",
+				"${workspaceFolder}/test/Wpf/Wpf.Formatted.xsd",
 				"${workspaceFolder}/test/Avalonia/AvaloniaXsd.csproj",
 				"${workspaceFolder}/test/Wpf/Wpf.csproj",
 				"${workspaceFolder}/test/Avalonia/MainWindow.xaml",
