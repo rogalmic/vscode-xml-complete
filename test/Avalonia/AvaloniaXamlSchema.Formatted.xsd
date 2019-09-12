@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schemaLocation="https://www.w3.org/2001/XMLSchema.xsd">
   <xs:simpleType name="text">
     <xs:restriction base="xs:string" />
   </xs:simpleType>

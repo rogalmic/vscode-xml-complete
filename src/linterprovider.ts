@@ -24,9 +24,6 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         vscode.workspace.onDidCloseTextDocument(doc =>
             this.cleanupDocument(doc), null, extensionContext.subscriptions);
-
-        vscode.workspace.textDocuments.forEach(doc =>
-            this.triggerDelayedLint(doc, 100), this);
     }
 
     public dispose() {
@@ -107,7 +104,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
             }
 
             this.diagnosticCollection.set(textDocument.uri, diagnostics
-                .reduce((prev, next) => prev.filter(dp => next.find(dn => dn.range.start.compareTo(dp.range.start) === 0))));
+                .reduce((prev, next) => prev.filter(dp => next.find(dn => dn.range.start.compareTo(dp.range.start) === 0)), []));
         }
         catch (err) {
             vscode.window.showErrorMessage(err.toString());
