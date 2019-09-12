@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
-import { XmlSchemaPropertiesArray } from './types';
+import { XmlSchemaPropertiesArray, CompletionString } from './types';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
+import { schemaId } from './extension';
 
 export default class XmlDefinitionProvider implements vscode.DefinitionProvider {
 
@@ -14,20 +15,21 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 		let wordRange = textDocument.getWordRangeAtPosition(position);
 		let word = textDocument.getText(wordRange);
 
-		let noDefinitionUri = (e) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;
+		let noDefinitionUri = (e: string) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;
+
+		let generateResult = (cs: CompletionString) => new vscode.Location(
+			vscode.Uri.parse(`${schemaId}://${Buffer.from(cs.definitionUri || noDefinitionUri(word)).toString('hex')}`),
+			new vscode.Position(cs.definitionLine || 0, cs.definitionColumn || 0)
+		);
 
 		switch (scope.context) {
 			case "element":
 				let tags = this.schemaPropertiesArray
 					.map(p => p.tagCollection.filter(t => t.tag.name === word))
 					.reduce((prev, next) => prev.concat(next), []);
+
 				if (tags.length > 0) {
-					let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${Buffer.from(tags[0].tag.definitionUri || noDefinitionUri(word)).toString('hex')}`);
-					let position = new vscode.Position(tags[0].tag.definitionLine || 1, tags[0].tag.definitionColumn || 1);
-					return {
-						uri: uri,
-						range: new vscode.Range(position, position)
-					};
+					return generateResult(tags[0].tag);
 				}
 			break;
 
@@ -37,13 +39,9 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 							.map(t => t.attributes.filter(a => a.name === word))
 							.reduce((prev, next) => prev.concat(next), []))
 						.reduce((prev, next) => prev.concat(next), []);
+
 					if (atts.length > 0) {
-						let uri = vscode.Uri.parse(`xml2xsd-definition-provider://${Buffer.from(atts[0].definitionUri || noDefinitionUri(word)).toString('hex')}`);
-						let position = new vscode.Position(atts[0].definitionLine || 1, atts[0].definitionColumn || 1);
-						return {
-							uri: uri,
-							range: new vscode.Range(position, position)
-						};
+						return generateResult(atts[0]);
 					}
 				break;
 		}

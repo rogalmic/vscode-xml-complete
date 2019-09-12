@@ -13,6 +13,8 @@ export declare let globalSettings: XmlCompleteSettings;
 
 export const languageId: string = 'xml';
 
+export const schemaId: string = 'xml2xsd-definition-provider';
+
 export function activate(context: vscode.ExtensionContext) {
 
 	vscode.workspace.onDidChangeConfiguration(loadConfiguration, undefined, context.subscriptions);
@@ -43,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
 
-	let definitioncontentprovider = vscode.workspace.registerTextDocumentContentProvider('xml2xsd-definition-provider', new XmlDefinitionContentProvider(context, schemaPropertiesArray));
+	let definitioncontentprovider = vscode.workspace.registerTextDocumentContentProvider(schemaId, new XmlDefinitionContentProvider(context, schemaPropertiesArray));
 
 	context.subscriptions.push(
 		completionitemprovider,
