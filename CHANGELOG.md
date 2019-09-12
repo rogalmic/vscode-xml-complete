@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.0...v0.2.1) (2019-09-12)
+
+
+### Bug Fixes
+
+* Various performance and stability improvements. ([839bcf9](https://github.com/rogalmic/vscode-xml-complete/commit/839bcf9))
+
 ## [0.2.0](https://github.com/rogalmic/vscode-xml-complete/compare/v0.1.10...v0.2.0) (2019-09-09)
 
 
