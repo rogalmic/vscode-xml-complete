@@ -24,6 +24,9 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         vscode.workspace.onDidCloseTextDocument(doc =>
             this.cleanupDocument(doc), null, extensionContext.subscriptions);
+
+        vscode.workspace.textDocuments.forEach(doc =>
+            this.triggerDelayedLint(doc, 100), this);
     }
 
     public dispose() {
