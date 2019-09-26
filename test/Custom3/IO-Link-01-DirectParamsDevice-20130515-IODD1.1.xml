@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IODevice xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD1.1.xsd">
+	<DocumentInfo copyright="IO-Link Community" releaseDate="2013-07-15" version="V1.8"/>
+	<ProfileHeader>
+		<ProfileIdentification>IO Device Profile</ProfileIdentification>
+		<ProfileRevision>1.1</ProfileRevision>
+		<ProfileName>Device Profile for IO Devices</ProfileName>
+		<ProfileSource>IO-Link Consortium</ProfileSource>
+		<ProfileClassID>Device</ProfileClassID>
+		<ISO15745Reference>
+			<ISO15745Part>1</ISO15745Part>
+			<ISO15745Edition>1</ISO15745Edition>
+			<ProfileTechnology>IODD</ProfileTechnology>
+		</ISO15745Reference>
+	</ProfileHeader>
+	<ProfileBody>
+		<DeviceIdentity deviceId="10" vendorId="65535" vendorName="IO-Link Community">
+			<VendorText textId="T_VendorText"/>
+			<VendorUrl textId="T_VendorUrl"/>
+			<DeviceName textId="T_DeviceName"/>
+			<DeviceFamily textId="T_DeviceFamily"/>
+			<DeviceVariantCollection>
+				<DeviceVariant productId="DirectParamsDeviceVariant">
+					<Name textId="TN_DirectParamsDeviceVariant"/>
+					<Description textId="TD_DirectParamsDeviceVariant"/>
+				</DeviceVariant>
+			</DeviceVariantCollection>
+		</DeviceIdentity>
+		<DeviceFunction>
+			<Features blockParameter="false" dataStorage="false"/>
+			<VariableCollection>
+				<StdVariableRef id="V_DirectParameters_1"/>
+				<StdVariableRef id="V_DirectParameters_2"/>
+				<DirectParameterOverlay accessRights="rw" id="V_DirectParameters">
+					<Datatype xsi:type="RecordT" bitLength="128">
+						<RecordItem subindex="1" bitOffset="0">
+							<SimpleDatatype xsi:type="IntegerT" bitLength="16"/>
+							<Name textId="TN_IntegerParameter"/>
+						</RecordItem>
+						<RecordItem subindex="2" bitOffset="16">
+							<SimpleDatatype xsi:type="BooleanT"/>
+							<Name textId="TN_BooleanParameter_1"/>
+						</RecordItem>
+						<RecordItem subindex="3" bitOffset="17">
+							<SimpleDatatype xsi:type="BooleanT"/>
+							<Name textId="TN_BooleanParameter_2"/>
+						</RecordItem>
+					</Datatype>
+					<Name textId="TN_DirectParameters"/>
+				</DirectParameterOverlay>
+			</VariableCollection>
+			<ProcessDataCollection>
+				<ProcessData id="P_ProcessData">
+					<ProcessDataIn bitLength="1" id="PI_ProcessDataIn">
+						<Datatype xsi:type="BooleanT"/>
+						<Name textId="TN_ProcessDataIn"/>
+					</ProcessDataIn>
+				</ProcessData>
+			</ProcessDataCollection>
+			<UserInterface>
+				<MenuCollection>
+					<Menu id="M_Sample">
+						<RecordItemRef variableId="V_DirectParameters" subindex="1"/>
+					</Menu>
+				</MenuCollection>
+				<ObserverRoleMenuSet>
+					<IdentificationMenu menuId="M_Sample"/>
+				</ObserverRoleMenuSet>
+				<MaintenanceRoleMenuSet>
+					<IdentificationMenu menuId="M_Sample"/>
+				</MaintenanceRoleMenuSet>
+				<SpecialistRoleMenuSet>
+					<IdentificationMenu menuId="M_Sample"/>
+				</SpecialistRoleMenuSet>
+			</UserInterface>
+		</DeviceFunction>
+	</ProfileBody>
+	<CommNetworkProfile xsi:type="IOLinkCommNetworkProfileT" iolinkRevision="V1.1">
+		<TransportLayers>
+			<PhysicalLayer bitrate="COM2" minCycleTime="2300" sioSupported="true" mSequenceCapability="0">
+				<Connection xsi:type="M5ConnectionT">
+					<ProductRef productId="DirectParamsDeviceVariant"/>
+					<Wire1/>
+					<Wire2 function="NC"/>
+					<Wire3/>
+					<Wire4/>
+				</Connection>
+			</PhysicalLayer>
+		</TransportLayers>
+		<Test/>
+	</CommNetworkProfile>
+	<ExternalTextCollection>
+		<PrimaryLanguage xml:lang="en">
+			<TextRedefine id="STD_TN_DeviceSpecific_16"  value="Integer Parameter (least significant octet)"/>
+			<TextRedefine id="STD_TN_DeviceSpecific_15"  value="Integer Parameter (most significant octet)"/>
+			<TextRedefine id="STD_TN_DeviceSpecific_14"  value="Boolean Parameters"/>
+			<Text id="T_VendorText" value="Breakthrough in Communication"/>
+			<Text id="T_DeviceName" value="DirectParams Device"/>
+			<Text id="T_VendorUrl" value="http://www.io-link.com"/>
+			<Text id="T_DeviceFamily" value="DirectParams Device Family"/>
+			<Text id="TN_DirectParamsDeviceVariant" value="DirectParams Device"/>
+			<Text id="TD_DirectParamsDeviceVariant" value="Sample for a device with direct parameters"/>
+			<Text id="TN_DirectParameters" value="Direct Parameters"/>
+			<Text id="TN_IntegerParameter" value="Integer Parameter"/>
+			<Text id="TN_BooleanParameter_1" value="Boolean Parameter 1"/>
+			<Text id="TN_BooleanParameter_2" value="Boolean Parameter 2"/>
+			<Text id="TN_ProcessDataIn" value="Process Data In"/>
+		</PrimaryLanguage>
+	</ExternalTextCollection>
+	<Stamp crc="0"><Checker name="IODD-Checker V1.1.1" version="V1.1.1.0"/></Stamp>
+</IODevice>

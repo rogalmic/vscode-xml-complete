@@ -40,12 +40,12 @@ It does not require any runtime like `java`, `python` or `xmllint`, while does p
  }
 ]
 ```
-### Using `schemaLocation` attribute directly in edited file
+### Using `schemaLocation` or `noNamespaceSchemaLocation` attribute directly in edited file
 ```xml
 <root
 ...
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
 />
 ```
 

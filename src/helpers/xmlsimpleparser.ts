@@ -71,6 +71,8 @@ export default class XmlSimpleParser {
 
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
+						result.push(...attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd")));
+					} else if (attr.name.endsWith(":noNamespaceSchemaLocation")) {
 						result.push(...attr.value.split(/\s+/));
 					} else if (attr.name === "xmlns") {
 						let newUriStrings = schemaMapping
