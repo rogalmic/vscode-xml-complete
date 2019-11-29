@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/2.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/autosaros/Standards/master/Adaptive%20Platform/19.03/MethodologyAndManifests/AUTOSAR_MMOD_XMLSchema/AUTOSAR_00047.xsd">
+    <ADMIN-DATA>
+        <LANGUAGE>EN</LANGUAGE>
+        <USED-LANGUAGES>
+            <L-10 L="EN" xml:space="default">English</L-10>
+        </USED-LANGUAGES>
+    </ADMIN-DATA>
+    <AR-PACKAGES>
+        <AR-PACKAGE>
+            <SHORT-NAME>AUTOSAR</SHORT-NAME>
+            <LONG-NAME>
+                <L-4 L="EN">AUTOSAR</L-4>
+            </LONG-NAME>
+            <AR-PACKAGES>
+                <AR-PACKAGE> 
+                    <SHORT-NAME>AISpecification</SHORT-NAME>
+                    <LONG-NAME>
+                        <L-4 L="EN">AISpecification</L-4>
+                    </LONG-NAME>
+                    <AR-PACKAGES>
+                        <AR-PACKAGE>
+                            <SHORT-NAME>BaseTypes</SHORT-NAME>
+                            <CATEGORY>STANDARD</CATEGORY>
+                            <ELEMENTS>
+                                <SW-BASE-TYPE>
+                                    <SHORT-NAME>SInt8</SHORT-NAME>
+                                    <CATEGORY>FIXED_LENGHT</CATEGORY>
+                                    <BASE-TYPE-SIZE>8</BASE-TYPE-SIZE>
+                                    <BASE-TYPE-ENCODING>UTF-8</BASE-TYPE-ENCODING>
+                                </SW-BASE-TYPE>
+                            </ELEMENTS>
+                        </AR-PACKAGE>
+                    </AR-PACKAGES>
+                </AR-PACKAGE>
+                <AR-PACKAGE>
+                    <SHORT-NAME>AUTOSAR_PhysicalUnits</SHORT-NAME>
+                </AR-PACKAGE>
+            </AR-PACKAGES>
+        </AR-PACKAGE>
+    </AR-PACKAGES>
+</AUTOSAR>

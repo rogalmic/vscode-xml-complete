@@ -12,7 +12,8 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 		let documentContent = textDocument.getText();
 		let offset = textDocument.offsetAt(position);
 		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
-		let wordRange = textDocument.getWordRangeAtPosition(position);
+		// https://github.com/microsoft/vscode/commits/master/src/vs/editor/common/model/wordHelper.ts
+		let wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
 		let word = textDocument.getText(wordRange);
 
 		let noDefinitionUri = (e: string) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;

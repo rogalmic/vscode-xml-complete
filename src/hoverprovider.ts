@@ -17,8 +17,8 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 		let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
 
 		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
-
-		let wordRange = textDocument.getWordRangeAtPosition(position);
+		// https://github.com/microsoft/vscode/commits/master/src/vs/editor/common/model/wordHelper.ts
+		let wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
 		let word  = textDocument.getText(wordRange);
 
 		let resultTexts: CompletionString[];

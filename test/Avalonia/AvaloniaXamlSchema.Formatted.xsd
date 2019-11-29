@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:schemaLocation="https://www.w3.org/2001/XMLSchema.xsd">
+<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:simpleType name="text">
     <xs:restriction base="xs:string" />
   </xs:simpleType>
@@ -35,7 +35,9 @@
     <xs:attribute name="IsFocused" type="text" />
     <xs:attribute name="IsHitTestVisible" type="text" />
     <xs:attribute name="IsPointerOver" type="text" />
+    <xs:attribute name="IsEffectivelyEnabled" type="text" />
     <xs:attribute name="KeyBindings" type="text" />
+    <xs:attribute name="GestureRecognizers" type="text" />
     <xs:attribute name="Width" type="text" />
     <xs:attribute name="Height" type="text" />
     <xs:attribute name="MinWidth" type="text" />
@@ -103,11 +105,14 @@
       <xs:element ref="ListBoxItem" />
       <xs:element ref="Menu" />
       <xs:element ref="MenuItem" />
+      <xs:element ref="NativeMenuBar" />
+      <xs:element ref="ReversibleStackPanel" />
       <xs:element ref="NumericUpDown" />
       <xs:element ref="Panel" />
       <xs:element ref="ProgressBar" />
       <xs:element ref="RadioButton" />
       <xs:element ref="RepeatButton" />
+      <xs:element ref="ItemsRepeater" />
       <xs:element ref="ScrollViewer" />
       <xs:element ref="Separator" />
       <xs:element ref="Slider" />
@@ -137,16 +142,19 @@
       <xs:element ref="ItemsPresenter" />
       <xs:element ref="ScrollContentPresenter" />
       <xs:element ref="TextPresenter" />
+      <xs:element ref="NotificationCard" />
+      <xs:element ref="WindowNotificationManager" />
       <xs:element ref="EmbeddableControlRoot" />
       <xs:element ref="CalendarButton" />
       <xs:element ref="CalendarDayButton" />
       <xs:element ref="CalendarItem" />
       <xs:element ref="AccessText" />
-      <xs:element ref="AdornerDecorator" />
       <xs:element ref="AdornerLayer" />
       <xs:element ref="HeaderedContentControl" />
       <xs:element ref="HeaderedItemsControl" />
       <xs:element ref="HeaderedSelectingItemsControl" />
+      <xs:element ref="OverlayLayer" />
+      <xs:element ref="OverlayPopupHost" />
       <xs:element ref="Popup" />
       <xs:element ref="PopupRoot" />
       <xs:element ref="ScrollBar" />
@@ -158,6 +166,7 @@
       <xs:element ref="ToggleButton" />
       <xs:element ref="Track" />
       <xs:element ref="UniformGrid" />
+      <xs:element ref="VisualLayerManager" />
     </xs:choice>
   </xs:group>
   <xs:element name="AutoCompleteBox">
@@ -200,11 +209,6 @@
           <xs:attribute name="ValueMemberBinding" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the "T:Avalonia.Data.Binding" that is used to get the values for display in the text portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="ValueMemberSelector" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets the MemberSelector that is used to get values for display in the text portion of the "T:Avalonia.Controls.AutoCompleteBox" control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedItem" type="text">
@@ -323,6 +327,7 @@
               <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -566,7 +571,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -596,6 +600,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -646,7 +651,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -751,7 +755,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -859,7 +862,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -935,6 +937,7 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
+          <xs:attribute name="ShowGridLines" type="text" />
           <xs:attribute name="ColumnDefinitions" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the columns definitions for the grid.</xs:documentation>
@@ -1021,11 +1024,6 @@
               <xs:documentation>Gets or sets the data template used to display the items in the control.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="MemberSelector" type="text">
-            <xs:annotation>
-              <xs:documentation>Selects a member from "P:Avalonia.Controls.ItemsControl.Items" to use as the list item.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
           <xs:attribute name="Presenter" type="text">
             <xs:annotation>
               <xs:documentation>Gets the items presenter control.</xs:documentation>
@@ -1057,6 +1055,7 @@
               <xs:documentation>Gets or sets a graphics transformation that should apply to this element when layout is performed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="UseRenderTransform" type="text" />
           <xs:attribute name="TransformRoot" type="text" />
           <xs:attribute name="Child" type="text" />
           <xs:attribute name="Padding" type="text" />
@@ -1091,7 +1090,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1154,7 +1152,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1227,7 +1224,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1239,6 +1235,37 @@
           <xs:attribute name="Foreground" type="text" />
           <xs:attribute name="Padding" type="text" />
           <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NativeMenuBar">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReversibleStackPanel">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="ReverseOrder" type="text" />
+          <xs:attribute name="Spacing" type="text" />
+          <xs:attribute name="Orientation" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -1395,6 +1422,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -1434,6 +1462,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -1450,6 +1479,22 @@
           <xs:attribute name="Foreground" type="text" />
           <xs:attribute name="Padding" type="text" />
           <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ItemsRepeater">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Layout" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="HorizontalCacheLength" type="text" />
+          <xs:attribute name="VerticalCacheLength" type="text" />
+          <xs:attribute name="ItemsSourceView" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -1635,7 +1680,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1763,8 +1807,12 @@
           <xs:attribute name="CaretIndex" type="text" />
           <xs:attribute name="IsReadOnly" type="text" />
           <xs:attribute name="PasswordChar" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionForegroundBrush" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
           <xs:attribute name="SelectionStart" type="text" />
           <xs:attribute name="SelectionEnd" type="text" />
+          <xs:attribute name="MaxLength" type="text" />
           <xs:attribute name="Text" type="text" />
           <xs:attribute name="TextAlignment" type="text" />
           <xs:attribute name="Watermark" type="text" />
@@ -1851,7 +1899,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1900,7 +1947,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -1979,7 +2025,6 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="Screens" type="text" />
           <xs:attribute name="PlatformImpl" type="text">
             <xs:annotation>
               <xs:documentation>Gets the platform-specific window implementation.</xs:documentation>
@@ -2025,8 +2070,9 @@
               <xs:documentation>Gets or sets the startup location of the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="IsActive" type="text" />
           <xs:attribute name="Position" type="text" />
+          <xs:attribute name="IsActive" type="text" />
+          <xs:attribute name="Screens" type="text" />
           <xs:attribute name="Owner" type="text" />
           <xs:attribute name="Topmost" type="text" />
           <xs:attribute name="ClientSize" type="text" />
@@ -2064,11 +2110,7 @@
               <xs:documentation>Gets a value that indicates whether the window is active.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="Position" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets the window position in screen coordinates.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
+          <xs:attribute name="Screens" type="text" />
           <xs:attribute name="Owner" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the owner of the window.</xs:documentation>
@@ -2113,6 +2155,8 @@
               <xs:documentation>Gets or sets the orientation in which child controls will be layed out.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="ItemWidth" type="text" />
+          <xs:attribute name="ItemHeight" type="text" />
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="Background" type="text" />
         </xs:extension>
@@ -2131,9 +2175,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2153,9 +2195,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2174,9 +2214,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2195,9 +2233,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2216,9 +2252,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2236,9 +2270,7 @@
           <xs:attribute name="StrokeDashArray" type="text" />
           <xs:attribute name="StrokeDashOffset" type="text" />
           <xs:attribute name="StrokeThickness" type="text" />
-          <xs:attribute name="StrokeDashCap" type="text" />
-          <xs:attribute name="StrokeStartLineCap" type="text" />
-          <xs:attribute name="StrokeEndLineCap" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
           <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2279,7 +2311,6 @@
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Panel" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2362,7 +2393,6 @@
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Panel" type="text" />
         </xs:extension>
       </xs:complexContent>
@@ -2420,6 +2450,9 @@
         <xs:extension base="Control">
           <xs:attribute name="CaretIndex" type="text" />
           <xs:attribute name="PasswordChar" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionForegroundBrush" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
           <xs:attribute name="SelectionStart" type="text" />
           <xs:attribute name="SelectionEnd" type="text" />
           <xs:attribute name="Background" type="text" />
@@ -2432,6 +2465,51 @@
           <xs:attribute name="FormattedText" type="text" />
           <xs:attribute name="TextWrapping" type="text" />
           <xs:attribute name="TextAlignment" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NotificationCard">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsClosing" type="text" />
+          <xs:attribute name="IsClosed" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WindowNotificationManager">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="MaxItems" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -2475,6 +2553,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -2504,6 +2583,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -2574,17 +2654,6 @@
           <xs:attribute name="FormattedText" type="text" />
           <xs:attribute name="TextWrapping" type="text" />
           <xs:attribute name="TextAlignment" type="text" />
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="AdornerDecorator">
-    <xs:complexType mixed="true">
-      <xs:complexContent>
-        <xs:extension base="Control">
-          <xs:attribute name="AdornerLayer" type="text" />
-          <xs:attribute name="Child" type="text" />
-          <xs:attribute name="Padding" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -2662,7 +2731,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -2703,8 +2771,42 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OverlayLayer">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AvailableSize" type="text" />
+          <xs:attribute name="Children" type="text" />
+          <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OverlayPopupHost">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="HostedVisualTreeRoot" type="text" />
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
@@ -2726,6 +2828,7 @@
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
+          <xs:attribute name="Host" type="text" />
           <xs:attribute name="Child" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the control to display in the popup.</xs:documentation>
@@ -2766,11 +2869,6 @@
               <xs:documentation>Gets or sets the control that is used to determine the popup's position.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="PopupRoot" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets the root of the popup window.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
           <xs:attribute name="StaysOpen" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets a value indicating whether the popup should stay open when the popup is pressed or loses focus.</xs:documentation>
@@ -2781,6 +2879,7 @@
               <xs:documentation>Gets or sets whether this popup appears on top of all other windows</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="IsPointerOverPopup" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -2798,7 +2897,7 @@
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsActive" type="text" />
-          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="Screens" type="text" />
           <xs:attribute name="Owner" type="text" />
           <xs:attribute name="Topmost" type="text" />
           <xs:attribute name="ClientSize" type="text" />
@@ -2891,7 +2990,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -2919,7 +3017,6 @@
           <xs:attribute name="ItemCount" type="text" />
           <xs:attribute name="ItemsPanel" type="text" />
           <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="MemberSelector" type="text" />
           <xs:attribute name="Presenter" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
@@ -3052,6 +3149,7 @@
           <xs:attribute name="HotKey" type="text" />
           <xs:attribute name="CommandParameter" type="text" />
           <xs:attribute name="IsDefault" type="text" />
+          <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -3084,6 +3182,7 @@
           <xs:attribute name="Thumb" type="text" />
           <xs:attribute name="IncreaseButton" type="text" />
           <xs:attribute name="DecreaseButton" type="text" />
+          <xs:attribute name="IsDirectionReversed" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -3112,6 +3211,19 @@
           </xs:attribute>
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VisualLayerManager">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="IsPopup" type="text" />
+          <xs:attribute name="AdornerLayer" type="text" />
+          <xs:attribute name="OverlayLayer" type="text" />
+          <xs:attribute name="Child" type="text" />
+          <xs:attribute name="Padding" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>

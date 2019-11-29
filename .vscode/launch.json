@@ -24,6 +24,7 @@
 				"${workspaceFolder}/test/Custom1/App.view.xml",
 				"${workspaceFolder}/test/Custom2/StackOverflowTest.xml",
 				"${workspaceFolder}/test/Custom3/IO-Link-01-DirectParamsDevice-20130515-IODD1.1.xml",
+				"${workspaceFolder}/test/Custom4/Autosar.xml",
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
