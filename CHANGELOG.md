@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.2...v0.2.3) (2019-11-29)
+
+
+### Bug Fixes
+
+* Allow XML nodes with dash or dot in hover/definition providers. ([c255028](https://github.com/rogalmic/vscode-xml-complete/commit/c255028a6015821d1cc925ca79a223ab59d9a3f3))
+
 ### [0.2.2](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.1...v0.2.2) (2019-09-26)
 
 
