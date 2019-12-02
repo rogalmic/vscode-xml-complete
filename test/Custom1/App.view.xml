@@ -4,7 +4,7 @@
     xmlns="sap.m"
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
-    core:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Custom1/sap.ui.core.xsd"
+    core:noNamespaceSchemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Custom1/sap.ui.core.xsd"
     xmlns:unified="sap.ui.unified">
     <Shell id="shell">
         <App id="app">

@@ -87,6 +87,11 @@
           "scope": "resource",
           "default": [
             {
+              "xmlns": "http://www.w3.org/2001/XMLSchema",
+              "xsdUri": "https://www.w3.org/2001/XMLSchema.xsd",
+              "strict": true
+            },
+            {
               "xmlns": "https://github.com/avaloniaui",
               "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd",
               "strict": false

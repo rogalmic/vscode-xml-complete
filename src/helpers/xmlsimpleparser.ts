@@ -30,7 +30,9 @@ export default class XmlSimpleParser {
 						let schemaTagAttributes = xsdTags.loadAttributesEx(nodeNameSplitted[0], nsMap);
 						nodeNameSplitted.shift();
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0 && a !== "xmlns") {
+							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0
+								&& a !== "xmlns" && !a.startsWith("xmlns:")
+								&& !a.endsWith(":schemaLocation") && !a.endsWith(":noNamespaceSchemaLocation")) {
 								result.push({
 									line: parser.line,
 									column: parser.column,
@@ -70,7 +72,7 @@ export default class XmlSimpleParser {
 				};
 
 				let ensureAbsoluteUri = (u : string) =>
-					(u.indexOf("/") > 0 || documentUri.startsWith("git")) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
+					(u.indexOf("/") > 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
 
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
@@ -95,7 +97,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onend = () => {
-					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
+					resolve(result.filter((v, i, a) => a.indexOf(v) === i).filter(v => !v.startsWith("git")));
 				};
 
 				parser.write(xmlContent).close();

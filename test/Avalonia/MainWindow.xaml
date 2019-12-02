@@ -3,7 +3,6 @@
         Title="ClootilsNetCoreUI"
         xmlns:vm="clr-namespace:ClootilsNetCoreUI.VS2017"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
         Background="#EEEEEE"
         MinWidth="700"
         MinHeight="500">
