@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.3...v0.2.4) (2019-12-02)
+
+
+### Features
+
+* Limited support for relative local xsd file location. ([2ab3135](https://github.com/rogalmic/vscode-xml-complete/commit/2ab31350df3bd1c17bdc321db8fa08ecf850bd2c))
+
 ### [0.2.3](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.2...v0.2.3) (2019-11-29)
 
 
