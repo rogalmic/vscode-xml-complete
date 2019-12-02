@@ -11,6 +11,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
     private diagnosticCollection: vscode.DiagnosticCollection;
     private delayCount: number = 0;
     private textDocument: vscode.TextDocument;
+    private linterActive: boolean = false;
 
     constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
         this.schemaPropertiesArray = schemaPropertiesArray;
@@ -49,12 +50,18 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
         const tick = 100;
 
-        while (this.delayCount > 0) {
+        while (this.delayCount > 0 || this.linterActive) {
             await new Promise(resolve => setTimeout(resolve, tick));
             this.delayCount -= tick;
         }
 
-        this.triggerLint(this.textDocument);
+        try {
+            this.linterActive = true;
+            await this.triggerLint(this.textDocument);
+        }
+        finally {
+            this.linterActive = false;
+        }
     }
 
     private async triggerLint(textDocument: vscode.TextDocument): Promise<void> {
@@ -67,7 +74,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
         try {
             let documentContent = textDocument.getText();
 
-            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping))
+            let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true), globalSettings.schemaMapping))
                 .map(u => vscode.Uri.parse(u))
                 .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString()) === i);
 

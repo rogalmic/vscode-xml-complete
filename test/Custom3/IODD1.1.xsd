@@ -1,0 +1,328 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:iodd="http://www.io-link.com/IODD/2010/10" targetNamespace="http://www.io-link.com/IODD/2010/10" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	<xsd:include schemaLocation="IODD-Primitives1.1.xsd"/>
+	<xsd:include schemaLocation="IODD-Datatypes1.1.xsd"/>
+	<xsd:include schemaLocation="IODD-Variables1.1.xsd"/>
+	<xsd:include schemaLocation="IODD-Events1.1.xsd"/>
+	<xsd:include schemaLocation="IODD-UserInterface1.1.xsd"/>
+	<xsd:include schemaLocation="IODD-Communication1.1.xsd"/>
+	<xsd:element name="IODevice">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="DocumentInfo" type="DocumentInfoT"/>
+				<xsd:element name="ProfileHeader" type="ProfileHeaderT"/>
+				<xsd:element name="ProfileBody" type="ProfileBodyT"/>
+				<xsd:element name="CommNetworkProfile" type="CommNetworkProfileT"/>
+				<xsd:element name="ExternalTextCollection" type="ExternalTextCollectionT">
+					<xsd:unique name="Language">
+						<xsd:selector xpath="iodd:PrimaryLanguage|iodd:Language"/>
+						<xsd:field xpath="@xml:lang"/>
+					</xsd:unique>
+				</xsd:element>
+				<xsd:element name="Stamp" type="StampT">
+					<xsd:annotation>
+						<xsd:documentation>Filled out by the IODD Checker.</xsd:documentation>
+					</xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+		<!-- unique, key -->
+		<xsd:key name="ProductRef_ProductId">
+			<xsd:selector xpath=".//iodd:ProductRef"/>
+			<xsd:field xpath="@productId"/>
+		</xsd:key>
+		<xsd:key name="DeviceVariant_ProductId">
+			<xsd:selector xpath=".//iodd:DeviceVariant"/>
+			<xsd:field xpath="@productId"/>
+		</xsd:key>
+		<xsd:unique name="All_Datatype_Id">
+			<xsd:selector xpath=".//iodd:Datatype"/>
+			<xsd:field xpath="@id"/>
+		</xsd:unique>
+		<xsd:key name="Datatype_Id">
+			<xsd:selector xpath=".//iodd:DatatypeCollection/iodd:Datatype"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="Variable_Id">
+			<xsd:selector xpath=".//iodd:StdVariableRef|.//iodd:DirectParameterOverlay|.//iodd:Variable"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:unique name="Variable_Index">
+			<xsd:selector xpath=".//iodd:Variable"/>
+			<xsd:field xpath="@index"/>
+		</xsd:unique>
+		<xsd:key name="ProcessData_Id">
+			<xsd:selector xpath=".//iodd:ProcessDataIn|.//iodd:ProcessDataOut"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="Menu_Id">
+			<xsd:selector xpath=".//iodd:Menu"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<xsd:key name="PrimaryLanguage_Id">
+			<xsd:selector xpath=".//iodd:PrimaryLanguage/iodd:Text"/>
+			<xsd:field xpath="@id"/>
+		</xsd:key>
+		<!-- keyref -->
+		<xsd:keyref name="ProductRef_ProductId_Ref" refer="DeviceVariant_ProductId">
+			<xsd:selector xpath=".//iodd:ProductRef"/>
+			<xsd:field xpath="@productId"/>
+		</xsd:keyref>
+		<xsd:keyref name="DeviceVariant_ProductId_Ref" refer="ProductRef_ProductId">
+			<xsd:selector xpath=".//iodd:DeviceVariant"/>
+			<xsd:field xpath="@productId"/>
+		</xsd:keyref>
+		<xsd:keyref name="_TextId" refer="PrimaryLanguage_Id">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@textId"/>
+		</xsd:keyref>
+		<xsd:keyref name="_VariableId" refer="Variable_Id">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@variableId"/>
+		</xsd:keyref>
+		<xsd:keyref name="_DatatypeId" refer="Datatype_Id">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@datatypeId"/>
+		</xsd:keyref>
+		<xsd:keyref name="_ProcessDataId" refer="ProcessData_Id">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@processDataId"/>
+		</xsd:keyref>
+		<xsd:keyref name="_MenuId" refer="Menu_Id">
+			<xsd:selector xpath=".//*"/>
+			<xsd:field xpath="@menuId"/>
+		</xsd:keyref>
+	</xsd:element>
+	<xsd:complexType name="ProfileHeaderT">
+		<xsd:sequence>
+			<xsd:element name="ProfileIdentification">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="IO Device Profile"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ProfileRevision">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="1.1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ProfileName">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="Device Profile for IO Devices"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ProfileSource">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:enumeration value="IO-Link Consortium"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ProfileClassID">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:NMTOKEN">
+						<xsd:enumeration value="Device"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="ISO15745Reference">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ISO15745Part" type="xsd:positiveInteger" fixed="1"/>
+						<xsd:element name="ISO15745Edition" type="xsd:positiveInteger" fixed="1"/>
+						<xsd:element name="ProfileTechnology" type="xsd:string" fixed="IODD"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ProfileBodyT">
+		<xsd:sequence>
+			<xsd:element name="DeviceIdentity" type="DeviceIdentityT"/>
+			<xsd:element name="DeviceFunction" type="DeviceFunctionT"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="DeviceIdentityT">
+		<xsd:sequence>
+			<xsd:element name="VendorText" type="TextRefT"/>
+			<xsd:element name="VendorUrl" type="TextRefT"/>
+			<xsd:element name="VendorLogo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>This logo shall be available as PNG, 160x90 pixels. The filename must not have a path prefix and shall follow the naming rules.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:attribute name="name" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="([\p{L}\d_#]+-)+logo\.png"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="DeviceName" type="TextRefT"/>
+			<xsd:element name="DeviceFamily" type="TextRefT"/>
+			<xsd:element name="DeviceVariantCollection" type="DeviceVariantCollectionT"/>
+		</xsd:sequence>
+		<xsd:attribute name="vendorId" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:unsignedShort">
+					<xsd:minInclusive value="1"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="vendorName" type="xsd:string" use="required"/>
+		<xsd:attribute name="deviceId" type="DeviceIdT" use="required"/>
+		<xsd:attribute name="additionalDeviceIds">
+			<xsd:simpleType>
+				<xsd:restriction base="DeviceIdListT">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="255"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:simpleType name="DeviceIdListT">
+		<xsd:list itemType="DeviceIdT"/>
+	</xsd:simpleType>
+	<xsd:complexType name="DeviceVariantT">
+		<xsd:sequence>
+			<xsd:element name="Name" type="TextRefT"/>
+			<xsd:element name="Description" type="TextRefT"/>
+		</xsd:sequence>
+		<xsd:attribute name="productId" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>This must be the same product ID as returned by the corresponding IO-Link index. This ensures unique identification of the device during scanning.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="deviceSymbol">
+			<xsd:annotation>
+				<xsd:documentation>The symbol shall be available as PNG, 160x160 pixels.
+The filename must not have a path prefix and shall follow the naming rules.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="([\p{L}\d_#]+-)+pic\.png"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="deviceIcon">
+			<xsd:annotation>
+				<xsd:documentation>The icon shall be available as PNG, 48x48 pixels.
+The filename must not have a path prefix and shall follow the naming rules.</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:pattern value="([\p{L}\d_#]+-)+icon\.png"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="DeviceVariantCollectionT">
+		<xsd:complexContent>
+			<xsd:extension base="CollectionT">
+				<xsd:sequence>
+					<xsd:element name="DeviceVariant" type="DeviceVariantT" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="DeviceFunctionT">
+		<xsd:sequence>
+			<xsd:element name="Features" type="FeaturesT"/>
+			<xsd:element name="DatatypeCollection" type="DatatypeCollectionT" minOccurs="0"/>
+			<xsd:element name="VariableCollection" type="VariableCollectionT">
+				<xsd:annotation>
+					<xsd:documentation>Simple collection of all variables supported by the device.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ProcessDataCollection" type="ProcessDataCollectionT">
+				<xsd:unique name="AllProcessData_Id">
+					<xsd:selector xpath="iodd:ProcessData|iodd:ProcessData/iodd:ProcessDataIn|iodd:ProcessData/iodd:ProcessDataOut"/>
+					<xsd:field xpath="@id"/>
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="ErrorTypeCollection" type="ErrorTypeCollectionT" minOccurs="0">
+				<xsd:unique name="ErrorType_code">
+					<xsd:selector xpath="iodd:StdErrorTypeRef|iodd:ErrorType"/>
+					<xsd:field xpath="@code"/>
+					<xsd:field xpath="@additionalCode"/>
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="EventCollection" type="EventCollectionT" minOccurs="0">
+				<xsd:unique name="Event_code">
+					<xsd:selector xpath="iodd:StdEventRef|iodd:Event"/>
+					<xsd:field xpath="@code"/>
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="UserInterface" type="UserInterfaceT"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="FeaturesT">
+		<xsd:sequence>
+			<xsd:element name="SupportedAccessLocks" type="SupportedAccessLocksT" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="blockParameter" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="dataStorage" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="profileCharacteristic">
+			<xsd:simpleType>
+				<xsd:restriction base="ProfileCharacteristicListT">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="32"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:simpleType name="ProfileCharacteristicListT">
+		<xsd:list itemType="xsd:unsignedShort"/>
+	</xsd:simpleType>
+	<xsd:complexType name="SupportedAccessLocksT">
+		<xsd:attribute name="parameter" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="dataStorage" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="localParameterization" type="xsd:boolean" use="required"/>
+		<xsd:attribute name="localUserInterface" type="xsd:boolean" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessDataT">
+		<xsd:complexContent>
+			<xsd:extension base="ObjectT">
+				<xsd:sequence>
+					<xsd:element name="Condition" type="ConditionT" minOccurs="0"/>
+					<xsd:element name="ProcessDataIn" type="ProcessDataItemT" minOccurs="0"/>
+					<xsd:element name="ProcessDataOut" type="ProcessDataItemT" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessDataCollectionT">
+		<xsd:complexContent>
+			<xsd:extension base="CollectionT">
+				<xsd:sequence>
+					<xsd:element name="ProcessData" type="ProcessDataT" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ProcessDataItemT">
+		<xsd:complexContent>
+			<xsd:extension base="DataItemT">
+				<xsd:sequence>
+					<xsd:element name="Name" type="TextRefT"/>
+				</xsd:sequence>
+				<xsd:attribute name="bitLength" use="required">
+					<xsd:simpleType>
+						<xsd:restriction base="BitCountT">
+							<xsd:minInclusive value="1"/>
+							<xsd:maxInclusive value="256"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

@@ -59,7 +59,7 @@ xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/rogalmic/vscode
 | `http`    | XSD from http server            | `http://www.example.com/path/to/name`
 | `https`   | XSD from https server           | `https://www.example.com/path/to/name`
 
-XSD location URIs can be [whitespace separated](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Svg/Test.svg).
+XSD location URIs can be [whitespace separated](https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Svg/Test.svg). Only absolute paths are fully supported, but when a [plain filename](https://github.com/rogalmic/vscode-xml-complete/blob/master/test/Custom3/IO-Link-01-DirectParamsDevice-20130515-IODD1.1.xml) is provided, the extension will search for schema next to local file for convenience.
 
 ## Known Issues
 

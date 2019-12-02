@@ -11,7 +11,7 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 	async provideHover(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.Hover> {
 		let documentContent = textDocument.getText();
 		let offset = textDocument.offsetAt(position);
-		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, globalSettings.schemaMapping))
+		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true),  globalSettings.schemaMapping))
 			.map(u => vscode.Uri.parse(u));
 
 		let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
