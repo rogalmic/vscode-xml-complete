@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.4...v0.2.5) (2019-12-02)
+
+
+### Bug Fixes
+
+* Allow arbitrary xml attributes (xmlns, schemaLocation). ([d9995fb](https://github.com/rogalmic/vscode-xml-complete/commit/d9995fbe8994423bdff8c0bf5c195b2e2d8fa9ab))
+
 ### [0.2.4](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.3...v0.2.4) (2019-12-02)
 
 
