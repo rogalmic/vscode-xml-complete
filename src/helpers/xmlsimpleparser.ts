@@ -1,4 +1,4 @@
-import { XmlTagCollection, XmlDiagnosticData, XmlScope } from '../types';
+import { XmlTagCollection, XmlDiagnosticData, XmlScope, CompletionString } from '../types';
 
 export default class XmlSimpleParser {
 
@@ -9,6 +9,16 @@ export default class XmlSimpleParser {
 		return new Promise<XmlDiagnosticData[]>(
 			(resolve) => {
 				let result: XmlDiagnosticData[] = [];
+				let nodeCache = new Map<string, CompletionString[]>();
+
+				let getAttributes = (nodeName: string) => {
+
+					if (!nodeCache.has(nodeName)) {
+						nodeCache.set(nodeName, xsdTags.loadAttributesEx(nodeName, nsMap));
+					}
+
+					return nodeCache.get(nodeName);
+				};
 
 				parser.onerror = () => {
 					if (undefined === result.find(e => e.line === parser.line)) {
@@ -27,7 +37,7 @@ export default class XmlSimpleParser {
 					let nodeNameSplitted: Array<string> = tagData.name.split('.');
 
 					if (xsdTags.loadTagEx(nodeNameSplitted[0], nsMap) !== undefined) {
-						let schemaTagAttributes = xsdTags.loadAttributesEx(nodeNameSplitted[0], nsMap);
+						let schemaTagAttributes = getAttributes(nodeNameSplitted[0]) ?? [];
 						nodeNameSplitted.shift();
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
 							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0
