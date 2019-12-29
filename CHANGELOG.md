@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.6](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.5...v0.2.6) (2019-12-29)
+
+
+### Bug Fixes
+
+* Improve linter performance. ([2005888](https://github.com/rogalmic/vscode-xml-complete/commit/2005888df337ca565957508d97d4584bb39cfd6e))
+* Totally disable linter for gitfs uris. ([75c614a](https://github.com/rogalmic/vscode-xml-complete/commit/75c614a890d5ff8975099056e56063ec0d8c2aba))
+
 ### [0.2.5](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.4...v0.2.5) (2019-12-02)
 
 
