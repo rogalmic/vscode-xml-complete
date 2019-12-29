@@ -9,7 +9,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
     private documentListener: vscode.Disposable;
     private diagnosticCollection: vscode.DiagnosticCollection;
-    private delayCount: number = 0;
+    private delayCount: number = Number.MIN_SAFE_INTEGER;
     private textDocument: vscode.TextDocument;
     private linterActive: boolean = false;
 
@@ -40,7 +40,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
     }
 
     private async triggerDelayedLint(textDocument: vscode.TextDocument, timeout: number = 2000): Promise<void> {
-        if (this.delayCount > 0) {
+        if (this.delayCount > Number.MIN_SAFE_INTEGER) {
             this.delayCount = timeout;
             this.textDocument = textDocument;
             return;
@@ -60,6 +60,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
             await this.triggerLint(this.textDocument);
         }
         finally {
+            this.delayCount = Number.MIN_SAFE_INTEGER;
             this.linterActive = false;
         }
     }

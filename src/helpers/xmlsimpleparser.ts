@@ -39,10 +39,12 @@ export default class XmlSimpleParser {
 					if (xsdTags.loadTagEx(nodeNameSplitted[0], nsMap) !== undefined) {
 						let schemaTagAttributes = getAttributes(nodeNameSplitted[0]) ?? [];
 						nodeNameSplitted.shift();
+
+						const xmlAllowed : Array<string> = [":schemaLocation", ":noNamespaceSchemaLocation", "xml:space"];
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
 							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0
 								&& a !== "xmlns" && !a.startsWith("xmlns:")
-								&& !a.endsWith(":schemaLocation") && !a.endsWith(":noNamespaceSchemaLocation")) {
+								&& xmlAllowed.findIndex(all => a.endsWith(all)) < 0) {
 								result.push({
 									line: parser.line,
 									column: parser.column,
@@ -77,6 +79,11 @@ export default class XmlSimpleParser {
 			(resolve) => {
 				let result: string[] = [];
 
+				if (documentUri.startsWith("git")) {
+					resolve(result);
+					return;
+				}
+
 				parser.onerror = () => {
 					parser.resume();
 				};
@@ -107,7 +114,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onend = () => {
-					resolve(result.filter((v, i, a) => a.indexOf(v) === i).filter(v => !v.startsWith("git")));
+					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
 				};
 
 				parser.write(xmlContent).close();

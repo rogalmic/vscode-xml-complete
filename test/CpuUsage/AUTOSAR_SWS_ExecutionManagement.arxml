@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/autosaros/Standards/master/Adaptive%20Platform/19.03/MethodologyAndManifests/AUTOSAR_MMOD_XMLSchema/AUTOSAR_00047.xsd">
+<AUTOSAR xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://autosar.org/schema/r4.0" xsi:noNamespaceSchemaLocation="AUTOSAR_00047.xsd">
   <ADMIN-DATA>
-    <LANGUAGE>EN</LANGUAGE> 
+    <LANGUAGE>EN</LANGUAGE>
     <USED-LANGUAGES>
       <L-10 L="EN" xml:space="preserve">EN</L-10>
     </USED-LANGUAGES>
@@ -360,7 +360,7 @@
                           </P>
                           <!--  ? GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
                           <!--  ? /GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
-                          <!-- 
+                          <!--
 Error at chapters/02_Acronyms/00_Acronyms:11:99 textvisiblespace: Tex-command not supported by Autosar tooling: textvisiblespace \textvisiblespace
  -->
                           <P>
@@ -2218,7 +2218,7 @@ Error at chapters/02_Acronyms/00_Acronyms:11:99 textvisiblespace: Tex-command no
                                   </P>
                                   <!--  ? GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
                                   <!--  ? /GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
-                                  <!-- 
+                                  <!--
 Error at chapters/07_FunctionalSpec/04_ApplicationLifecycleManagement.tex:189:91 textvisiblespace: Tex-command not supported by Autosar tooling: textvisiblespace \textvisiblespace
  -->
                                   <P>
@@ -2230,7 +2230,7 @@ Error at chapters/07_FunctionalSpec/04_ApplicationLifecycleManagement.tex:189:91
                                 </P>
                                 <!--  ? GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
                                 <!--  ? /GenericDocument2Arxml::ContentMetamodel::Report::Unsupported ?  -->
-                                <!-- 
+                                <!--
 Error at chapters/07_FunctionalSpec/04_ApplicationLifecycleManagement.tex:192:123 textvisiblespace: Tex-command not supported by Autosar tooling: textvisiblespace \textvisiblespace
  -->
                                 <P>
