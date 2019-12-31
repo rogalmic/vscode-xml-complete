@@ -112,9 +112,9 @@ export default class XsdParser {
 							return;
 						}
 
-						let currentCommentTarget =
-							stack
-								.filter(e => e.resultTagName !== undefined)[0];
+						let currentCommentTargets = stack.filter(e => e.resultTagName !== undefined);
+
+						let currentCommentTarget = currentCommentTargets[0];
 
 						if (!currentCommentTarget) {
 							return;
@@ -126,7 +126,10 @@ export default class XsdParser {
 								.forEach(e => e.tag.comment = t.trim());
 						}
 						else if (currentCommentTarget.tag.endsWith(":attribute")) {
+							let currentCommentTargetTag = currentCommentTargets[1];
+
 							result
+								.filter(e => currentCommentTargetTag && e.tag.name === currentCommentTargetTag.resultTagName)
 								.map(e => e.attributes)
 								.reduce((prev, next) => prev.concat(next), [])
 								.filter(e => currentCommentTarget && e.name === currentCommentTarget.resultTagName)
