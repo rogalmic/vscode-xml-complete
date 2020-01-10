@@ -281,7 +281,7 @@ export default class XmlSimpleParser {
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
 					let argString: string[] = [""];
 					for (let arg in tagData.attributes) {
-						argString.push(` ${arg}="${tagData.attributes[arg]}"`);
+						argString.push(` ${arg}="${getEncodedText(tagData.attributes[arg])}"`);
 					}
 
 					if (xmlDepthPath.length > 0) {

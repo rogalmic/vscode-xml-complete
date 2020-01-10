@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	$Id$
+	Copyright 2014 Memento, Inc. All rights reserved.
+-->
+<build xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="build.xsd">
+
+	<parser mode="csv">
+		<maxrows>10</maxrows>
+		<csv>
+			<!-- Input file has a header row -->
+			<header>true</header>
+			<!-- trim leading/trailing whitespace in each field-->
+			<trimresults>true</trimresults>
+			<!-- strip out any non printing characters -->
+			<stripcontrol>true</stripcontrol>
+		</csv>
+	</parser>
+
+	<!-- this is a comment -->
+
+	<output mode="csv">
+		<csv>
+			<delimiter>|</delimiter>
+			<header type="true">true</header>
+			<error>warn</error>
+		</csv>
+	</output>
+
+</build>

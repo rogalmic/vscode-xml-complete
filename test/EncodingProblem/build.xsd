@@ -1,0 +1,1617 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="build">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<!-- parser stage is optional but only allowed once -->
+				<xs:element ref="parser" minOccurs="0" maxOccurs="1"/>
+
+				<!-- allow zero or more stages -->
+				<xs:group ref="stage" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="parser">
+		<xs:complexType>
+			<xs:all>
+				<!-- list of include fields -->
+				<xs:element name="include" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+
+									<!-- data type for the field -->
+									<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+									<!-- optional name of the source field -->
+									<xs:attribute name="source" type="xs:string" use="optional"/>
+
+									<!-- optional error result (fail, skip, warn) -->
+									<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- list of exclude fields -->
+				<xs:element name="exclude" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to binary parser -->
+				<xs:element name="binary" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- multiple input file selection -->
+							<xs:element ref="selection" minOccurs="0"/>
+
+							<!-- file information special fields -->
+							<xs:element ref="file" minOccurs="0"/>
+
+							<!-- source data is compressed (gzip) -->
+							<xs:element name="compression" type="xs:string" minOccurs="0"/>
+
+							<!-- default encoding of source character data -->
+							<xs:element name="encoding" type="xs:string" minOccurs="0"/>
+
+							<!-- list of sections -->
+							<xs:element name="sections" minOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="section" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to csharp parser -->
+				<xs:element name="csharp" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<!-- multiple input file selection -->
+							<xs:element ref="selection" minOccurs="0"/>
+
+							<!-- file information special fields -->
+							<xs:element ref="file" minOccurs="0"/>
+
+							<!-- source data is compressed (gzip) -->
+							<xs:element name="compression" type="xs:string" minOccurs="0"/>
+
+							<xs:choice minOccurs="0" maxOccurs="unbounded">
+								<!-- provider compiler options (CompilerVersion) -->
+								<xs:element name="options" minOccurs="0" maxOccurs="1">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="option" minOccurs="1" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:attribute name="name" type="xs:string" use="required"/>
+													<xs:attribute name="value" type="xs:string" use="required"/>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+
+								<!-- assembly reference -->
+								<xs:element name="assembly" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="name" type="xs:string" use="required"/>
+										<xs:attribute name="path" type="xs:string" use="optional"/>
+									</xs:complexType>
+								</xs:element>
+
+								<!-- namespace reference -->
+								<xs:element name="using" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="namespace" type="xs:string" use="required"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+
+							<!-- csharp implementation code -->
+							<xs:element name="code" minOccurs="1" maxOccurs="1" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to csv parser -->
+				<xs:element name="csv" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- multiple input file selection -->
+							<xs:element ref="selection" minOccurs="0"/>
+
+							<!-- file information special fields -->
+							<xs:element ref="file" minOccurs="0"/>
+
+							<!-- iterate over input files -->
+							<xs:element name="iterate" minOccurs="0">
+								<xs:complexType>
+									<!-- count of iterations -->
+									<xs:attribute name="count" type="xs:string" default="1"/>
+
+									<!-- optional name of field of iteration index -->
+									<xs:attribute name="index" type="xs:string"/>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- source data is compressed (gzip) -->
+							<xs:element name="compression" type="xs:string" minOccurs="0"/>
+
+							<!-- encoding of source text file -->
+							<xs:element name="encoding" type="xs:string" minOccurs="0"/>
+
+							<!-- column delimiter character -->
+							<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+							<!-- escape character -->
+							<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+							<!-- quote character -->
+							<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+
+							<!-- comment character -->
+							<xs:element name="comment" type="xs:string" minOccurs="0" maxOccurs="1" default="#"/>
+
+							<!-- file has header flag -->
+							<xs:element name="header" minOccurs="0" maxOccurs="1" default="true">
+								<xs:complexType mixed="true">
+									<xs:attribute name="type" type="xs:boolean" default="true"/>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- first file has header flag -->
+							<xs:element name="firstfilehasheader" type="xs:boolean" minOccurs="0" default="false"/>
+
+							<!-- strip control character flag -->
+							<xs:element name="stripcontrol" type="xs:boolean" minOccurs="0" default="false"/>
+
+							<!-- trim leading and trailing blanks flag -->
+							<xs:element name="trimresults" type="xs:boolean" minOccurs="0" default="false"/>
+
+							<!-- parser error action (fail, skip) -->
+							<xs:element name="error" type="xs:string" minOccurs="0" default="fail"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration sepcific to the event server parser -->
+				<xs:element name="event" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- trace like condition for the event parser  -->
+							<xs:element name="query" type="xs:string" minOccurs="0" maxOccurs="1"/>
+							<!-- host name of event server -->
+							<xs:element name="host" type="xs:string" minOccurs="0" maxOccurs="1" default="localhost"/>
+							<!-- port number of event server -->
+							<xs:element name="port" type="xs:string" minOccurs="0" maxOccurs="1" default="1525"/>
+							<!-- start time for timestamped field; not applicable for reference data -->
+							<xs:element name="starttime" type="xs:string" minOccurs="0" maxOccurs="1"/>
+							<!-- endtime for timestamped data; not applicable for reference data -->
+							<xs:element name="endtime" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to Excel parser -->
+				<xs:element name="excel" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- multiple input file selection -->
+							<xs:element ref="selection" minOccurs="0"/>
+
+							<!-- file information special fields -->
+							<xs:element ref="file" minOccurs="0"/>
+
+							<!-- source data is compressed (gzip) -->
+							<xs:element name="compression" type="xs:string" minOccurs="0"/>
+
+							<!-- data has a header row -->
+							<xs:element name="header" type="xs:boolean" minOccurs="0" default="true"/>
+
+							<!-- column names are case sensitive -->
+							<xs:element name="casesensitive" type="xs:boolean" minOccurs="0" default="true"/>
+
+							<!-- type of spreadsheet (xls or xlsx) -->
+							<xs:element name="type" type="xs:string" minOccurs="0" default="xls"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to index parser -->
+				<xs:element name="index" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- number of record to read in each chunk from the index -->
+							<xs:element name="chunksize" type="xs:string" minOccurs="0" default="5000"/>
+
+							<!-- indicates if the special filename field should be included -->
+							<xs:element name="filename" type="xs:boolean" minOccurs="0" default="false"/>
+
+							<!-- parser error action (fail, skip) -->
+							<xs:element name="error" type="xs:string" minOccurs="0" default="fail"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to the sharepoint parser -->
+				<xs:element name="sharepoint" minOccurs="0">
+					<xs:complexType>
+						<xs:all>              
+							<!-- optional chunk size (defaults to 1000) -->
+							<xs:element name="chunksize" type="xs:string" minOccurs="0" maxOccurs="1" default="1000"/>
+              <!-- optional folder specification -->
+              <xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1" default="" />
+							<!-- optional query to filter items -->
+							<xs:element name="query" type="xs:string" minOccurs="0" maxOccurs="1"/>
+							<!-- view to consider fields from (the fields will be those only present in the view) -->
+							<xs:element name="view" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to the sql parser -->
+				<xs:element name="sql" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- connection string to the sql server database -->
+							<xs:element name="connection" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<!-- optional query clause used to select records to read -->
+							<xs:element name="query" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to the sqlite parser -->
+				<xs:element name="sqlite" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- optional query clause used to select records to read -->
+							<xs:element name="query" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to the stream parser -->
+				<xs:element name="stream" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- optional path to the bin folder -->
+							<xs:element name="path"  type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- cygwin command (sort) -->
+							<xs:element name="command" type="xs:string" minOccurs="1" maxOccurs="1"/>
+
+							<!-- arguments to the command -->
+							<xs:element name="arguments" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- timeout in seconds waiting for the process to complete (default is 1 hour) -->
+							<xs:element name="timeout" type="xs:int" minOccurs="0" maxOccurs="1" default="3600"/>
+
+							<!-- optional indicator to send the header -->
+							<xs:element name="header" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+
+							<!-- column delimiter character -->
+							<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+							<!-- escape character -->
+							<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+							<!-- quote character -->
+							<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+
+							<!-- encoding for reading and writing to the process -->
+							<xs:element name="encoding" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to the xml parser -->
+				<xs:element name="xml" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<xs:element name="tags" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element type="xs:string" name="tag" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- common configuration -->
+				<xs:element name="maxbuffersize" type="xs:unsignedInt" minOccurs="0"/>
+				<xs:element name="maxrows" type="xs:unsignedInt" minOccurs="0"/>
+				<xs:element name="record" type="xs:string" minOccurs="0" maxOccurs="1" default="false"/>
+				<xs:element name="skipdatarows" type="xs:unsignedInt" minOccurs="0"/>
+				<xs:element name="detail" type="xs:string" minOccurs="0"/>
+
+				<!-- DEPRECATED: this has moved within the binary tag -->
+				<xs:element name="sections" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="section" minOccurs="1" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- DEPRECATED: these next two are are parser specific -->
+				<xs:element name="compression" type="xs:string" minOccurs="0"/>
+				<xs:element name="encoding" type="xs:string" minOccurs="0"/>
+			</xs:all>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- mode of the parser (binary, csharp, csv, event, excel, index, sharepoint, sql, sqlite, stream, xml) -->
+			<xs:attribute name="mode" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="action">
+		<xs:complexType>
+			<!-- allow zero or more stages -->
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="stage"/>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- condition to evaluate for the action -->
+			<xs:attribute name="condition" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="append">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- field name -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- expression to compute -->
+						<xs:attribute name="expression" type="xs:string" use="required"/>
+
+						<!-- condition when to compute -->
+						<xs:attribute name="condition" type="xs:string" use="optional"/>
+
+						<!-- data type for the computed expression -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- verification error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- optional flag which indicates a new record should be created -->
+			<xs:attribute name="create" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="branch">
+		<xs:complexType>
+			<!-- allow zero or more stages -->
+			<xs:sequence minOccurs="1" maxOccurs="unbounded">
+				<xs:group ref="stage"/>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- optional flag which indicates if a separate thread should be used -->
+			<xs:attribute name="thread" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="choose">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="choice" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- allow zero or more stages -->
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:group ref="stage"/>
+						</xs:sequence>
+
+						<!-- condition for this choice block -->
+						<xs:attribute name="condition" type="xs:string" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="client">
+		<xs:complexType>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- name or address of the server -->
+			<xs:attribute name="server" type="xs:string" use="required"/>
+
+			<!-- listening port on the server -->
+			<xs:attribute name="port" type="xs:unsignedInt" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="custom">
+		<xs:complexType>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- path of the assembly -->
+			<xs:attribute name="path" type="xs:string" use="optional"/>
+
+			<!-- file name of the assembly -->
+			<xs:attribute name="assembly" type="xs:string" use="required"/>
+
+			<!-- class name -->
+			<xs:attribute name="class" type="xs:string" use="required"/>
+
+			<!-- flag to indicate if the transport record should be copied -->
+			<xs:attribute name="copy" type="xs:boolean" use="optional" default="true"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="cygwin">
+		<xs:complexType>
+			<xs:all>
+				<!-- optional path to the bin folder -->
+				<xs:element name="path" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- cygwin command (sort) -->
+				<xs:element name="command" type="xs:string" minOccurs="1" maxOccurs="1"/>
+
+				<!-- arguments to the command -->
+				<xs:element name="arguments" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- timeout in seconds waiting for the process to complete (default is 1 hour) -->
+				<xs:element name="timeout" type="xs:int" minOccurs="0" maxOccurs="1" default="3600"/>
+
+				<!-- optional indicator to send the header -->
+				<xs:element name="header" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+
+				<!-- column delimiter character -->
+				<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+				<!-- escape character -->
+				<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+				<!-- quote character -->
+				<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+
+				<!-- encoding for reading and writing to the process -->
+				<xs:element name="encoding" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- list of include fields -->
+				<xs:element name="include" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+
+									<!-- data type for the field -->
+									<xs:attribute name="datatype" type="DataType" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- list of exclude fields -->
+				<xs:element name="exclude" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="delete">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- field name to delete -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="engine">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="machine" minOccurs="1" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="state" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="transition" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="action" minOccurs="0" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="field" use="required"/>
+															<xs:attribute name="value" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="condition" use="required"/>
+												<xs:attribute name="state" use ="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" use="required"/>
+									<xs:attribute name="type" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="expand">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- name of the field to expand -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- delimiter which separates values -->
+			<xs:attribute name="delimiter" type="xs:string" use="optional" default=","/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="export">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- name of the field to export -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- expression that generates the value -->
+						<xs:attribute name="expression" type="xs:string" use="required"/>
+
+						<!-- datatype of field to export -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- action to be taken if an error occurs with a field being exported -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- optional field name the id of the last exported record should be included into -->
+			<xs:attribute name="id" type="xs:string" use="optional"/>
+			<!-- optional field for supporting publishing to 5.0.x (from 5.0.3 upwards)-->
+			<xs:attribute name="version" type="xs:string" use="optional"/>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+			<!-- url of the case manager instance -->
+			<xs:attribute name="url" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="extend">
+		<xs:complexType>
+			<xs:sequence>
+				<!-- optional cache settings -->
+				<xs:element name="cache" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+
+									<!-- mapping expression for the field  -->
+									<xs:attribute name="expression" type="xs:string"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+
+						<!-- name of the cache -->
+						<xs:attribute name="name" type="xs:string" use="optional"/>
+
+						<!-- type of caching (memory, network) -->
+						<xs:attribute name="type" type="xs:string" use="optional" default="memory"/>
+
+						<!-- count of maxmimum number of entries in cache -->
+						<xs:attribute name="count" type="xs:string" use="optional" default="5000"/>
+
+						<!-- list of servers for network cache -->
+						<xs:attribute name="servers" type="xs:string" use="optional" default="localhost:11211"/>
+
+						<!-- timeout for entries in network cache in minutes -->
+						<xs:attribute name="timeout" type="xs:string" use="optional"/>
+
+						<!-- flag to indicate preload is requested -->
+						<xs:attribute name="preload" type="xs:string" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to file joining -->
+				<xs:element name="csv" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:all>
+							<!-- file has header flag -->
+							<xs:element name="header" minOccurs="0" maxOccurs="1" default="true">
+								<xs:complexType mixed="true">
+									<xs:attribute name="type" type="xs:boolean" default="true"/>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- comment for join -->
+							<xs:element name="comment" type="xs:string" minOccurs="0" maxOccurs="1" default="#"/>
+
+							<!-- compression scheme (gzip) -->
+							<xs:element name="compression" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- specify the delimiter to be considered to the reference being joined against -->
+							<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+							<!-- specify the delimiter to be considered to the reference being joined against -->
+							<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+							<!-- specify the quote character to be considered to the reference being joined against -->
+							<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to joining against a sql server table -->
+				<xs:element name="sql" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="connection" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific for joining against a sharepoint list -->
+				<xs:element name="sharepoint" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+              <!-- optional chunk size of joined records to return -->
+							<xs:element name="chunksize" type="xs:string" minOccurs="0" maxOccurs="1" default="1000"/>
+              <!-- optional folder to limit the joining scope to -->
+              <xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1" default="" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- result field from the extend -->
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- name of the field -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- source field in the archive -->
+						<xs:attribute name="source" type="xs:string" use="optional"/>
+
+						<!-- data type for the result -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- can the field contain multiple values -->
+						<xs:attribute name="multiple" type="xs:boolean" use="optional" default="false"/>
+
+						<!-- optional error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+
+						<xs:attribute name="onnoresult" type="xs:string" use="optional"/>
+						<xs:attribute name="onsingleresult" type="xs:string" use="optional"/>
+						<xs:attribute name="onmultipleresults" type="xs:string" use="optional"/>
+						<xs:attribute name="onexceededmaxresults" type="xs:string" use="optional"/>
+
+						<xs:attribute name="delimiter" type="xs:string" use="optional" default=","/>
+						<xs:attribute name="sortby" type="xs:string" use="optional"/>
+						<xs:attribute name="scale" type="xs:int" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- mode of the join source (csv, index, sharepoint, sql, sqlite) -->
+			<xs:attribute name="mode" type="xs:string" use="required"/>
+
+			<!-- reference to the archive to join -->
+			<xs:attribute name="archive" type="xs:string" use="required"/>
+
+			<!-- join condition -->
+			<xs:attribute name="where" type="xs:string" use="required"/>
+
+			<!-- distinct results flag -->
+			<xs:attribute name="distinct" type="xs:boolean" use="optional" default="false"/>
+
+			<!-- date and time range selection of the segments -->
+			<xs:attribute name="starttime" type="xs:string" use="optional"/>
+			<xs:attribute name="endtime" type="xs:string" use="optional"/>
+
+			<!-- DEPRECATED: only supported for mode=csv use cache preload instead -->
+			<xs:attribute name="preload" type="xs:boolean" use="optional" default="false"/>
+
+			<xs:attribute name="keydatatype" type="xs:string" use="optional"/>
+
+			<xs:attribute name="dbcachesize" type="xs:string" use="optional"/>
+
+			<!-- DEPRECATED: this has been moved into the cache section -->
+			<xs:attribute name="resultcachesize" type="xs:string" use="optional" default="5000"/>
+
+			<!-- maximum number of extend results before onexceededmaxresults is triggered -->
+			<xs:attribute name="maxjoinresults" type="xs:string" use="optional" default="100"/>
+
+			<!-- provide cache details on extend -->
+			<xs:attribute name="verbose" type="xs:boolean" use="optional" default="false"/>
+
+			<!-- flag to only extend against enabled archives -->
+			<xs:attribute name="online" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="insert">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- parameter name -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- parameter value -->
+						<xs:attribute name="value" type="xs:string" use="required"/>
+
+						<!-- data type for the parameter value -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- condition when to pass the parameter -->
+						<xs:attribute name="condition" type="xs:string" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- name of the pipeline configuration file -->
+			<xs:attribute name="file" type="xs:string" use="required"/>
+
+			<!-- path of the pipeline configuration file -->
+			<xs:attribute name="path" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="logger">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="argument" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- expression for the argument -->
+						<xs:attribute name="expression" type="xs:string" use="required"/>
+						<!-- configure behavior on error -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- flag indicating if the stage is enabled -->
+			<xs:attribute name="enable" type="xs:string" use="optional" default="true"/>
+
+			<!-- level the logger should use -->
+			<xs:attribute name="level" type="xs:string" use="optional" default="debug"/>
+
+			<!-- message formatter for the logger -->
+			<xs:attribute name="pattern" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="memory">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- field name -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- expression to compute -->
+						<xs:attribute name="expression" type="xs:string" use="required"/>
+
+						<!-- condition when to compute -->
+						<xs:attribute name="condition" type="xs:string" use="optional"/>
+
+						<!-- data type for the computed expression -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- verification error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="output">
+		<xs:complexType>
+			<xs:all>
+				<!-- list of include fields -->
+				<xs:element name="include" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+
+									<!-- data type for the field -->
+									<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+									<!-- optional name of the source field -->
+									<xs:attribute name="source" type="xs:string" use="optional"/>
+
+									<!-- can the field contain multiple values -->
+									<xs:attribute name="multiple" type="xs:boolean" use="optional" default="false"/>
+
+									<!-- should the field be indexed -->
+									<xs:attribute name="indexed" type="xs:boolean" use="optional" default="false"/>
+
+									<!-- optional type of summary (empty, range, value) -->
+									<xs:attribute name="summary" type="xs:string" use="optional" default="empty"/>
+
+									<!-- optional error result (fail, skip, warn) -->
+									<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- list of exclude fields -->
+				<xs:element name="exclude" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to csv output -->
+				<xs:element name="csv" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- optional expression which defines the output bucket -->
+							<xs:element name="bucket" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- output index directory -->
+							<xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- indicates that data is ordered by the bucket field and previous file can be closed -->
+							<xs:element name="ordered" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- indicates if a header should be written -->
+							<xs:element name="header" minOccurs="0" maxOccurs="1" default="true">
+								<xs:complexType mixed="true">
+									<xs:attribute name="type" default="false" type="xs:boolean"/>
+								</xs:complexType>
+							</xs:element>
+
+							<!-- extension of output file -->
+							<xs:element name="extension" type="xs:string" minOccurs="0" maxOccurs="1" default="csv"/>
+
+							<!-- compression for output file -->
+							<xs:element name="compression" type="xs:string" minOccurs="0"/>
+
+							<!-- name of the output file encoding -->
+							<xs:element name="encoding" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- column delimiter character -->
+							<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+							<!-- escape character -->
+							<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+							<!-- quote character -->
+							<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+
+							<!-- override string boolean -->
+							<xs:element name="override" type="xs:string" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- output error action (fail, skip, warn) -->
+							<xs:element name="error" type="xs:string" minOccurs="0" default="fail"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to dtSearch output -->
+				<xs:element name="index" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- optional expression which defines the output bucket -->
+							<xs:element name="bucket" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- indicates that data is ordered by the bucket field and previous file can be closed -->
+							<xs:element name="ordered" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- optional expression for created date -->
+							<xs:element name="created" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- output index directory -->
+							<xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- optional expression for modified date -->
+							<xs:element name="modified" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- optional expression for filename -->
+							<xs:element name="filename" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- name of the alphabet file -->
+							<xs:element name="alphabetfilename" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- field configuration -->
+							<xs:element name="fieldflags" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- text configuration -->
+							<xs:element name="textflags" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- override string boolean -->
+							<xs:element name="override" type="xs:string" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- optional property to specify the version of the archive to create -->
+							<xs:element name="version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- optional property to specify a dtSearch crash log path  -->
+							<xs:element name="dtscrashlog" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- optional property to specify a dtSearch debug log path  -->
+							<xs:element name="dtsdebuglog" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- DEPRECATED: special field for dtSearch (name, created, modified) -->
+							<xs:element name="field" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:attribute name="name" type="xs:string" use="required"/>
+									<xs:attribute name="expression" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to SharePoint output -->
+				<xs:element name="sharepoint" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- required element which contains the url to the output list -->
+							<xs:element name="list" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to memfile output -->
+				<xs:element name="memfile" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- required element which contains name of the memory section to write to -->
+							<xs:element name="sectionname" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to sql output -->
+				<xs:element name="sql" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- required connection string element -->
+							<xs:element name="connection" type="xs:string" minOccurs="1" maxOccurs="1"/>
+							<!-- required table name element -->
+							<xs:element name="table" type="xs:string" minOccurs="1" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- configuration specific to sqlite output -->
+				<xs:element name="sqlite" minOccurs="0">
+					<xs:complexType>
+						<xs:all>
+							<!-- optional expression which defines the output bucket -->
+							<xs:element name="bucket" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- output index directory -->
+							<xs:element name="folder" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- indicates that data is ordered by the bucket field and previous file can be closed -->
+							<xs:element name="ordered" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- name of the field to be used as date id for transactional data -->
+							<xs:element name="datefield" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- name of the field(s) to be used as a unique key -->
+							<xs:element name="key" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- number of rows processed before each database commit -->
+							<xs:element name="maxrowspertransaction" type="xs:string" minOccurs="0" maxOccurs="1" default="1000000"/>
+
+							<!-- cache size used by sqlite -->
+							<xs:element name="cachesize" type="xs:string" minOccurs="0" maxOccurs="1" default="2000"/>
+
+							<!-- page size used by sqlite -->
+							<xs:element name="pagesize" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- property to determine how often sqlite commits to disk. options are NORMAL, FULL or OFF -->
+							<xs:element name="syncmode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- determine where temporary tables are stored. DEFAULT, FILE, MEMORY -->
+							<xs:element name="tempstore" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- create an index for the key columns before inserting data -->
+							<xs:element name="createindexonkeycolumns" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+
+							<!-- index create mode - NONE, CREATEBEFORE, DROPBEFORE, CREATEAFTER-->
+							<xs:element name="indexcreatemode" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+							<!-- override string boolean -->
+							<xs:element name="override" type="xs:string" minOccurs="0" maxOccurs="1" default="false"/>
+
+							<!-- optional property to specify the version of the archive to create -->
+							<xs:element name="version" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						</xs:all>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+			<!-- name of the output mode (csv, index, sqlite, sharepoint) -->
+			<xs:attribute name="mode" type="xs:string" use="required"/>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="reduce">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:choice minOccurs="0" maxOccurs="unbounded">
+								<!-- provider compiler options (CompilerVersion) -->
+								<xs:element name="options" minOccurs="0" maxOccurs="1">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="option" minOccurs="1" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:attribute name="name" type="xs:string" use="required"/>
+													<xs:attribute name="value" type="xs:string" use="required"/>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+
+								<!-- assembly reference -->
+								<xs:element name="assembly" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="name" type="xs:string" use="required"/>
+										<xs:attribute name="path" type="xs:string" use="optional"/>
+									</xs:complexType>
+								</xs:element>
+
+								<!-- namespace reference -->
+								<xs:element name="using" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="namespace" type="xs:string" use="required"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:choice>
+
+							<!-- language specific code -->
+							<xs:element name="code" minOccurs="0" maxOccurs="1">
+								<xs:complexType mixed="true">
+									<xs:attribute name="source" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<!-- name of the field -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- key field indicator -->
+						<xs:attribute name="key" type="xs:boolean" use="optional" default="false"/>
+
+						<!-- aggregate expression to compute the value -->
+						<xs:attribute name="expression" type="xs:string" use="optional"/>
+
+						<!-- data type for the computed value -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- scale of the computed value -->
+						<xs:attribute name="scale" type="xs:int" use="optional"/>
+
+						<!-- verification error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- indicator that input is ordered by the key fields -->
+			<xs:attribute name="ordered" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="rename">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- field name to rename to -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- field name to rename from -->
+						<xs:attribute name="source" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="repeat">
+		<xs:complexType>
+			<!-- allow zero or more stages -->
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="stage"/>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- expression that defines the repeat count -->
+			<xs:attribute name="count" type="xs:string" use="required"/>
+
+			<!-- name of the optional index field -->
+			<xs:attribute name="index" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="script">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<!-- provider compiler options (CompilerVersion) -->
+					<xs:element name="options" minOccurs="0" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="option" minOccurs="1" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:attribute name="name" type="xs:string" use="required"/>
+										<xs:attribute name="value" type="xs:string" use="required"/>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+
+					<!-- assembly reference -->
+					<xs:element name="assembly" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="name" type="xs:string" use="required"/>
+							<xs:attribute name="path" type="xs:string" use="optional"/>
+						</xs:complexType>
+					</xs:element>
+
+					<!-- namespace reference -->
+					<xs:element name="using" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="namespace" type="xs:string" use="required"/>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+
+				<!-- language specific code -->
+				<xs:element name="code" minOccurs="0" maxOccurs="1" type="xs:string"/>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- language of the script (csharp) -->
+			<xs:attribute name="language" type="xs:string" use="required"/>
+
+			<!-- flag to indicate if the transport record should be copied -->
+			<xs:attribute name="copy" type="xs:boolean" use="optional" default="true"/>
+		</xs:complexType>
+	</xs:element>
+
+  
+  <!--memory sort-->
+  <xs:element name="sort">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="name" type="xs:string" use="required"/>
+            <xs:attribute name="order" type="xs:int" use="required"/>
+            <xs:attribute name="ascending" type="xs:boolean" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <!-- name of the stage in the pipeline --> 
+      <xs:attribute name="name" type="xs:string" use="optional"/>
+      <xs:attribute name="LimitRowsInMemory" type="xs:int" use="optional" default="0"/>
+    </xs:complexType>
+  </xs:element>
+  
+  
+	<xs:element name="status">
+		<xs:complexType>
+			<!-- allow zero or more stages -->
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="stage"/>
+			</xs:sequence>
+
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- flag indicating if the stage is enabled -->
+			<xs:attribute name="enable" type="xs:string" use="optional" default="true"/>
+
+			<!-- frequency with which progress messages should be shown -->
+			<xs:attribute name="frequency" type="xs:string" use="optional" default="100000"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="stream">
+		<xs:complexType>
+			<xs:all>
+				<!-- optional path to the bin folder -->
+				<xs:element name="path"  type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- cygwin command (sort) -->
+				<xs:element name="command" type="xs:string" minOccurs="1" maxOccurs="1"/>
+
+				<!-- arguments to the command -->
+				<xs:element name="arguments" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- timeout in seconds waiting for the process to complete (default is 1 hour) -->
+				<xs:element name="timeout" type="xs:int" minOccurs="0" maxOccurs="1" default="3600"/>
+
+				<!-- optional indicator to send the header -->
+				<xs:element name="header" type="xs:boolean" minOccurs="0" maxOccurs="1" default="true"/>
+
+				<!-- column delimiter character -->
+				<xs:element name="delimiter" type="xs:string" minOccurs="0" maxOccurs="1" default=","/>
+
+				<!-- escape character -->
+				<xs:element name="escape" type="xs:string" minOccurs="0" maxOccurs="1" default="\\"/>
+
+				<!-- quote character -->
+				<xs:element name="quote" type="xs:string"  minOccurs="0" maxOccurs="1" default="&quot;"/>
+
+				<!-- encoding for reading and writing to the process -->
+				<xs:element name="encoding" type="xs:string" minOccurs="0" maxOccurs="1"/>
+
+				<!-- list of include fields -->
+				<xs:element name="include" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+
+									<!-- data type for the field -->
+									<xs:attribute name="datatype" type="DataType" use="optional"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<!-- list of exclude fields -->
+				<xs:element name="exclude" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="field" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<!-- name of the field -->
+									<xs:attribute name="name" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="verify">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="skip" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<!-- allow zero or more stages -->
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:group ref="stage"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="warn" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<!-- allow zero or more stages -->
+						<xs:sequence minOccurs="0" maxOccurs="unbounded">
+							<xs:group ref="stage"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- name of the field to verify -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- verification error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+
+						<!-- field length range verification (low:high) -->
+						<xs:attribute name="length" type="xs:string" use="optional"/>
+
+						<!-- regular expression verification -->
+						<xs:attribute name="regex" type="xs:string" use="optional"/>
+
+						<!-- data type verification -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- multiple value field -->
+						<xs:attribute name="multiple" type="xs:boolean" use="optional" default="false"/>
+
+						<!-- condition verification -->
+						<xs:attribute name="condition" type="xs:string" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- flag indicating if the stage is enabled -->
+			<xs:attribute name="enable" type="xs:string" use="optional" default="true"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="window">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="field" minOccurs="1" maxOccurs="unbounded">
+					<xs:complexType>
+						<!-- name of the field -->
+						<xs:attribute name="name" type="xs:string" use="required"/>
+
+						<!-- key field -->
+						<xs:attribute name="key" type="xs:boolean" use="optional" default="false"/>
+
+						<!-- expression field -->
+						<xs:attribute name="expression" type="xs:string" use="optional"/>
+
+						<!-- data type for the computed value -->
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+
+						<!-- scale of the computed value -->
+						<xs:attribute name="scale" type="xs:int" use="optional"/>
+
+						<!-- verification error result (fail, skip, warn) -->
+						<xs:attribute name="error" type="xs:string" use="optional" default="fail"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<!-- name of the stage in the pipeline -->
+			<xs:attribute name="name" type="xs:string" use="optional"/>
+
+			<!-- logical expression that defines the insertion into the window -->
+			<xs:attribute name="insertion" type="xs:string" use="optional"/>
+
+			<!-- logical expression that defines the span of the window -->
+			<xs:attribute name="span" type="xs:string" use="optional"/>
+
+			<!-- logical expression that defines the selection from the window -->
+			<xs:attribute name="selection" type="xs:string" use="optional"/>
+
+			<!-- indicator that input is ordered by the key fields -->
+			<xs:attribute name="ordered" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- stages other than parser that can be nested -->
+	<xs:group name="stage">
+		<xs:choice>
+			<xs:element ref="action"/>
+			<xs:element ref="append"/>
+			<xs:element ref="branch"/>
+			<xs:element ref="choose"/>
+			<xs:element ref="client"/>
+			<xs:element ref="custom"/>
+			<xs:element ref="cygwin"/>
+			<xs:element ref="delete"/>
+			<xs:element ref="engine"/>
+			<xs:element ref="expand"/>
+			<xs:element ref="extend"/>
+			<xs:element ref="export"/>
+			<xs:element ref="insert"/>
+			<xs:element ref="logger"/>
+			<xs:element ref="memory"/>
+			<xs:element ref="output"/>
+			<xs:element ref="reduce"/>
+			<xs:element ref="rename"/>
+			<xs:element ref="repeat"/>
+			<xs:element ref="script"/>
+      <xs:element ref="sort"/>
+			<xs:element ref="status"/>
+			<xs:element ref="stream"/>
+			<xs:element ref="verify"/>
+			<xs:element ref="window"/>
+		</xs:choice>
+	</xs:group>
+
+	<!-- multiple input file selection for parser modes -->
+	<xs:element name="selection">
+		<xs:complexType>
+			<!-- specifies a pattern for file selection (*.csv) -->
+			<xs:attribute name="pattern" type="xs:string" use="required"/>
+
+			<!-- include subfolders versus only the top level -->
+			<xs:attribute name="recursive" type="xs:boolean" use="optional" default="false"/>
+
+			<!-- specifies a condition for file selection -->
+			<xs:attribute name="condition" type="xs:string" use="optional"/>
+
+			<!-- optional order for input files (creationtime, extension, fullname, lastaccesstime, lastwritetime, length, name) -->
+			<xs:attribute name="order" type="xs:string" use="optional"/>
+
+			<!-- indicates if the order should be ascending or descending -->
+			<xs:attribute name="ascending" type="xs:boolean" use="optional" default="true"/>
+		</xs:complexType>
+	</xs:element>
+
+	<!-- file information fields for parser modes -->
+	<xs:element name="file">
+		<xs:complexType>
+			<xs:attribute name="creationtime" type="xs:string"/>
+			<xs:attribute name="extension" type="xs:string"/>
+			<xs:attribute name="fullname" type="xs:string"/>
+			<xs:attribute name="lastaccesstime" type="xs:string"/>
+			<xs:attribute name="lastwritetime" type="xs:string"/>
+			<xs:attribute name="length" type="xs:string"/>
+			<xs:attribute name="name" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="section">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="item" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="type" type="ParseType" use="required"/>
+						<xs:attribute name="offset" type="xs:string" use="required"/>
+						<xs:attribute name="name" type="xs:string" use="required"/>
+						<xs:attribute name="length" type="xs:string" use="optional"/>
+						<xs:attribute name="encoding" type="xs:string" use="optional"/>
+						<xs:attribute name="truncate" type="xs:boolean" use="optional"/>
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="reference" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="section" type="xs:string" use="required"/>
+						<xs:attribute name="name" type="xs:string" use="optional"/>
+						<xs:attribute name="value" type="xs:string" use="optional"/>
+						<xs:attribute name="offset" type="xs:string" use="optional"/>
+						<xs:attribute name="datatype" type="DataType" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="length" type="xs:string" use="optional"/>
+			<xs:attribute name="block" type="xs:boolean" use="optional" default="false"/>
+			<xs:attribute name="suffix" type="xs:boolean" use="optional" default="false"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="ParseType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="X"/>
+			<xs:enumeration value="Z"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="DataType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Boolean" />
+			<xs:enumeration value="Currency" />
+			<xs:enumeration value="Date" />
+			<xs:enumeration value="DateTime" />
+			<xs:enumeration value="Decimal" />
+			<xs:enumeration value="Double" />
+			<xs:enumeration value="Duration" />
+			<xs:enumeration value="Int16" />
+			<xs:enumeration value="Int32" />
+			<xs:enumeration value="Int64" />
+			<xs:enumeration value="Ipv4" />
+			<xs:enumeration value="Single" />
+			<xs:enumeration value="String" />
+			<xs:enumeration value="Text" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
