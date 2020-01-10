@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.8](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.7...v0.2.8) (2020-01-10)
+
+
+### Bug Fixes
+
+* Fix attribute value encoding during formatting. ([e3b852c](https://github.com/rogalmic/vscode-xml-complete/commit/e3b852c78468583ab7531988e543deba371de0e7))
+
 ### [0.2.7](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.6...v0.2.7) (2019-12-31)
 
 
