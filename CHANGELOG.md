@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.9](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.8...v0.2.9) (2020-02-29)
+
+
+### Bug Fixes
+
+* Update default msbuild xsd location. ([88bed0e](https://github.com/rogalmic/vscode-xml-complete/commit/88bed0e89e141df368c816237dec6bb737e225f1))
+
 ### [0.2.8](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.7...v0.2.8) (2020-01-10)
 
 
