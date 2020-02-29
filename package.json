@@ -108,7 +108,7 @@
             },
             {
               "xmlns": "http://schemas.microsoft.com/developer/msbuild/2003",
-              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/Microsoft.Build.Core.xsd",
+              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.Core.xsd",
               "strict": true
             }
           ]
@@ -128,17 +128,17 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "get-uri": "2.0.4",
+    "get-uri": "3.0.1",
     "sax": "1.2.4"
   },
   "devDependencies": {
-    "typescript": "^3.7.4",
+    "typescript": "^3.7.5",
     "vscode": "^1.1.36",
-    "tslint": "^5.20.1",
+    "tslint": "^6.0.0",
     "@types/node": "12.12.14",
-    "@types/mocha": "5.2.7",
+    "@types/mocha": "7.0.1",
     "jsdoctest": "1.7.1",
-    "standard-version": "7.0.1",
-    "vsce": "1.71.0"
+    "standard-version": "7.1.0",
+    "vsce": "1.73.0"
   }
 }
