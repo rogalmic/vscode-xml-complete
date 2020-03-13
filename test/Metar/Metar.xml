@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance" version="1.2" xsi:noNamespaceSchemaLocation="http://aviationweather.gov/adds/schema/metar1_2.xsd">
+  <request_index>67063210</request_index>
+  <data_source name="metars" />
+  <request type="retrieve" />
+  <errors />
+  <warnings />
+  <time_taken_ms>149</time_taken_ms>
+  <data num_results="6">
+    <METAR>
+      <raw_text>EPZG 131930Z 24016KT 9999 FEW025 06/03 Q1013</raw_text>
+      <station_id>EPZG</station_id>
+      <observation_time>2020-03-13T19:30:00Z</observation_time>
+      <latitude>52.13</latitude>
+      <longitude>15.8</longitude>
+      <temp_c>6.0</temp_c>
+      <dewpoint_c>3.0</dewpoint_c>
+      <wind_dir_degrees>240</wind_dir_degrees>
+      <wind_speed_kt>16</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.911417</altim_in_hg>
+      <sky_condition sky_cover="FEW" cloud_base_ft_agl="2500" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>59.0</elevation_m>
+    </METAR>
+    <METAR>
+      <raw_text>EPZG 131900Z 24015KT 9999 FEW039 06/03 Q1012</raw_text>
+      <station_id>EPZG</station_id>
+      <observation_time>2020-03-13T19:00:00Z</observation_time>
+      <latitude>52.13</latitude>
+      <longitude>15.8</longitude>
+      <temp_c>6.0</temp_c>
+      <dewpoint_c>3.0</dewpoint_c>
+      <wind_dir_degrees>240</wind_dir_degrees>
+      <wind_speed_kt>15</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.88189</altim_in_hg>
+      <sky_condition sky_cover="FEW" cloud_base_ft_agl="3900" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>59.0</elevation_m>
+    </METAR>
+    <METAR>
+      <raw_text>EPPO 131930Z 27015KT 9999 FEW034 06/02 Q1010</raw_text>
+      <station_id>EPPO</station_id>
+      <observation_time>2020-03-13T19:30:00Z</observation_time>
+      <latitude>52.42</latitude>
+      <longitude>16.82</longitude>
+      <temp_c>6.0</temp_c>
+      <dewpoint_c>2.0</dewpoint_c>
+      <wind_dir_degrees>270</wind_dir_degrees>
+      <wind_speed_kt>15</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.822834</altim_in_hg>
+      <sky_condition sky_cover="FEW" cloud_base_ft_agl="3400" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>92.0</elevation_m>
+    </METAR>
+    <METAR>
+      <raw_text>EPPO 131900Z 27013KT 9999 FEW032 06/01 Q1010</raw_text>
+      <station_id>EPPO</station_id>
+      <observation_time>2020-03-13T19:00:00Z</observation_time>
+      <latitude>52.42</latitude>
+      <longitude>16.82</longitude>
+      <temp_c>6.0</temp_c>
+      <dewpoint_c>1.0</dewpoint_c>
+      <wind_dir_degrees>270</wind_dir_degrees>
+      <wind_speed_kt>13</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.822834</altim_in_hg>
+      <sky_condition sky_cover="FEW" cloud_base_ft_agl="3200" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>92.0</elevation_m>
+    </METAR>
+    <METAR>
+      <raw_text>EPWR 131930Z 26011KT CAVOK 04/02 Q1014</raw_text>
+      <station_id>EPWR</station_id>
+      <observation_time>2020-03-13T19:30:00Z</observation_time>
+      <latitude>51.1</latitude>
+      <longitude>16.87</longitude>
+      <temp_c>4.0</temp_c>
+      <dewpoint_c>2.0</dewpoint_c>
+      <wind_dir_degrees>260</wind_dir_degrees>
+      <wind_speed_kt>11</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.940945</altim_in_hg>
+      <sky_condition sky_cover="CAVOK" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>121.0</elevation_m>
+    </METAR>
+    <METAR>
+      <raw_text>EPWR 131900Z 28016KT CAVOK 05/02 Q1014</raw_text>
+      <station_id>EPWR</station_id>
+      <observation_time>2020-03-13T19:00:00Z</observation_time>
+      <latitude>51.1</latitude>
+      <longitude>16.87</longitude>
+      <temp_c>5.0</temp_c>
+      <dewpoint_c>2.0</dewpoint_c>
+      <wind_dir_degrees>280</wind_dir_degrees>
+      <wind_speed_kt>16</wind_speed_kt>
+      <visibility_statute_mi>6.21</visibility_statute_mi>
+      <altim_in_hg>29.940945</altim_in_hg>
+      <sky_condition sky_cover="CAVOK" />
+      <flight_category>VFR</flight_category>
+      <metar_type>METAR</metar_type>
+      <elevation_m>121.0</elevation_m>
+    </METAR>
+  </data>
+</response>
+

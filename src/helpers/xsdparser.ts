@@ -63,7 +63,7 @@ export default class XsdParser {
 							.reverse()
 							.filter(e => e.resultTagName !== undefined)[1];
 						result
-							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.attributes.push(getCompletionString(tagData.attributes["name"])));
 					}
 
@@ -74,7 +74,7 @@ export default class XsdParser {
 							.filter(e => e.resultTagName !== undefined)[0];
 
 						result
-							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.base.push(tagData.attributes["base"]));
 					}
 
@@ -85,7 +85,7 @@ export default class XsdParser {
 							.filter(e => e.resultTagName !== undefined)[0];
 
 						result
-							.filter(e => e.tag.name === currentResultTag.resultTagName)
+							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.base.push(tagData.attributes["ref"]));
 					}
 
@@ -112,7 +112,7 @@ export default class XsdParser {
 							return;
 						}
 
-						let currentCommentTargets = stack.filter(e => e.resultTagName !== undefined);
+						let currentCommentTargets = stack.filter(e => e && e.resultTagName !== undefined);
 
 						let currentCommentTarget = currentCommentTargets[0];
 
