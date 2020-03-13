@@ -39,7 +39,8 @@ namespace AvaloniaXsd
                 new XAttribute("targetNamespace", "https://github.com/avaloniaui"),
                 new XAttribute("elementFormDefault", "qualified"),
                 new XAttribute("xmlns", "https://github.com/avaloniaui"),
-                new XAttribute(XNamespace.Xmlns + "xs", "http://www.w3.org/2001/XMLSchema"));
+                new XAttribute(XNamespace.Xmlns + "xs", "http://www.w3.org/2001/XMLSchema"),
+                new XAttribute(XNamespace.Xmlns + "noNamespaceSchemaLocation", "https://www.w3.org/2001/XMLSchema.xsd"));
 
             root.Add(GetSimpleTypes());
             root.Add(GetBaseControlType(baseControl.Value));

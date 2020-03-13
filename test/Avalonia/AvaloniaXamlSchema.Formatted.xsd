@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema id="AvaloniaXamlSchema" targetNamespace="https://github.com/avaloniaui" elementFormDefault="qualified" xmlns="https://github.com/avaloniaui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:noNamespaceSchemaLocation="https://www.w3.org/2001/XMLSchema.xsd">
   <xs:simpleType name="text">
     <xs:restriction base="xs:string" />
   </xs:simpleType>
@@ -327,7 +327,11 @@
               <xs:documentation>Gets or sets a value indicating whether the button is the default button for the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="IsCancel" type="text" />
+          <xs:attribute name="IsCancel" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating whether the button is the Cancel button for the window.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
@@ -932,20 +936,24 @@
   </xs:element>
   <xs:element name="Grid">
     <xs:annotation>
-      <xs:documentation>Lays out child controls according to a grid.</xs:documentation>
+      <xs:documentation>Grid</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="ShowGridLines" type="text" />
+          <xs:attribute name="ShowGridLines" type="text">
+            <xs:annotation>
+              <xs:documentation>ShowGridLines property.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="ColumnDefinitions" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the columns definitions for the grid.</xs:documentation>
+              <xs:documentation>Returns a ColumnDefinitions of column definitions.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="RowDefinitions" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets the row definitions for the grid.</xs:documentation>
+              <xs:documentation>Returns a RowDefinitions of row definitions.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Children" type="text" />
@@ -992,6 +1000,11 @@
               <xs:documentation>Gets or sets a value controlling how the image will be stretched.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="StretchDirection" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value controlling in what direction the image will be stretched.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -1013,7 +1026,11 @@
               <xs:documentation>Gets or sets the items to display.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemCount" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the number of items in "P:Avalonia.Controls.ItemsControl.Items" .</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="ItemsPanel" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the panel used to display the items.</xs:documentation>
@@ -1055,7 +1072,11 @@
               <xs:documentation>Gets or sets a graphics transformation that should apply to this element when layout is performed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="UseRenderTransform" type="text" />
+          <xs:attribute name="UseRenderTransform" type="text">
+            <xs:annotation>
+              <xs:documentation>Utilize the "F:Avalonia.Visual.RenderTransformProperty" for layout transforms.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="TransformRoot" type="text" />
           <xs:attribute name="Child" type="text" />
           <xs:attribute name="Padding" type="text" />
@@ -1076,7 +1097,11 @@
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SelectedItems" type="text" />
-          <xs:attribute name="SelectionMode" type="text" />
+          <xs:attribute name="SelectionMode" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the selection mode.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="VirtualizationMode" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the virtualization mode for the items.</xs:documentation>
@@ -1258,10 +1283,17 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ReversibleStackPanel">
+    <xs:annotation>
+      <xs:documentation>Implements a "T:Avalonia.Controls.StackPanel" where the flow direction of its items can be reversed.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="ReverseOrder" type="text" />
+          <xs:attribute name="ReverseOrder" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets if the child controls will be layed out in reverse order.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Spacing" type="text" />
           <xs:attribute name="Orientation" type="text" />
           <xs:attribute name="Children" type="text" />
@@ -1484,15 +1516,42 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ItemsRepeater">
+    <xs:annotation>
+      <xs:documentation>Represents a data-driven collection control that incorporates a flexible layout system, custom views, and virtualization.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="Layout" type="text" />
-          <xs:attribute name="Items" type="text" />
-          <xs:attribute name="ItemTemplate" type="text" />
-          <xs:attribute name="HorizontalCacheLength" type="text" />
-          <xs:attribute name="VerticalCacheLength" type="text" />
-          <xs:attribute name="ItemsSourceView" type="text" />
+          <xs:attribute name="Layout" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the layout used to size and position elements in the ItemsRepeater.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Items" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets an object source used to generate the content of the ItemsRepeater.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ItemTemplate" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the template used to display each item.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="HorizontalCacheLength" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value that indicates the size of the buffer used to realize items when panning or scrolling horizontally.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="VerticalCacheLength" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value that indicates the size of the buffer used to realize items when panning or scrolling vertically.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ItemsSourceView" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets a standardized view of the supported interactions between a given Items object and the ItemsRepeater control and its associated components.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="Background" type="text" />
         </xs:extension>
@@ -2070,7 +2129,11 @@
               <xs:documentation>Gets or sets the startup location of the window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="Position" type="text" />
+          <xs:attribute name="Position" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the window position in screen coordinates.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="IsActive" type="text" />
           <xs:attribute name="Screens" type="text" />
           <xs:attribute name="Owner" type="text" />
@@ -2145,7 +2208,7 @@
   </xs:element>
   <xs:element name="WrapPanel">
     <xs:annotation>
-      <xs:documentation>Positions child elements in sequential position from left to right, breaking content to the next line at the edge of the containing box. Subsequent ordering happens sequentially from top to bottom or from right to left, depending on the value of the Orientation property.</xs:documentation>
+      <xs:documentation>Positions child elements in sequential position from left to right, breaking content to the next line at the edge of the containing box. Subsequent ordering happens sequentially from top to bottom or from right to left, depending on the value of the "P:Avalonia.Controls.WrapPanel.Orientation" property.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2155,8 +2218,16 @@
               <xs:documentation>Gets or sets the orientation in which child controls will be layed out.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="ItemWidth" type="text" />
-          <xs:attribute name="ItemHeight" type="text" />
+          <xs:attribute name="ItemWidth" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the width of all items in the WrapPanel.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ItemHeight" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the height of all items in the WrapPanel.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="Background" type="text" />
         </xs:extension>
@@ -2470,11 +2541,22 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="NotificationCard">
+    <xs:annotation>
+      <xs:documentation>Control that represents and displays a notification.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsClosing" type="text" />
-          <xs:attribute name="IsClosed" type="text" />
+          <xs:attribute name="IsClosing" type="text">
+            <xs:annotation>
+              <xs:documentation>Determines if the notification is already closing.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="IsClosed" type="text">
+            <xs:annotation>
+              <xs:documentation>Determines if the notification is closed.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -2495,11 +2577,22 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="WindowNotificationManager">
+    <xs:annotation>
+      <xs:documentation>An "T:Avalonia.Controls.Notifications.INotificationManager" that displays notifications in a "T:Avalonia.Controls.Window" .</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="Position" type="text" />
-          <xs:attribute name="MaxItems" type="text" />
+          <xs:attribute name="Position" type="text">
+            <xs:annotation>
+              <xs:documentation>Defines which corner of the screen notifications can be displayed in.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MaxItems" type="text">
+            <xs:annotation>
+              <xs:documentation>Defines the maximum number of notifications visible at once.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
@@ -2836,7 +2929,7 @@
           </xs:attribute>
           <xs:attribute name="DependencyResolver" type="text">
             <xs:annotation>
-              <xs:documentation>Gets or sets a dependency resolver for the "P:Avalonia.Controls.Primitives.Popup.PopupRoot" .</xs:documentation>
+              <xs:documentation>Gets or sets a dependency resolver for the "T:Avalonia.Controls.Primitives.PopupRoot" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsOpen" type="text">
@@ -2849,11 +2942,7 @@
               <xs:documentation>Gets or sets the placement mode of the popup in relation to the "P:Avalonia.Controls.Primitives.Popup.PlacementTarget" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
-          <xs:attribute name="ObeyScreenEdges" type="text">
-            <xs:annotation>
-              <xs:documentation>Gets or sets a value indicating whether the popup positions itself within the nearest screen boundary when its opened at a position where it would otherwise overlap the screen edge.</xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
+          <xs:attribute name="ObeyScreenEdges" type="text" />
           <xs:attribute name="HorizontalOffset" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the Horizontal offset of the popup in relation to the "P:Avalonia.Controls.Primitives.Popup.PlacementTarget" </xs:documentation>
@@ -2886,7 +2975,7 @@
   </xs:element>
   <xs:element name="PopupRoot">
     <xs:annotation>
-      <xs:documentation>Gets the root of the popup window.</xs:documentation>
+      <xs:documentation>The root window of a "T:Avalonia.Controls.Primitives.Popup" .</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -3139,11 +3228,22 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ToggleButton">
+    <xs:annotation>
+      <xs:documentation>Represents a control that a user can select (check) or clear (uncheck). Base class for controls that can switch states.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
-          <xs:attribute name="IsChecked" type="text" />
-          <xs:attribute name="IsThreeState" type="text" />
+          <xs:attribute name="IsChecked" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets whether the "T:Avalonia.Controls.Primitives.ToggleButton" is checked.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="IsThreeState" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value that indicates whether the control supports three states.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="ClickMode" type="text" />
           <xs:attribute name="Command" type="text" />
           <xs:attribute name="HotKey" type="text" />

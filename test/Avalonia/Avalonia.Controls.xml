@@ -4069,6 +4069,84 @@
             </summary>
             <param name="control">The control.</param>
         </member>
+        <member name="T:Avalonia.Controls.Primitives.ToggleButton">
+            <summary>
+            Represents a control that a user can select (check) or clear (uncheck). Base class for controls that can switch states.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ToggleButton.IsCheckedProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ToggleButton.IsThreeStateProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsThreeState"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ToggleButton.CheckedEvent">
+            <summary>
+            Defines the <see cref="E:Avalonia.Controls.Primitives.ToggleButton.Checked"/> event.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ToggleButton.UncheckedEvent">
+            <summary>
+            Defines the <see cref="E:Avalonia.Controls.Primitives.ToggleButton.Unchecked"/> event.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ToggleButton.IndeterminateEvent">
+            <summary>
+            Defines the <see cref="E:Avalonia.Controls.Primitives.ToggleButton.Unchecked"/> event.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Primitives.ToggleButton.Checked">
+            <summary>
+            Raised when a <see cref="T:Avalonia.Controls.Primitives.ToggleButton"/> is checked.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Primitives.ToggleButton.Unchecked">
+            <summary>
+            Raised when a <see cref="T:Avalonia.Controls.Primitives.ToggleButton"/> is unchecked.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Primitives.ToggleButton.Indeterminate">
+            <summary>
+            Raised when a <see cref="T:Avalonia.Controls.Primitives.ToggleButton"/> is neither checked nor unchecked.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked">
+            <summary>
+            Gets or sets whether the <see cref="T:Avalonia.Controls.Primitives.ToggleButton"/> is checked.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.ToggleButton.IsThreeState">
+            <summary>
+            Gets or sets a value that indicates whether the control supports three states.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.ToggleButton.Toggle">
+            <summary>
+            Toggles the <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked"/> property.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.ToggleButton.OnChecked(Avalonia.Interactivity.RoutedEventArgs)">
+            <summary>
+            Called when <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked"/> becomes true.
+            </summary>
+            <param name="e">Event arguments for the routed event that is raised by the default implementation of this method.</param>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.ToggleButton.OnUnchecked(Avalonia.Interactivity.RoutedEventArgs)">
+            <summary>
+            Called when <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked"/> becomes false.
+            </summary>
+            <param name="e">Event arguments for the routed event that is raised by the default implementation of this method.</param>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.ToggleButton.OnIndeterminate(Avalonia.Interactivity.RoutedEventArgs)">
+            <summary>
+            Called when <see cref="P:Avalonia.Controls.Primitives.ToggleButton.IsChecked"/> becomes null.
+            </summary>
+            <param name="e">Event arguments for the routed event that is raised by the default implementation of this method.</param>
+        </member>
         <member name="M:Avalonia.Controls.Primitives.Track.ValueFromPoint(Avalonia.Point)">
             <summary>
             Calculates the distance along the <see cref="P:Avalonia.Controls.Primitives.Track.Thumb"/> of a specified point along the
@@ -6673,6 +6751,11 @@
             Defines the <see cref="P:Avalonia.Controls.Image.Stretch"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Image.StretchDirectionProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Image.StretchDirection"/> property.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Image.Source">
             <summary>
             Gets or sets the bitmap image that will be displayed.
@@ -6681,6 +6764,11 @@
         <member name="P:Avalonia.Controls.Image.Stretch">
             <summary>
             Gets or sets a value controlling how the image will be stretched.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Image.StretchDirection">
+            <summary>
+            Gets or sets a value controlling in what direction the image will be stretched.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.Image.Render(Avalonia.Media.DrawingContext)">

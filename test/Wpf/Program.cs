@@ -42,7 +42,8 @@ namespace Wpf
                 new XAttribute("targetNamespace", "http://schemas.microsoft.com/winfx/2006/xaml/presentation"),
                 new XAttribute("elementFormDefault", "qualified"),
                 new XAttribute("xmlns", "http://schemas.microsoft.com/winfx/2006/xaml/presentation"),
-                new XAttribute(XNamespace.Xmlns + "xs", "http://www.w3.org/2001/XMLSchema"));
+                new XAttribute(XNamespace.Xmlns + "xs", "http://www.w3.org/2001/XMLSchema"),
+                new XAttribute(XNamespace.Xmlns + "noNamespaceSchemaLocation", "https://www.w3.org/2001/XMLSchema.xsd"));
 
             root.Add(GetSimpleTypes());
             root.Add(GetBaseControlType(baseControl.Value));
