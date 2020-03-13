@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.10](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.9...v0.2.10) (2020-03-13)
+
+
+### Bug Fixes
+
+* Fix error when loading certain XSD files. ([db3bd5d](https://github.com/rogalmic/vscode-xml-complete/commit/db3bd5d87083d575317099efbe776c2f4eeacd64))
+
 ### [0.2.9](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.8...v0.2.9) (2020-02-29)
 
 
