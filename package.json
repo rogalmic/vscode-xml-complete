@@ -12,7 +12,7 @@
   "license": "MIT",
   "engines": {
     "vscode": "^1.40.0",
-    "node": "^12.4.0"
+    "node": "^12.8.1"
   },
   "icon": "images/xml-complete-icon.png",
   "categories": [
@@ -128,17 +128,17 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "get-uri": "3.0.1",
+    "get-uri": "3.0.2",
     "sax": "1.2.4"
   },
   "devDependencies": {
-    "typescript": "^3.7.5",
+    "typescript": "^3.9.3",
     "vscode": "^1.1.36",
-    "tslint": "^6.0.0",
+    "tslint": "^6.1.2",
     "@types/node": "12.12.14",
     "@types/mocha": "7.0.1",
     "jsdoctest": "1.7.1",
-    "standard-version": "7.1.0",
-    "vsce": "1.73.0"
+    "standard-version": "8.0.0",
+    "vsce": "1.75.0"
   }
 }
