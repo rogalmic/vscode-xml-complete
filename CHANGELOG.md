@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.11](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.10...v0.2.11) (2020-06-15)
+
+
+### Features
+
+* Deploy to Open vsx. ([0cc086b](https://github.com/rogalmic/vscode-xml-complete/commit/0cc086baafda85e7e6f96914c6efc7bcab6e30b5))
+
 ### [0.2.10](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.9...v0.2.10) (2020-03-13)
 
 
