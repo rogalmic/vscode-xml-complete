@@ -132,13 +132,13 @@
     "sax": "1.2.4"
   },
   "devDependencies": {
-    "typescript": "^3.9.3",
+    "typescript": "^3.9.5",
     "vscode": "^1.1.36",
     "tslint": "^6.1.2",
     "@types/node": "12.12.14",
     "@types/mocha": "7.0.1",
     "jsdoctest": "1.7.1",
     "standard-version": "8.0.0",
-    "vsce": "1.75.0"
+    "vsce": "1.77.0"
   }
 }
