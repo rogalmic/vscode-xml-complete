@@ -89,15 +89,15 @@ export default class XmlSimpleParser {
 				};
 
 				let ensureAbsoluteUri = (u : string) =>
-					(u.indexOf("/") > 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
+					(u.indexOf("/") > 0 && u.indexOf(".") != 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
 
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
 						let uris = attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd"));
-						result.push(...uris.map(u => ensureAbsoluteUri(ensureAbsoluteUri(u))));
+						result.push(...uris.map(u => ensureAbsoluteUri(u)));
 					} else if (attr.name.endsWith(":noNamespaceSchemaLocation")) {
 						let uris = attr.value.split(/\s+/);
-						result.push(...uris.map(u => ensureAbsoluteUri(ensureAbsoluteUri(u))));
+						result.push(...uris.map(u => ensureAbsoluteUri(u)));
 					} else if (attr.name === "xmlns") {
 						let newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
