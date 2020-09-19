@@ -89,28 +89,31 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 const xsdUri = currentUriPair.uri;
 
                 let schemaProperties = this.schemaPropertiesArray
-                    .filterUris([xsdUri])[0];
+                    .filterUris([xsdUri]);
 
-                if (schemaProperties === undefined) {
-                    schemaProperties = { schemaUri: currentUriPair.uri, parentSchemaUri: currentUriPair.parentUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as XmlSchemaProperties;
+                if (schemaProperties.length === 0) {
+                    let schemaProperty = { schemaUri: currentUriPair.uri, parentSchemaUri: currentUriPair.parentUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as XmlSchemaProperties;
 
                     try {
                         let xsdUriString = xsdUri.toString(true);
-                        schemaProperties.xsdContent = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString);
-                        schemaProperties.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperties.xsdContent, xsdUriString, (u) => xsdFileUris.push({ uri: vscode.Uri.parse(XmlSimpleParser.ensureAbsoluteUri(u, xsdUriString)), parentUri: currentUriPair.parentUri}));
+                        schemaProperty.xsdContent = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString);
+                        schemaProperty.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperty.xsdContent, xsdUriString, (u) => xsdFileUris.push({ uri: vscode.Uri.parse(XmlSimpleParser.ensureAbsoluteUri(u, xsdUriString)), parentUri: currentUriPair.parentUri}));
                         vscode.window.showInformationMessage(`Loaded ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
                     }
                     catch (err) {
                         vscode.window.showErrorMessage(err.toString());
                     } finally {
-                        this.schemaPropertiesArray.push(schemaProperties);
+                        this.schemaPropertiesArray.push(schemaProperty);
+                        schemaProperties = [schemaProperty];
                     }
                 }
 
                 const strict = !globalSettings.schemaMapping.find(m => m.xsdUri === xsdUri.toString() && m.strict === false);
-                let diagnosticResults = await XmlSimpleParser.getXmlDiagnosticData(text, schemaProperties.tagCollection, nsMap, strict);
 
-                diagnostics.push(this.getDiagnosticArray(diagnosticResults));
+                for (const sp of schemaProperties) {
+                    let diagnosticResults = await XmlSimpleParser.getXmlDiagnosticData(text, sp.tagCollection, nsMap, strict);
+                    diagnostics.push(this.getDiagnosticArray(diagnosticResults));
+                }
             }
 
             if (xsdFileUris.length === 0) {
