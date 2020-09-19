@@ -29,6 +29,7 @@
 				"${workspaceFolder}/test/CpuUsage/AUTOSAR_SWS_ExecutionManagement.arxml",
 				"${workspaceFolder}/test/EncodingProblem/build.xml",
 				"${workspaceFolder}/test/Metar/Metar.xml",
+				"${workspaceFolder}/test/XsdInclude/XsdInclude.xml",
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"

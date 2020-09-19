@@ -99,6 +99,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 
 export class XmlSchemaProperties {
 	schemaUri: vscode.Uri;
+	parentSchemaUri: vscode.Uri;
 	xsdContent: string;
 	tagCollection: XmlTagCollection;
 }
@@ -106,7 +107,7 @@ export class XmlSchemaProperties {
 export class XmlSchemaPropertiesArray extends Array<XmlSchemaProperties> {
 	filterUris(uris: vscode.Uri[]): Array<XmlSchemaProperties> {
 		return this.filter(e => uris
-			.find(u => u.toString() === e.schemaUri.toString()) !== undefined);
+			.find(u => u.toString() === e.parentSchemaUri.toString()) !== undefined);
 	}
 }
 

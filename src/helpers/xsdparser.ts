@@ -2,7 +2,7 @@ import { XmlTagCollection, CompletionString } from '../types';
 
 export default class XsdParser {
 
-	public static getSchemaTagsAndAttributes(xsdContent: string, xsdUri: string): Promise<XmlTagCollection> {
+	public static getSchemaTagsAndAttributes(xsdContent: string, xsdUri: string, importExtraXsdFunc : (uri: string) => void): Promise<XmlTagCollection> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -89,9 +89,12 @@ export default class XsdParser {
 							.forEach(e => e.base.push(tagData.attributes["ref"]));
 					}
 
-					if (tagData.name.endsWith(":import") && tagData.attributes["schemaLocation"] !== undefined) {
-						// TODO: handle this somehow, possibly separate methood to be called:
-						// importFiles.push(tagData.attributes["schemaLocation"]);
+					if (tagData.name.endsWith(":import") && tagData.attributes["schemaLocation"] !== undefined && importExtraXsdFunc) {
+						importExtraXsdFunc(tagData.attributes["schemaLocation"]);
+					}
+
+					if (tagData.name.endsWith(":include") && tagData.attributes["schemaLocation"] !== undefined && importExtraXsdFunc) {
+						importExtraXsdFunc(tagData.attributes["schemaLocation"]);
 					}
 				};
 

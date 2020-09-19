@@ -71,6 +71,10 @@ export default class XmlSimpleParser {
 			});
 	}
 
+	public static ensureAbsoluteUri(u : string, documentUri: string) {
+		return (u.indexOf("/") > 0 && u.indexOf(".") != 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
+	}
+
 	public static getSchemaXsdUris(xmlContent: string, documentUri: string, schemaMapping: { xmlns: string, xsdUri: string }[]): Promise<string[]> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
@@ -88,16 +92,13 @@ export default class XmlSimpleParser {
 					parser.resume();
 				};
 
-				let ensureAbsoluteUri = (u : string) =>
-					(u.indexOf("/") > 0 && u.indexOf(".") != 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
-
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
 						let uris = attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd"));
-						result.push(...uris.map(u => ensureAbsoluteUri(u)));
+						result.push(...uris.map(u => XmlSimpleParser.ensureAbsoluteUri(u, documentUri)));
 					} else if (attr.name.endsWith(":noNamespaceSchemaLocation")) {
 						let uris = attr.value.split(/\s+/);
-						result.push(...uris.map(u => ensureAbsoluteUri(u)));
+						result.push(...uris.map(u => XmlSimpleParser.ensureAbsoluteUri(u, documentUri)));
 					} else if (attr.name === "xmlns") {
 						let newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)

@@ -77,23 +77,27 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
             let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true), globalSettings.schemaMapping))
                 .map(u => vscode.Uri.parse(u))
-                .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString()) === i);
+                .filter((v, i, a) => a.findIndex(u => u.toString() === v.toString()) === i)
+                .map(u => ({ uri: u, parentUri: u}));
 
             let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
 
             const text = textDocument.getText();
 
-            for (let xsdUri of xsdFileUris) {
+            while (xsdFileUris.length > 0) {
+                const currentUriPair =  xsdFileUris.shift() || { uri: vscode.Uri.parse(``), parentUri: vscode.Uri.parse(``)};
+                const xsdUri = currentUriPair.uri;
+
                 let schemaProperties = this.schemaPropertiesArray
                     .filterUris([xsdUri])[0];
 
                 if (schemaProperties === undefined) {
-                    schemaProperties = { schemaUri: xsdUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as XmlSchemaProperties;
+                    schemaProperties = { schemaUri: currentUriPair.uri, parentSchemaUri: currentUriPair.parentUri, xsdContent: ``, tagCollection: new XmlTagCollection() } as XmlSchemaProperties;
 
                     try {
                         let xsdUriString = xsdUri.toString(true);
                         schemaProperties.xsdContent = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString);
-                        schemaProperties.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperties.xsdContent, xsdUriString);
+                        schemaProperties.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperties.xsdContent, xsdUriString, (u) => xsdFileUris.push({ uri: vscode.Uri.parse(XmlSimpleParser.ensureAbsoluteUri(u, xsdUriString)), parentUri: currentUriPair.parentUri}));
                         vscode.window.showInformationMessage(`Loaded ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
                     }
                     catch (err) {
