@@ -84,6 +84,11 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
             const text = textDocument.getText();
 
+            if (xsdFileUris.length === 0) {
+                const plainXmlCheckResults = await XmlSimpleParser.getXmlDiagnosticData(text, new XmlTagCollection(), nsMap, false);
+                diagnostics.push(this.getDiagnosticArray(plainXmlCheckResults));
+            }
+
             while (xsdFileUris.length > 0) {
                 const currentUriPair =  xsdFileUris.shift() || { uri: vscode.Uri.parse(``), parentUri: vscode.Uri.parse(``)};
                 const xsdUri = currentUriPair.uri;
@@ -116,13 +121,8 @@ export default class XmlLinterProvider implements vscode.Disposable {
                 }
             }
 
-            if (xsdFileUris.length === 0) {
-                const planXmlCheckResults = await XmlSimpleParser.getXmlDiagnosticData(text, new XmlTagCollection(), nsMap, false);
-                diagnostics.push(this.getDiagnosticArray(planXmlCheckResults));
-            }
-
             this.diagnosticCollection.set(textDocument.uri, diagnostics
-                .reduce((prev, next) => prev.filter(dp => next.find(dn => dn.range.start.compareTo(dp.range.start) === 0))));
+                .reduce((prev, next) => prev.filter(dp => next.some(dn => dn.range.start.compareTo(dp.range.start) === 0))));
         }
         catch (err) {
             vscode.window.showErrorMessage(err.toString());

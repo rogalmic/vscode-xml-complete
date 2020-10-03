@@ -53,7 +53,7 @@ export default class XmlSimpleParser {
 							}
 						});
 					}
-					else if (tagData.name.indexOf(":!") < 0) {
+					else if (tagData.name.indexOf(":!") < 0 && xsdTags.length > 0) {
 						result.push({
 							line: parser.line,
 							column: parser.column,
