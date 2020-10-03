@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.14](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.13...v0.2.14) (2020-10-03)
+
+
+### Bug Fixes
+
+* Fix for showing unknown tag warnings when xsd missing. ([70c7d12](https://github.com/rogalmic/vscode-xml-complete/commit/70c7d12460caa76ff63630508a084198df6d358f))
+
 ### [0.2.13](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.11...v0.2.13) (2020-09-20)
 
 
