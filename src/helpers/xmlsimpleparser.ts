@@ -112,20 +112,18 @@ export default class XmlSimpleParser {
 					} else if (attr.name === "xmlns") {
 						const newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
-							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next), []);
+							.flatMap(m => m.xsdUri.split(/\s+/));
 						result.push(...newUriStrings);
 					} else if (attr.name.startsWith("xmlns:")) {
 						const newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
-							.map(m => m.xsdUri.split(/\s+/))
-							.reduce((prev, next) => prev.concat(next), []);
+							.flatMap(m => m.xsdUri.split(/\s+/));
 						result.push(...newUriStrings);
 					}
 				};
 
 				parser.onend = () => {
-					resolve(result.filter((v, i, a) => a.indexOf(v) === i));
+					resolve([...new Set(result)]);
 				};
 
 				parser.write(xmlContent).close();

@@ -52,10 +52,11 @@ export class XmlTagCollection extends Array<XmlTag> {
 			handledNames.push(tagName);
 			const currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
 			if (currentTags.length > 0) {
-				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
+				result.push(...currentTags.flatMap(e => e.attributes));
 				currentTags.forEach(e => {
-					e.base.filter(b => !handledNames.includes(b))
-						.forEach(b => result.push(...this.loadAttributes(b)))
+					const attrs = e.base.filter(b => !handledNames.includes(b))
+						.flatMap(b => this.loadAttributes(b))
+					result.push(...attrs);
 				});
 			}
 		}
@@ -66,7 +67,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 		const arr = xsdString.name.split(":");
 		if (arr.length === 2 && this.nsMap.has(arr[0]) && localXmlMapping.has(this.nsMap[arr[0]]))
 		{
-			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment, xsdString.definitionUri, xsdString.definitionLine, xsdString.definitionColumn);
+			return new CompletionString (`${localXmlMapping[this.nsMap[arr[0]]]}:${arr[1]}`, xsdString.comment, xsdString.definitionUri, xsdString.definitionLine, xsdString.definitionColumn);
 		}
 		return xsdString;
 	}
@@ -79,7 +80,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 			if (v === arr[0]) {
 				this.nsMap.forEach((v2, k2) => {
 					if (v2 == k) {
-						xmlStrings.push(k2 + ":" + arr[1]);
+						xmlStrings.push(`${k2}:${arr[1]}`);
 					}
 				});
 			}

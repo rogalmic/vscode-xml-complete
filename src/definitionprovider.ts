@@ -26,8 +26,7 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 		switch (scope.context) {
 			case "element":
 				const tags = this.schemaPropertiesArray
-					.map(p => p.tagCollection.filter(t => t.tag.name === word))
-					.reduce((prev, next) => prev.concat(next), []);
+					.flatMap(p => p.tagCollection.filter(t => t.tag.name === word));
 
 				if (tags.length > 0) {
 					return generateResult(tags[0].tag);
@@ -36,10 +35,8 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 
 			case "attribute":
 					const atts = this.schemaPropertiesArray
-						.map(p => p.tagCollection
-							.map(t => t.attributes.filter(a => a.name === word))
-							.reduce((prev, next) => prev.concat(next), []))
-						.reduce((prev, next) => prev.concat(next), []);
+						.flatMap(p =>
+							p.tagCollection.flatMap(t => t.attributes.filter(a => a.name === word)));
 
 					if (atts.length > 0) {
 						return generateResult(atts[0]);

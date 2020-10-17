@@ -35,24 +35,22 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 		} else if (scope.context === "element") {
 			resultTexts = this.schemaPropertiesArray
 				.filterUris(xsdFileUris)
-				.map(sp => sp.tagCollection.filter(e => e.visible).map(e => sp.tagCollection.fixNs(e.tag, nsMap)))
-				.reduce((prev, next) => prev.concat(next), [])
-				.sort()
-				.filter(e => e.name === word)
-				.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i);
+				.flatMap(sp => sp.tagCollection.filter(e => e.visible).map(e => sp.tagCollection.fixNs(e.tag, nsMap)))
+				.filter(e => e.name === word);
 
 		} else if (scope.context !== undefined) {
 			resultTexts = this.schemaPropertiesArray
 				.filterUris(xsdFileUris)
-				.map(sp => sp.tagCollection.loadAttributesEx(scope.tagName, nsMap).map(s => sp.tagCollection.fixNs(s, nsMap)))
-				.reduce((prev, next) => prev.concat(next), [])
-				.sort()
-				.filter(e => e.name === word)
-				.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i);
+				.flatMap(sp => sp.tagCollection.loadAttributesEx(scope.tagName, nsMap).map(s => sp.tagCollection.fixNs(s, nsMap)))
+				.filter(e => e.name === word);
 
 		} else {
 			resultTexts = [];
 		}
+
+		resultTexts = resultTexts
+			.filter((v, i, a) => a.findIndex(e => e.name === v.name && e.comment === v.comment ) === i)
+			.sort();
 
 		return {
 			contents: resultTexts.map(t => new vscode.MarkdownString(t.comment)),

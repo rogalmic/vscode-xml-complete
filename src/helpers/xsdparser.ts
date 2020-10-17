@@ -59,9 +59,8 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":attribute") && tagData.attributes["name"] !== undefined) {
 						const currentResultTag = xmlDepthPath
-							.slice()
-							.reverse()
-							.filter(e => e.resultTagName !== undefined)[1];
+							.filter(e => e.resultTagName !== undefined)
+							.slice(-2)[0];
 						result
 							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
 							.forEach(e => e.attributes.push(getCompletionString(tagData.attributes["name"])));
@@ -69,9 +68,8 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":extension") && tagData.attributes["base"] !== undefined) {
 						const currentResultTag = xmlDepthPath
-							.slice()
-							.reverse()
-							.filter(e => e.resultTagName !== undefined)[0];
+							.filter(e => e.resultTagName !== undefined)
+							.slice(-1)[0];
 
 						result
 							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
@@ -80,9 +78,8 @@ export default class XsdParser {
 
 					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["ref"] !== undefined) {
 						const currentResultTag = xmlDepthPath
-							.slice()
-							.reverse()
-							.filter(e => e.resultTagName !== undefined)[0];
+							.filter(e => e.resultTagName !== undefined)
+							.slice(-1)[0];
 
 						result
 							.filter(e => currentResultTag && e.tag.name === currentResultTag.resultTagName)
@@ -107,17 +104,16 @@ export default class XsdParser {
 
 				parser.ontext = (t: string) => {
 					if (/\S/.test(t)) {
-						const stack = xmlDepthPath
-							.slice()
-							.reverse();
-
-						if (!stack.find(e => e.tag.endsWith(":documentation"))) {
+						if (!xmlDepthPath.find(e => e.tag.endsWith(":documentation"))) {
 							return;
 						}
 
-						const currentCommentTargets = stack.filter(e => e && e.resultTagName !== undefined);
+						const stack = xmlDepthPath
+							.filter(e => e && e.resultTagName !== undefined)
+							.slice(-2);
 
-						const currentCommentTarget = currentCommentTargets[0];
+						const currentCommentTarget = stack[1];
+						const currentCommentTargetTag = stack[0];
 
 						if (!currentCommentTarget) {
 							return;
@@ -129,12 +125,9 @@ export default class XsdParser {
 								.forEach(e => e.tag.comment = t.trim());
 						}
 						else if (currentCommentTarget.tag.endsWith(":attribute")) {
-							const currentCommentTargetTag = currentCommentTargets[1];
-
 							result
 								.filter(e => currentCommentTargetTag && e.tag.name === currentCommentTargetTag.resultTagName)
-								.map(e => e.attributes)
-								.reduce((prev, next) => prev.concat(next), [])
+								.flatMap(e => e.attributes)
 								.filter(e => currentCommentTarget && e.name === currentCommentTarget.resultTagName)
 								.forEach(e => e.comment = t.trim());
 						}

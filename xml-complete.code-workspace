@@ -8,11 +8,17 @@
 		},
 		{
 			"path": "test/Wpf"
+		},
+		{
+			"path": "test/Wpf5"
 		}
 	],
 	"settings": {
 		"javascript.validate.enable": false,
 		"typescript.tsdk": "node_modules/typescript/lib",
 		"typescript.tsc.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": ["ms-vscode.vscode-js-profile-flame"]
 	}
 }
