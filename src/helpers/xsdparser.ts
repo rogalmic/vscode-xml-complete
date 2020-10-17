@@ -6,12 +6,12 @@ export default class XsdParser {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
-		let getCompletionString = (name: string, comment?: string) => new CompletionString(name, comment, xsdUri, parser.line, parser.column);
+		const getCompletionString = (name: string, comment?: string) => new CompletionString(name, comment, xsdUri, parser.line, parser.column);
 
 		return new Promise<XmlTagCollection>(
 			(resolve) => {
-				let result: XmlTagCollection = new XmlTagCollection();
-				let xmlDepthPath: { tag: string, resultTagName: string }[] = [];
+				const result: XmlTagCollection = new XmlTagCollection();
+				const xmlDepthPath: { tag: string, resultTagName: string }[] = [];
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
 
@@ -58,7 +58,7 @@ export default class XsdParser {
 					}
 
 					if (tagData.name.endsWith(":attribute") && tagData.attributes["name"] !== undefined) {
-						let currentResultTag = xmlDepthPath
+						const currentResultTag = xmlDepthPath
 							.slice()
 							.reverse()
 							.filter(e => e.resultTagName !== undefined)[1];
@@ -68,7 +68,7 @@ export default class XsdParser {
 					}
 
 					if (tagData.name.endsWith(":extension") && tagData.attributes["base"] !== undefined) {
-						let currentResultTag = xmlDepthPath
+						const currentResultTag = xmlDepthPath
 							.slice()
 							.reverse()
 							.filter(e => e.resultTagName !== undefined)[0];
@@ -79,7 +79,7 @@ export default class XsdParser {
 					}
 
 					if (tagData.name.endsWith(":attributeGroup") && tagData.attributes["ref"] !== undefined) {
-						let currentResultTag = xmlDepthPath
+						const currentResultTag = xmlDepthPath
 							.slice()
 							.reverse()
 							.filter(e => e.resultTagName !== undefined)[0];
@@ -99,7 +99,7 @@ export default class XsdParser {
 				};
 
 				parser.onclosetag = (name: string) => {
-					let popped = xmlDepthPath.pop();
+					const popped = xmlDepthPath.pop();
 					if (popped !== undefined && popped.tag !== name) {
 						console.warn("XSD open/close tag consistency error.");
 					}
@@ -107,7 +107,7 @@ export default class XsdParser {
 
 				parser.ontext = (t: string) => {
 					if (/\S/.test(t)) {
-						let stack = xmlDepthPath
+						const stack = xmlDepthPath
 							.slice()
 							.reverse();
 
@@ -115,9 +115,9 @@ export default class XsdParser {
 							return;
 						}
 
-						let currentCommentTargets = stack.filter(e => e && e.resultTagName !== undefined);
+						const currentCommentTargets = stack.filter(e => e && e.resultTagName !== undefined);
 
-						let currentCommentTarget = currentCommentTargets[0];
+						const currentCommentTarget = currentCommentTargets[0];
 
 						if (!currentCommentTarget) {
 							return;
@@ -129,7 +129,7 @@ export default class XsdParser {
 								.forEach(e => e.tag.comment = t.trim());
 						}
 						else if (currentCommentTarget.tag.endsWith(":attribute")) {
-							let currentCommentTargetTag = currentCommentTargets[1];
+							const currentCommentTargetTag = currentCommentTargets[1];
 
 							result
 								.filter(e => currentCommentTargetTag && e.tag.name === currentCommentTargetTag.resultTagName)

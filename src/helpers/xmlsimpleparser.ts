@@ -2,22 +2,32 @@ import { XmlTagCollection, XmlDiagnosticData, XmlScope, CompletionString } from 
 
 export default class XmlSimpleParser {
 
-	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict: boolean = true): Promise<XmlDiagnosticData[]> {
+	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict = true): Promise<XmlDiagnosticData[]> {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
 		return new Promise<XmlDiagnosticData[]>(
 			(resolve) => {
-				let result: XmlDiagnosticData[] = [];
-				let nodeCache = new Map<string, CompletionString[]>();
+				const result: XmlDiagnosticData[] = [];
+				const nodeCacheAttributes = new Map<string, CompletionString[]>();
+				const nodeCacheTags = new Map<string, CompletionString | undefined>();
 
-				let getAttributes = (nodeName: string) => {
+				const getAttributes = (nodeName: string) => {
 
-					if (!nodeCache.has(nodeName)) {
-						nodeCache.set(nodeName, xsdTags.loadAttributesEx(nodeName, nsMap));
+					if (!nodeCacheAttributes.has(nodeName)) {
+						nodeCacheAttributes.set(nodeName, xsdTags.loadAttributesEx(nodeName, nsMap));
 					}
 
-					return nodeCache.get(nodeName);
+					return nodeCacheAttributes.get(nodeName);
+				};
+
+				const getTag = (nodeName: string) => {
+
+					if (!nodeCacheTags.has(nodeName)) {
+						nodeCacheTags.set(nodeName, xsdTags.loadTagEx(nodeName, nsMap));
+					}
+
+					return nodeCacheTags.get(nodeName);
 				};
 
 				parser.onerror = () => {
@@ -34,10 +44,10 @@ export default class XmlSimpleParser {
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
 
-					let nodeNameSplitted: Array<string> = tagData.name.split('.');
+					const nodeNameSplitted: Array<string> = tagData.name.split('.');
 
-					if (xsdTags.loadTagEx(nodeNameSplitted[0], nsMap) !== undefined) {
-						let schemaTagAttributes = getAttributes(nodeNameSplitted[0]) ?? [];
+					if (getTag(nodeNameSplitted[0]) !== undefined) {
+						const schemaTagAttributes = getAttributes(nodeNameSplitted[0]) ?? [];
 						nodeNameSplitted.shift();
 
 						const xmlAllowed : Array<string> = [":schemaLocation", ":noNamespaceSchemaLocation", "xml:space"];
@@ -81,7 +91,7 @@ export default class XmlSimpleParser {
 
 		return new Promise<string[]>(
 			(resolve) => {
-				let result: string[] = [];
+				const result: string[] = [];
 
 				if (documentUri.startsWith("git")) {
 					resolve(result);
@@ -94,19 +104,19 @@ export default class XmlSimpleParser {
 
 				parser.onattribute = (attr: any) => {
 					if (attr.name.endsWith(":schemaLocation")) {
-						let uris = attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd"));
+						const uris = attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd"));
 						result.push(...uris.map(u => XmlSimpleParser.ensureAbsoluteUri(u, documentUri)));
 					} else if (attr.name.endsWith(":noNamespaceSchemaLocation")) {
-						let uris = attr.value.split(/\s+/);
+						const uris = attr.value.split(/\s+/);
 						result.push(...uris.map(u => XmlSimpleParser.ensureAbsoluteUri(u, documentUri)));
 					} else if (attr.name === "xmlns") {
-						let newUriStrings = schemaMapping
+						const newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
 							.map(m => m.xsdUri.split(/\s+/))
 							.reduce((prev, next) => prev.concat(next), []);
 						result.push(...newUriStrings);
 					} else if (attr.name.startsWith("xmlns:")) {
-						let newUriStrings = schemaMapping
+						const newUriStrings = schemaMapping
 							.filter(m => m.xmlns === attr.value)
 							.map(m => m.xsdUri.split(/\s+/))
 							.reduce((prev, next) => prev.concat(next), []);
@@ -128,7 +138,7 @@ export default class XmlSimpleParser {
 
 		return new Promise<Map<string, string>>(
 			(resolve) => {
-				let result: Map<string, string> = new Map<string, string>();
+				const result: Map<string, string> = new Map<string, string>();
 
 				parser.onerror = () => {
 					parser.resume();
@@ -156,22 +166,22 @@ export default class XmlSimpleParser {
 			(resolve) => {
 				let result: XmlScope;
 				let previousStartTagPosition = 0;
-				let updatePosition = () => {
+				const updatePosition = () => {
 
 					if ((parser.position >= offset) && !result) {
 
 						let content = xmlContent.substring(previousStartTagPosition, offset);
 						content = content.lastIndexOf("<") >= 0 ? content.substring(content.lastIndexOf("<")) : content;
 
-						let normalizedContent = content.concat(" ").replace("/", "").replace("\t", " ").replace("\n", " ").replace("\r", " ");
-						let tagName = content.substring(1, normalizedContent.indexOf(" "));
+						const normalizedContent = content.concat(" ").replace("/", "").replace("\t", " ").replace("\n", " ").replace("\r", " ");
+						const tagName = content.substring(1, normalizedContent.indexOf(" "));
 
 						result = { tagName: /^[a-zA-Z0-9_:\.\-]*$/.test(tagName) ? tagName : undefined, context: undefined };
 
 						if (content.lastIndexOf(">") >= content.lastIndexOf("<")) {
 							result.context = "text";
 						} else {
-							let lastTagText = content.substring(content.lastIndexOf("<"));
+							const lastTagText = content.substring(content.lastIndexOf("<"));
 							if (!/\s/.test(lastTagText)) {
 								result.context = "element";
 							} else if ((lastTagText.split(`"`).length % 2) !== 0) {
@@ -218,7 +228,7 @@ export default class XmlSimpleParser {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
-		let result: boolean = true;
+		let result = true;
 		return new Promise<boolean>(
 			(resolve) => {
 				parser.onerror = () => {
@@ -238,18 +248,18 @@ export default class XmlSimpleParser {
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
-		let result: string[] = [];
-		let xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
+		const result: string[] = [];
+		const xmlDepthPath: { tag: string, selfClosing: boolean, isTextContent: boolean }[] = [];
 
-		let multiLineAttributes = formattingStyle === "multiLineAttributes";
+		const multiLineAttributes = formattingStyle === "multiLineAttributes";
 		indentationString = (formattingStyle === "fileSizeOptimized") ? "" : indentationString;
 
-		let getIndentation = (): string =>
+		const getIndentation = (): string =>
 			(!result[result.length - 1] || result[result.length - 1].indexOf("<") >= 0 || result[result.length - 1].indexOf(">") >= 0)
 				? eol + Array(xmlDepthPath.length).fill(indentationString).join("")
 				: "";
 
-		let getEncodedText = (t: string) : string =>
+		const getEncodedText = (t: string) : string =>
 			t.replace(/&/g, '&amp;')
 			.replace(/</g, '&lt;')
 			.replace(/>/g, '&gt;')
@@ -280,8 +290,8 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
-					let argString: string[] = [""];
-					for (let arg in tagData.attributes) {
+					const argString: string[] = [""];
+					for (const arg in tagData.attributes) {
 						argString.push(` ${arg}="${getEncodedText(tagData.attributes[arg])}"`);
 					}
 
@@ -289,7 +299,7 @@ export default class XmlSimpleParser {
 						xmlDepthPath[xmlDepthPath.length - 1].isTextContent = false;
 					}
 
-					let attributesStr = argString.join(multiLineAttributes ? `${getIndentation()}${indentationString}` : ``);
+					const attributesStr = argString.join(multiLineAttributes ? `${getIndentation()}${indentationString}` : ``);
 					result.push(`${getIndentation()}<${tagData.name}${attributesStr}${tagData.isSelfClosing ? "/>" : ">"}`);
 
 					xmlDepthPath.push({
@@ -300,7 +310,7 @@ export default class XmlSimpleParser {
 				};
 
 				parser.onclosetag = (t) => {
-					let tag = xmlDepthPath.pop();
+					const tag = xmlDepthPath.pop();
 
 					if (tag && !tag.selfClosing) {
 						result.push(tag.isTextContent ? `</${t}>` : `${getIndentation()}</${t}>`);

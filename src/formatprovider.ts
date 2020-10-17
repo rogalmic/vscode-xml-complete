@@ -14,7 +14,7 @@ export default class XmlFormatProvider implements vscode.DocumentFormattingEditP
 		const documentRange = new vscode.Range(textDocument.positionAt(0), textDocument.lineAt(textDocument.lineCount - 1).range.end);
 		const text = textDocument.getText();
 
-		let formattedText: string =
+		const formattedText: string =
 			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`, globalSettings.formattingStyle))
 				.trim();
 

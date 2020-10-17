@@ -26,7 +26,7 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 
 		const emptyLines = /^\s*[\r?\n]|\s*[\r?\n]$/g;
 
-		let formattedText: string =
+		const formattedText: string =
 			(await XmlSimpleParser.formatXml(text, indentationString, textDocument.eol === vscode.EndOfLine.CRLF ? `\r\n` : `\n`, globalSettings.formattingStyle))
 				.split(selectionSeparator)[1]
 				.replace(emptyLines, "");

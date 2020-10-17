@@ -9,14 +9,14 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 	}
 
 	async provideCompletionItems(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken, _context: vscode.CompletionContext): Promise<vscode.CompletionItem[] | vscode.CompletionList> {
-		let documentContent = textDocument.getText();
-		let offset = textDocument.offsetAt(position);
-		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true), globalSettings.schemaMapping))
+		const documentContent = textDocument.getText();
+		const offset = textDocument.offsetAt(position);
+		const xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true), globalSettings.schemaMapping))
 			.map(u => vscode.Uri.parse(u));
 
-		let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
+		const nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
 
-		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
+		const scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
 
 		let resultTexts: CompletionString[];
 
@@ -51,7 +51,7 @@ export default class XmlCompletionItemProvider implements vscode.CompletionItemP
 
 		return resultTexts
 			.map(t => {
-				let ci = new vscode.CompletionItem(t.name, vscode.CompletionItemKind.Snippet);
+				const ci = new vscode.CompletionItem(t.name, vscode.CompletionItemKind.Snippet);
 				ci.detail = scope.context;
 				ci.documentation = t.comment;
 				return ci;

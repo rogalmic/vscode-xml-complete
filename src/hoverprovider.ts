@@ -9,17 +9,17 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 	}
 
 	async provideHover(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.Hover> {
-		let documentContent = textDocument.getText();
-		let offset = textDocument.offsetAt(position);
-		let xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true),  globalSettings.schemaMapping))
+		const documentContent = textDocument.getText();
+		const offset = textDocument.offsetAt(position);
+		const xsdFileUris = (await XmlSimpleParser.getSchemaXsdUris(documentContent, textDocument.uri.toString(true),  globalSettings.schemaMapping))
 			.map(u => vscode.Uri.parse(u));
 
-		let nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
+		const nsMap = await XmlSimpleParser.getNamespaceMapping(documentContent);
 
-		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
+		const scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
 		// https://github.com/microsoft/vscode/commits/master/src/vs/editor/common/model/wordHelper.ts
-		let wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
-		let word  = textDocument.getText(wordRange);
+		const wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
+		const word  = textDocument.getText(wordRange);
 
 		let resultTexts: CompletionString[];
 

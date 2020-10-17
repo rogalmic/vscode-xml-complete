@@ -11,9 +11,9 @@ import XmlDefinitionContentProvider from './definitioncontentprovider';
 
 export declare let globalSettings: XmlCompleteSettings;
 
-export const languageId: string = 'xml';
+export const languageId = 'xml';
 
-export const schemaId: string = 'xml2xsd-definition-provider';
+export const schemaId = 'xml2xsd-definition-provider';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -21,31 +21,31 @@ export function activate(context: vscode.ExtensionContext) {
 	loadConfiguration();
 
 	const schemaPropertiesArray = new XmlSchemaPropertiesArray();
-	let completionitemprovider = vscode.languages.registerCompletionItemProvider(
+	const completionitemprovider = vscode.languages.registerCompletionItemProvider(
 		{ language: languageId, scheme: 'file' },
 		new XmlCompletionItemProvider(context, schemaPropertiesArray));
 
-	let formatprovider = vscode.languages.registerDocumentFormattingEditProvider(
+	const formatprovider = vscode.languages.registerDocumentFormattingEditProvider(
 		{ language: languageId, scheme: 'file' },
 		new XmlFormatProvider(context, schemaPropertiesArray));
 
-	let rangeformatprovider = vscode.languages.registerDocumentRangeFormattingEditProvider(
+	const rangeformatprovider = vscode.languages.registerDocumentRangeFormattingEditProvider(
 		{ language: languageId, scheme: 'file' },
 		new XmlRangeFormatProvider(context, schemaPropertiesArray));
 
-	let hoverprovider = vscode.languages.registerHoverProvider(
+	const hoverprovider = vscode.languages.registerHoverProvider(
 		{ language: languageId, scheme: 'file' },
 		new XmlHoverProvider(context, schemaPropertiesArray));
 
-	let definitionprovider = vscode.languages.registerDefinitionProvider(
+	const definitionprovider = vscode.languages.registerDefinitionProvider(
 			{ language: languageId, scheme: 'file' },
 			new XmlDefinitionProvider(context, schemaPropertiesArray));
 
-	let linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
+	const linterprovider = new XmlLinterProvider(context, schemaPropertiesArray);
 
-	let autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
+	const autocompletionprovider = new AutoCompletionProvider(context, schemaPropertiesArray);
 
-	let definitioncontentprovider = vscode.workspace.registerTextDocumentContentProvider(schemaId, new XmlDefinitionContentProvider(context, schemaPropertiesArray));
+	const definitioncontentprovider = vscode.workspace.registerTextDocumentContentProvider(schemaId, new XmlDefinitionContentProvider(context, schemaPropertiesArray));
 
 	context.subscriptions.push(
 		completionitemprovider,

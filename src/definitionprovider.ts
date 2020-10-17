@@ -9,23 +9,23 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 	}
 
 	async provideDefinition(textDocument: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken): Promise<vscode.Location> {
-		let documentContent = textDocument.getText();
-		let offset = textDocument.offsetAt(position);
-		let scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
+		const documentContent = textDocument.getText();
+		const offset = textDocument.offsetAt(position);
+		const scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
 		// https://github.com/microsoft/vscode/commits/master/src/vs/editor/common/model/wordHelper.ts
-		let wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
-		let word = textDocument.getText(wordRange);
+		const wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
+		const word = textDocument.getText(wordRange);
 
-		let noDefinitionUri = (e: string) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;
+		const noDefinitionUri = (e: string) => `data:text/plain;base64,${Buffer.from(`No definition found for '${e}'`).toString('base64')}`;
 
-		let generateResult = (cs: CompletionString) => new vscode.Location(
+		const generateResult = (cs: CompletionString) => new vscode.Location(
 			vscode.Uri.parse(`${schemaId}://${Buffer.from(cs.definitionUri || noDefinitionUri(word)).toString('hex')}`),
 			new vscode.Position(cs.definitionLine || 0, cs.definitionColumn || 0)
 		);
 
 		switch (scope.context) {
 			case "element":
-				let tags = this.schemaPropertiesArray
+				const tags = this.schemaPropertiesArray
 					.map(p => p.tagCollection.filter(t => t.tag.name === word))
 					.reduce((prev, next) => prev.concat(next), []);
 
@@ -35,7 +35,7 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 			break;
 
 			case "attribute":
-					let atts = this.schemaPropertiesArray
+					const atts = this.schemaPropertiesArray
 						.map(p => p.tagCollection
 							.map(t => t.attributes.filter(a => a.name === word))
 							.reduce((prev, next) => prev.concat(next), []))

@@ -8,7 +8,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
     private documentListener: vscode.Disposable;
     private static maxLineChars = 1024;
     private static maxLines = 8096;
-    private delayCount: number = 0;
+    private delayCount = 0;
     private documentEvent: vscode.TextDocumentChangeEvent;
 
     constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
@@ -16,11 +16,11 @@ export default class AutoCompletionProvider implements vscode.Disposable {
             this.triggerDelayedAutoCompletion(evnt), this, this.extensionContext.subscriptions);
     }
 
-    public dispose() {
+    public dispose(): void {
         this.documentListener.dispose();
     }
 
-    private async triggerDelayedAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent, timeout: number = 250): Promise<void> {
+    private async triggerDelayedAutoCompletion(documentEvent: vscode.TextDocumentChangeEvent, timeout = 250): Promise<void> {
 
         if (this.delayCount > 0) {
             this.delayCount = timeout;
@@ -90,7 +90,7 @@ export default class AutoCompletionProvider implements vscode.Disposable {
         const nextTagEndingPostion = nextTagStartPostion >= 0 ? after.indexOf(">", nextTagStartPostion) : -1;
         const invalidTagStartPostion = nextTagEndingPostion >= 0 ? after.indexOf("<", nextTagEndingPostion) : -1;
 
-        let resultText: string = "";
+        let resultText = "";
 
         if (after.substr(closeCurrentTagIndex - 1).startsWith(`/></${scope.tagName}>`) && closeCurrentTagIndex === 1) {
 

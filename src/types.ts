@@ -21,43 +21,36 @@ export class XmlTag {
 export class XmlTagCollection extends Array<XmlTag> {
 	private nsMap: Map<string, string> = new Map<string, string>();
 
-	setNsMap(xsdNsTag:string, xsdNsStr:string) {
+	setNsMap(xsdNsTag:string, xsdNsStr:string): void {
 		this.nsMap.set(xsdNsTag, xsdNsStr);
 	}
 
 	loadAttributesEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString[] {
-		let result: CompletionString[] = [];
 		if (tagName !== undefined) {
-			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			fixedNames.forEach(fixn => {
-				result.push(...this.loadAttributes(fixn));
-			});
+			const fixedNames = this.fixNsReverse(tagName, localXmlMapping);
+			return fixedNames.flatMap(fixn => this.loadAttributes(fixn));
 		}
 
-		return result;
+		return [];
 	}
 
 	loadTagEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString | undefined {
-		let result = undefined;
 		if (tagName !== undefined) {
-			let fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			let element =this.find(e => fixedNames.includes(e.tag.name))
-			if (element !== undefined) {
-				return element.tag;
-			}
+			const fixedNames = this.fixNsReverse(tagName, localXmlMapping);
+			return this.find(e => fixedNames.includes(e.tag.name))?.tag;
 		}
 
-		return result;
+		return undefined;
 	}
 
 	loadAttributes(tagName: string | undefined, handledNames: string[] = []): CompletionString[] {
 
-		let tagNameCompare = (a: string, b: string) => a === b || a === b.substring(b.indexOf(":")+1);
+		const tagNameCompare = (a: string, b: string) => a === b || a === b.substring(b.indexOf(":")+1);
 
-		let result: CompletionString[] = [];
+		const result: CompletionString[] = [];
 		if (tagName !== undefined) {
 			handledNames.push(tagName);
-			let currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
+			const currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.map(e => e.attributes).reduce((prev, next) => prev.concat(next), []));
 				currentTags.forEach(e => {
@@ -70,7 +63,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 	}
 
 	fixNs(xsdString: CompletionString, localXmlMapping: Map<string, string>): CompletionString {
-		let arr = xsdString.name.split(":");
+		const arr = xsdString.name.split(":");
 		if (arr.length === 2 && this.nsMap.has(arr[0]) && localXmlMapping.has(this.nsMap[arr[0]]))
 		{
 			return new CompletionString (localXmlMapping[this.nsMap[arr[0]]] + ":" + arr[1], xsdString.comment, xsdString.definitionUri, xsdString.definitionLine, xsdString.definitionColumn);
@@ -79,8 +72,8 @@ export class XmlTagCollection extends Array<XmlTag> {
 	}
 
 	fixNsReverse(xmlString: string, localXmlMapping: Map<string, string>): Array<string> {
-		let arr = xmlString.split(":");
-		let xmlStrings = new Array<string>();
+		const arr = xmlString.split(":");
+		const xmlStrings = new Array<string>();
 
 		localXmlMapping.forEach((v, k) => {
 			if (v === arr[0]) {
