@@ -15,7 +15,9 @@ export const languageId = 'xml';
 
 export const schemaId = 'xml2xsd-definition-provider';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
+
+	console.debug(`Activate XmlComplete`);
 
 	vscode.workspace.onDidChangeConfiguration(loadConfiguration, undefined, context.subscriptions);
 	loadConfiguration();
@@ -65,4 +67,6 @@ function loadConfiguration(): void {
 	globalSettings.formattingStyle = section.get('formattingStyle', "singleLineAttributes");
 }
 
-export function deactivate() { }
+export function deactivate(): void {
+	console.debug(`Deactivate XmlComplete`);
+}

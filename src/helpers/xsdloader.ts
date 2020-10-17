@@ -6,6 +6,7 @@ export default class XsdLoader {
 		return new Promise<string>(
 			(resolve, reject) => {
 				let resultContent = ``;
+				// eslint-disable-next-line @typescript-eslint/no-var-requires
 				const getUri = require('get-uri');
 
 				getUri(schemaLocationUri, function (err: any, rs: ReadStream) {

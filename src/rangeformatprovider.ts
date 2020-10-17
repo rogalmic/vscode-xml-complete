@@ -8,7 +8,7 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
-	async provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
+	async provideDocumentRangeFormattingEdits(textDocument: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions, token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
 		const indentationString = options.insertSpaces ? Array(options.tabSize).fill(' ').join("") : "\t";
 
 		const before = textDocument.getText(new vscode.Range(textDocument.positionAt(0), range.start)).trim();
@@ -34,6 +34,8 @@ export default class XmlRangeFormatProvider implements vscode.DocumentRangeForma
 		if (!formattedText) {
 			return [];
 		}
+
+		if (token.isCancellationRequested) return [];
 
 		return [vscode.TextEdit.replace(range, formattedText)];
 	}

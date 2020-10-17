@@ -3,6 +3,7 @@ import { XmlTagCollection, XmlDiagnosticData, XmlScope, CompletionString } from 
 export default class XmlSimpleParser {
 
 	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict = true): Promise<XmlDiagnosticData[]> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -81,11 +82,12 @@ export default class XmlSimpleParser {
 			});
 	}
 
-	public static ensureAbsoluteUri(u : string, documentUri: string) {
+	public static ensureAbsoluteUri(u : string, documentUri: string): string {
 		return (u.indexOf("/") > 0 && u.indexOf(".") != 0) ? u : documentUri.substring(0, documentUri.lastIndexOf("/") + 1) + u;
 	}
 
 	public static getSchemaXsdUris(xmlContent: string, documentUri: string, schemaMapping: { xmlns: string, xsdUri: string }[]): Promise<string[]> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -102,7 +104,7 @@ export default class XmlSimpleParser {
 					parser.resume();
 				};
 
-				parser.onattribute = (attr: any) => {
+				parser.onattribute = (attr: {name: string; value: string;}) => {
 					if (attr.name.endsWith(":schemaLocation")) {
 						const uris = attr.value.split(/\s+/).filter((v, i) => i % 2 === 1 || v.toLowerCase().endsWith(".xsd"));
 						result.push(...uris.map(u => XmlSimpleParser.ensureAbsoluteUri(u, documentUri)));
@@ -131,6 +133,7 @@ export default class XmlSimpleParser {
 	}
 
 	public static getNamespaceMapping(xmlContent: string): Promise<Map<string, string>> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -142,7 +145,7 @@ export default class XmlSimpleParser {
 					parser.resume();
 				};
 
-				parser.onattribute = (attr: any) => {
+				parser.onattribute = (attr: {name: string; value: string;}) => {
 					if (attr.name.startsWith("xmlns:")) {
 						result.set(attr.value, attr.name.substring("xmlns:".length));
 					}
@@ -157,6 +160,7 @@ export default class XmlSimpleParser {
 	}
 
 	public static getScopeForPosition(xmlContent: string, offset: number): Promise<XmlScope> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -195,7 +199,7 @@ export default class XmlSimpleParser {
 					parser.resume();
 				};
 
-				parser.ontext = (_t: any) => {
+				parser.ontext = () => {
 					updatePosition();
 				};
 
@@ -223,6 +227,7 @@ export default class XmlSimpleParser {
 	}
 
 	public static checkXml(xmlContent: string): Promise<boolean> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 
@@ -243,6 +248,7 @@ export default class XmlSimpleParser {
 	}
 
 	public static formatXml(xmlContent: string, indentationString: string, eol: string, formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized"): Promise<string> {
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
 

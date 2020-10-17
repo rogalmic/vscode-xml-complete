@@ -30,7 +30,7 @@ export default class XmlLinterProvider implements vscode.Disposable {
             this.triggerDelayedLint(doc, 100), this);
     }
 
-    public dispose() {
+    public dispose(): void {
         this.documentListener.dispose();
         this.diagnosticCollection.clear();
     }

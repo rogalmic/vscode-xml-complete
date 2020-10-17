@@ -8,10 +8,12 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
-	async provideDefinition(textDocument: vscode.TextDocument, position: vscode.Position, _token: vscode.CancellationToken): Promise<vscode.Location> {
+	async provideDefinition(textDocument: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Promise<vscode.Location[]> {
 		const documentContent = textDocument.getText();
 		const offset = textDocument.offsetAt(position);
 		const scope = await XmlSimpleParser.getScopeForPosition(documentContent, offset);
+		if (token.isCancellationRequested) return [];
+
 		// https://github.com/microsoft/vscode/commits/master/src/vs/editor/common/model/wordHelper.ts
 		const wordRange = textDocument.getWordRangeAtPosition(position, /(-?\d*\.\d\w*)|([^\`\~\!\@\#\$\%\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\<\>\/\?\s]+)/g);
 		const word = textDocument.getText(wordRange);
@@ -29,7 +31,7 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 					.flatMap(p => p.tagCollection.filter(t => t.tag.name === word));
 
 				if (tags.length > 0) {
-					return generateResult(tags[0].tag);
+					return tags.map(t => generateResult(t.tag));
 				}
 			break;
 
@@ -39,7 +41,7 @@ export default class XmlDefinitionProvider implements vscode.DefinitionProvider 
 							p.tagCollection.flatMap(t => t.attributes.filter(a => a.name === word)));
 
 					if (atts.length > 0) {
-						return generateResult(atts[0]);
+						return atts.map(a => generateResult(a));
 					}
 				break;
 		}

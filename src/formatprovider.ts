@@ -8,7 +8,7 @@ export default class XmlFormatProvider implements vscode.DocumentFormattingEditP
 	constructor(protected extensionContext: vscode.ExtensionContext, protected schemaPropertiesArray: XmlSchemaPropertiesArray) {
 	}
 
-	async provideDocumentFormattingEdits(textDocument: vscode.TextDocument, options: vscode.FormattingOptions, _token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
+	async provideDocumentFormattingEdits(textDocument: vscode.TextDocument, options: vscode.FormattingOptions, token: vscode.CancellationToken): Promise<vscode.TextEdit[]> {
 		const indentationString = options.insertSpaces ? Array(options.tabSize).fill(' ').join("") : "\t";
 
 		const documentRange = new vscode.Range(textDocument.positionAt(0), textDocument.lineAt(textDocument.lineCount - 1).range.end);
@@ -21,6 +21,8 @@ export default class XmlFormatProvider implements vscode.DocumentFormattingEditP
 		if (!formattedText) {
 			return [];
 		}
+
+		if (token.isCancellationRequested) return [];
 
 		return [vscode.TextEdit.replace(documentRange, formattedText)];
 	}

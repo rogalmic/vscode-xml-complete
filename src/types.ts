@@ -45,7 +45,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 
 	loadAttributes(tagName: string | undefined, handledNames: string[] = []): CompletionString[] {
 
-		const tagNameCompare = (a: string, b: string) => a === b || a === b.substring(b.indexOf(":")+1);
+		const tagNameCompare = (a: string, b: string) => a === b || b.endsWith(`:${a}`);
 
 		const result: CompletionString[] = [];
 		if (tagName !== undefined) {
@@ -53,11 +53,9 @@ export class XmlTagCollection extends Array<XmlTag> {
 			const currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.flatMap(e => e.attributes));
-				currentTags.forEach(e => {
-					const attrs = e.base.filter(b => !handledNames.includes(b))
-						.flatMap(b => this.loadAttributes(b))
-					result.push(...attrs);
-				});
+				result.push(...currentTags.flatMap(e =>
+					e.base.filter(b => !handledNames.includes(b))
+						.flatMap(b => this.loadAttributes(b))));
 			}
 		}
 		return result;
