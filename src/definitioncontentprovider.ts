@@ -11,6 +11,6 @@ export default class XmlDefinitionContentProvider implements vscode.TextDocument
 	async provideTextDocumentContent (uri : vscode.Uri) : Promise<string> {
 		// NOTE: Uri@Windows is normalizing to lower-case (https://vshaxe.github.io/vscode-extern/vscode/Uri.html), using hex
 		const trueUri = Buffer.from(uri.toString(true).replace(`${schemaId}://`, ''), 'hex').toString();
-        return await XsdCachedLoader.loadSchemaContentsFromUri(trueUri);
+        return (await XsdCachedLoader.loadSchemaContentsFromUri(trueUri)).data;
     }
 }
