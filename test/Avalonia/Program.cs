@@ -16,13 +16,16 @@ namespace AvaloniaXsd
         private static Regex alphanumeric = new Regex("[^a-zA-Z0-9 -]");
 
         private static XDocument XmlDocumentation;
+        private static XDocument XmlDocumentation2;
 
         public static void Main(string[] args)
         {
             Func<string, bool> isAlphanumeric = str => !alphanumeric.IsMatch(str);
 
             var assembly = Assembly.GetAssembly(typeof(Control));
-            var controlsWithAttributes = assembly.GetExportedTypes()
+            var assembly2 = Assembly.GetAssembly(typeof(Avalonia.Controls.DataGrid));
+
+            var controlsWithAttributes = assembly.GetExportedTypes().Union(assembly2.GetExportedTypes())
                 .Where(t => !t.IsAbstract && t.FullName.StartsWith("Avalonia.Controls") && typeof(Control).IsAssignableFrom(t) && isAlphanumeric(t.Name))
                 .ToDictionary(t => t.Name, t => t.GetProperties().Where(p => isAlphanumeric(p.Name)).Select(p => p.Name).Distinct().ToList());
 
@@ -95,19 +98,19 @@ namespace AvaloniaXsd
 
         private static void AppendAttributes(XElement controlType, IEnumerable<XElement> elementsToAdd)
         {
-            var controlTypeElements =  controlType.Elements(ns + "attribute").ToArray();
+            var controlTypeElements = controlType.Elements(ns + "attribute").ToArray();
 
             foreach (var e in elementsToAdd)
             {
-                var existingElements =  controlTypeElements.Where(a => 
-                    a.Attribute("name").Value == e.Attribute("name").Value).ToList();
+                var existingElements = controlTypeElements.Where(a =>
+                   a.Attribute("name").Value == e.Attribute("name").Value).ToList();
 
                 if (existingElements.Any())
                 {
                     var docs = existingElements.Descendants(ns + "documentation").ToList();
                     if (docs.Any())
                     {
-                        docs.ForEach(d => 
+                        docs.ForEach(d =>
                         {
                             d.Value += string.Join(Environment.NewLine, e.Descendants(ns + "documentation").Select(d2 => d2.Value));
                         });
@@ -176,6 +179,10 @@ namespace AvaloniaXsd
             {
                 XmlDocumentation = GetDocumentation();
             }
+            if (XmlDocumentation2 == null)
+            {
+                XmlDocumentation2 = GetDocumentation2();
+            }
 
             entityNames = entityNames
                 .Where(n => !string.IsNullOrWhiteSpace(n))
@@ -183,12 +190,13 @@ namespace AvaloniaXsd
                 .ToArray();
 
             return XmlDocumentation.Descendants("member")
+                .Union(XmlDocumentation2.Descendants("member"))
                 .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{string.Join(".", entityNames)}")))
                 .SelectMany(e => e.Elements("summary"))
-                .Select(e => new XElement(ns + "annotation", 
-                    new XElement(ns + "documentation", 
-                        Regex.Replace(e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim().Replace("<see cref=","").Replace("/>","")
-                            , @"\s+", " "))))                
+                .Select(e => new XElement(ns + "annotation",
+                    new XElement(ns + "documentation",
+                        Regex.Replace(e.Nodes().Aggregate("", (b, node) => b += node.ToString()).Trim().Replace("<see cref=", "").Replace("/>", "")
+                            , @"\s+", " "))))
                 .Take(1)
                 .ToArray();
         }
@@ -199,14 +207,25 @@ namespace AvaloniaXsd
             {
                 XmlDocumentation = GetDocumentation();
             }
+            if (XmlDocumentation2 == null)
+            {
+                XmlDocumentation2 = GetDocumentation2();
+            }
 
-            return new [] { new XElement(ns + "annotation", new XElement(ns + "documentation", text)) };
+            return new[] { new XElement(ns + "annotation", new XElement(ns + "documentation", text)) };
         }
 
         private static XDocument GetDocumentation()
         {
             var resourceAssembly = Assembly.GetExecutingAssembly();
             Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Avalonia.Controls.xml")));
+            return XDocument.Load(resource);
+        }
+
+        private static XDocument GetDocumentation2()
+        {
+            var resourceAssembly = Assembly.GetExecutingAssembly();
+            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Avalonia.Controls.DataGrid.xml")));
             return XDocument.Load(resource);
         }
     }
