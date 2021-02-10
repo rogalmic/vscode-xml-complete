@@ -42,6 +42,16 @@ export default class XsdCachedLoader {
 		if (result !== undefined) {
 			if (cacheLocally)
 			{
+				// purge previous
+				let keys:string[] = this.vscodeCache.keys();
+				let toRemove:string[] = [];
+				keys.forEach(x => {
+					if (x.startsWith(schemaLocationUri))
+					toRemove.push(x);
+				});
+				toRemove.forEach(x => this.vscodeCache.forget(x));
+
+				// add new one
 				this.vscodeCache.put(schemaLocationUriVersioned, result);
 			}
 			return { data:result, cached:false };
