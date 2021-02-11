@@ -88,28 +88,23 @@
           "default": [
             {
               "xmlns": "http://www.w3.org/2001/XMLSchema",
-              "xsdUri": "https://www.w3.org/2001/XMLSchema.xsd",
-              "strict": true
+              "xsdUri": "https://www.w3.org/2001/XMLSchema.xsd"
             },
             {
               "xmlns": "https://github.com/avaloniaui",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd",
-              "strict": false
+              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
             },
             {
               "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd",
-              "strict": false
+              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd"
             },
             {
               "xmlns": "http://www.w3.org/2000/svg",
-              "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd",
-              "strict": true
+              "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd"
             },
             {
               "xmlns": "http://schemas.microsoft.com/developer/msbuild/2003",
-              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.Core.xsd",
-              "strict": true
+              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.Core.xsd"
             }
           ]
         }
@@ -135,13 +130,13 @@
   "devDependencies": {
     "@types/mocha": "7.0.1",
     "@types/node": "12.12.14",
-    "@typescript-eslint/eslint-plugin": "^4.4.1",
-    "@typescript-eslint/parser": "^4.4.1",
-    "eslint": "^7.11.0",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.19.0",
     "jsdoctest": "1.7.1",
-    "standard-version": "9.0.0",
-    "typescript": "^4.0.3",
-    "vsce": "1.81.1",
+    "standard-version": "9.1.0",
+    "typescript": "^4.1.5",
+    "vsce": "1.85.0",
     "vscode": "^1.1.36"
   }
 }

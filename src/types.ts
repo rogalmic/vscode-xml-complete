@@ -26,37 +26,46 @@ export class XmlTagCollection extends Array<XmlTag> {
 		this.nsMap.set(xsdNsTag, xsdNsStr);
 	}
 
-	loadAttributesEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString[] {
+	// TODO: to extension method
+	static loadAttributesEx(tagName: string | undefined, localXmlMapping: Map<string, string>, allTagsForScope: XmlTagCollection[]): CompletionString[] {
 		if (tagName !== undefined) {
-			const fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			return fixedNames.flatMap(fixn => this.loadAttributes(fixn));
+			return allTagsForScope.flatMap(xtc => {
+				const fixedNames = xtc.fixNsReverse(tagName, localXmlMapping);
+				return fixedNames.flatMap(fixn => XmlTagCollection.loadAttributes(fixn, allTagsForScope));
+			});
 		}
 
 		return [];
 	}
 
-	loadTagEx(tagName: string | undefined, localXmlMapping: Map<string, string>): CompletionString | undefined {
+	// TODO: to extension method
+	static loadTagEx(tagName: string | undefined, localXmlMapping: Map<string, string>, allTagsForScope: XmlTagCollection[]): CompletionString | undefined {
 		if (tagName !== undefined) {
-			const fixedNames = this.fixNsReverse(tagName, localXmlMapping);
-			return this.find(e => fixedNames.includes(e.tag.name))?.tag;
+			return allTagsForScope
+				.map(xtc => {
+					const fixedNames = xtc.fixNsReverse(tagName, localXmlMapping);
+					return xtc.find(e => fixedNames.includes(e.tag.name))?.tag;
+				})
+				.find(cs => cs !== undefined);
 		}
 
 		return undefined;
 	}
 
-	loadAttributes(tagName: string | undefined, handledNames: string[] = []): CompletionString[] {
+	// TODO: to extension method
+	private static loadAttributes(tagName: string | undefined, allTagsForScope : XmlTagCollection[] = [], handledNames: string[] = []): CompletionString[] {
 
 		const tagNameCompare = (a: string, b: string) => a === b || b.endsWith(`:${a}`);
 
 		const result: CompletionString[] = [];
 		if (tagName !== undefined) {
 			handledNames.push(tagName);
-			const currentTags = this.filter(e => tagNameCompare(e.tag.name, tagName));
+			const currentTags = allTagsForScope.flatMap(t => t).filter(e => tagNameCompare(e.tag.name, tagName));
 			if (currentTags.length > 0) {
 				result.push(...currentTags.flatMap(e => e.attributes));
 				result.push(...currentTags.flatMap(e =>
 					e.base.filter(b => !handledNames.includes(b))
-						.flatMap(b => this.loadAttributes(b))));
+						.flatMap(b => XmlTagCollection.loadAttributes(b, allTagsForScope))));
 			}
 		}
 		return result;

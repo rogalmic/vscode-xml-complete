@@ -33,7 +33,7 @@ export default class XsdParser {
 					else if (tagData.name.endsWith(":element") && tagData.attributes["name"] !== undefined) {
 						result.push({
 							tag: getCompletionString(tagData.attributes["name"]),
-							base: [tagData.attributes["type"]],
+							base: tagData.attributes["type"] !== undefined ? [tagData.attributes["type"]] : [],
 							attributes: [],
 							visible: true
 						});

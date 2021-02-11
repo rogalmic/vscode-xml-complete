@@ -6,6 +6,8 @@
     <StartupObject>Wpf.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="" />
     <EmbeddedResource Include="Wpf.Controls.xml"/>
+    <Folder  />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { XmlSchemaPropertiesArray, CompletionString } from './types';
+import { XmlSchemaPropertiesArray, CompletionString, XmlTagCollection } from './types';
 import { globalSettings } from './extension';
 import XmlSimpleParser from './helpers/xmlsimpleparser';
 
@@ -23,6 +23,10 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 
 		let resultTexts: CompletionString[];
 
+		const tagCollections = this.schemaPropertiesArray
+				.filterUris(xsdFileUris)
+				.map(sp => sp.tagCollection);
+
 		if (token.isCancellationRequested) {
 			resultTexts = [];
 
@@ -33,15 +37,13 @@ export default class XmlHoverProvider implements vscode.HoverProvider {
 			resultTexts = [];
 
 		} else if (scope.context === "element") {
-			resultTexts = this.schemaPropertiesArray
-				.filterUris(xsdFileUris)
-				.flatMap(sp => sp.tagCollection.filter(e => e.visible).map(e => sp.tagCollection.fixNs(e.tag, nsMap)))
+			resultTexts = tagCollections
+				.flatMap(tc => tc.filter(e => e.visible).map(e => tc.fixNs(e.tag, nsMap)))
 				.filter(e => e.name === word);
 
 		} else if (scope.context !== undefined) {
-			resultTexts = this.schemaPropertiesArray
-				.filterUris(xsdFileUris)
-				.flatMap(sp => sp.tagCollection.loadAttributesEx(scope.tagName, nsMap).map(s => sp.tagCollection.fixNs(s, nsMap)))
+			resultTexts = tagCollections
+				.flatMap(tc => XmlTagCollection.loadAttributesEx(scope.tagName, nsMap, tagCollections).map(s => tc.fixNs(s, nsMap)))
 				.filter(e => e.name === word);
 
 		} else {
