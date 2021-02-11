@@ -2,7 +2,7 @@ import { XmlTagCollection, XmlDiagnosticData, XmlScope, CompletionString } from 
 
 export default class XmlSimpleParser {
 
-	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection, nsMap: Map<string, string>, strict = true): Promise<XmlDiagnosticData[]> {
+	public static getXmlDiagnosticData(xmlContent: string, xsdTags: XmlTagCollection[], nsMap: Map<string, string>, strict = true): Promise<XmlDiagnosticData[]> {
 		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const sax = require("sax");
 		const parser = sax.parser(true);
@@ -16,7 +16,7 @@ export default class XmlSimpleParser {
 				const getAttributes = (nodeName: string) => {
 
 					if (!nodeCacheAttributes.has(nodeName)) {
-						nodeCacheAttributes.set(nodeName, xsdTags.loadAttributesEx(nodeName, nsMap));
+						nodeCacheAttributes.set(nodeName, XmlTagCollection.loadAttributesEx(nodeName, nsMap, xsdTags));
 					}
 
 					return nodeCacheAttributes.get(nodeName);
@@ -25,7 +25,7 @@ export default class XmlSimpleParser {
 				const getTag = (nodeName: string) => {
 
 					if (!nodeCacheTags.has(nodeName)) {
-						nodeCacheTags.set(nodeName, xsdTags.loadTagEx(nodeName, nsMap));
+						nodeCacheTags.set(nodeName, XmlTagCollection.loadTagEx(nodeName, nsMap, xsdTags));
 					}
 
 					return nodeCacheTags.get(nodeName);
@@ -53,7 +53,7 @@ export default class XmlSimpleParser {
 
 						const xmlAllowed : Array<string> = [":schemaLocation", ":noNamespaceSchemaLocation", "xml:space"];
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
-							if (schemaTagAttributes.findIndex(sta => sta.name === a) < 0 && a.indexOf(":!") < 0
+							if (schemaTagAttributes.some(sta => sta.name === a) === false && a.indexOf(":!") < 0
 								&& a !== "xmlns" && !a.startsWith("xmlns:")
 								&& xmlAllowed.findIndex(all => a.endsWith(all)) < 0) {
 								result.push({

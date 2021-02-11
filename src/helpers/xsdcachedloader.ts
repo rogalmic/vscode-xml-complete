@@ -10,20 +10,20 @@ export default class XsdCachedLoader {
 	private static vscodeCache : Cache;
 	private static pluginVersion : string;
 
-	public static InitVscodeCache(extensionContext: vscode.ExtensionContext) {
+	public static InitVscodeCache(extensionContext: vscode.ExtensionContext): void {
 		XsdCachedLoader.vscodeCache = new Cache(extensionContext);
 		XsdCachedLoader.pluginVersion = vscode.extensions.getExtension('rogalmic.vscode-xml-complete')?.packageJSON.version as string;
 	}
 
 	public static async loadSchemaContentsFromUri(schemaLocationUri: string, formatXsd = true, xsdCachePattern: string | undefined = undefined): Promise<{data:string, cached:boolean}> {
-		let cacheLocally = xsdCachePattern && (schemaLocationUri.match(xsdCachePattern) != null)
-		let schemaLocationUriVersioned = schemaLocationUri + "?v=" + this.pluginVersion;
+		const cacheLocally = xsdCachePattern && (schemaLocationUri.match(xsdCachePattern) != null)
+		const schemaLocationUriVersioned = `${schemaLocationUri}?v=${this.pluginVersion}`;
 
 		if (cacheLocally)
 		{
 			if (this.vscodeCache.has(schemaLocationUriVersioned))
 			{
-				let q = this.vscodeCache.get(schemaLocationUriVersioned);
+				const q = this.vscodeCache.get(schemaLocationUriVersioned);
 				return { data:q, cached:true };
 			}
 		}
@@ -43,8 +43,8 @@ export default class XsdCachedLoader {
 			if (cacheLocally)
 			{
 				// purge previous
-				let keys:string[] = this.vscodeCache.keys();
-				let toRemove:string[] = [];
+				const keys:string[] = this.vscodeCache.keys();
+				const toRemove:string[] = [];
 				keys.forEach(x => {
 					if (x.startsWith(schemaLocationUri))
 					toRemove.push(x);
