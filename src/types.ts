@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 
 export class XmlCompleteSettings {
+	xsdCachePattern?: string;
 	schemaMapping: { xmlns: string, xsdUri: string, strict: boolean }[];
 	formattingStyle: "singleLineAttributes" | "multiLineAttributes" | "fileSizeOptimized";
 }

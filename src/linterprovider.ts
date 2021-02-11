@@ -104,10 +104,11 @@ export default class XmlLinterProvider implements vscode.Disposable {
 
                     try {
                         const xsdUriString = xsdUri.toString(true);
-                        let q = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString);
+                        let q = await XsdCachedLoader.loadSchemaContentsFromUri(xsdUriString, true, globalSettings.xsdCachePattern);
                         schemaProperty.xsdContent = q.data;
                         schemaProperty.tagCollection = await XsdParser.getSchemaTagsAndAttributes(schemaProperty.xsdContent, xsdUriString, (u) => xsdFileUris.push({ uri: vscode.Uri.parse(XmlSimpleParser.ensureAbsoluteUri(u, xsdUriString)), parentUri: currentUriPair.parentUri}));
-                        vscode.window.showInformationMessage(`Loaded ` + (q.cached ? '(cache)' : '') + ` ...${xsdUri.toString().substr(xsdUri.path.length - 16)}`);
+                        const s = xsdUri.toString();
+                        vscode.window.showInformationMessage(`Loaded ${q.cached ? '(cache) ' : ''}${s.length>48 ? '...' : ''}${s.substr(Math.max(0, s.length-48))}`);
                     }
                     catch (err) {
                         vscode.window.showErrorMessage(err.toString());

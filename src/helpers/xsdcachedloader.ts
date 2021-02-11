@@ -15,8 +15,8 @@ export default class XsdCachedLoader {
 		XsdCachedLoader.pluginVersion = vscode.extensions.getExtension('rogalmic.vscode-xml-complete')?.packageJSON.version as string;
 	}
 
-	public static async loadSchemaContentsFromUri(schemaLocationUri: string, formatXsd = true): Promise<{data:string, cached:boolean}> {
-		let cacheLocally = schemaLocationUri.startsWith("https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master");
+	public static async loadSchemaContentsFromUri(schemaLocationUri: string, formatXsd = true, xsdCachePattern: string | undefined = undefined): Promise<{data:string, cached:boolean}> {
+		let cacheLocally = xsdCachePattern && (schemaLocationUri.match(xsdCachePattern) != null)
 		let schemaLocationUriVersioned = schemaLocationUri + "?v=" + this.pluginVersion;
 
 		if (cacheLocally)
