@@ -63,6 +63,7 @@ export function activate(context: vscode.ExtensionContext): void {
 function loadConfiguration(): void {
 	const section = vscode.workspace.getConfiguration('xmlComplete', null);
 	globalSettings = new XmlCompleteSettings();
+	globalSettings.xsdCachePattern = section.get('xsdCachePattern', undefined);
 	globalSettings.schemaMapping = section.get('schemaMapping', []);
 	globalSettings.formattingStyle = section.get('formattingStyle', "singleLineAttributes");
 }

@@ -129,7 +129,8 @@
   },
   "dependencies": {
     "get-uri": "3.0.2",
-    "sax": "1.2.4"
+    "sax": "1.2.4",
+    "vscode-cache": "^0.3.0"
   },
   "devDependencies": {
     "@types/mocha": "7.0.1",
