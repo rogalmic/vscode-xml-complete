@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.15...v0.3.0) (2021-02-12)
+
+
+### Features
+
+* Optional Xsd persistent cache ([#36](https://github.com/rogalmic/vscode-xml-complete/issues/36)) ([bc28882](https://github.com/rogalmic/vscode-xml-complete/commit/bc2888213cdb0b40c5cafa5ec020ba224fffebb6))
+
+
+### Bug Fixes
+
+* Fix collecting attributes from base Xsd nodes ([9fc551c](https://github.com/rogalmic/vscode-xml-complete/commit/9fc551c749b4d3e35a2960c4d49b906b07cabfb4))
+* Handle multiple Xsd files in include chain ([#37](https://github.com/rogalmic/vscode-xml-complete/issues/37)) ([54d8885](https://github.com/rogalmic/vscode-xml-complete/commit/54d88859e29d201bffeca86b7385e12cc981c5e3))
+
 ### [0.2.15](https://github.com/rogalmic/vscode-xml-complete/compare/v0.2.14...v0.2.15) (2020-10-17)
 
 
