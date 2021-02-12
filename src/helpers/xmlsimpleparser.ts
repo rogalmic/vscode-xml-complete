@@ -45,13 +45,13 @@ export default class XmlSimpleParser {
 
 				parser.onopentag = (tagData: { name: string, isSelfClosing: boolean, attributes: Map<string, string> }) => {
 
-					const nodeNameSplitted: Array<string> = tagData.name.split('.');
+					const nodeNameSplitted: string[] = tagData.name.split('.');
 
 					if (getTag(nodeNameSplitted[0]) !== undefined) {
 						const schemaTagAttributes = getAttributes(nodeNameSplitted[0]) ?? [];
 						nodeNameSplitted.shift();
 
-						const xmlAllowed : Array<string> = [":schemaLocation", ":noNamespaceSchemaLocation", "xml:space"];
+						const xmlAllowed = [":schemaLocation", ":noNamespaceSchemaLocation", "xml:space"];
 						Object.keys(tagData.attributes).concat(nodeNameSplitted).forEach((a: string) => {
 							if (schemaTagAttributes.some(sta => sta.name === a) === false && a.indexOf(":!") < 0
 								&& a !== "xmlns" && !a.startsWith("xmlns:")

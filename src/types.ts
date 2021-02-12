@@ -65,7 +65,7 @@ export class XmlTagCollection extends Array<XmlTag> {
 				result.push(...currentTags.flatMap(e => e.attributes));
 				result.push(...currentTags.flatMap(e =>
 					e.base.filter(b => !handledNames.includes(b))
-						.flatMap(b => XmlTagCollection.loadAttributes(b, allTagsForScope))));
+						.flatMap(b => XmlTagCollection.loadAttributes(b, allTagsForScope, handledNames))));
 			}
 		}
 		return result;
