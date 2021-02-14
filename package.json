@@ -1,142 +1,143 @@
 {
-  "name": "vscode-xml-complete",
-  "displayName": "Xml Complete",
-  "publisher": "rogalmic",
-  "description": "XML editing helper (using XSD schemaLocation)",
-  "author": {
-    "name": "Michal Rogalinski",
-    "email": "rogalinsky@gmail.com"
-  },
-  "version": "0.3.0",
-  "preview": true,
-  "license": "MIT",
-  "engines": {
-    "vscode": "^1.40.0",
-    "node": "^12.8.1"
-  },
-  "icon": "images/xml-complete-icon.png",
-  "categories": [
-    "Programming Languages",
-    "Linters"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rogalmic/vscode-xml-complete.git"
-  },
-  "bugs": {
-    "url": "https://github.com/rogalmic/vscode-xml-complete/issues"
-  },
-  "badges": [
-    {
-      "url": "https://img.shields.io/github/downloads/rogalmic/vscode-xml-complete/latest/total.svg",
-      "href": "https://github.com/rogalmic/vscode-xml-complete/releases/latest",
-      "description": "Download latest beta release (master branch)"
+    "name": "vscode-xml-complete",
+    "displayName": "Xml Complete",
+    "publisher": "rogalmic",
+    "description": "XML editing helper (using XSD schemaLocation)",
+    "author": {
+        "name": "Michal Rogalinski",
+        "email": "rogalinsky@gmail.com"
     },
-    {
-      "url": "https://img.shields.io/github/stars/rogalmic/vscode-xml-complete.svg?style=social&label=Stars",
-      "href": "https://github.com/rogalmic/vscode-xml-complete/stargazers",
-      "description": "Star the project in github"
+    "version": "0.3.0",
+    "preview": true,
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.40.0",
+        "node": "^12.18.3"
     },
-    {
-      "url": "https://img.shields.io/badge/paypal-donate-blue.svg",
-      "href": "https://paypal.me/rogalmic",
-      "description": "Donate some $ to keep project going"
-    }
-  ],
-  "keywords": [
-    "xml",
-    "xaml",
-    "avalonia",
-    "wpf",
-    "xsd",
-    "completion",
-    "linter",
-    "lint",
-    "format",
-    "msbuild"
-  ],
-  "activationEvents": [
-    "onLanguage:xml"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "languages": [
-      {
-        "id": "xml",
-        "configuration": "./src/language-configuration.json"
-      }
+    "icon": "images/xml-complete-icon.png",
+    "categories": [
+        "Programming Languages",
+        "Linters"
     ],
-    "configuration": {
-      "title": "XmlComplete",
-      "type": "object",
-      "properties": {
-        "xmlComplete.formattingStyle": {
-          "description": "Defines if attributes should be single line or not.",
-          "type": "string",
-          "enum": [
-            "singleLineAttributes",
-            "multiLineAttributes",
-            "fileSizeOptimized"
-          ],
-          "scope": "resource",
-          "default": []
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rogalmic/vscode-xml-complete.git"
+    },
+    "bugs": {
+        "url": "https://github.com/rogalmic/vscode-xml-complete/issues"
+    },
+    "badges": [
+        {
+            "url": "https://img.shields.io/github/downloads/rogalmic/vscode-xml-complete/latest/total.svg",
+            "href": "https://github.com/rogalmic/vscode-xml-complete/releases/latest",
+            "description": "Download latest beta release (master branch)"
         },
-        "xmlComplete.schemaMapping": {
-          "description": "Maps xmlns to xsd location Uri.",
-          "type": "array",
-          "scope": "resource",
-          "default": [
-            {
-              "xmlns": "http://www.w3.org/2001/XMLSchema",
-              "xsdUri": "https://www.w3.org/2001/XMLSchema.xsd"
-            },
-            {
-              "xmlns": "https://github.com/avaloniaui",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
-            },
-            {
-              "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
-              "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd"
-            },
-            {
-              "xmlns": "http://www.w3.org/2000/svg",
-              "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd"
-            },
-            {
-              "xmlns": "http://schemas.microsoft.com/developer/msbuild/2003",
-              "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.Core.xsd"
-            }
-          ]
+        {
+            "url": "https://img.shields.io/github/stars/rogalmic/vscode-xml-complete.svg?style=social&label=Stars",
+            "href": "https://github.com/rogalmic/vscode-xml-complete/stargazers",
+            "description": "Star the project in github"
+        },
+        {
+            "url": "https://img.shields.io/badge/paypal-donate-blue.svg",
+            "href": "https://paypal.me/rogalmic",
+            "description": "Donate some $ to keep project going"
         }
-      }
+    ],
+    "keywords": [
+        "xml",
+        "xaml",
+        "avalonia",
+        "wpf",
+        "xsd",
+        "completion",
+        "linter",
+        "lint",
+        "format",
+        "msbuild"
+    ],
+    "activationEvents": [
+        "onLanguage:xml"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "xml",
+                "configuration": "./src/language-configuration.json"
+            }
+        ],
+        "configuration": {
+            "title": "XmlComplete",
+            "type": "object",
+            "properties": {
+                "xmlComplete.formattingStyle": {
+                    "description": "Defines if attributes should be single line or not.",
+                    "type": "string",
+                    "enum": [
+                        "singleLineAttributes",
+                        "multiLineAttributes",
+                        "fileSizeOptimized"
+                    ],
+                    "scope": "resource",
+                    "default": []
+                },
+                "xmlComplete.schemaMapping": {
+                    "description": "Maps xmlns to xsd location Uri.",
+                    "type": "array",
+                    "scope": "resource",
+                    "default": [
+                        {
+                            "xmlns": "http://www.w3.org/2001/XMLSchema",
+                            "xsdUri": "https://www.w3.org/2001/XMLSchema.xsd"
+                        },
+                        {
+                            "xmlns": "https://github.com/avaloniaui",
+                            "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Avalonia/AvaloniaXamlSchema.xsd"
+                        },
+                        {
+                            "xmlns": "http://schemas.microsoft.com/winfx/2006/xaml/presentation",
+                            "xsdUri": "https://raw.githubusercontent.com/rogalmic/vscode-xml-complete/master/test/Wpf/Wpf.xsd"
+                        },
+                        {
+                            "xmlns": "http://www.w3.org/2000/svg",
+                            "xsdUri": "https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/svg.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/xlink.xsd https://raw.githubusercontent.com/dumistoklus/svg-xsd-schema/master/namespace.xsd"
+                        },
+                        {
+                            "xmlns": "http://schemas.microsoft.com/developer/msbuild/2003",
+                            "xsdUri": "https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.CommonTypes.xsd https://raw.githubusercontent.com/Microsoft/msbuild/master/src/MSBuild/MSBuild/Microsoft.Build.Core.xsd"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "scripts": {
+        "prepublish": "tsc -p ./src",
+        "compile": "tsc -p ./src",
+        "lint": "eslint ./src/**/*.ts",
+        "watch": "tsc -w -p ./src",
+        "test": "ts-node --project ./src/tsconfig.json node_modules/jasmine/bin/jasmine --config=jasmine.json",
+        "package": "vsce package",
+        "publish": "vsce publish",
+        "release": "standard-version"
+    },
+    "dependencies": {
+        "get-uri": "3.0.2",
+        "sax": "1.2.4",
+        "vscode-cache": "^0.3.0"
+    },
+    "devDependencies": {
+        "@types/jasmine": "^3.6.3",
+        "@types/node": "^14.14.27",
+        "@types/vscode": "^1.40.0",
+        "@typescript-eslint/eslint-plugin": "^4.15.0",
+        "@typescript-eslint/parser": "^4.15.0",
+        "eslint": "^7.20.0",
+        "jasmine": "^3.6.4",
+        "ovsx": "^0.1.0-next.a9154dc",
+        "standard-version": "^9.1.0",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.1.5",
+        "vsce": "^1.85.0"
     }
-  },
-  "scripts": {
-    "prepublish": "tsc -p ./src",
-    "compile": "tsc -p ./src",
-    "lint": "eslint ./src/**/*.ts",
-    "watch": "tsc -w -p ./src",
-    "test": "mocha -u tdd ./out/tests/; node_modules/.bin/mocha --require jsdoctest out/extension.js",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "package": "vsce package",
-    "publish": "vsce publish",
-    "release": "standard-version"
-  },
-  "dependencies": {
-    "get-uri": "3.0.2",
-    "sax": "1.2.4",
-    "vscode-cache": "^0.3.0"
-  },
-  "devDependencies": {
-    "@types/mocha": "7.0.1",
-    "@types/node": "12.12.14",
-    "@typescript-eslint/eslint-plugin": "^4.15.0",
-    "@typescript-eslint/parser": "^4.15.0",
-    "eslint": "^7.19.0",
-    "jsdoctest": "1.7.1",
-    "standard-version": "9.1.0",
-    "typescript": "^4.1.5",
-    "vsce": "1.85.0",
-    "vscode": "^1.1.36"
-  }
 }

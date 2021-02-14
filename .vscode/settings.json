@@ -1,15 +1,16 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "editor.insertSpaces": false,
+    "javascript.validate.enable": false,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "files.trimTrailingWhitespace": true,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
     "editor.renderWhitespace": "all",
     "files.exclude": {
         "out": false
     },
-    "files.trimTrailingWhitespace": true,
-    "javascript.validate.enable": false,
     "search.exclude": {
         "out": true
-    },
-    "typescript.tsc.autoDetect": "off",
-    "typescript.tsdk": "node_modules/typescript/lib"
+    }
 }
