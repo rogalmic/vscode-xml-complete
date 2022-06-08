@@ -4,6 +4,116 @@
         <name>Avalonia.Controls</name>
     </assembly>
     <members>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have
+            not-<see langword="null"/> values.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with a field or property member.</summary>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have
+            non-<see langword="null"/> values when returning with the specified return value condition.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value,
+            the associated parameter will not be <see langword="null"/>.
+            </param>
+            <param name="member">The field or property member that is promised to be not-<see langword="null"/>.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes the attribute with the specified return value condition and list of field and property members.
+            </summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value,
+            the associated parameter will not be <see langword="null"/>.
+            </param>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
         <member name="T:Avalonia.Controls.AcrylicPlatformCompensationLevels">
             <summary>
             Defines compensation levels for the platform depending on the transparency level.
@@ -140,10 +250,13 @@
         </member>
         <member name="M:Avalonia.Controls.AppBuilderBase`1.Setup">
             <summary>
-            Sets up the platform-speciic services for the <see cref="T:Avalonia.Application"/>.
+            Sets up the platform-specific services for the <see cref="T:Avalonia.Application"/>.
             </summary>
         </member>
         <member name="E:Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime.Startup">
+            <inheritdoc/>
+        </member>
+        <member name="E:Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime.ShutdownRequested">
             <inheritdoc/>
         </member>
         <member name="E:Avalonia.Controls.ApplicationLifetimes.ClassicDesktopStyleApplicationLifetime.Exit">
@@ -175,6 +288,12 @@
             Controls application lifetime in classic desktop style
             </summary>
         </member>
+        <member name="M:Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime.TryShutdown(System.Int32)">
+            <summary>
+            Tries to Shutdown the application. <see cref="E:Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime.ShutdownRequested" /> event can be used to cancel the shutdown.
+            </summary>
+            <param name="exitCode">An integer exit code for an application. The default exit code is 0.</param>
+        </member>
         <member name="P:Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime.Args">
             <summary>
             Gets the arguments passed to the
@@ -199,6 +318,24 @@
             <value>
             The main window.
             </value>
+        </member>
+        <member name="E:Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime.ShutdownRequested">
+            <summary>
+            Raised by the platform when an application shutdown is requested.
+            </summary>
+            <remarks>
+            Application Shutdown can be requested for various reasons like OS shutdown.
+            
+            On Windows this will be called when an OS Session (logout or shutdown) terminates. Cancelling the eventargs will 
+            block OS shutdown.
+            
+            On OSX this has the same behavior as on Windows and in addition:
+            This event is raised via the Quit menu or right-clicking on the application icon and selecting Quit. 
+            
+            This event provides a first-chance to cancel application shutdown; if shutdown is not canceled at this point the application
+            will try to close each non-owned open window, invoking the <see cref="E:Avalonia.Controls.Window.Closing"/> event on each and allowing
+            each window to cancel the shutdown of the application. Windows cannot however prevent OS shutdown.
+            </remarks>
         </member>
         <member name="E:Avalonia.Controls.ApplicationLifetimes.IControlledApplicationLifetime.Startup">
             <summary>
@@ -1611,6 +1748,26 @@
             Defines the <see cref="P:Avalonia.Controls.Border.BoxShadow"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Border.BorderDashOffsetProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Border.BorderDashOffset"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Border.BorderDashArrayProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Border.BorderDashArray"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Border.BorderLineCapProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Border.BorderLineCap"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Border.BorderLineJoinProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Border.BorderLineJoin"/> property.
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.Border.#cctor">
             <summary>
             Initializes static members of the <see cref="T:Avalonia.Controls.Border"/> class.
@@ -1626,9 +1783,29 @@
             Gets or sets a brush with which to paint the border.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Border.BorderDashArray">
+            <summary>
+            Gets or sets a collection of <see cref="T:System.Double"/> values that indicate the pattern of dashes and gaps that is used to outline shapes.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Border.BorderThickness">
             <summary>
             Gets or sets the thickness of the border.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Border.BorderDashOffset">
+            <summary>
+            Gets or sets a value that specifies the distance within the dash pattern where a dash begins.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Border.BorderLineCap">
+            <summary>
+            Gets or sets a <see cref="T:Avalonia.Media.PenLineCap"/> enumeration value that describes the shape at the ends of a line.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Border.BorderLineJoin">
+            <summary>
+            Gets or sets a <see cref="T:Avalonia.Media.PenLineJoin"/> enumeration value that specifies the type of join that is used at the vertices of a Shape.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Border.CornerRadius">
@@ -1716,6 +1893,11 @@
             Defines the <see cref="E:Avalonia.Controls.Button.Click"/> event.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Button.FlyoutProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Button.Flyout"/> property
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.Button.#cctor">
             <summary>
             Initializes static members of the <see cref="T:Avalonia.Controls.Button"/> class.
@@ -1758,6 +1940,11 @@
             window.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Button.Flyout">
+            <summary>
+            Gets or sets the Flyout that should be shown with this button
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.Button.OnAttachedToVisualTree(Avalonia.VisualTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
@@ -1784,6 +1971,12 @@
         <member name="M:Avalonia.Controls.Button.CommandChanged(Avalonia.AvaloniaPropertyChangedEventArgs)">
             <summary>
             Called when the <see cref="P:Avalonia.Controls.Button.Command"/> property changes.
+            </summary>
+            <param name="e">The event args.</param>
+        </member>
+        <member name="M:Avalonia.Controls.Button.CommandParameterChanged(Avalonia.AvaloniaPropertyChangedEventArgs)">
+            <summary>
+            Called when the <see cref="P:Avalonia.Controls.Button.CommandParameter"/> property changes.
             </summary>
             <param name="e">The event args.</param>
         </member>
@@ -2996,6 +3189,81 @@
             Defines the base class for Date and Time PickerPresenters
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Primitives.FlyoutBase.IsOpenProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.FlyoutBase.IsOpen"/> property
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.FlyoutBase.TargetProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.FlyoutBase.Target"/> property
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.FlyoutBase.PlacementProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.FlyoutBase.Placement"/> property
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.FlyoutBase.ShowModeProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.FlyoutBase.ShowMode"/> property
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.FlyoutBase.AttachedFlyoutProperty">
+            <summary>
+            Defines the AttachedFlyout property
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.FlyoutBase.IsOpen">
+            <summary>
+            Gets whether this Flyout is currently Open
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.FlyoutBase.Placement">
+            <summary>
+            Gets or sets the desired placement
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.FlyoutBase.ShowMode">
+            <summary>
+            Gets or sets the desired ShowMode
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.FlyoutBase.Target">
+            <summary>
+            Gets the Target used for showing the Flyout
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.ShowAt(Avalonia.Controls.Control)">
+            <summary>
+            Shows the Flyout at the given Control
+            </summary>
+            <param name="placementTarget">The control to show the Flyout at</param>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.ShowAt(Avalonia.Controls.Control,System.Boolean)">
+            <summary>
+            Shows the Flyout for the given control at the current pointer location, as in a ContextFlyout
+            </summary>
+            <param name="placementTarget">The target control</param>
+            <param name="showAtPointer">True to show at pointer</param>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.Hide">
+            <summary>
+            Hides the Flyout
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.HideCore(System.Boolean)">
+            <returns>True, if action was handled</returns>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.ShowAtCore(Avalonia.Controls.Control,System.Boolean)">
+            <returns>True, if action was handled</returns>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.FlyoutBase.CreatePresenter">
+            <summary>
+            Used to create the content the Flyout displays
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Avalonia.Controls.Primitives.IScrollable">
             <summary>
             Interface implemented by scrollable controls.
@@ -3085,6 +3353,25 @@
             Called when the <see cref="P:Avalonia.Controls.TextBlock.Text"/> property changes.
             </summary>
             <param name="text">The new text.</param>
+        </member>
+        <member name="T:Avalonia.Controls.Primitives.AdornerLayer">
+            <summary>
+            Represents a surface for showing adorners.
+            Adorners are always on top of the adorned element and are positioned to stay relative to the adorned element.
+            </summary>
+            <remarks>
+            TODO: Need to track position of adorned elements and move the adorner if they move.
+            </remarks>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.AdornerLayer.AdornedElementProperty">
+            <summary>
+            Allows for getting and setting of the adorned element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.AdornerLayer.IsClipEnabledProperty">
+            <summary>
+            Allows for controlling clipping of the adorner.
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.Primitives.HeaderedContentControl">
             <summary>
@@ -3895,7 +4182,7 @@
         <member name="T:Avalonia.Controls.Primitives.PopupPositioning.ManagedPopupPositioner">
             <summary>
             An <see cref="T:Avalonia.Controls.Primitives.PopupPositioning.IPopupPositioner"/> implementation for platforms on which a popup can be
-            aritrarily positioned.
+            arbitrarily positioned.
             </summary>
         </member>
         <member name="T:Avalonia.Controls.Primitives.PopupPositioning.ManagedPopupPositionerPopupImplHelper">
@@ -4006,7 +4293,7 @@
         </member>
         <member name="M:Avalonia.Controls.Primitives.RangeBase.ValidateDouble(System.Double)">
             <summary>
-            Checks if the double value is not inifinity nor NaN.
+            Checks if the double value is not infinity nor NaN.
             </summary>
             <param name="value">The value.</param>
         </member>
@@ -4054,6 +4341,16 @@
             Defines the <see cref="P:Avalonia.Controls.Primitives.ScrollBar.AllowAutoHide"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBar.HideDelayProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.ScrollBar.HideDelay"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBar.ShowDelayProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.ScrollBar.ShowDelay"/> property.
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.Primitives.ScrollBar.#cctor">
             <summary>
             Initializes static members of the <see cref="T:Avalonia.Controls.Primitives.ScrollBar"/> class. 
@@ -4090,9 +4387,44 @@
             Gets a value that indicates whether the scrollbar can hide itself when user is not interacting with it.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Primitives.ScrollBar.HideDelay">
+            <summary>
+            Gets a value that determines how long will be the hide delay after user stops interacting with the scrollbar.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.ScrollBar.ShowDelay">
+            <summary>
+            Gets a value that determines how long will be the show delay when user starts interacting with the scrollbar.
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.Primitives.ScrollBar.UpdateIsVisible">
             <summary>
             Calculates and updates whether the scrollbar should be visible.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.Primitives.ScrollBarVisibility">
+            <summary>
+            Specifies the visibility of a <see cref="T:Avalonia.Controls.Primitives.ScrollBar"/> for scrollable content.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBarVisibility.Disabled">
+            <summary>
+            No scrollbars and no scrolling in this dimension.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBarVisibility.Auto">
+            <summary>
+            The scrollbar should be visible only if there is more content than fits in the viewport.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBarVisibility.Hidden">
+            <summary>
+            The scrollbar should never be visible.  No space should ever be reserved for the scrollbar.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Primitives.ScrollBarVisibility.Visible">
+            <summary>
+            The scrollbar should always be visible.  Space should always be reserved for the scrollbar.
             </summary>
         </member>
         <member name="T:Avalonia.Controls.Primitives.ScrollEventType">
@@ -4198,6 +4530,11 @@
             Defines the <see cref="P:Avalonia.Controls.Primitives.SelectingItemsControl.SelectionMode"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Primitives.SelectingItemsControl.IsTextSearchEnabledProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.SelectingItemsControl.IsTextSearchEnabled"/> property.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.Primitives.SelectingItemsControl.IsSelectedChangedEvent">
             <summary>
             Event that should be raised by items that implement <see cref="T:Avalonia.Controls.ISelectable"/> to
@@ -4250,13 +4587,18 @@
             Gets or sets the model that holds the current selection.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Primitives.SelectingItemsControl.IsTextSearchEnabled">
+            <summary>
+            Gets or sets a value that specifies whether a user can jump to a value by typing.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Primitives.SelectingItemsControl.SelectionMode">
             <summary>
             Gets or sets the selection mode.
             </summary>
             <remarks>
             Note that the selection mode only applies to selections made via user interaction.
-            Multiple selections can be made programatically regardless of the value of this property.
+            Multiple selections can be made programmatically regardless of the value of this property.
             </remarks>
         </member>
         <member name="P:Avalonia.Controls.Primitives.SelectingItemsControl.AlwaysSelected">
@@ -4300,6 +4642,14 @@
         </member>
         <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.OnDataContextEndUpdate">
             <inheritdoc/>
+        </member>
+        <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.UpdateDataValidation``1(Avalonia.AvaloniaProperty{``0},Avalonia.Data.BindingValue{``0})">
+            <summary>
+            Called to update the validation state for properties for which data validation is
+            enabled.
+            </summary>
+            <param name="property">The property.</param>
+            <param name="value">The new binding value for the property.</param>
         </member>
         <member name="M:Avalonia.Controls.Primitives.SelectingItemsControl.MoveSelection(Avalonia.Input.NavigationDirection,System.Boolean)">
             <summary>
@@ -4438,6 +4788,11 @@
             Defines the <see cref="P:Avalonia.Controls.Primitives.TemplatedControl.BorderThickness"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Primitives.TemplatedControl.CornerRadiusProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Primitives.TemplatedControl.CornerRadius"/> property.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.Primitives.TemplatedControl.FontFamilyProperty">
             <summary>
             Defines the <see cref="P:Avalonia.Controls.Primitives.TemplatedControl.FontFamily"/> property.
@@ -4506,6 +4861,11 @@
         <member name="P:Avalonia.Controls.Primitives.TemplatedControl.BorderThickness">
             <summary>
             Gets or sets the thickness of the control's border.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Primitives.TemplatedControl.CornerRadius">
+            <summary>
+            Gets or sets the radius of the border rounded corners.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Primitives.TemplatedControl.FontFamily">
@@ -5206,6 +5566,11 @@
             Draws window minimize / maximize / close buttons in a <see cref="T:Avalonia.Controls.Chrome.TitleBar"/> when managed client decorations are enabled.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Chrome.CaptionButtons.HostWindow">
+            <summary>
+            Currently attached window.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.Chrome.TitleBar">
             <summary>
             Draws a titlebar when managed client decorations are enabled.
@@ -5627,6 +5992,36 @@
             Closes the menu.
             </summary>
         </member>
+        <member name="T:Avalonia.Controls.ContextRequestedEventArgs">
+            <summary>
+            Provides event data for the ContextRequested event.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.ContextRequestedEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the ContextRequestedEventArgs class.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.ContextRequestedEventArgs.#ctor(Avalonia.Input.PointerEventArgs)">
+            <inheritdoc cref="M:Avalonia.Controls.ContextRequestedEventArgs.#ctor" />
+        </member>
+        <member name="M:Avalonia.Controls.ContextRequestedEventArgs.TryGetPosition(Avalonia.Controls.Control,Avalonia.Point@)">
+            <summary>
+            Gets the x- and y-coordinates of the pointer position, optionally evaluated against a coordinate origin of a supplied <see cref="T:Avalonia.Controls.Control"/>.
+            </summary>
+            <param name="relativeTo">
+            Any <see cref="T:Avalonia.Controls.Control"/>-derived object that is connected to the same object tree.
+            To specify the object relative to the overall coordinate system, use a relativeTo  value of null.
+            </param>
+            <param name="point">
+            A <see cref="T:Avalonia.Point"/> that represents the current x- and y-coordinates of the mouse pointer position.
+            If null was passed as relativeTo, this coordinate is for the overall window.
+            If a relativeTo value other than null was passed, this coordinate is relative to the object referenced by relativeTo.
+            </param>
+            <returns>
+            true if the context request was initiated by a pointer device; otherwise, false.
+            </returns>
+        </member>
         <member name="T:Avalonia.Controls.Control">
              <summary>
              Base class for Avalonia controls.
@@ -5635,6 +6030,7 @@
              The control class extends <see cref="T:Avalonia.Input.InputElement"/> and adds the following features:
             
              - A <see cref="P:Avalonia.Controls.Control.Tag"/> property to allow user-defined data to be attached to the control.
+             - <see cref="F:Avalonia.Controls.Control.ContextRequestedEvent"/> and other context menu related members.
              </remarks>
         </member>
         <member name="F:Avalonia.Controls.Control.FocusAdornerProperty">
@@ -5652,9 +6048,19 @@
             Defines the <see cref="P:Avalonia.Controls.Control.ContextMenu"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Control.ContextFlyoutProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Control.ContextFlyout"/> property
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.Control.RequestBringIntoViewEvent">
             <summary>
             Event raised when an element wishes to be scrolled into view.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Control.ContextRequestedEvent">
+            <summary>
+            Provides event data for the <see cref="E:Avalonia.Controls.Control.ContextRequested"/> event.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Control.FocusAdorner">
@@ -5676,9 +6082,19 @@
             Gets or sets a context menu to the control.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Control.ContextFlyout">
+            <summary>
+            Gets or sets a context flyout to the control
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Control.Tag">
             <summary>
             Gets or sets a user-defined object attached to the control.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Control.ContextRequested">
+            <summary>
+            Occurs when the user has completed a context input gesture, such as a right-click.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Control.Avalonia#Controls#Templates#IDataTemplateHost#IsDataTemplatesInitialized">
@@ -5759,6 +6175,52 @@
             Initializes a new instance of the <see cref="T:Avalonia.Controls.Controls"/> class.
             </summary>
             <param name="items">The initial items in the collection.</param>
+        </member>
+        <member name="T:Avalonia.Controls.Converters.CornerRadiusFilterConverter">
+            <summary>
+            Converts an existing CornerRadius struct to a new CornerRadius struct,
+            with filters applied to extract only the specified fields, leaving the others set to 0.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Converters.CornerRadiusFilterConverter.Filter">
+            <summary>
+            Gets or sets the type of the filter applied to the <see cref="T:Avalonia.Controls.Converters.CornerRadiusFilterConverter"/>.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Converters.CornerRadiusFilterConverter.Scale">
+            <summary>
+            Gets or sets the scale multiplier applied to the <see cref="T:Avalonia.Controls.Converters.CornerRadiusFilterConverter"/>.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.Converters.CornerRadiusFilterKinds">
+            <summary>
+            Defines constants that specify the filter type for a <see cref="T:Avalonia.Controls.Converters.CornerRadiusFilterConverter"/> instance.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Converters.CornerRadiusFilterKinds.None">
+            <summary>
+            No filter applied.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Converters.CornerRadiusFilterKinds.TopLeft">
+            <summary>
+            Filters TopLeft value.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Converters.CornerRadiusFilterKinds.TopRight">
+            <summary>
+            Filters TopRight value.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Converters.CornerRadiusFilterKinds.BottomLeft">
+            <summary>
+            Filters BottomLeft value.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Converters.CornerRadiusFilterKinds.BottomRight">
+            <summary>
+            Filters BottomRight value.
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.Converters.PlatformKeyGestureConverter">
             <summary>
@@ -5845,7 +6307,7 @@
         </member>
         <member name="F:Avalonia.Controls.DatePicker.YearFormatProperty">
             <summary>
-            Defiens the <see cref="P:Avalonia.Controls.DatePicker.YearFormat"/> Property
+            Defines the <see cref="P:Avalonia.Controls.DatePicker.YearFormat"/> Property
             </summary>
         </member>
         <member name="F:Avalonia.Controls.DatePicker.YearVisibleProperty">
@@ -6021,7 +6483,7 @@
         </member>
         <member name="T:Avalonia.Controls.TimePicker">
             <summary>
-            A control to allow the user to select a time
+            A control to allow the user to select a time.
             </summary>
         </member>
         <member name="F:Avalonia.Controls.TimePicker.MinuteIncrementProperty">
@@ -6175,7 +6637,7 @@
         </member>
         <member name="M:Avalonia.Controls.DefinitionBase.OnExitParentTree">
             <summary>
-            Callback to notify about exitting model tree.
+            Callback to notify about exiting model tree.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.DefinitionBase.OnBeforeLayout(Avalonia.Controls.Grid)">
@@ -6369,7 +6831,7 @@
         </member>
         <member name="M:Avalonia.Controls.DefinitionBase.SharedSizeState.Invalidate">
             <summary>
-            Propogates invalidations for all registered definitions.
+            Propagates invalidations for all registered definitions.
             Resets its own state.
             </summary>
         </member>
@@ -6454,6 +6916,31 @@
             <param name="app">The application.</param>
             <param name="token">The token to track.</param>
         </member>
+        <member name="T:Avalonia.Controls.Diagnostics.IPopupHostProvider">
+            <summary>
+            Diagnostics interface to retrieve an associated <see cref="T:Avalonia.Controls.Primitives.IPopupHost"/>.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Diagnostics.IPopupHostProvider.PopupHost">
+            <summary>
+            The popup host.
+            </summary>
+        </member>
+        <member name="E:Avalonia.Controls.Diagnostics.IPopupHostProvider.PopupHostChanged">
+            <summary>
+            Raised when the popup host changes.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.Diagnostics.ToolTipDiagnostics">
+            <summary>
+            Helper class to provide diagnostics information for <see cref="T:Avalonia.Controls.ToolTip"/>.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Diagnostics.ToolTipDiagnostics.ToolTipProperty">
+            <summary>
+            Provides access to the internal <see cref="F:Avalonia.Controls.ToolTip.ToolTipProperty"/> for use in DevTools.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.Dock">
             <summary>
             Defines the available docking modes for a control in a <see cref="T:Avalonia.Controls.DockPanel"/>.
@@ -6522,6 +7009,36 @@
         <member name="P:Avalonia.Controls.Embedding.Offscreen.OffscreenTopLevelImplBase.AcrylicCompensationLevels">
             <inheritdoc/>
         </member>
+        <member name="T:Avalonia.Controls.ExpandDirection">
+            <summary>
+            Direction in which an <see cref="T:Avalonia.Controls.Expander"/> control opens.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ExpandDirection.Down">
+            <summary>
+            Opens down.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ExpandDirection.Up">
+            <summary>
+            Opens up.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ExpandDirection.Left">
+            <summary>
+            Opens left.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.ExpandDirection.Right">
+            <summary>
+            Opens right.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.Expander">
+            <summary>
+            A control with a header that has a collapsible content section.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.ExperimentalAcrylicBorder.CornerRadius">
             <summary>
             Gets or sets the radius of the border rounded corners.
@@ -6540,6 +7057,122 @@
             </summary>
             <param name="finalSize">The size allocated to the control.</param>
             <returns>The space taken.</returns>
+        </member>
+        <member name="F:Avalonia.Controls.Flyout.ContentProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Flyout.Content"/> property
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Flyout.FlyoutPresenterClasses">
+            <summary>
+            Gets the Classes collection to apply to the FlyoutPresenter this Flyout is hosting
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Flyout.Content">
+            <summary>
+            Gets or sets the content to display in this flyout
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.Top">
+            <summary>
+            Preferred location is above the target element
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.Bottom">
+            <summary>
+            Preferred location is below the target element
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.Left">
+            <summary>
+            Preferred location is to the left of the target element
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.Right">
+            <summary>
+            Preferred location is to the right of the target element
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.TopEdgeAlignedLeft">
+            <summary>
+            Preferred location is above the target element, with the left edge of the flyout
+            aligned with the left edge of the target element
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.TopEdgeAlignedRight">
+            <summary>
+            Preferred location is above the target element, with the right edge of flyout aligned with right edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.BottomEdgeAlignedLeft">
+            <summary>
+            Preferred location is below the target element, with the left edge of flyout aligned with left edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.BottomEdgeAlignedRight">
+            <summary>
+            Preferred location is below the target element, with the right edge of flyout aligned with right edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.LeftEdgeAlignedTop">
+            <summary>
+            Preferred location is to the left of the target element, with the top edge of flyout aligned with top edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.LeftEdgeAlignedBottom">
+            <summary>
+            Preferred location is to the left of the target element, with the bottom edge of flyout aligned with bottom edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.RightEdgeAlignedTop">
+            <summary>
+            Preferred location is to the right of the target element, with the top edge of flyout aligned with top edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.RightEdgeAlignedBottom">
+            <summary>
+            Preferred location is to the right of the target element, with the bottom edge of flyout aligned with bottom edge of the target element.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutPlacementMode.Auto">
+            <summary>
+            Preferred location is determined automatically.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutShowMode.Standard">
+            <summary>
+            Behavior is typical of a flyout shown reactively, like a context menu. The open flyout takes focus. For a CommandBarFlyout, it opens in it's expanded state.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutShowMode.Transient">
+            <summary>
+            Behavior is typical of a flyout shown proactively. The open flyout does not take focus.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.FlyoutShowMode.TransientWithDismissOnPointerMoveAway">
+            <summary>
+            The flyout exhibits Transient behavior while the cursor is close to it, but is dismissed when the cursor moves away.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.MenuFlyout.ItemsProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.MenuFlyout.Items"/> property
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.MenuFlyout.ItemTemplateProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.MenuFlyout.ItemTemplate"/> property
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MenuFlyout.Items">
+            <summary>
+            Gets or sets the items of the MenuFlyout
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MenuFlyout.ItemTemplate">
+            <summary>
+            Gets or sets the template used for the items
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.Generators.IItemContainerGenerator">
             <summary>
@@ -6949,7 +7582,7 @@
         </member>
         <member name="T:Avalonia.Controls.Grid">
             <summary>
-            Grid
+            Defines a flexible grid area that consists of columns and rows.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.Grid.#ctor">
@@ -7113,7 +7746,7 @@
         </member>
         <member name="M:Avalonia.Controls.Grid.ValidateDefinitionsUStructure">
             <summary>
-            Initializes DefinitionsU memeber either to user supplied ColumnDefinitions collection
+            Initializes DefinitionsU member either to user supplied ColumnDefinitions collection
             or to a default single element collection. DefinitionsU gets trimmed to size.
             </summary>
             <remarks>
@@ -7123,7 +7756,7 @@
         </member>
         <member name="M:Avalonia.Controls.Grid.ValidateDefinitionsVStructure">
             <summary>
-            Initializes DefinitionsV memeber either to user supplied RowDefinitions collection
+            Initializes DefinitionsV member either to user supplied RowDefinitions collection
             or to a default single element collection. DefinitionsV gets trimmed to size.
             </summary>
             <remarks>
@@ -7150,6 +7783,7 @@
             width is not registered in columns.</param>
             <param name="forceInfinityV">Passed through to MeasureCell.
             When "true" cells' desired height is not registered in rows.</param>
+            <param name="hasDesiredSizeUChanged">When the method exits, indicates whether the desired size has changed.</param>
         </member>
         <member name="M:Avalonia.Controls.Grid.RegisterSpan(System.Collections.Hashtable@,System.Int32,System.Int32,System.Boolean,System.Double)">
             <summary>
@@ -7275,21 +7909,11 @@
             flags on the object.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.Grid.CheckFlagsAnd(Avalonia.Controls.Grid.Flags)">
+        <member name="M:Avalonia.Controls.Grid.CheckFlags(Avalonia.Controls.Grid.Flags)">
             <summary>
-            CheckFlagsAnd returns <c>true</c> if all the flags in the
+            CheckFlags returns <c>true</c> if all the flags in the
             given bitmask are set on the object.
             </summary>
-        </member>
-        <member name="M:Avalonia.Controls.Grid.CheckFlagsOr(Avalonia.Controls.Grid.Flags)">
-            <summary>
-            CheckFlagsOr returns <c>true</c> if at least one flag in the
-            given bitmask is set.
-            </summary>
-            <remarks>
-            If no bits are set in the given bitmask, the method returns
-            <c>true</c>.
-            </remarks>
         </member>
         <member name="M:Avalonia.Controls.Grid.CompareNullRefs(System.Object,System.Object,System.Int32@)">
             <summary>
@@ -7388,7 +8012,7 @@
         <member name="F:Avalonia.Controls.Grid.ShowGridLinesProperty">
             <summary>
             ShowGridLines property. This property is used mostly
-            for simplification of visual debuggig. When it is set
+            for simplification of visual debugging. When it is set
             to <c>true</c> grid lines are drawn to visualize location
             of grid lines.
             </summary>
@@ -7622,6 +8246,12 @@
             <summary>
             Gets an instance of <see cref="T:Avalonia.Controls.GridLength"/> that indicates that a row or column should
             auto-size to fit its content.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.GridLength.Star">
+            <summary>
+            Gets an instance of <see cref="T:Avalonia.Controls.GridLength"/> that indicates that a row or column should
+            fill its content.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.GridLength.GridUnitType">
@@ -8371,6 +9001,11 @@
             TODO: Not yet implemented in Avalonia.
             </remarks>
         </member>
+        <member name="P:Avalonia.Controls.ItemsSourceView.Inner">
+            <summary>
+            Gets the inner collection.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.ItemsSourceView.Item(System.Int32)">
             <summary>
             Retrieves the item at the specified index.
@@ -8728,7 +9363,7 @@
             </summary>
             <remarks>
             Note that the selection mode only applies to selections made via user interaction.
-            Multiple selections can be made programatically regardless of the value of this property.
+            Multiple selections can be made programmatically regardless of the value of this property.
             </remarks>
         </member>
         <member name="P:Avalonia.Controls.ListBox.VirtualizationMode">
@@ -8773,6 +9408,68 @@
         <member name="P:Avalonia.Controls.ListBoxItem.IsSelected">
             <summary>
             Gets or sets the selection state of the item.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.MaskedTextBox.#ctor(System.ComponentModel.MaskedTextProvider)">
+            <summary>
+             Constructs the MaskedTextBox with the specified MaskedTextProvider object.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.AsciiOnly">
+            <summary>
+            Gets or sets a value indicating if the masked text box is restricted to accept only ASCII characters.
+            Default value is false.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.Culture">
+            <summary>
+            Gets or sets the culture information associated with the masked text box.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.HidePromptOnLeave">
+            <summary>
+            Gets or sets a value indicating if the prompt character is hidden when the masked text box loses focus.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.Mask">
+            <summary>
+            Gets or sets the mask to apply to the TextBox.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.MaskCompleted">
+            <summary>
+             Specifies whether the test string required input positions, as specified by the mask, have
+             all been assigned.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.MaskFull">
+            <summary>
+             Specifies whether all inputs (required and optional) have been provided into the mask successfully.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.MaskProvider">
+            <summary>
+            Gets the MaskTextProvider for the specified Mask.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.PasswordChar">
+            <summary>
+            Gets or sets the character to be displayed in substitute for user input.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.PromptChar">
+            <summary>
+            Gets or sets the character used to represent the absence of user input in MaskedTextBox.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.ResetOnPrompt">
+            <summary>
+            Gets or sets a value indicating if selected characters should be reset when the prompt character is pressed.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.MaskedTextBox.ResetOnSpace">
+            <summary>
+            Gets or sets a value indicating if selected characters should be reset when the space character is pressed.
             </summary>
         </member>
         <member name="T:Avalonia.Controls.Menu">
@@ -9238,6 +9935,28 @@
             <param name="sender">The event sender.</param>
             <param name="e">The event args.</param>
         </member>
+        <member name="T:Avalonia.Controls.Mixins.DisposableMixin">
+            <summary>
+            Extension methods associated with the IDisposable interface.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.Mixins.DisposableMixin.DisposeWith``1(``0,System.Reactive.Disposables.CompositeDisposable)">
+            <summary>
+            Ensures the provided disposable is disposed with the specified <see cref="T:System.Reactive.Disposables.CompositeDisposable"/>.
+            </summary>
+            <typeparam name="T">
+            The type of the disposable.
+            </typeparam>
+            <param name="item">
+            The disposable we are going to want to be disposed by the CompositeDisposable.
+            </param>
+            <param name="compositeDisposable">
+            The <see cref="T:System.Reactive.Disposables.CompositeDisposable"/> to which <paramref name="item"/> will be added.
+            </param>
+            <returns>
+            The disposable.
+            </returns>
+        </member>
         <member name="T:Avalonia.Controls.Mixins.PressedMixin">
             <summary>
             Adds pressed functionality to control classes.
@@ -9285,10 +10004,30 @@
             <typeparam name="TControl">The control type.</typeparam>
             <param name="isSelected">The IsSelected property.</param>
         </member>
+        <member name="E:Avalonia.Controls.NativeMenu.NeedsUpdate">
+            <summary>
+            Raised when the menu requests an update.
+            </summary>
+            <remarks>
+            Use this event to add, remove or modify menu items before a menu is
+            shown or a hotkey is pressed.
+            </remarks>
+        </member>
         <member name="E:Avalonia.Controls.NativeMenu.Opening">
             <summary>
-            Raised when the user clicks the menu and before its opened. Use this event to update the menu dynamically.
+            Raised before the menu is opened.
             </summary>
+            <remarks>
+            Do not update the menu in this event; use <see cref="E:Avalonia.Controls.NativeMenu.NeedsUpdate"/>.
+            </remarks>
+        </member>
+        <member name="E:Avalonia.Controls.NativeMenu.Closed">
+            <summary>
+            Raised after the menu is closed.
+            </summary>
+            <remarks>
+            Do not update the menu in this event; use <see cref="E:Avalonia.Controls.NativeMenu.NeedsUpdate"/>.
+            </remarks>
         </member>
         <member name="F:Avalonia.Controls.NativeMenuItem.CommandParameterProperty">
             <summary>
@@ -9736,6 +10475,14 @@
         <member name="M:Avalonia.Controls.NumericUpDown.OnKeyDown(Avalonia.Input.KeyEventArgs)">
             <inheritdoc />
         </member>
+        <member name="M:Avalonia.Controls.NumericUpDown.UpdateDataValidation``1(Avalonia.AvaloniaProperty{``0},Avalonia.Data.BindingValue{``0})">
+            <summary>
+            Called to update the validation state for properties for which data validation is
+            enabled.
+            </summary>
+            <param name="property">The property.</param>
+            <param name="value">The new binding value for the property.</param>
+        </member>
         <member name="M:Avalonia.Controls.NumericUpDown.OnCultureInfoChanged(System.Globalization.CultureInfo,System.Globalization.CultureInfo)">
             <summary>
             Called when the <see cref="P:Avalonia.Controls.NumericUpDown.CultureInfo"/> property value changed.
@@ -10077,6 +10824,11 @@
             forwards updates to the referenced
             <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/>.
             </summary> 
+        </member>
+        <member name="T:Avalonia.Controls.Platform.INativeApplicationCommands">
+            <summary>
+            Native Menu Default Application Commands
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.Platform.ISystemDialogImpl">
             <summary>
@@ -11058,6 +11810,16 @@
         <member name="M:Avalonia.Controls.ProgressBar.OnApplyTemplate(Avalonia.Controls.Primitives.TemplateAppliedEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="T:Avalonia.Controls.RadioButton">
+            <summary>
+            Represents a button that allows a user to select a single option from a group of options.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.RelativePanel">
+            <summary>
+            Defines an area within which you can position and align child objects in relation to each other or the parent panel.
+            </summary>
+        </member>
         <member name="M:Avalonia.Controls.RelativePanel.GetAbove(Avalonia.AvaloniaObject)">
             <summary>
             Gets the value of the RelativePanel.Above XAML attached property for the target element.
@@ -11435,6 +12197,11 @@
             <param name="d">A double-precision floating-point number.</param>
             <returns>true if  evaluates to ; otherwise, false.</returns>
         </member>
+        <member name="T:Avalonia.Controls.RepeatButton">
+            <summary>
+            Represents a control that raises its <see cref="E:Avalonia.Controls.Button.Click"/> event repeatedly when it is pressed and held.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.RepeatButton.IntervalProperty">
             <summary>
             Defines the <see cref="P:Avalonia.Controls.RepeatButton.Interval"/> property.
@@ -11498,7 +12265,7 @@
         </member>
         <member name="T:Avalonia.Controls.IElementFactory">
             <summary>
-            A data template that supports creating and recyling elements for an <see cref="T:Avalonia.Controls.ItemsRepeater"/>.
+            A data template that supports creating and recycling elements for an <see cref="T:Avalonia.Controls.ItemsRepeater"/>.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.IElementFactory.GetElement(Avalonia.Controls.ElementFactoryGetArgs)">
@@ -12139,46 +12906,6 @@
             ensure that this event is raised.
             </remarks>
         </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.DeselectedIndexes">
-            <summary>
-            Gets the indexes of the items that were removed from the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.SelectedIndexes">
-            <summary>
-            Gets the indexes of the items that were added to the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.DeselectedItems">
-            <summary>
-            Gets the items that were removed from the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.SelectedItems">
-            <summary>
-            Gets the items that were added to the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.DeselectedIndexes">
-            <summary>
-            Gets the indexes of the items that were removed from the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.SelectedIndexes">
-            <summary>
-            Gets the indexes of the items that were added to the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.DeselectedItems">
-            <summary>
-            Gets the items that were removed from the selection.
-            </summary>
-        </member>
-        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.SelectedItems">
-            <summary>
-            Gets the items that were added to the selection.
-            </summary>
-        </member>
         <member name="T:Avalonia.Controls.SelectionChangedEventArgs">
             <summary>
             Provides data for the <see cref="E:Avalonia.Controls.Primitives.SelectingItemsControl.SelectionChanged"/> event.
@@ -12227,9 +12954,70 @@
             An item will always be selected as long as there are items to select.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.DeselectedIndexes">
+            <summary>
+            Gets the indexes of the items that were removed from the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.SelectedIndexes">
+            <summary>
+            Gets the indexes of the items that were added to the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.DeselectedItems">
+            <summary>
+            Gets the items that were removed from the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs.SelectedItems">
+            <summary>
+            Gets the items that were added to the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.DeselectedIndexes">
+            <summary>
+            Gets the indexes of the items that were removed from the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.SelectedIndexes">
+            <summary>
+            Gets the indexes of the items that were added to the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.DeselectedItems">
+            <summary>
+            Gets the items that were removed from the selection.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Selection.SelectionModelSelectionChangedEventArgs`1.SelectedItems">
+            <summary>
+            Gets the items that were added to the selection.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.Separator">
             <summary>
             A separator control.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Shapes.Arc.StartAngleProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Shapes.Arc.StartAngle"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Shapes.Arc.SweepAngleProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Shapes.Arc.SweepAngle"/> property.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Shapes.Arc.StartAngle">
+            <summary>
+            Gets or sets the angle at which the arc starts, in degrees.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Shapes.Arc.SweepAngle">
+            <summary>
+            Gets or sets the angle, in degrees, added to the <see cref="P:Avalonia.Controls.Shapes.Arc.StartAngle"/> defining where the arc ends.
+            A positive value is clockwise, negative is counter-clockwise.
             </summary>
         </member>
         <member name="T:Avalonia.Controls.Shapes.Shape">
@@ -12403,6 +13191,11 @@
             Defines the <see cref="P:Avalonia.Controls.Slider.Orientation"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.Slider.IsDirectionReversedProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Slider.IsDirectionReversed"/> property.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.Slider.IsSnapToTickEnabledProperty">
             <summary>
             Defines the <see cref="P:Avalonia.Controls.Slider.IsSnapToTickEnabled"/> property.
@@ -12442,6 +13235,15 @@
             <summary>
             Gets or sets the orientation of a <see cref="T:Avalonia.Controls.Slider"/>.
             </summary>
+        </member>
+        <member name="P:Avalonia.Controls.Slider.IsDirectionReversed">
+            <summary>
+            Gets or sets the direction of increasing value.
+            </summary>
+            <value>
+            true if the direction of increasing value is to the left for a horizontal slider or
+            down for a vertical slider; otherwise, false. The default is false.
+            </value>
         </member>
         <member name="P:Avalonia.Controls.Slider.IsSnapToTickEnabled">
             <summary>
@@ -12661,7 +13463,7 @@
         </member>
         <member name="F:Avalonia.Controls.SplitView.PaneTemplateProperty">
             <summary>
-            Defines the <see cref="!:HeaderTemplate"/> property.
+            Defines the <see cref="P:Avalonia.Controls.SplitView.PaneTemplate"/> property.
             </summary>
         </member>
         <member name="F:Avalonia.Controls.SplitView.UseLightDismissOverlayModeProperty">
@@ -12809,6 +13611,114 @@
             Content arrangement.
             </summary>
             <param name="finalSize">Arrange size</param>
+        </member>
+        <member name="T:Avalonia.Controls.FileDialog">
+            <summary>
+            Base class for system file dialogs.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.FileDialog.Filters">
+            <summary>
+            Gets or sets a collection of filters which determine the types of files displayed in an
+            <see cref="T:Avalonia.Controls.OpenFileDialog"/> or an <see cref="T:Avalonia.Controls.SaveFileDialog"/>.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.FileDialog.InitialFileName">
+            <summary>
+            Gets or sets initial file name that is displayed when the dialog is opened.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.FileSystemDialog">
+            <summary>
+            Base class for system file and directory dialogs.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.FileSystemDialog.Directory">
+            <summary>
+            Gets or sets the initial directory that will be displayed when the file system dialog
+            is opened.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.SaveFileDialog">
+            <summary>
+            Represents a system dialog that prompts the user to select a location for saving a file.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.SaveFileDialog.DefaultExtension">
+            <summary>
+            Gets or sets the default extension to be used to save the file (including the period ".").
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.SaveFileDialog.ShowAsync(Avalonia.Controls.Window)">
+            <summary>
+            Shows the save file dialog.
+            </summary>
+            <param name="parent">The parent window.</param>
+            <returns>
+            A task that on completion contains the full path of the save location, or null if the
+            dialog was canceled.
+            </returns>
+        </member>
+        <member name="T:Avalonia.Controls.OpenFileDialog">
+            <summary>
+            Represents a system dialog that allows the user to select one or more files to open.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.OpenFileDialog.AllowMultiple">
+            <summary>
+            Gets or sets a value indicating whether the user can select multiple files.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.OpenFileDialog.ShowAsync(Avalonia.Controls.Window)">
+            <summary>
+            Shows the open file dialog.
+            </summary>
+            <param name="parent">The parent window.</param>
+            <returns>
+            A task that on completion returns an array containing the full path to the selected
+            files, or null if the dialog was canceled.
+            </returns>
+        </member>
+        <member name="T:Avalonia.Controls.OpenFolderDialog">
+            <summary>
+            Represents a system dialog that allows the user to select a directory.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.OpenFolderDialog.ShowAsync(Avalonia.Controls.Window)">
+            <summary>
+            Shows the open folder dialog.
+            </summary>
+            <param name="parent">The parent window.</param>
+            <returns>
+            A task that on completion returns the full path of the selected directory, or null if the
+            dialog was canceled.
+            </returns>
+        </member>
+        <member name="T:Avalonia.Controls.SystemDialog">
+            <summary>
+            Base class for system dialogs.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.SystemDialog.Title">
+            <summary>
+            Gets or sets the dialog title.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Controls.FileDialogFilter">
+            <summary>
+            Represents a filter in an <see cref="T:Avalonia.Controls.OpenFileDialog"/> or an <see cref="T:Avalonia.Controls.SaveFileDialog"/>.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.FileDialogFilter.Name">
+            <summary>
+            Gets or sets the name of the filter, e.g. ("Text files (.txt)").
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.FileDialogFilter.Extensions">
+            <summary>
+            Gets or sets a list of file extensions matched by the filter (e.g. "txt" or "*" for all
+            files).
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.TabControl">
             <summary>
@@ -13633,6 +14543,11 @@
             <param name="availableSize">The available size for the control.</param>
             <returns>The desired size.</returns>
         </member>
+        <member name="T:Avalonia.Controls.TextBox">
+            <summary>
+            Represents a control that can be used to display or edit unformatted text.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.TextBox.HorizontalContentAlignmentProperty">
             <summary>
             Defines the <see cref="T:Avalonia.Layout.HorizontalAlignment"/> property.
@@ -13676,6 +14591,11 @@
         <member name="P:Avalonia.Controls.TextBox.CanPaste">
             <summary>
             Property for determining if the Paste command can be executed.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TextBox.IsUndoEnabled">
+            <summary>
+            Property for determining whether undo/redo is enabled
             </summary>
         </member>
         <member name="M:Avalonia.Controls.TextBox.SelectAll">
@@ -13808,7 +14728,7 @@
         <member name="P:Avalonia.Controls.TickBar.ReservedSpace">
             <summary>
             TickBar will use ReservedSpaceProperty for left and right spacing (for horizontal orientation) or
-            top and bottom spacing (for vertical orienation).
+            top and bottom spacing (for vertical orientation).
             The space on both sides of TickBar is half of specified ReservedSpace.
             This property has type of <see cref="T:Avalonia.Rect" />.
             </summary>
@@ -13821,7 +14741,7 @@
              This function also draw selection-tick(s) if IsSelectionRangeEnabled is 'true' and
              SelectionStart and SelectionEnd are valid.
             
-             The primary ticks (for Mininum and Maximum value) height will be 100% of TickBar's render size (use Width or Height
+             The primary ticks (for Minimum and Maximum value) height will be 100% of TickBar's render size (use Width or Height
              depends on Placement property).
             
              The secondary ticks (all other ticks, including selection-tics) height will be 75% of TickBar's render size.
@@ -14061,6 +14981,11 @@
             Defines the <see cref="P:Avalonia.Controls.TopLevel.ClientSize"/> property.
             </summary>
         </member>
+        <member name="F:Avalonia.Controls.TopLevel.FrameSizeProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TopLevel.FrameSize"/> property.
+            </summary>
+        </member>
         <member name="F:Avalonia.Controls.TopLevel.PointerOverElementProperty">
             <summary>
             Defines the <see cref="P:Avalonia.Input.IInputRoot.PointerOverElement"/> property.
@@ -14116,6 +15041,11 @@
             Gets or sets the client size of the window.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.TopLevel.FrameSize">
+            <summary>
+            Gets or sets the total size of the window.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.TopLevel.TransparencyLevelHint">
             <summary>
             Gets or sets the <see cref="T:Avalonia.Controls.WindowTransparencyLevel"/> that the TopLevel should use when possible.
@@ -14123,7 +15053,7 @@
         </member>
         <member name="P:Avalonia.Controls.TopLevel.ActualTransparencyLevel">
             <summary>
-            Gets the acheived <see cref="T:Avalonia.Controls.WindowTransparencyLevel"/> that the platform was able to provide.
+            Gets the achieved <see cref="T:Avalonia.Controls.WindowTransparencyLevel"/> that the platform was able to provide.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.TopLevel.TransparencyBackgroundFallback">
@@ -14199,11 +15129,12 @@
             Handles a closed notification from <see cref="P:Avalonia.Platform.ITopLevelImpl.Closed"/>.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.TopLevel.HandleResized(Avalonia.Size)">
+        <member name="M:Avalonia.Controls.TopLevel.HandleResized(Avalonia.Size,Avalonia.Platform.PlatformResizeReason)">
             <summary>
             Handles a resize notification from <see cref="P:Avalonia.Platform.ITopLevelImpl.Resized"/>.
             </summary>
             <param name="clientSize">The new client size.</param>
+            <param name="reason">The reason for the resize.</param>
         </member>
         <member name="M:Avalonia.Controls.TopLevel.HandleScalingChanged(System.Double)">
             <summary>
@@ -14241,6 +15172,116 @@
             Handles input from <see cref="P:Avalonia.Platform.ITopLevelImpl.Input"/>.
             </summary>
             <param name="e">The event args.</param>
+        </member>
+        <member name="T:Avalonia.Controls.TransitioningContentControl">
+            <summary>
+            Displays <see cref="P:Avalonia.Controls.ContentControl.Content"/> according to a <see cref="T:Avalonia.Controls.Templates.FuncDataTemplate"/>.
+            Uses <see cref="P:Avalonia.Controls.TransitioningContentControl.PageTransition"/> to move between the old and new content values. 
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TransitioningContentControl.PageTransitionProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TransitioningContentControl.PageTransition"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TransitioningContentControl.CurrentContentProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TransitioningContentControl.CurrentContent"/> property.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TransitioningContentControl.PageTransition">
+            <summary>
+            Gets or sets the animation played when content appears and disappears.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TransitioningContentControl.CurrentContent">
+            <summary>
+            Gets the content currently displayed on the screen.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.TransitioningContentControl.UpdateContentWithTransition(System.Object)">
+            <summary>
+            Updates the content with transitions.
+            </summary>
+            <param name="content">New content to set.</param>
+        </member>
+        <member name="E:Avalonia.Controls.TrayIcon.Clicked">
+            <summary>
+            Raised when the TrayIcon is clicked.
+            Note, this is only supported on Win32 and some Linux DEs, 
+            on OSX this event is not raised.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.CommandProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.Command"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.CommandParameterProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.CommandParameter"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.IconsProperty">
+            <summary>
+            Defines the <see cref="T:Avalonia.Controls.TrayIcons"/> attached property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.MenuProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.Menu"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.IconProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.Icon"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.ToolTipTextProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.ToolTipText"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.TrayIcon.IsVisibleProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.TrayIcon.IsVisible"/> property.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.Command">
+            <summary>
+            Gets or sets the <see cref="P:Avalonia.Controls.TrayIcon.Command"/> property of a TrayIcon.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.CommandParameter">
+            <summary>
+            Gets or sets the parameter to pass to the <see cref="P:Avalonia.Controls.TrayIcon.Command"/> property of a
+            <see cref="T:Avalonia.Controls.TrayIcon"/>.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.Menu">
+            <summary>
+            Gets or sets the Menu of the TrayIcon.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.Icon">
+            <summary>
+            Gets or sets the icon of the TrayIcon.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.ToolTipText">
+            <summary>
+            Gets or sets the tooltip text of the TrayIcon.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.TrayIcon.IsVisible">
+            <summary>
+            Gets or sets the visibility of the TrayIcon.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.TrayIcon.Dispose">
+            <summary>
+            Disposes the tray icon (removing it from the tray area).
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.TreeView">
             <summary>
@@ -14470,6 +15511,9 @@
         <member name="M:Avalonia.Controls.TreeViewItem.CreateItemContainerGenerator">
             <inheritdoc/>
         </member>
+        <member name="M:Avalonia.Controls.TreeViewItem.CreateTreeItemContainerGenerator``1">
+            <inheritdoc/>
+        </member>
         <member name="M:Avalonia.Controls.TreeViewItem.OnAttachedToLogicalTree(Avalonia.LogicalTree.LogicalTreeAttachmentEventArgs)">
             <inheritdoc/>
         </member>
@@ -14693,15 +15737,26 @@
             Change the selection after the actions are complete.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Utils.UndoRedoHelper`1.Limit">
+            <summary>
+            Maximum number of states this helper can store for undo/redo.
+            If -1, no limit is imposed.
+            </summary>
+        </member>
         <member name="T:Avalonia.Controls.Viewbox">
             <summary>
-            Viewbox is used to scale single child.
+            Viewbox is used to scale single child to fit in the available space.
             </summary>
             <seealso cref="T:Avalonia.Controls.Decorator" />
         </member>
         <member name="F:Avalonia.Controls.Viewbox.StretchProperty">
             <summary>
-            The stretch property
+            Defines the <see cref="P:Avalonia.Controls.Viewbox.Stretch"/> property.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.Viewbox.StretchDirectionProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.Viewbox.StretchDirection"/> property.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.Viewbox.Stretch">
@@ -14709,9 +15764,11 @@
             Gets or sets the stretch mode, 
             which determines how child fits into the available space.
             </summary>
-            <value>
-            The stretch.
-            </value>
+        </member>
+        <member name="P:Avalonia.Controls.Viewbox.StretchDirection">
+            <summary>
+            Gets or sets a value controlling in what direction contents will be stretched.
+            </summary>
         </member>
         <member name="T:Avalonia.Controls.SizeToContent">
             <summary>
@@ -14854,10 +15911,27 @@
             Gets the platform-specific window implementation.
             </summary>
         </member>
+        <member name="P:Avalonia.Controls.Window.OwnedWindows">
+            <summary>
+            Gets a collection of child windows owned by this window.
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.Window.SizeToContent">
             <summary>
             Gets or sets a value indicating how the window will size itself to fit its content.
             </summary>
+            <remarks>
+            If <see cref="P:Avalonia.Controls.Window.SizeToContent"/> has a value other than <see cref="F:Avalonia.Controls.SizeToContent.Manual"/>,
+            <see cref="P:Avalonia.Controls.Window.SizeToContent"/> is automatically set to <see cref="F:Avalonia.Controls.SizeToContent.Manual"/>
+            if a user resizes the window by using the resize grip or dragging the border.
+            
+            NOTE: Because of a limitation of X11, <see cref="P:Avalonia.Controls.Window.SizeToContent"/> will be reset on X11 to
+            <see cref="F:Avalonia.Controls.SizeToContent.Manual"/> on any resize - including the resize that happens when
+            the window is first shown. This is because X11 resize notifications are asynchronous and
+            there is no way to know whether a resize came from the user or the layout system. To avoid
+            this, consider setting <see cref="P:Avalonia.Controls.Window.CanResize"/> to false, which will disable user resizing
+            of the window.
+            </remarks>
         </member>
         <member name="P:Avalonia.Controls.Window.Title">
             <summary>
@@ -14987,6 +16061,7 @@
         <member name="M:Avalonia.Controls.Window.HandleClosing">
             <summary>
             Handles a closing notification from <see cref="P:Avalonia.Platform.IWindowImpl.Closing"/>.
+            <returns>true if closing is cancelled. Otherwise false.</returns>
             </summary>
         </member>
         <member name="M:Avalonia.Controls.Window.Hide">
@@ -15035,7 +16110,7 @@
             A task that can be used to retrieve the result of the dialog when it closes.
             </returns>
         </member>
-        <member name="M:Avalonia.Controls.Window.HandleResized(Avalonia.Size)">
+        <member name="M:Avalonia.Controls.Window.HandleResized(Avalonia.Size,Avalonia.Platform.PlatformResizeReason)">
             <inheritdoc/>
         </member>
         <member name="M:Avalonia.Controls.Window.OnClosing(System.ComponentModel.CancelEventArgs)">
@@ -15089,11 +16164,6 @@
             Gets a value that indicates whether the window is active.
             </summary>
         </member>
-        <member name="P:Avalonia.Controls.WindowBase.AutoSizing">
-            <summary>
-            Whether an auto-size operation is in progress.
-            </summary>
-        </member>
         <member name="P:Avalonia.Controls.WindowBase.Owner">
             <summary>
             Gets or sets the owner of the window.
@@ -15119,27 +16189,17 @@
             Shows the window.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.WindowBase.BeginAutoSizing">
-            <summary>
-            Begins an auto-resize operation.
-            </summary>
-            <returns>A disposable used to finish the operation.</returns>
-            <remarks>
-            When an auto-resize operation is in progress any resize events received will not be
-            cause the new size to be written to the <see cref="P:Avalonia.Layout.Layoutable.Width"/> and
-            <see cref="P:Avalonia.Layout.Layoutable.Height"/> properties.
-            </remarks>
-        </member>
         <member name="M:Avalonia.Controls.WindowBase.EnsureInitialized">
             <summary>
             Ensures that the window is initialized.
             </summary>
         </member>
-        <member name="M:Avalonia.Controls.WindowBase.HandleResized(Avalonia.Size)">
+        <member name="M:Avalonia.Controls.WindowBase.HandleResized(Avalonia.Size,Avalonia.Platform.PlatformResizeReason)">
             <summary>
             Handles a resize notification from <see cref="P:Avalonia.Platform.ITopLevelImpl.Resized"/>.
             </summary>
             <param name="clientSize">The new client size.</param>
+            <param name="reason">The reason for the resize.</param>
         </member>
         <member name="M:Avalonia.Controls.WindowBase.MeasureCore(Avalonia.Size)">
             <summary>
@@ -15166,7 +16226,7 @@
         </member>
         <member name="M:Avalonia.Controls.WindowBase.ArrangeSetBounds(Avalonia.Size)">
             <summary>
-            Called durung the arrange pass to set the size of the window.
+            Called during the arrange pass to set the size of the window.
             </summary>
             <param name="size">The requested size of the window.</param>
             <returns>The actual size of the window.</returns>
@@ -15256,6 +16316,16 @@
         <member name="F:Avalonia.Controls.WindowTransparencyLevel.AcrylicBlur">
             <summary>
             The window background is a blur-behind with a high blur radius. This level may fallback to Blur.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.WindowTransparencyLevel.ForceAcrylicBlur">
+            <summary>
+            Force acrylic on some incompatible versions of Windows 10. 
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.WindowTransparencyLevel.Mica">
+            <summary>
+            The window background is based on desktop wallpaper tint with a blur. This will only work on Windows 11 
             </summary>
         </member>
         <member name="T:Avalonia.Controls.WrapPanel">
@@ -15531,7 +16601,7 @@
         <member name="F:Avalonia.Platform.ExtendClientAreaChromeHints.PreferSystemChrome">
             <summary>
             Use system chrome where possible. OSX system chrome is used, Windows managed chrome is used.
-            This is because Windows Chrome can not be shown ontop of user content.
+            This is because Windows Chrome can not be shown on top of user content.
             </summary>
         </member>
         <member name="F:Avalonia.Platform.ExtendClientAreaChromeHints.OSXThickTitleBar">
@@ -15540,9 +16610,50 @@
             slightly lower than normal.
             </summary>
         </member>
+        <member name="E:Avalonia.Platform.IPlatformLifetimeEventsImpl.ShutdownRequested">
+            <summary>
+            Raised by the platform when a shutdown is requested.
+            </summary>
+            <remarks>
+            Raised on on OSX via the Quit menu or right-clicking on the application icon and selecting Quit.
+            </remarks>
+        </member>
         <member name="T:Avalonia.Platform.IPopupImpl">
             <summary>
             Defines a platform-specific popup window implementation.
+            </summary>
+        </member>
+        <member name="T:Avalonia.Platform.PlatformResizeReason">
+            <summary>
+            Describes the reason for a <see cref="P:Avalonia.Platform.ITopLevelImpl.Resized"/> message.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Platform.PlatformResizeReason.Unspecified">
+            <summary>
+            The resize reason is unknown or unspecified.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Platform.PlatformResizeReason.User">
+            <summary>
+            The resize was due to the user resizing the window, for example by dragging the
+            window frame.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Platform.PlatformResizeReason.Application">
+            <summary>
+            The resize was initiated by the application, for example by setting one of the sizing-
+            related properties on <see cref="T:Avalonia.Controls.Window"/> such as <see cref="P:Avalonia.Layout.Layoutable.Width"/> or
+            <see cref="P:Avalonia.Layout.Layoutable.Height"/>.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Platform.PlatformResizeReason.Layout">
+            <summary>
+            The resize was initiated by the layout system.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Platform.PlatformResizeReason.DpiChange">
+            <summary>
+            The resize was due to a change in DPI.
             </summary>
         </member>
         <member name="T:Avalonia.Platform.ITopLevelImpl">
@@ -15557,6 +16668,11 @@
         <member name="P:Avalonia.Platform.ITopLevelImpl.ClientSize">
             <summary>
             Gets the client size of the toplevel.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Platform.ITopLevelImpl.FrameSize">
+            <summary>
+            Gets the total size of the toplevel, excluding shadows.
             </summary>
         </member>
         <member name="P:Avalonia.Platform.ITopLevelImpl.RenderScaling">
@@ -15667,10 +16783,37 @@
             Gets the <see cref="T:Avalonia.Controls.AcrylicPlatformCompensationLevels"/> for the platform.        
             </summary>
         </member>
-        <member name="M:Avalonia.Platform.IWindowBaseImpl.Show(System.Boolean)">
+        <member name="M:Avalonia.Platform.ITrayIconImpl.SetIcon(Avalonia.Platform.IWindowIconImpl)">
+            <summary>
+            Sets the icon of this tray icon.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Platform.ITrayIconImpl.SetToolTipText(System.String)">
+            <summary>
+            Sets the icon of this tray icon.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Platform.ITrayIconImpl.SetIsVisible(System.Boolean)">
+            <summary>
+            Sets if the tray icon is visible or not.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Platform.ITrayIconImpl.MenuExporter">
+            <summary>
+            Gets the MenuExporter to allow native menus to be exported to the TrayIcon.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Platform.ITrayIconImpl.OnClicked">
+            <summary>
+            Gets or Sets the Action that is called when the TrayIcon is clicked.
+            </summary>
+        </member>
+        <member name="M:Avalonia.Platform.IWindowBaseImpl.Show(System.Boolean,System.Boolean)">
             <summary>
             Shows the window.
             </summary>
+            <param name="activate">Whether to activate the shown window.</param>
+            <param name="isDialog">Whether the window is being shown as a dialog.</param>
         </member>
         <member name="M:Avalonia.Platform.IWindowBaseImpl.Hide">
             <summary>
@@ -15830,10 +16973,12 @@
             Should be called from left mouse button press event handler
             </summary>
         </member>
-        <member name="M:Avalonia.Platform.IWindowImpl.Resize(Avalonia.Size)">
+        <member name="M:Avalonia.Platform.IWindowImpl.Resize(Avalonia.Size,Avalonia.Platform.PlatformResizeReason)">
             <summary>
             Sets the client size of the top level.
             </summary>
+            <param name="clientSize">The new client size.</param>
+            <param name="reason">The reason for the resize.</param>
         </member>
         <member name="M:Avalonia.Platform.IWindowImpl.Move(Avalonia.PixelPoint)">
             <summary>
@@ -15863,70 +17008,6 @@
             Sets how big the non-client titlebar area should be.
             </summary>
             <param name="titleBarHeight">-1 for platform default, otherwise the height in DIPs.</param>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
-            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
-            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
-            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
-            <summary>Specifies that an output will not be null even if the corresponding type allows it.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
-            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified return value condition.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter may be null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
-            <summary>Gets the return value condition.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
-            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified return value condition.</summary>
-            <param name="returnValue">
-            The return value condition. If the method returns this value, the associated parameter will not be null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
-            <summary>Gets the return value condition.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
-            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
-            <summary>Initializes the attribute with the associated parameter name.</summary>
-            <param name="parameterName">
-            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
-            <summary>Gets the associated parameter name.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
-            <summary>Applied to a method that will never return under any circumstance.</summary>
-        </member>
-        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
-            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
-        </member>
-        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
-            <summary>Initializes the attribute with the specified parameter value.</summary>
-            <param name="parameterValue">
-            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
-            the associated parameter matches this value.
-            </param>
-        </member>
-        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
-            <summary>Gets the condition parameter value.</summary>
         </member>
     </members>
 </doc>

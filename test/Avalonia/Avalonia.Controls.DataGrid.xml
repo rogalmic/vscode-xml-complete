@@ -1058,7 +1058,7 @@
             </summary>
             <remarks>
             This method can be called from a constructor - it does not call
-            any virtuals.  The 'count' parameter is substitute for the real Count,
+            any virtuals. The 'count' parameter is substitute for the real Count,
             used only when newItem is null.
             In that case, this method sets IsCurrentAfterLast to true if and only
             if newPosition >= count.  This distinguishes between a null belonging
@@ -3019,7 +3019,7 @@
         </member>
         <member name="P:Avalonia.Controls.DataGridRowClipboardEventArgs.Item">
             <summary>
-            DataGrid row item used for proparing the ClipboardRowContent.
+            DataGrid row item used for preparing the ClipboardRowContent.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.DataGridColumn.#ctor">
@@ -3037,6 +3037,11 @@
             When a column is initially added, we won't know its initial desired value
             until all rows have been measured.  We use this variable to track whether or
             not the column has been fully measured.
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.DataGridColumn.IsVisibleProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.DataGridColumn.IsVisible"/> property.
             </summary>
         </member>
         <member name="P:Avalonia.Controls.DataGridColumn.IsVisible">
@@ -3097,6 +3102,26 @@
             When setting this property, the specified value would result in a frozen column being displayed in the range of unfrozen columns, or an unfrozen column being displayed in the range of frozen columns.
             </exception>
         </member>
+        <member name="F:Avalonia.Controls.DataGridColumn.HeaderProperty">
+            <summary>
+               Backing field for Header property
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.DataGridColumn.Header">
+            <summary>
+               Gets or sets the <see cref="T:Avalonia.Controls.DataGridColumnHeader"/> content 
+            </summary>
+        </member>
+        <member name="F:Avalonia.Controls.DataGridColumn.HeaderTemplateProperty">
+            <summary>
+               Backing field for Header property
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.DataGridColumn.HeaderTemplate">
+            <summary>
+             Gets or sets an <see cref="T:Avalonia.Controls.Templates.IDataTemplate"/> for the <see cref="P:Avalonia.Controls.DataGridColumn.Header"/>
+            </summary>
+        </member>
         <member name="P:Avalonia.Controls.DataGridColumn.ClipboardContentBinding">
             <summary>
             The binding that will be used to get or set cell content for the clipboard.
@@ -3117,6 +3142,22 @@
             <param name="element">element contained in a column</param>
             <returns>Column that contains the element, or null if not found
             </returns>
+        </member>
+        <member name="M:Avalonia.Controls.DataGridColumn.ClearSort">
+            <summary>
+            Clears the current sort direction
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.DataGridColumn.Sort">
+            <summary>
+            Switches the current state of sort direction
+            </summary>
+        </member>
+        <member name="M:Avalonia.Controls.DataGridColumn.Sort(System.ComponentModel.ListSortDirection)">
+            <summary>
+            Changes the sort direction of this column
+            </summary>
+            <param name="direction">New sort direction</param>
         </member>
         <member name="M:Avalonia.Controls.DataGridColumn.CancelCellEdit(Avalonia.Controls.IControl,System.Object)">
             <summary>
@@ -3200,7 +3241,7 @@
         </member>
         <member name="M:Avalonia.Controls.DataGridColumn.ComputeLayoutRoundedWidth(System.Double)">
             <summary>
-            If the DataGrid is using using layout rounding, the pixel snapping will force all widths to
+            If the DataGrid is using layout rounding, the pixel snapping will force all widths to
             whole numbers. Since the column widths aren't visual elements, they don't go through the normal
             rounding process, so we need to do it ourselves.  If we don't, then we'll end up with some
             pixel gaps and/or overlaps between columns.
@@ -3263,6 +3304,11 @@
         <member name="P:Avalonia.Controls.DataGridColumn.SortMemberPath">
             <summary>
             Holds the name of the member to use for sorting, if not using the default.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.DataGridColumn.CustomSortComparer">
+            <summary>
+            Holds a Comparer to use for sorting, if not using the default.
             </summary>
         </member>
         <member name="M:Avalonia.Controls.DataGridColumn.GetSortDescription">
@@ -4027,6 +4073,22 @@
             <returns>
             The size that the <see cref="T:Avalonia.Controls.Primitives.DataGridRowsPresenter" /> determines it needs during layout, based on its calculations of child object allocated sizes.
             </returns>
+        </member>
+        <member name="F:Avalonia.Controls.DataGridTemplateColumn.CellEditingTemplateProperty">
+            <summary>
+            Defines the <see cref="P:Avalonia.Controls.DataGridTemplateColumn.CellEditingTemplate"/> property.
+            </summary>
+        </member>
+        <member name="P:Avalonia.Controls.DataGridTemplateColumn.CellEditingTemplate">
+            <summary>
+            Gets or sets the <see cref="T:Avalonia.Controls.Templates.IDataTemplate"/> which is used for the editing mode of the current <see cref="T:Avalonia.Controls.DataGridCell"/>
+            </summary>
+            <value>
+            An <see cref="T:Avalonia.Controls.Templates.IDataTemplate"/> for the editing mode of the current <see cref="T:Avalonia.Controls.DataGridCell"/>
+            </value>
+            <remarks>
+            If this property is <see langword="null"/> the column is read-only.
+            </remarks>
         </member>
         <member name="T:Avalonia.Controls.DataGridTextColumn">
             <summary>

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Wpf5.csproj"
+                "${workspaceFolder}/Wpf6.csproj"
             ],
             "problemMatcher": "$msCompile"
         },

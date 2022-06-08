@@ -53,8 +53,8 @@ namespace Wpf
 
             var document = new XDocument();
             document.Add(root);
-            document.Save("Wpf5.Formatted.xsd", SaveOptions.None);
-            document.Save("Wpf5.xsd", SaveOptions.DisableFormatting);
+            document.Save("Wpf6.Formatted.xsd", SaveOptions.None);
+            document.Save("Wpf6.xsd", SaveOptions.DisableFormatting);
         }
 
         private static XElement GetControlElement(string controlName, IEnumerable<string> controlAttributes, IEnumerable<string> baseAttributeNames)

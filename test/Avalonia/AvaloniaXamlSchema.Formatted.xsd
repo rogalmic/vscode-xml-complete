@@ -23,6 +23,11 @@
         <xs:documentation>Gets or sets a context menu to the control.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="ContextFlyout" type="text">
+      <xs:annotation>
+        <xs:documentation>Gets or sets a context flyout to the control</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="Tag" type="text">
       <xs:annotation>
         <xs:documentation>Gets or sets a user-defined object attached to the control.</xs:documentation>
@@ -36,7 +41,9 @@
     <xs:attribute name="IsFocused" type="text" />
     <xs:attribute name="IsHitTestVisible" type="text" />
     <xs:attribute name="IsPointerOver" type="text" />
+    <xs:attribute name="IsTabStop" type="text" />
     <xs:attribute name="IsEffectivelyEnabled" type="text" />
+    <xs:attribute name="TabIndex" type="text" />
     <xs:attribute name="KeyBindings" type="text" />
     <xs:attribute name="GestureRecognizers" type="text" />
     <xs:attribute name="Width" type="text" />
@@ -102,6 +109,8 @@
       <xs:element ref="DropDownItem" />
       <xs:element ref="Expander" />
       <xs:element ref="ExperimentalAcrylicBorder" />
+      <xs:element ref="FlyoutPresenter" />
+      <xs:element ref="MenuFlyoutPresenter" />
       <xs:element ref="Grid" />
       <xs:element ref="GridSplitter" />
       <xs:element ref="Image" />
@@ -110,6 +119,7 @@
       <xs:element ref="LayoutTransformControl" />
       <xs:element ref="ListBox" />
       <xs:element ref="ListBoxItem" />
+      <xs:element ref="MaskedTextBox" />
       <xs:element ref="Menu" />
       <xs:element ref="MenuItem" />
       <xs:element ref="NativeControlHost" />
@@ -135,6 +145,7 @@
       <xs:element ref="TickBar" />
       <xs:element ref="ToggleSwitch" />
       <xs:element ref="ToolTip" />
+      <xs:element ref="TransitioningContentControl" />
       <xs:element ref="TreeView" />
       <xs:element ref="TreeViewItem" />
       <xs:element ref="UserControl" />
@@ -143,6 +154,7 @@
       <xs:element ref="Window" />
       <xs:element ref="WindowBase" />
       <xs:element ref="WrapPanel" />
+      <xs:element ref="Arc" />
       <xs:element ref="Ellipse" />
       <xs:element ref="Line" />
       <xs:element ref="Path" />
@@ -290,6 +302,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -318,9 +331,29 @@
               <xs:documentation>Gets or sets a brush with which to paint the border.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="BorderDashArray" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a collection of "T:System.Double" values that indicate the pattern of dashes and gaps that is used to outline shapes.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="BorderThickness" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the thickness of the border.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="BorderDashOffset" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value that specifies the distance within the dash pattern where a dash begins.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="BorderLineCap" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a "T:Avalonia.Media.PenLineCap" enumeration value that describes the shape at the ends of a line.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="BorderLineJoin" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a "T:Avalonia.Media.PenLineJoin" enumeration value that specifies the type of join that is used at the vertices of a Shape.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="CornerRadius" type="text">
@@ -378,6 +411,11 @@
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the Flyout that should be shown with this button</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -386,6 +424,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -428,6 +467,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -500,6 +540,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -581,6 +622,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -625,6 +667,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -634,6 +677,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -661,6 +705,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -669,6 +714,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -725,6 +771,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -734,6 +781,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -761,6 +809,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -807,6 +856,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -870,6 +920,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -879,6 +930,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -907,6 +959,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -979,6 +1032,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1045,6 +1099,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1058,7 +1113,7 @@
   </xs:element>
   <xs:element name="TimePicker">
     <xs:annotation>
-      <xs:documentation>A control to allow the user to select a time</xs:documentation>
+      <xs:documentation>A control to allow the user to select a time.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1091,6 +1146,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1127,6 +1183,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1201,6 +1258,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -1210,6 +1268,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1234,6 +1293,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1246,6 +1306,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="Expander">
+    <xs:annotation>
+      <xs:documentation>A control with a header that has a collapsible content section.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1263,6 +1326,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1290,9 +1354,63 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="FlyoutPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MenuFlyoutPresenter">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="IsOpen" type="text" />
+          <xs:attribute name="AutoScrollToSelectedItem" type="text" />
+          <xs:attribute name="SelectedIndex" type="text" />
+          <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
+          <xs:attribute name="ItemContainerGenerator" type="text" />
+          <xs:attribute name="Items" type="text" />
+          <xs:attribute name="ItemCount" type="text" />
+          <xs:attribute name="ItemsPanel" type="text" />
+          <xs:attribute name="ItemTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="Grid">
     <xs:annotation>
-      <xs:documentation>Grid</xs:documentation>
+      <xs:documentation>Defines a flexible grid area that consists of columns and rows.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -1358,6 +1476,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1435,6 +1554,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1466,6 +1586,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1528,6 +1649,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -1537,6 +1659,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1568,6 +1691,108 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MaskedTextBox">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="AsciiOnly" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating if the masked text box is restricted to accept only ASCII characters. Default value is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Culture" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the culture information associated with the masked text box.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="HidePromptOnLeave" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating if the prompt character is hidden when the masked text box loses focus.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Mask" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the mask to apply to the TextBox.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MaskCompleted" type="text">
+            <xs:annotation>
+              <xs:documentation>Specifies whether the test string required input positions, as specified by the mask, have all been assigned.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MaskFull" type="text">
+            <xs:annotation>
+              <xs:documentation>Specifies whether all inputs (required and optional) have been provided into the mask successfully.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="MaskProvider" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the MaskTextProvider for the specified Mask.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="PasswordChar" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the character to be displayed in substitute for user input.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="PromptChar" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the character used to represent the absence of user input in MaskedTextBox.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ResetOnPrompt" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating if selected characters should be reset when the prompt character is pressed.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ResetOnSpace" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value indicating if selected characters should be reset when the space character is pressed.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="AcceptsReturn" type="text" />
+          <xs:attribute name="AcceptsTab" type="text" />
+          <xs:attribute name="CaretIndex" type="text" />
+          <xs:attribute name="IsReadOnly" type="text" />
+          <xs:attribute name="SelectionBrush" type="text" />
+          <xs:attribute name="SelectionForegroundBrush" type="text" />
+          <xs:attribute name="CaretBrush" type="text" />
+          <xs:attribute name="SelectionStart" type="text" />
+          <xs:attribute name="SelectionEnd" type="text" />
+          <xs:attribute name="MaxLength" type="text" />
+          <xs:attribute name="Text" type="text" />
+          <xs:attribute name="SelectedText" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="TextAlignment" type="text" />
+          <xs:attribute name="Watermark" type="text" />
+          <xs:attribute name="UseFloatingWatermark" type="text" />
+          <xs:attribute name="InnerLeftContent" type="text" />
+          <xs:attribute name="InnerRightContent" type="text" />
+          <xs:attribute name="RevealPassword" type="text" />
+          <xs:attribute name="TextWrapping" type="text" />
+          <xs:attribute name="NewLine" type="text" />
+          <xs:attribute name="CanCut" type="text" />
+          <xs:attribute name="CanCopy" type="text" />
+          <xs:attribute name="CanPaste" type="text" />
+          <xs:attribute name="IsUndoEnabled" type="text" />
+          <xs:attribute name="UndoLimit" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1590,6 +1815,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -1599,6 +1825,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1667,6 +1894,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -1676,6 +1904,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1701,6 +1930,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1822,6 +2052,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1862,6 +2093,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1894,6 +2126,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1906,6 +2139,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RadioButton">
+    <xs:annotation>
+      <xs:documentation>Represents a button that allows a user to select a single option from a group of options.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1919,6 +2155,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -1927,6 +2164,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -1939,6 +2177,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RelativePanel">
+    <xs:annotation>
+      <xs:documentation>Defines an area within which you can position and align child objects in relation to each other or the parent panel.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1949,6 +2190,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="RepeatButton">
+    <xs:annotation>
+      <xs:documentation>Represents a control that raises its "E:Avalonia.Controls.Button.Click" event repeatedly when it is pressed and held.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -1969,6 +2213,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -1977,6 +2222,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2092,6 +2338,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2113,6 +2360,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2141,6 +2389,11 @@
               <xs:documentation>Gets or sets the orientation of a "T:Avalonia.Controls.Slider" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="IsDirectionReversed" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the direction of increasing value.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="IsSnapToTickEnabled" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets a value that indicates whether the "T:Avalonia.Controls.Slider" automatically moves the "T:Avalonia.Controls.Primitives.Thumb" to the closest tick mark.</xs:documentation>
@@ -2164,6 +2417,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2240,6 +2494,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2314,6 +2569,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -2323,6 +2579,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2362,6 +2619,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2519,9 +2777,16 @@
               <xs:documentation>Property for determining if the Paste command can be executed.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="IsUndoEnabled" type="text">
+            <xs:annotation>
+              <xs:documentation>Property for determining whether undo/redo is enabled</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="UndoLimit" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2582,7 +2847,7 @@
           </xs:attribute>
           <xs:attribute name="ReservedSpace" type="text">
             <xs:annotation>
-              <xs:documentation>TickBar will use ReservedSpaceProperty for left and right spacing (for horizontal orientation) or top and bottom spacing (for vertical orienation). The space on both sides of TickBar is half of specified ReservedSpace. This property has type of "T:Avalonia.Rect" .</xs:documentation>
+              <xs:documentation>TickBar will use ReservedSpaceProperty for left and right spacing (for horizontal orientation) or top and bottom spacing (for vertical orientation). The space on both sides of TickBar is half of specified ReservedSpace. This property has type of "T:Avalonia.Rect" .</xs:documentation>
             </xs:annotation>
           </xs:attribute>
         </xs:extension>
@@ -2627,6 +2892,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -2635,6 +2901,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2661,6 +2928,44 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
+          <xs:attribute name="FontFamily" type="text" />
+          <xs:attribute name="FontSize" type="text" />
+          <xs:attribute name="FontStyle" type="text" />
+          <xs:attribute name="FontWeight" type="text" />
+          <xs:attribute name="Foreground" type="text" />
+          <xs:attribute name="Padding" type="text" />
+          <xs:attribute name="Template" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransitioningContentControl">
+    <xs:annotation>
+      <xs:documentation>Displays "P:Avalonia.Controls.ContentControl.Content" according to a "T:Avalonia.Controls.Templates.FuncDataTemplate" . Uses "P:Avalonia.Controls.TransitioningContentControl.PageTransition" to move between the old and new content values.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="PageTransition" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the animation played when content appears and disappears.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="CurrentContent" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets the content currently displayed on the screen.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="Content" type="text" />
+          <xs:attribute name="ContentTemplate" type="text" />
+          <xs:attribute name="Presenter" type="text" />
+          <xs:attribute name="HorizontalContentAlignment" type="text" />
+          <xs:attribute name="VerticalContentAlignment" type="text" />
+          <xs:attribute name="Background" type="text" />
+          <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2712,6 +3017,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2760,6 +3066,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2786,6 +3093,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2799,7 +3107,7 @@
   </xs:element>
   <xs:element name="Viewbox">
     <xs:annotation>
-      <xs:documentation>Viewbox is used to scale single child.</xs:documentation>
+      <xs:documentation>Viewbox is used to scale single child to fit in the available space.</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
@@ -2807,6 +3115,11 @@
           <xs:attribute name="Stretch" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the stretch mode, which determines how child fits into the available space.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="StretchDirection" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value controlling in what direction contents will be stretched.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="Child" type="text" />
@@ -2837,6 +3150,11 @@
           <xs:attribute name="PlatformImpl" type="text">
             <xs:annotation>
               <xs:documentation>Gets the platform-specific window implementation.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="OwnedWindows" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets a collection of child windows owned by this window.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="SizeToContent" type="text">
@@ -2929,6 +3247,7 @@
           <xs:attribute name="Owner" type="text" />
           <xs:attribute name="Topmost" type="text" />
           <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="FrameSize" type="text" />
           <xs:attribute name="TransparencyLevelHint" type="text" />
           <xs:attribute name="ActualTransparencyLevel" type="text" />
           <xs:attribute name="TransparencyBackgroundFallback" type="text" />
@@ -2942,6 +3261,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -2978,6 +3298,7 @@
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="FrameSize" type="text" />
           <xs:attribute name="TransparencyLevelHint" type="text" />
           <xs:attribute name="ActualTransparencyLevel" type="text" />
           <xs:attribute name="TransparencyBackgroundFallback" type="text" />
@@ -2991,6 +3312,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3026,6 +3348,34 @@
           </xs:attribute>
           <xs:attribute name="Children" type="text" />
           <xs:attribute name="Background" type="text" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Arc">
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="Control">
+          <xs:attribute name="StartAngle" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the angle at which the arc starts, in degrees.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="SweepAngle" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the angle, in degrees, added to the "P:Avalonia.Controls.Shapes.Arc.StartAngle" defining where the arc ends. A positive value is clockwise, negative is counter-clockwise.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="DefiningGeometry" type="text" />
+          <xs:attribute name="RenderedGeometry" type="text" />
+          <xs:attribute name="Fill" type="text" />
+          <xs:attribute name="Stretch" type="text" />
+          <xs:attribute name="Stroke" type="text" />
+          <xs:attribute name="StrokeDashArray" type="text" />
+          <xs:attribute name="StrokeDashOffset" type="text" />
+          <xs:attribute name="StrokeThickness" type="text" />
+          <xs:attribute name="StrokeLineCap" type="text" />
+          <xs:attribute name="StrokeJoin" type="text" />
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -3414,6 +3764,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3445,6 +3796,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3461,6 +3813,7 @@
       <xs:complexContent>
         <xs:extension base="Control">
           <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="FrameSize" type="text" />
           <xs:attribute name="TransparencyLevelHint" type="text" />
           <xs:attribute name="ActualTransparencyLevel" type="text" />
           <xs:attribute name="TransparencyBackgroundFallback" type="text" />
@@ -3475,6 +3828,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3496,6 +3850,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3517,6 +3872,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3542,6 +3898,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -3550,6 +3907,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3572,6 +3930,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -3580,6 +3939,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3603,6 +3963,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3709,6 +4070,9 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="AdornerLayer">
+    <xs:annotation>
+      <xs:documentation>Represents a surface for showing adorners. Adorners are always on top of the adorned element and are positioned to stay relative to the adorned element.</xs:documentation>
+    </xs:annotation>
     <xs:complexType mixed="true">
       <xs:complexContent>
         <xs:extension base="Control">
@@ -3758,6 +4122,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3795,6 +4160,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3826,6 +4192,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -3835,6 +4202,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -3856,7 +4224,11 @@
           <xs:attribute name="InputPassThroughElement" type="text" />
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
+          <xs:attribute name="BorderDashArray" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="BorderDashOffset" type="text" />
+          <xs:attribute name="BorderLineCap" type="text" />
+          <xs:attribute name="BorderLineJoin" type="text" />
           <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="BoxShadow" type="text" />
           <xs:attribute name="ClipToBoundsRadius" type="text" />
@@ -3890,6 +4262,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4013,6 +4386,7 @@
           <xs:attribute name="Owner" type="text" />
           <xs:attribute name="Topmost" type="text" />
           <xs:attribute name="ClientSize" type="text" />
+          <xs:attribute name="FrameSize" type="text" />
           <xs:attribute name="TransparencyLevelHint" type="text" />
           <xs:attribute name="ActualTransparencyLevel" type="text" />
           <xs:attribute name="TransparencyBackgroundFallback" type="text" />
@@ -4026,6 +4400,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4069,6 +4444,16 @@
               <xs:documentation>Gets a value that indicates whether the scrollbar can hide itself when user is not interacting with it.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="HideDelay" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets a value that determines how long will be the hide delay after user stops interacting with the scrollbar.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="ShowDelay" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets a value that determines how long will be the show delay when user starts interacting with the scrollbar.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="Minimum" type="text" />
           <xs:attribute name="Maximum" type="text" />
           <xs:attribute name="Value" type="text" />
@@ -4077,6 +4462,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4110,6 +4496,11 @@
               <xs:documentation>Gets or sets the selected item.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
+          <xs:attribute name="IsTextSearchEnabled" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets a value that specifies whether a user can jump to a value by typing.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -4119,6 +4510,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4137,6 +4529,7 @@
           <xs:attribute name="AutoScrollToSelectedItem" type="text" />
           <xs:attribute name="SelectedIndex" type="text" />
           <xs:attribute name="SelectedItem" type="text" />
+          <xs:attribute name="IsTextSearchEnabled" type="text" />
           <xs:attribute name="ItemContainerGenerator" type="text" />
           <xs:attribute name="Items" type="text" />
           <xs:attribute name="ItemCount" type="text" />
@@ -4146,6 +4539,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4173,6 +4567,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4204,6 +4599,11 @@
           <xs:attribute name="BorderThickness" type="text">
             <xs:annotation>
               <xs:documentation>Gets or sets the thickness of the control's border.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="CornerRadius" type="text">
+            <xs:annotation>
+              <xs:documentation>Gets or sets the radius of the border rounded corners.</xs:documentation>
             </xs:annotation>
           </xs:attribute>
           <xs:attribute name="FontFamily" type="text">
@@ -4252,6 +4652,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4287,6 +4688,7 @@
           <xs:attribute name="IsDefault" type="text" />
           <xs:attribute name="IsCancel" type="text" />
           <xs:attribute name="IsPressed" type="text" />
+          <xs:attribute name="Flyout" type="text" />
           <xs:attribute name="Content" type="text" />
           <xs:attribute name="ContentTemplate" type="text" />
           <xs:attribute name="Presenter" type="text" />
@@ -4295,6 +4697,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4543,6 +4946,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4570,6 +4974,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4598,6 +5003,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4639,6 +5045,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4677,6 +5084,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4709,6 +5117,7 @@
           <xs:attribute name="Background" type="text" />
           <xs:attribute name="BorderBrush" type="text" />
           <xs:attribute name="BorderThickness" type="text" />
+          <xs:attribute name="CornerRadius" type="text" />
           <xs:attribute name="FontFamily" type="text" />
           <xs:attribute name="FontSize" type="text" />
           <xs:attribute name="FontStyle" type="text" />
@@ -4809,12 +5218,24 @@
             <xs:sequence>
               <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax" />
             </xs:sequence>
-            <xs:attribute name="Property" type="text" />
-            <xs:attribute name="Value" type="text" />
+            <xs:attribute name="Property" type="text">
+              <xs:annotation>
+                <xs:documentation>Gets or sets the property to set.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Value" type="text">
+              <xs:annotation>
+                <xs:documentation>Gets or sets the property value.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-      <xs:attribute name="Selector" type="text" />
+      <xs:attribute name="Selector" type="text">
+        <xs:annotation>
+          <xs:documentation>Gets or sets the style's selector.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 </xs:schema>

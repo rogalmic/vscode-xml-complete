@@ -1,13 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Wpf.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="" />
     <EmbeddedResource Include="Wpf.Controls.xml"/>
-    <Folder  />
   </ItemGroup>
 </Project>

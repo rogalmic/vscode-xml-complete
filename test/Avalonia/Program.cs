@@ -15,8 +15,7 @@ namespace AvaloniaXsd
 
         private static Regex alphanumeric = new Regex("[^a-zA-Z0-9 -]");
 
-        private static XDocument XmlDocumentation;
-        private static XDocument XmlDocumentation2;
+        private static List<XDocument> XmlDocumentation = new List<XDocument>();
 
         public static void Main(string[] args)
         {
@@ -175,22 +174,24 @@ namespace AvaloniaXsd
 
         private static XElement[] GetDocumentationNodeFromName(params string[] entityNames)
         {
-            if (XmlDocumentation == null)
+            if (!XmlDocumentation.Any())
             {
-                XmlDocumentation = GetDocumentation();
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Controls.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Controls.DataGrid.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Styling.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Themes.Fluent.xml"));
             }
-            if (XmlDocumentation2 == null)
-            {
-                XmlDocumentation2 = GetDocumentation2();
-            }
+
 
             entityNames = entityNames
                 .Where(n => !string.IsNullOrWhiteSpace(n))
                 .Select(n => n.Split(new[] { "`" }, StringSplitOptions.None).First())
                 .ToArray();
 
-            return XmlDocumentation.Descendants("member")
-                .Union(XmlDocumentation2.Descendants("member"))
+            return XmlDocumentation[0].Descendants("member")
+                .Union(XmlDocumentation[1].Descendants("member"))
+                .Union(XmlDocumentation[2].Descendants("member"))
+                .Union(XmlDocumentation[3].Descendants("member"))
                 .Where(e => e.Attributes("name").Any(a => a.Value.EndsWith($".{string.Join(".", entityNames)}")))
                 .SelectMany(e => e.Elements("summary"))
                 .Select(e => new XElement(ns + "annotation",
@@ -203,29 +204,23 @@ namespace AvaloniaXsd
 
         private static XElement[] GetDocumentationNodeFromText(string text)
         {
-            if (XmlDocumentation == null)
+            if (!XmlDocumentation.Any())
             {
-                XmlDocumentation = GetDocumentation();
-            }
-            if (XmlDocumentation2 == null)
-            {
-                XmlDocumentation2 = GetDocumentation2();
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Controls.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Controls.DataGrid.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Styling.xml"));
+                XmlDocumentation.Add(GetDocumentation("Avalonia.Themes.Fluent.xml"));
             }
 
             return new[] { new XElement(ns + "annotation", new XElement(ns + "documentation", text)) };
         }
 
-        private static XDocument GetDocumentation()
+//"Avalonia.Controls.xml"
+// "Avalonia.Controls.DataGrid.xml"
+        private static XDocument GetDocumentation(string docFileName)
         {
             var resourceAssembly = Assembly.GetExecutingAssembly();
-            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Avalonia.Controls.xml")));
-            return XDocument.Load(resource);
-        }
-
-        private static XDocument GetDocumentation2()
-        {
-            var resourceAssembly = Assembly.GetExecutingAssembly();
-            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith("Avalonia.Controls.DataGrid.xml")));
+            Stream resource = resourceAssembly.GetManifestResourceStream(resourceAssembly.GetManifestResourceNames().First(n => n.EndsWith(docFileName)));
             return XDocument.Load(resource);
         }
     }
